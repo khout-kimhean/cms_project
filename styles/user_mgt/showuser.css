@@ -1,0 +1,43 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+}
+
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+table {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 20px auto;
+}
+
+th, td {
+    border: 1px solid #5b5858;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #798692;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+a {
+    text-align: center;
+    display: block;
+    font-size: 20px;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #010202;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+/* Style for the Delete button */

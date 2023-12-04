@@ -1,0 +1,95 @@
+/* index.html and Register.html */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000000;
+    margin: 0;
+    padding: 0;
+}
+.login-container, .admin-upload-container {
+    background-color: #fff;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 15px;
+    border: 2px solid #900505;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 100px;
+}
+h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+form {
+    text-align: left;
+}
+label {
+    display: block;
+    padding: 2px;
+    font-weight: bold;
+}
+input[type="text"], input[type="password"], select, input[type="file"]{
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+button {
+    background-color: crimson;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top:20px;
+}
+a {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    color: #007BFF;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+input[type="submit"] {
+    background: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+input[type="submit"]:hover {
+    background: #0056b3;
+}
+form p{
+    margin-top: 10px;
+    font-size: 20px;
+    color:#333;
+ }
+ 
+form p a{
+    color:crimson;
+ } 
+/* End */
+
+
+
+
