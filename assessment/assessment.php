@@ -157,6 +157,17 @@
                             </div>
                         </div>
                     </div>
+                    <div class="visits" onclick="window.location.href='../assessment/upload_user.php';"
+                        style="cursor: pointer;">
+                        <div class="status">
+                            <div class="info">
+                                <h1>Upload User</h1>
+                            </div>
+                            <div>
+                                <img src="../images/file/file.png">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </Div>
 

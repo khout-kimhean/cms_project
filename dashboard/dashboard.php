@@ -132,7 +132,7 @@ $result = $conn->query($sql);
             <h1>Analytics</h1>
             <!-- Analyses -->
             <div class="analyse">
-                <div class="sales">
+                <div class="sales" onclick="window.location.href='#';" style="cursor: pointer;">
                     <div class="status">
                         <div class="info">
                             <h3>Total Sales</h3>
@@ -148,7 +148,7 @@ $result = $conn->query($sql);
                         </div>
                     </div>
                 </div>
-                <div class="visits">
+                <div class="visits" onclick="window.location.href='#';" style="cursor: pointer;">
                     <div class="status">
                         <div class="info">
                             <h3>Site Visit</h3>
@@ -164,7 +164,7 @@ $result = $conn->query($sql);
                         </div>
                     </div>
                 </div>
-                <div class="searches">
+                <div class="searches" onclick="window.location.href='#';" style="cursor: pointer;">
                     <div class="status">
                         <div class="info">
                             <h3>Searches</h3>
