@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
 
 :root {
-  --color-primary: #6c9bcf;
+  --color-primary: rgb(12, 77, 162);
+  /* --color-primary: #6c9bcf; */
   --color-danger: #ff0060;
   --color-success: #1b9c85;
   --color-warning: #f7d060;
@@ -225,25 +226,22 @@ aside .sidebar .message-count {
 
 /* main css */
 
-
 .container2 {
-    margin-top: 70px;
-    display: inline-block;
-    background-color: var(--color-white);
-    padding: var(--card-padding);
-    border-radius: var(--card-border-radius);
-    box-shadow: var(--box-shadow);
-    height: 700px;
-    width: 100%;
-    /* width: 1290px; */
-    color: var(--color-dark);
-  }
-
-
+  margin-top: 70px;
+  display: inline-block;
+  background-color: var(--color-white);
+  padding: var(--card-padding);
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--box-shadow);
+  height: 700px;
+  width: 100%;
+  /* width: 1290px; */
+  color: var(--color-dark);
+}
 
 #output {
-    margin-top: 20px;
-    white-space: pre-wrap;
+  margin-top: 20px;
+  white-space: pre-wrap;
 }
 
 /* end main css */

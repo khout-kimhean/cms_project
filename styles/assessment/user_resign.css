@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
 
 :root {
-  --color-primary: #6c9bcf;
+  --color-primary: rgb(12, 77, 162);
+  /* --color-primary: #6c9bcf; */
   --color-danger: #ff0060;
   --color-success: #1b9c85;
   --color-warning: #f7d060;
@@ -135,37 +136,31 @@ aside .toggle {
 
 /* container2 */
 
-
-
-
-.back_button a{
+.back_button a {
   color: rgb(12, 77, 162);
 }
 
-
-
 .button-container a {
   margin-top: 50px !important;
-    margin-left: 30px;
-    color: rgb(12, 77, 162);
+  margin-left: 30px;
+  color: rgb(12, 77, 162);
 }
 
-.btn.btn-info{
-
-    display: inline-flex;
-    margin: 15px;
-    font-size: 15px;
-    color: var(--color-dark);
-    background-color: var(--color-danger);
-    color: var(--color-white);
-    border: none;
-    border-radius: var(--card-border-radius);
-    padding: 10px 38px;
-    cursor: pointer;
+.btn.btn-info {
+  display: inline-flex;
+  margin: 15px;
+  font-size: 15px;
+  color: var(--color-dark);
+  background-color: var(--color-danger);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--card-border-radius);
+  padding: 10px 38px;
+  cursor: pointer;
 }
 .container2 {
   margin-top: 70px;
-    display: flex;
+  display: flex;
   background-color: var(--color-white);
   padding: var(--card-padding);
   border-radius: var(--card-border-radius);
@@ -180,7 +175,6 @@ aside .toggle {
   padding: 20px;
   color: rgb(12, 77, 162);
 }
-
 
 /* search */
 /* .column button{
@@ -205,12 +199,9 @@ aside .toggle {
   border-radius: 20px; 
 } */
 
-
-
 /* end search */
 
-
-.container2  input[type="submit"] {
+.container2 input[type="submit"] {
   /* background-color: var(--color-primary); */
   /* border: none; */
   border-radius: var(--card-border-radius);
@@ -221,7 +212,7 @@ aside .toggle {
   width: 150px;
   padding: 20px;
   font-size: 17px;
-  padding:10px 15px;
+  padding: 10px 15px;
   background: rgb(196, 160, 6);
   margin-left: 150px;
 }
@@ -236,7 +227,7 @@ aside .toggle {
   background-color: rgb(12, 77, 162);
 }
 
-.container2 input[type="text"]{
+.container2 input[type="text"] {
   /* border-radius: var(--card-border-radius); */
   margin-left: 150px;
   margin-top: 10px;
@@ -244,7 +235,7 @@ aside .toggle {
   width: 70%;
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 20px; 
+  border-radius: 20px;
 }
 .container2 select {
   width: 60%;
@@ -259,8 +250,8 @@ aside .toggle {
   border-radius: var(--card-border-radius);
 }
 .container2 label {
-font-size: 14px;
-border: 1px solid #ccc;
+  font-size: 14px;
+  border: 1px solid #ccc;
   font-family: cursive, sans-serif;
   background-color: var(--color-white);
   /* color: var(--color-dark); */
@@ -271,19 +262,11 @@ border: 1px solid #ccc;
   border-radius: var(--card-border-radius);
 }
 
-
-
 .container2 select.form-control option {
   padding: 10px;
 }
 
-
 /* end container2 */
-
-
-
-
-
 
 aside .toggle .logo {
   display: flex;

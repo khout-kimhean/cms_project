@@ -97,45 +97,36 @@
                 <h1 class="h1">Assessment</h1>
                 <!-- Analyses -->
                 <div class="analyse">
-                    <div class="sales">
+                    <div class="sales" onclick="window.location.href='../assessment/newuser_assessment.php';"
+                        style="cursor: pointer;">
                         <div class="status">
                             <div class="info">
-                                <a href="../assessment/newuser_assessment.php">
-                                    <h1>New User</h1>
-                                </a>
+                                <h1>New User</h1>
                             </div>
                             <div>
-                                <a href="../assessment/newuser_assessment.php">
-                                    <img src="../images/usermgt/adduser.png">
-                                </a>
+                                <img src="../images/usermgt/adduser.png">
                             </div>
                         </div>
                     </div>
-                    <div class="visits">
+                    <div class="visits" onclick="window.location.href='../assessment/search_move.php';"
+                        style="cursor: pointer;">
                         <div class="status">
                             <div class="info">
-                                <a href="../assessment/search_move.php">
-                                    <h1>Move User</h1>
-                                </a>
+                                <h1>Move User</h1>
                             </div>
                             <div>
-                                <a href="../assessment/search_move.php">
-                                    <img src="../images/usermgt/usermgt.png">
-                                </a>
+                                <img src="../images/usermgt/usermgt.png">
                             </div>
                         </div>
                     </div>
-                    <div class="searches">
+                    <div class="searches" onclick="window.location.href='../assessment/search_resign.php';"
+                        style="cursor: pointer;">
                         <div class="status">
                             <div class="info">
-                                <a href="../assessment/search_resign.php">
-                                    <h1>User Resign</h1>
-                                </a>
+                                <h1>User Resign</h1>
                             </div>
                             <div>
-                                <a href="../assessment/search_resign.php">
-                                    <img src="../images/usermgt/move.png">
-                                </a>
+                                <img src="../images/usermgt/move.png">
                             </div>
                         </div>
                     </div>
@@ -143,31 +134,26 @@
                 </div>
                 <!-- <h1>Assessment</h1> -->
                 <div class="analyse">
-                    <div class="status">
+                    <div class="status" onclick="window.location.href='../assessment/Summary.php';"
+                        style="cursor: pointer;">
                         <div class="status">
                             <div class="info">
-                                <a href="../assessment/Summary.php">
-                                    <h1>View Data</h1>
-                                </a>
+                                <h1>View Data</h1>
                             </div>
                             <div>
-                                <a href="../assessment/Summary.php">
-                                    <img src="../images/file/file1.png">
-                                </a>
+                                <img src="../images/file/file1.png">
                             </div>
                         </div>
                     </div>
-                    <div class="visits">
+
+                    <div class="visits" onclick="window.location.href='../assessment/assessment_list.php';"
+                        style="cursor: pointer;">
                         <div class="status">
                             <div class="info">
-                                <a href="../assessment/assessment_list.php">
-                                    <h1>List Assessment</h1>
-                                </a>
+                                <h1>List Assessment</h1>
                             </div>
                             <div>
-                                <a href="../assessment/assessment_list.php">
-                                    <img src="../images/file/file2.png">
-                                </a>
+                                <img src="../images/file/file2.png">
                             </div>
                         </div>
                     </div>

@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
 
 :root {
-  --color-primary: #6c9bcf;
+  --color-primary: rgb(12, 77, 162);
+  /* --color-primary: #6c9bcf; */
   --color-danger: #ff0060;
   --color-success: #1b9c85;
   --color-warning: #f7d060;
@@ -216,8 +217,6 @@ aside .sidebar a:hover span {
   margin-left: 0.6rem;
 }
 
-
-
 .box {
   background-color: var(--color-white);
   padding: var(--card-padding);
@@ -320,12 +319,12 @@ main {
   overflow-y: auto;
 }
 .container2 .card-header a {
-    margin-right: 20px;
+  margin-right: 20px;
   color: var(--color-danger);
 }
 .container2 .card-header h2 {
-    text-align: center;
-    margin-right: 20px;
+  text-align: center;
+  margin-right: 20px;
   color: var(--color-dark);
 }
 .container2 .btn.btn-info {
@@ -337,7 +336,6 @@ main {
   cursor: pointer;
 }
 table {
-
   width: 100%;
   border-collapse: collapse;
 }
@@ -392,7 +390,6 @@ a:hover {
 }
 
 /* end container2 */
-
 
 .right-section {
   margin-top: 1.4rem;

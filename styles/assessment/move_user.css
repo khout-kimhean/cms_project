@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
 
 :root {
-  --color-primary: #6c9bcf;
+  --color-primary: rgb(12, 77, 162);
+  /* --color-primary: #6c9bcf; */
   --color-danger: #ff0060;
   --color-success: #1b9c85;
   --color-warning: #f7d060;
@@ -137,12 +138,6 @@ aside .toggle {
 
 /* container2 */
 
-
-
-
-
-
-
 /* 
 .button-container a {
   margin-top: 50px !important;
@@ -150,22 +145,21 @@ aside .toggle {
     color: var(--color-danger);
 } */
 
-.btn.btn-info{
-
-    display: inline-flex;
-    margin: 15px;
-    font-size: 15px;
-    color: var(--color-dark);
-    background-color: var(--color-danger);
-    color: var(--color-white);
-    border: none;
-    border-radius: var(--card-border-radius);
-    padding: 10px 38px;
-    cursor: pointer;
+.btn.btn-info {
+  display: inline-flex;
+  margin: 15px;
+  font-size: 15px;
+  color: var(--color-dark);
+  background-color: var(--color-danger);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--card-border-radius);
+  padding: 10px 38px;
+  cursor: pointer;
 }
 .container2 {
   margin-top: 60px;
-    display: flex;
+  display: flex;
   background-color: var(--color-white);
   padding: var(--card-padding);
   border-radius: var(--card-border-radius);
@@ -180,7 +174,7 @@ aside .toggle {
   padding: 20px;
   color: rgb(12, 77, 162);
 }
-.container2  input[type="submit"] {
+.container2 input[type="submit"] {
   background-color: var(--color-primary);
   border: none;
   border-radius: var(--card-border-radius);
@@ -191,7 +185,7 @@ aside .toggle {
   width: 150px;
   padding: 20px;
   font-size: 17px;
-  padding:10px 15px;
+  padding: 10px 15px;
   background: rgb(196, 160, 6);
   margin-left: 120px;
 }
@@ -208,19 +202,19 @@ aside .toggle {
   background-color: rgb(12, 77, 162);
 }
 
-.container2 a{
+.container2 a {
   margin-top: 10px;
   color: rgb(12, 77, 162) !important;
 }
 
-.container2 input[type="text"]{
+.container2 input[type="text"] {
   margin-left: 120px;
   /* margin-top: 10px; */
   margin-bottom: 10px;
   width: 60%;
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 20px; 
+  border-radius: 20px;
 }
 .container2 select {
   width: 50%;
@@ -234,12 +228,12 @@ aside .toggle {
   padding: 8px;
   border-radius: var(--card-border-radius);
 }
-.form-btn .back_button{
+.form-btn .back_button {
   display: inline-flex;
 }
 .container2 label {
-font-size: 14px;
-border: 1px solid #ccc;
+  font-size: 14px;
+  border: 1px solid #ccc;
   font-family: cursive, sans-serif;
   background-color: var(--color-white);
   /* color: var(--color-dark); */
@@ -250,15 +244,11 @@ border: 1px solid #ccc;
   border-radius: var(--card-border-radius);
 }
 
-
 .container2 select.form-control option {
   padding: 10px;
 }
 
-
 /* end container2 */
-
-
 
 aside .toggle .logo {
   display: flex;
@@ -478,7 +468,7 @@ aside .sidebar .message-count {
 .right-section .reminders .notification .icon {
   padding: 0.6rem;
   color: var(--color-white);
-  background-color:rgb(12, 77, 162);
+  background-color: rgb(12, 77, 162);
   border-radius: 20%;
   display: flex;
 }

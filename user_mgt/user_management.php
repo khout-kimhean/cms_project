@@ -93,30 +93,28 @@
                 <h1 class="h1">User Management</h1>
                 <!-- Analyses -->
                 <div class="analyse">
-                    <div class="sales">
-                        <a href="../user_mgt/createuser.php">
-                            <div class="status">
-                                <div class="info">
-                                    <h1>Create User</h1>
-                                </div>
-                                <div>
-                                    <img src="../images/usermgt/adduser.png">
-                                </div>
+                    <div class="sales" onclick="window.location.href='../user_mgt/createuser.php';"
+                        style="cursor: pointer;">
+                        <div class="status">
+                            <div class="info">
+                                <h1>Create User</h1>
                             </div>
-                        </a>
+                            <div>
+                                <img src="../images/usermgt/adduser.png">
+                            </div>
+                        </div>
                     </div>
-                    <div class="visits">
-                        <a href="../user_mgt/search_user.php">
-                            <div class="status">
-                                <div class="info">
-                                    <h2>Assign</h2>
-                                    <h1>Function</h1>
-                                </div>
-                                <div>
-                                    <img src="../images/usermgt/usermgt.png">
-                                </div>
+                    <div class="visits" onclick="window.location.href='../user_mgt/search_user.php';"
+                        style="cursor: pointer;">
+                        <div class="status">
+                            <div class="info">
+                                <h2>Assign</h2>
+                                <h1>Function</h1>
                             </div>
-                        </a>
+                            <div>
+                                <img src="../images/usermgt/usermgt.png">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

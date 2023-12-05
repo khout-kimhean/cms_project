@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
 
 :root {
-  --color-primary: #6c9bcf;
+  --color-primary: rgb(12, 77, 162);
+  /* --color-primary: #6c9bcf; */
   --color-danger: #ff0060;
   --color-success: #1b9c85;
   --color-warning: #f7d060;
@@ -154,13 +155,7 @@ aside .toggle .logo img {
 
 /* main  */
 
-
-
-
 /* main */
-
-
-
 
 .msg_cotainer {
   margin-left: 0;
@@ -174,9 +169,7 @@ aside .toggle .logo img {
   display: flex;
   flex-direction: column;
   align-items: end;
-  
 }
-
 
 /* start  */
 .cotainer_send {
@@ -223,17 +216,17 @@ aside .toggle .logo img {
   margin-right: 20px;
 }
 
-.button1 button{
-    color: white;
-    text-align: center;
-    display: inline-flex;
-    background-color: #717279;
-    margin-left: 20px;
-    margin-right: 20px;
-    border-radius: 20px;
-    border: 1px solid var(--color-dark-variant);
-    padding: 20px;
-    margin-bottom: 20px;
+.button1 button {
+  color: white;
+  text-align: center;
+  display: inline-flex;
+  background-color: #717279;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-radius: 20px;
+  border: 1px solid var(--color-dark-variant);
+  padding: 20px;
+  margin-bottom: 20px;
 }
 .msg_cotainer_send,
 .msg_cotainer {
@@ -254,15 +247,14 @@ main .chat {
 
 main .card {
   height: 700px;
-  background-image: url('../images/background.jpg');
+  background-image: url("../images/background.jpg");
   background-size: cover;
   background-position: center;
   border-radius: 20px !important;
   background-color: var(--color-primary) !important;
-  backdrop-filter: blur(100px); 
+  backdrop-filter: blur(100px);
   opacity: 0.08px !important;
 }
-
 
 main .card-header {
   color: #181616;
@@ -329,7 +321,6 @@ main .send_btn {
   margin-bottom: 10px;
 }
 
-
 .user_img_msgs span .msg_cotainer_send {
   width: 40px;
   height: 40px;
@@ -364,25 +355,23 @@ main .send_btn {
 
 .d-flex.justify-content-start.mb-4 {
   display: flex;
-  align-items: flex-start; 
+  align-items: flex-start;
 }
 
 .user_img_msg {
-  max-width: 40px; 
+  max-width: 40px;
   height: auto;
 }
-
-
 
 .msg_time_send {
   text-align: right !important;
   margin-left: 5px;
   color: var(--color-dark);
   font-size: 12px;
-  white-space: nowrap; 
+  white-space: nowrap;
 }
 
-.msg_cotainer_send .msg_time_send  {
+.msg_cotainer_send .msg_time_send {
   text-align: right !important;
   margin-right: 5px;
   color: var(--color-dark);
@@ -390,7 +379,7 @@ main .send_btn {
 }
 
 .msg_time {
-  white-space: nowrap; 
+  white-space: nowrap;
   margin-left: 5px;
   color: var(--color-dark);
   font-size: 12px;
@@ -400,7 +389,6 @@ main .send_btn {
   color: var(--color-dark);
   font-size: 12px;
 }
-
 
 .user_img_msg {
   width: 40px;
@@ -416,15 +404,12 @@ main .send_btn {
   flex-wrap: wrap;
 }
 
-
-
-
 .clickable-member:hover {
-  background-color: rgb(196, 160, 6); 
+  background-color: rgb(196, 160, 6);
 }
 
 .clickable-member {
-  background-color: rgb(196, 160, 6); 
+  background-color: rgb(196, 160, 6);
   color: white;
   padding: 10px 20px;
   margin: 5px;
@@ -432,8 +417,6 @@ main .send_btn {
   border-radius: 5px;
   cursor: pointer;
 }
-
-
 
 .clickable-subcategory {
   padding: 10px;
@@ -447,26 +430,24 @@ main .send_btn {
   border-radius: 5px;
 }
 
-
-
 .clickable-member {
   padding: 10px 10px;
   margin: 2px;
   width: 230px;
   font-size: 16px;
-  background-color:rgb(196, 160, 6) ; 
-  color: var(--color-dark); 
+  background-color: rgb(196, 160, 6);
+  color: var(--color-dark);
   border: none;
   border-radius: 10px;
   cursor: pointer;
 }
 
 .clickable-member:hover {
-  background-color: rgb(196, 160, 6); 
+  background-color: rgb(196, 160, 6);
 }
 
 .clickable-member {
-  background-color: rgb(196, 160, 6); 
+  background-color: rgb(196, 160, 6);
   color: white;
   padding: 10px 20px;
   margin: 5px;
@@ -476,12 +457,11 @@ main .send_btn {
 }
 
 .clickable-member:hover {
-  background-color: rgb(196, 160, 6); 
+  background-color: rgb(196, 160, 6);
 }
 
-
 .clickable-subcategory:hover {
-  background-color: rgb(196, 160, 6); 
+  background-color: rgb(196, 160, 6);
 }
 
 /* end main  */

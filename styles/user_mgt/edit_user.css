@@ -2,7 +2,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 
 :root {
-  --color-primary: #6c9bcf;
+  --color-primary: rgb(12, 77, 162);
+  /* --color-primary: #6c9bcf; */
   --color-danger: #ff0060;
   --color-success: #1b9c85;
   --color-warning: #f7d060;
@@ -116,7 +117,7 @@ b {
 }
 
 .container {
-  display: grid  !important;
+  display: grid !important;
   width: 96%;
   margin: 0 auto;
   gap: 1.8rem;
@@ -222,10 +223,7 @@ aside .sidebar .message-count {
   border-radius: var(--border-radius-1);
 }
 
-
-
-
-.container2{
+.container2 {
   box-shadow: var(--box-shadow);
   border-radius: var(--card-border-radius);
   padding: var(--card-padding);
@@ -252,7 +250,6 @@ aside .sidebar .message-count {
   border-radius: var(--card-border-radius);
 }
 
-
 .container2 input {
   width: 38%;
   font-size: 14px;
@@ -264,8 +261,7 @@ aside .sidebar .message-count {
   border-radius: var(--card-border-radius);
 }
 
-
-.container2 .select{
+.container2 .select {
   display: flex;
 }
 /* 
@@ -291,11 +287,11 @@ aside .sidebar .message-count {
     border-radius: var(--card-border-radius);
 } */
 
-.container2 .select1 h2{
-    text-align: left;
-    margin-top: 20px;
+.container2 .select1 h2 {
+  text-align: left;
+  margin-top: 20px;
 }
-.container2  form input[type="submit"] {
+.container2 form input[type="submit"] {
   background-color: var(--color-primary);
   border: none;
   border-radius: var(--border-radius-1);
@@ -308,20 +304,18 @@ aside .sidebar .message-count {
   padding: 20px;
   border-radius: 5px;
   font-size: 17px;
-  padding:10px 15px;
+  padding: 10px 15px;
   background: rgb(196, 160, 6);
   border-radius: 5px;
-
 }
-
 
 .container2 .select .user_mgt {
-margin-bottom: 15px;
-flex-direction: row;
-display: flex;
+  margin-bottom: 15px;
+  flex-direction: row;
+  display: flex;
 }
 
-.container2 .select .user_mgt select{
+.container2 .select .user_mgt select {
   margin-left: 25px;
   width: 300px;
   border: 1px solid #ccc;
@@ -332,7 +326,6 @@ display: flex;
   border-radius: var(--card-border-radius);
 }
 .container2 .select .user_mgt label {
-
   font-size: 14px;
   border: 1px solid #ccc;
   font-family: cursive, sans-serif;
@@ -347,7 +340,7 @@ display: flex;
   margin-right: 20px;
 } */
 
-.container2 .select .todo_mgt select{
+.container2 .select .todo_mgt select {
   margin-left: 10px;
   width: 300px;
   border: 1px solid #ccc;
@@ -367,7 +360,7 @@ display: flex;
   border-radius: var(--card-border-radius);
 }
 
-.container2 .select .stock_mgt select{
+.container2 .select .stock_mgt select {
   border: 1px solid #ccc;
   margin-left: 55px;
   width: 300px;
@@ -389,8 +382,7 @@ display: flex;
   border-radius: var(--card-border-radius);
 }
 
-.container2 .select .chatbot select{
-
+.container2 .select .chatbot select {
   width: 300px;
   margin-left: 25px;
   border: 1px solid #ccc;
@@ -434,8 +426,7 @@ display: flex;
   margin-bottom: 15px;
 }
 
-
-.container2 .select .data_input select{
+.container2 .select .data_input select {
   margin-left: 10px;
   width: 300px;
   border: 1px solid #ccc;
@@ -454,7 +445,7 @@ display: flex;
   color: #202528;
   border-radius: var(--card-border-radius);
 }
-.container2 .select .user_assessment select{
+.container2 .select .user_assessment select {
   margin-left: 10px;
   width: 300px;
   margin-bottom: 15px;
@@ -476,8 +467,7 @@ display: flex;
   border-radius: var(--card-border-radius);
 }
 
-
-.container2 .select .search select{
+.container2 .select .search select {
   width: 300px;
   margin-left: 10px;
   border: 1px solid #ccc;
@@ -488,7 +478,6 @@ display: flex;
   border-radius: var(--card-border-radius);
 }
 .container2 .select .search label {
-
   font-size: 14px;
   border: 1px solid #ccc;
   font-family: cursive, sans-serif;
@@ -498,7 +487,7 @@ display: flex;
   border-radius: var(--card-border-radius);
 }
 
-.container2 .select .contact select{
+.container2 .select .contact select {
   width: 300px;
   margin-bottom: 15px;
   margin-left: 73px;
@@ -519,7 +508,7 @@ display: flex;
   color: #202528;
   border-radius: var(--card-border-radius);
 }
-.container2 .select .data_stor select{
+.container2 .select .data_stor select {
   width: 300px;
   margin-left: 17px;
   border: 1px solid #ccc;
@@ -538,7 +527,7 @@ display: flex;
   color: #202528;
   border-radius: var(--card-border-radius);
 }
-.container2 .select .file_list select{
+.container2 .select .file_list select {
   margin-bottom: 20px;
   width: 300px;
   margin-left: 75px;
@@ -550,7 +539,6 @@ display: flex;
   border-radius: var(--card-border-radius);
 }
 .container2 .select .file_list label {
-
   margin-left: 58px;
   font-size: 14px;
   border: 1px solid #ccc;
@@ -560,7 +548,6 @@ display: flex;
   color: #202528;
   border-radius: var(--card-border-radius);
 }
-
 
 .right-section {
   margin-top: 1.4rem;
@@ -838,5 +825,3 @@ display: flex;
     font-size: 2rem;
   }
 }
-
-

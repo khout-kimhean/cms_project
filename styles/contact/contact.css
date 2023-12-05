@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
 
 :root {
-  --color-primary: #6c9bcf;
+  --color-primary: rgb(12, 77, 162);
+  /* --color-primary: #6c9bcf; */
   --color-danger: #ff0060;
   --color-success: #1b9c85;
   --color-warning: #f7d060;
@@ -149,7 +150,6 @@ aside .toggle {
   box-shadow: var(--box-shadow);
 }
 
-
 .email a {
   font-size: 2rem;
   margin: 40px;
@@ -159,9 +159,6 @@ aside .toggle {
   color: var(--color-dark);
   font-weight: 600;
 }
-
-
-
 
 /* main container2 */
 
@@ -333,8 +330,6 @@ a:hover {
 }
 
 /* end container2 */
-
-
 
 aside .toggle .logo {
   display: flex;

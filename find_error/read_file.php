@@ -97,60 +97,47 @@
                 <h1 class="h1">Short Error From .log file</h1>
                 <!-- Analyses -->
                 <div class="analyse">
-                    <div class="sales">
+                    <div class="sales" onclick="window.location.href='../find_error/read_by_keyword.php';"
+                        style="cursor: pointer;">
                         <div class="status">
                             <div class="info">
-                                <a href="../find_error/read_by_keyword.php">
-                                    <!-- <h3>Read Text</h3> -->
-                                    <h1>Error Line</h1>
-                                </a>
+                                <!-- <h3>Read Text</h3> -->
+                                <h1>Error Line</h1>
                             </div>
                             <div>
-                                <a href="../find_error/read_by_keyword.php">
-                                    <img src="../images/file/file2.png">
-                                </a>
+                                <img src="../images/file/file2.png">
                             </div>
                         </div>
                     </div>
-                    <div class="visits">
+                    <div class="visits" onclick="window.location.href='../find_error/read_error_trx.php';"
+                        style="cursor: pointer;">
                         <div class="status">
                             <div class="info">
-                                <a href="../find_error/read_error_trx.php">
-                                    <h1>Error + XML</h1>
-                                </a>
+                                <h1>Error + XML</h1>
                             </div>
                             <div>
-                                <a href="../find_error/read_error_trx.php">
-                                    <img src="../images/file/file2.png">
-                                </a>
+                                <img src="../images/file/file2.png">
                             </div>
                         </div>
                     </div>
-                    <div class="searches">
+                    <div class="searches" onclick="window.location.href='../find_error/v1.php';"
+                        style="cursor: pointer;">
                         <div class="status">
                             <div class="info">
-                                <a href="../find_error/v1.php">
-                                    <h1>Test V1</h1>
-                                </a>
+                                <h1>Test V1</h1>
                             </div>
                             <div>
-                                <a href="../find_error/v1.php">
-                                    <img src="../images/file/file2.png">
-                                </a>
+                                <img src="../images/file/file2.png">
                             </div>
                         </div>
                     </div>
-                    <div class="sales">
+                    <div class="sales" onclick="window.location.href='../find_error/v2.php';" style="cursor: pointer;">
                         <div class="status">
                             <div class="info">
-                                <a href="../find_error/v2.php">
-                                    <h1>Test V2</h1>
-                                </a>
+                                <h1>Test V2</h1>
                             </div>
                             <div>
-                                <a href="../find_error/v2.php">
-                                    <img src="../images/file/file2.png">
-                                </a>
+                                <img src="../images/file/file2.png">
                             </div>
                         </div>
                     </div>

@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
 
 :root {
-  --color-primary: #6c9bcf;
+  --color-primary: rgb(12, 77, 162);
+  /* --color-primary: #6c9bcf; */
   --color-danger: #ff0060;
   --color-success: #1b9c85;
   --color-warning: #f7d060;
@@ -237,13 +238,10 @@ aside .sidebar .message-count {
   color: var(--color-dark);
 } */
 
-.back_button a{
+.back_button a {
   margin-top: 70px;
-    color: rgb(196, 160, 6);
+  color: rgb(196, 160, 6);
 }
-
-
-
 
 /* main{  
   font-family: cursive, sans-serif;
@@ -263,43 +261,43 @@ aside .sidebar .message-count {
   color: var(--color-dark);
 }
 
-.container2 .analyse{
+.container2 .analyse {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.6rem;
 }
 
-.container2 .analyse > div{
+.container2 .analyse > div {
   /* background-color: rgb(12, 77, 162); */
   /* color: #edeffd; */
   padding: var(--card-padding);
   border-radius: var(--card-border-radius);
   margin-top: 2rem;
-  margin-bottom   : 2rem;
+  margin-bottom: 2rem;
   box-shadow: var(--box-shadow);
   cursor: pointer;
   transition: all 0.3s ease;
   border: 1px solid #ccc;
 }
 
-.container2 .analyse > div:hover{
+.container2 .analyse > div:hover {
   background-color: rgb(196, 160, 6);
   box-shadow: none;
 }
 
-.container2 .analyse > div .status{
+.container2 .analyse > div .status {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.container2 .analyse h3{
+.container2 .analyse h3 {
   font-family: cursive, sans-serif;
   margin-left: 0.6rem;
   font-size: 1rem;
 }
 
-.container2 .analyse .progresss{
+.container2 .analyse .progresss {
   font-family: cursive, sans-serif;
   position: relative;
   width: 92px;
@@ -307,7 +305,7 @@ aside .sidebar .message-count {
   border-radius: 50%;
 }
 
-.container2 .analyse .progresss .percentage{
+.container2 .analyse .progresss .percentage {
   font-family: cursive, sans-serif;
   position: absolute;
   top: -3px;
@@ -324,8 +322,6 @@ aside .sidebar .message-count {
   /* border-radius: 50%; */
   overflow: hidden;
 }
-
-
 
 /* end main  */
 

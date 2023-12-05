@@ -92,43 +92,40 @@
             <div class="container2">
                 <h1 class="h1">User Management</h1>
                 <div class="analyse">
-                    <div class="sales">
-                        <a href="../to_do_list/task.php">
-                            <div class="status">
-                                <div class="info">
-                                    <h1>Task</h1>
-                                </div>
-                                <div>
-                                    <img src="../images/file/task.png">
-                                </div>
+                    <div class="sales" onclick="window.location.href='../to_do_list/task.php';"
+                        style="cursor: pointer;">
+                        <div class="status">
+                            <div class="info">
+                                <h1>Task</h1>
                             </div>
-                        </a>
+                            <div>
+                                <img src="../images/file/task.png">
+                            </div>
+                        </div>
                     </div>
-                    <div class="visits">
-                        <a href="../to_do_list/add_task_user.php">
-                            <div class="status">
-                                <div class="info">
-                                    <h2>Add Task</h2>
-                                    <h1>To User</h1>
-                                </div>
-                                <div>
-                                    <img src="../images/file/task.png">
-                                </div>
+                    <div class="visits" onclick="window.location.href='../to_do_list/add_task_user.php';"
+                        style="cursor: pointer;">
+                        <div class="status">
+                            <div class="info">
+                                <h2>Add Task</h2>
+                                <h1>To User</h1>
                             </div>
-                        </a>
+                            <div>
+                                <img src="../images/file/task.png">
+                            </div>
+                        </div>
                     </div>
-                    <div class="visits">
-                        <a href="../to_do_list/add_task_team.php">
-                            <div class="status">
-                                <div class="info">
-                                    <h2>Add Task</h2>
-                                    <h1>To Team</h1>
-                                </div>
-                                <div>
-                                    <img src="../images/file/task.png">
-                                </div>
+                    <div class="visits" onclick="window.location.href='../to_do_list/add_task_team.php';"
+                        style="cursor: pointer;">
+                        <div class="status">
+                            <div class="info">
+                                <h2>Add Task</h2>
+                                <h1>To Team</h1>
                             </div>
-                        </a>
+                            <div>
+                                <img src="../images/file/task.png">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

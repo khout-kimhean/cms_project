@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
 
 :root {
-  --color-primary: #6c9bcf;
+  --color-primary: rgb(12, 77, 162);
+  /* --color-primary: #6c9bcf; */
   --color-danger: #ff0060;
   --color-success: #1b9c85;
   --color-warning: #f7d060;
@@ -184,7 +185,7 @@ aside .toggle {
   background: rgb(196, 160, 6);
   margin-left: 150px;
 }
-.container2 a{
+.container2 a {
   color: rgb(12, 77, 162) !important;
 }
 
@@ -223,7 +224,7 @@ aside .toggle {
 }
 .container2 label {
   border: 1px solid #ccc;
-font-size: 14px;
+  font-size: 14px;
   font-family: cursive, sans-serif;
   background-color: var(--color-white);
   margin-left: 150px;
@@ -308,7 +309,7 @@ aside .sidebar a.active::before {
 }
 
 aside .sidebar a.active span {
-  color:rgb(12, 77, 162);
+  color: rgb(12, 77, 162);
   margin-left: calc(1rem - 3px);
 }
 

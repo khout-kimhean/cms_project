@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
 
 :root {
-  --color-primary: #6c9bcf;
+  --color-primary: rgb(12, 77, 162);
+  /* --color-primary: #6c9bcf; */
   --color-danger: #ff0060;
   --color-success: #1b9c85;
   --color-warning: #f7d060;
@@ -238,7 +239,7 @@ aside .sidebar .message-count {
 }
 
 .container2 .analyse {
-    margin-top: 20px;
+  margin-top: 20px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.6rem;
@@ -292,33 +293,12 @@ aside .sidebar .message-count {
   width: 100%;
 }
 
-
-
-
-
-
-
-
-
-
-
 .container2 .analyse img {
   width: 5rem;
   height: 5rem;
   /* border-radius: 50%; */
   overflow: hidden;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 .right-section {
   margin-top: 1.4rem;

@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
 
 :root {
-  --color-primary: #6c9bcf;
+  --color-primary: rgb(12, 77, 162);
+  /* --color-primary: #6c9bcf; */
   --color-danger: #ff0060;
   --color-success: #1b9c85;
   --color-warning: #f7d060;
@@ -240,29 +241,27 @@ main {
   margin: 0 auto;
 } */
 
-
 .container2 .form-list {
   margin: 0;
 }
 
 .container2 .form-list label {
   font-weight: bold;
-  margin-right: 5px; 
+  margin-right: 5px;
 }
-
 
 .container2 .form-list select {
   margin-bottom: 10px;
-  width: 100%; 
-  padding: 5px; 
+  width: 100%;
+  padding: 5px;
   border: 1px solid #ccc;
-  border-radius: 5px; 
-  font-size: 15px; 
-  background-color: #f9f9f9; 
+  border-radius: 5px;
+  font-size: 15px;
+  background-color: #f9f9f9;
 }
 
 .container2 .form-list select option {
-  font-size: 16px; 
+  font-size: 16px;
 }
 
 .container2 .form-list select option:hover {
@@ -270,7 +269,6 @@ main {
 }
 
 .container2 .card {
-  
   height: 700px;
   background-color: var(--color-white);
   border-radius: var(--card-border-radius);
@@ -323,15 +321,11 @@ main {
   margin-bottom: 5px;
 }
 
-
 main .alert {
   /* border-radius: var(--border-radius-1); */
   /* padding: 10px; */
   text-align: center;
 }
-
-
-
 
 /* Style the label */
 .container2 label {

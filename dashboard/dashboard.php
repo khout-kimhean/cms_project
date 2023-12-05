@@ -302,13 +302,11 @@ $result = $conn->query($sql);
             </div>
             <!-- End of Nav -->
 
-            <div class="user-profile">
+            <div class="user-profile" onclick="window.location.href='https://ftb.com.kh/en/'">
                 <div class="logo">
-                    <a href="https://ftb.com.kh/en/">
-                        <img src="../images/logo/logo.jpg">
-                        <h2>FTB Bank </h2>
-                        <p>Welcome to FTB Bank</p>
-                    </a>
+                    <img src="../images/logo/logo.jpg" alt="FTB Bank Logo">
+                    <h2>FTB Bank</h2>
+                    <p>Welcome to FTB Bank</p>
                 </div>
             </div>
 

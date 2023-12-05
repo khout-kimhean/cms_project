@@ -93,32 +93,26 @@
                 <h1 class="h1">Test Store Data</h1>
                 <!-- Analyses -->
                 <div class="analyse">
-                    <div class="sales">
+                    <div class="sales" onclick="window.location.href='../data_store/data_store.php';"
+                        style="cursor: pointer;">
                         <div class="status">
                             <div class="info">
-                                <a href="../data_store/data_store.php">
-                                    <!-- <h3>Read Text</h3> -->
-                                    <h1>Store File</h1>
-                                </a>
+                                <!-- <h3>Read Text</h3> -->
+                                <h1>Store File</h1>
                             </div>
                             <div>
-                                <a href="../data_store/data_store.php">
-                                    <img src="../images/file/upload.png">
-                                </a>
+                                <img src="../images/file/upload.png">
                             </div>
                         </div>
                     </div>
-                    <div class="visits">
+                    <div class="visits" onclick="window.location.href='../data_store/view_data.php';"
+                        style="cursor: pointer;">
                         <div class="status">
                             <div class="info">
-                                <a href="../data_store/view_data.php">
-                                    <h1>View Data</h1>
-                                </a>
+                                <h1>View Data</h1>
                             </div>
                             <div>
-                                <a href="../data_store/view_data.php">
-                                    <img src="../images/file/view.png">
-                                </a>
+                                <img src="../images/file/view.png">
                             </div>
                         </div>
                     </div>

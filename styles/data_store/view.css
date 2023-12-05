@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
 
 :root {
-  --color-primary: #6c9bcf;
+  --color-primary: rgb(12, 77, 162);
+  /* --color-primary: #6c9bcf; */
   --color-danger: #ff0060;
   --color-success: #1b9c85;
   --color-warning: #f7d060;
@@ -224,20 +225,14 @@ aside .sidebar .message-count {
   border-radius: var(--border-radius-1);
 }
 
-
-
-
-
-
-
-main{
+main {
   /* display: grid; */
   margin-top: 70px;
   margin-bottom: 30px;
-  width: 100%; 
-  padding: 5px; 
+  width: 100%;
+  padding: 5px;
   border-radius: 5px;
-  font-size: 13px; 
+  font-size: 13px;
   background-color: var(--color-white);
   border-radius: var(--card-border-radius);
 }
@@ -282,29 +277,21 @@ main{
   border: #007bff;
 }
 
-
-
-
 .container2 .form-list select {
   margin-bottom: 10px;
-  width: 100%; 
-  padding: 5px; 
-  border: 1px solid #ccc; 
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
   border-radius: 5px;
-  font-size: 13px; 
-  background-color: #f9f9f9; 
+  font-size: 13px;
+  background-color: #f9f9f9;
 }
-
 
 .container2 .back_button a {
   margin-left: 20px;
   /* margin: 10px !important; */
   color: var(--color-danger);
 }
-
-
-
-
 
 .container2 .alert {
   border-radius: var(--border-radius-1);
@@ -316,8 +303,6 @@ main{
   margin-bottom: 10px;
 }
 
-
-
 .container2 input[type="text"] {
   width: 100%;
   padding: 5px;
@@ -325,13 +310,6 @@ main{
   border-radius: 4px;
   font-size: 14px;
 }
-
-
-
-
-
-
-
 
 /* 
 
@@ -463,7 +441,6 @@ main {
 
 
  */
-
 
 .right-section {
   margin-top: 1.4rem;

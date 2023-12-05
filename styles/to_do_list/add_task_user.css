@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
 
 :root {
-  --color-primary: #6c9bcf;
+  --color-primary: rgb(12, 77, 162);
+  /* --color-primary: #6c9bcf; */
   --color-danger: #ff0060;
   --color-success: #1b9c85;
   --color-warning: #f7d060;
@@ -226,7 +227,6 @@ aside .sidebar .message-count {
 
 /* main  */
 
-
 .container2 {
   margin-top: 70px;
   display: inline-block;
@@ -262,11 +262,11 @@ aside .sidebar .message-count {
   color: #202528;
   border-radius: var(--card-border-radius);
 }
-.container2 .create_task{
+.container2 .create_task {
   display: flex;
 }
 
-.container2  form input[type="submit"] {
+.container2 form input[type="submit"] {
   margin-left: 20px;
   background-color: var(--color-primary);
   border: none;
@@ -279,10 +279,9 @@ aside .sidebar .message-count {
   padding: 10px;
   border-radius: 5px;
   font-size: 17px;
-  padding:10px 15px;
+  padding: 10px 15px;
   background: rgb(196, 160, 6);
   border-radius: 5px;
-
 }
 
 /* .container2 .task h2{

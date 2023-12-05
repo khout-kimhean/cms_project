@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
 
 :root {
-  --color-primary: #6c9bcf;
+  --color-primary: rgb(12, 77, 162);
+  /* --color-primary: #6c9bcf; */
   --color-danger: #ff0060;
   --color-success: #1b9c85;
   --color-warning: #f7d060;
@@ -184,7 +185,7 @@ aside .toggle {
   background: var(--color-danger);
   margin-left: 150px;
 }
-.container2 a{
+.container2 a {
   color: var(--color-danger) !important;
 }
 
@@ -209,7 +210,7 @@ aside .toggle {
   border-radius: 20px;
 }
 .container2 select {
-    margin-left: 150px;
+  margin-left: 150px;
   width: 70%;
   margin-bottom: 15px !important;
   margin-top: 15px !important;
@@ -221,9 +222,9 @@ aside .toggle {
   border-radius: var(--card-border-radius);
 }
 .container2 label {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
   margin-top: 10px;
-font-size: 14px;
+  font-size: 14px;
   font-family: cursive, sans-serif;
   background-color: var(--color-danger);
   /* color: var(--color-dark); */
