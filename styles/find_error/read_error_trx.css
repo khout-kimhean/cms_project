@@ -4,7 +4,7 @@
   --color-blue: rgb(12, 77, 162);
   --color-button: rgb(196, 160, 6);
   --color-text: #ff0800;
-  --color-primary: #6c9bcf;
+  --color-primary: rgb(12, 77, 162);
   --color-danger: #ff0060;
   --color-success: #1b9c85;
   --color-warning: #f7d060;
@@ -227,7 +227,9 @@ aside .sidebar .message-count {
   font-size: 11px;
   border-radius: var(--border-radius-1);
 }
-
+a:hover {
+  text-decoration: underline;
+}
 /* main  */
 .container2 .head {
   margin-bottom: 10px;

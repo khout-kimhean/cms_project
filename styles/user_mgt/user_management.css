@@ -224,19 +224,10 @@ aside .sidebar .message-count {
   font-size: 11px;
   border-radius: var(--border-radius-1);
 }
-
+a:hover {
+  text-decoration: underline;
+}
 /* main  */
-
-/* .container2 {
-  display: flex;
-  background-color: var(--color-white);
-  padding: var(--card-padding);
-  border-radius: var(--card-border-radius);
-  box-shadow: var(--box-shadow);
-  height: 700px;
-  width: 100%;
-  color: var(--color-dark);
-} */
 
 .container2 {
   font-family: cursive, sans-serif;

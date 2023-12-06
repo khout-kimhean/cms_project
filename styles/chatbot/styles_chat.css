@@ -153,7 +153,9 @@ aside .toggle .logo img {
   border-radius: 50%; /* Make the image circular */
   object-fit: cover;
 }
-
+a:hover {
+  text-decoration: underline;
+}
 /* main  */
 
 /* main */
@@ -281,10 +283,11 @@ main .background::before {
   right: 0;
   bottom: 0;
   z-index: -1;
-  background-image: url("./background.jpg");
+  background-image: url("./background1.jpg");
+  /* background-image: url("./background.jpg"); */
   background-size: cover;
   background-position: center;
-  filter: blur(2px);
+  /* filter: blur(2px); */
 }
 
 main .background {

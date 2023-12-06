@@ -248,7 +248,9 @@ td {
 }
 
 /* end container2 */
-
+a:hover {
+  text-decoration: underline;
+}
 aside .toggle .logo {
   display: flex;
   gap: 0.5rem;

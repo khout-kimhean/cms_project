@@ -1,120 +1,3 @@
-<?php
-require_once '../vendor/autoload.php';
-use PhpOffice\PhpSpreadsheet\IOFactory;
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Database connection
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "demo"; // Change to your database name
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    // Function to sanitize input data
-    function sanitizeData($data)
-    {
-        return htmlspecialchars(stripslashes(trim($data)));
-    }
-
-    // Process uploaded file
-    if (isset($_FILES["fileInput"])) {
-        $file = $_FILES["fileInput"];
-        $fileTmpName = $file["tmp_name"];
-
-        try {
-            // Load the Excel file
-            $spreadsheet = IOFactory::load($fileTmpName);
-            $worksheet = $spreadsheet->getActiveSheet();
-
-            // Define column mappings
-            $columnMappings = array(
-                'C4' => 'fullname',
-                'C5' => 'branch',
-                'F7' => 'position',
-                'F10' => 'function',
-                'D10' => 'role',
-                'C21' => 'command',
-                'C6' => 'duration',
-                'D7' => 'department',
-                'B22' => 'request_by',
-                'B23' => 'request_date',
-                'B24' => 'start_date',
-                'B25' => 'end_date',
-            );
-
-            // Prepare SQL statement for data insertion
-            $sql = "INSERT INTO tb_user (fullname, branch, position, function, role, command, duration, department, request_by, request_date, start_date, end_date) 
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param(
-                'ssssssssssss',
-                $fullname,
-                $branch,
-                $position,
-                $function,
-                $role,
-                $command,
-                $duration,
-                $department,
-                $request_by,
-                $request_date,
-                $start_date,
-                $end_date
-            );
-
-            // Iterate through rows
-            foreach ($worksheet->getRowIterator() as $row) {
-                $rowData = array();
-                $cellIterator = $row->getCellIterator();
-
-                // Iterate through cells
-                foreach ($cellIterator as $cell) {
-                    $column = PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($cell->getColumn());
-                    $cellValue = sanitizeData($cell->getFormattedValue());
-                    $rowData[$column] = $cellValue;
-                }
-
-                // Map cell values to variables
-                extract($rowData);
-
-                // Debugging statements
-                echo "Inserting data:\n";
-                echo "Full Name: $fullname, Branch: $branch, Position: $position, ...\n";
-
-                // Check if 'fullname' is not empty before insertion
-                if (!empty($fullname)) {
-                    // Execute the prepared statement
-                    if (!$stmt->execute()) {
-                        throw new Exception("Error in executing the statement: " . $stmt->error);
-                    }
-                    echo "Data inserted successfully\n";
-                } else {
-                    echo "Skipping row with empty 'fullname'\n";
-                }
-            }
-
-        } catch (Exception $e) {
-            echo 'Error loading file: ', $e->getMessage(), "\n";
-        }
-
-        // Close the prepared statement
-        $stmt->close();
-    }
-
-    // Close database connection
-    $conn->close();
-}
-?>
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -124,6 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../styles/assessment/upload_user.css">
+    <script src="https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js"></script>
     <title>Assessment</title>
 </head>
 
@@ -208,60 +92,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <main>
             <div class="container2">
                 <h1 class="h1">Upload User Assessment</h1>
-                <form method="post" enctype="multipart/form-data">
+                <form method="post" enctype="multipart/form-data" action="process_upload.php" id="uploadForm">
                     <div class="item">
                         <input class="file" type="file" name="fileInput" id="fileInput" />
-                        <button type="submit">Submit</button>
+                        <button type="button" id="submitBtn">Submit</button>
                     </div>
                 </form>
-                <div class="table">
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th>Full Name</th>
-                                <th>Branch</th>
-                                <th>Position</th>
-                                <th>Function</th>
-                                <th>Role</th>
-                                <th>Command</th>
-                                <th>Duration Move</th>
-                                <th>Department</th>
-                                <th>Request By</th>
-                                <th>Request Date</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            // Check if $rows is defined before looping
-                            if (isset($rows) && is_array($rows)) {
-                                // Loop through the fetched rows and display data in the table
-                                foreach ($rows as $row) {
-                                    echo "<tr>";
-                                    echo "<td>{$row['fullname']}</td>";
-                                    echo "<td>{$row['branch']}</td>";
-                                    echo "<td>{$row['position']}</td>";
-                                    echo "<td>{$row['function']}</td>";
-                                    echo "<td>{$row['role']}</td>";
-                                    echo "<td>{$row['command']}</td>";
-                                    echo "<td>{$row['duration']}</td>";
-                                    echo "<td>{$row['department']}</td>";
-                                    echo "<td>{$row['request_by']}</td>";
-                                    echo "<td>{$row['request_date']}</td>";
-                                    echo "<td>{$row['start_date']}</td>";
-                                    echo "<td>{$row['end_date']}</td>";
-                                    echo "</tr>";
-                                }
-                            } else {
-                                // Handle the case where $rows is not defined or is not an array
-                                echo "<tr><td colspan='12'>No data available</td></tr>";
-                            }
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
+                <div id="output"></div>
             </div>
+
+
         </main>
         <div class="right-section">
             <div class="nav">
@@ -359,8 +199,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         </div>
     </div>
-    <!-- <script src="orders.js"></script> -->
     <script src="../script/index.js"></script>
+
+    <script>
+    function uploadFile() {
+        var fileInput = document.getElementById('fileInput');
+        var outputDiv = document.getElementById('output');
+
+        var file = fileInput.files[0];
+
+        if (file) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                var image = new Image();
+                image.src = e.target.result;
+
+                image.onload = function() {
+                    // Use Tesseract.js to perform OCR on the image
+                    Tesseract.recognize(
+                        image,
+                        'eng', // Language code (English in this case)
+                        {
+                            logger: info => console.log(info)
+                        } // Optional logger
+                    ).then(({
+                        data: {
+                            text
+                        }
+                    }) => {
+                        // Display the recognized text in the #output div
+                        outputDiv.innerText = text;
+                    });
+                };
+            };
+
+            reader.readAsDataURL(file);
+        } else {
+            // Handle the case when no file is selected
+            alert('Please select a file.');
+        }
+    }
+
+    document.getElementById('uploadForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent the default form submission
+        uploadFile();
+    });
+    </script>
+
 </body>
 
 </html>

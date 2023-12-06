@@ -59,15 +59,11 @@ $conn->close();
 
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>login form</title>
-
-    <!-- custom css file link  -->
     <link rel="stylesheet" type="text/css" href="../styles/user_mgt/login_form.css">
 
 </head>
@@ -75,6 +71,7 @@ $conn->close();
 <body>
     <div class="form-container">
         <form action="" method="post">
+            <!-- <img src="../images/logo/logo.jpg" alt=""> -->
             <h3>login now</h3>
             <?php
             if (isset($error)) {

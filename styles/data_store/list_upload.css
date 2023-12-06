@@ -216,7 +216,9 @@ aside .sidebar a:hover {
 aside .sidebar a:hover span {
   margin-left: 0.6rem;
 }
-
+a:hover {
+  text-decoration: underline;
+}
 .box {
   background-color: var(--color-white);
   padding: var(--card-padding);
