@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../styles/assessment/upload_user.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
     <script src="https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js"></script>
     <title>Assessment</title>
 </head>
 
 <body>
-
     <div class="container">
         <aside>
             <div class="toggle">
@@ -100,8 +100,6 @@
                 </form>
                 <div id="output"></div>
             </div>
-
-
         </main>
         <div class="right-section">
             <div class="nav">
@@ -200,53 +198,55 @@
         </div>
     </div>
     <script src="../script/index.js"></script>
-
     <script>
-    function uploadFile() {
-        var fileInput = document.getElementById('fileInput');
-        var outputDiv = document.getElementById('output');
+        document.addEventListener('DOMContentLoaded', function () {
+            var fileInput = document.getElementById('fileInput');
+            var submitBtn = document.getElementById('submitBtn');
 
-        var file = fileInput.files[0];
+            fileInput.addEventListener('change', function (event) {
+                var file = event.target.files[0];
 
-        if (file) {
-            var reader = new FileReader();
+                if (file) {
+                    var reader = new FileReader();
 
-            reader.onload = function(e) {
-                var image = new Image();
-                image.src = e.target.result;
+                    reader.onload = function (e) {
+                        var data = e.target.result;
 
-                image.onload = function() {
-                    // Use Tesseract.js to perform OCR on the image
-                    Tesseract.recognize(
-                        image,
-                        'eng', // Language code (English in this case)
-                        {
-                            logger: info => console.log(info)
-                        } // Optional logger
-                    ).then(({
-                        data: {
-                            text
-                        }
-                    }) => {
-                        // Display the recognized text in the #output div
-                        outputDiv.innerText = text;
-                    });
-                };
-            };
+                        var workbook = XLSX.read(data, {
+                            type: 'binary'
+                        });
+                        var sheetName = workbook.SheetNames[0];
+                        var sheet = workbook.Sheets[sheetName];
 
-            reader.readAsDataURL(file);
-        } else {
-            // Handle the case when no file is selected
-            alert('Please select a file.');
-        }
-    }
+                        var jsonData = XLSX.utils.sheet_to_json(sheet, {
+                            header: 1
+                        });
 
-    document.getElementById('uploadForm').addEventListener('submit', function(e) {
-        e.preventDefault(); // Prevent the default form submission
-        uploadFile();
-    });
+                        displayData(jsonData);
+                    };
+
+                    reader.readAsBinaryString(file);
+                }
+            });
+
+            function displayData(data) {
+                var outputDiv = document.getElementById('output');
+                outputDiv.innerHTML = '';
+
+                var table = document.createElement('table');
+
+                for (var i = 0; i < data.length; i++) {
+                    var row = table.insertRow();
+                    for (var j = 0; j < data[i].length; j++) {
+                        var cell = row.insertCell();
+                        cell.textContent = data[i][j];
+                    }
+                }
+
+                outputDiv.appendChild(table);
+            }
+        });
     </script>
-
 </body>
 
 </html>

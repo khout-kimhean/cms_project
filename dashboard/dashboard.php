@@ -9,22 +9,22 @@ $db_name = 'demo';
 $conn = new mysqli($db_host, $db_username, $db_password, $db_name);
 
 // Check for connection errors
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if($conn->connect_error) {
+    die("Connection failed: ".$conn->connect_error);
 }
 
 // Define an array to store errors
 $error = array();
 
 // Delete user if the delete button is clicked
-if (isset($_POST['delete_user'])) {
+if(isset($_POST['delete_user'])) {
     $user_id = $_POST['user_id'];
     $delete_sql = "DELETE FROM login_register WHERE id = $user_id";
-    if ($conn->query($delete_sql) === TRUE) {
+    if($conn->query($delete_sql) === TRUE) {
         header('Location: admin.php'); // Redirect to refresh the user list
         exit();
     } else {
-        $error[] = 'Error deleting user: ' . $conn->error;
+        $error[] = 'Error deleting user: '.$conn->error;
     }
 }
 
@@ -236,17 +236,17 @@ $result = $conn->query($sql);
                         <?php
                         $userCount = 0; // Initialize a counter variable
                         
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
-                                if ($userCount < 3) { // Display only 3 users
+                        if($result->num_rows > 0) {
+                            while($row = $result->fetch_assoc()) {
+                                if($userCount < 3) { // Display only 3 users
                                     echo '<tr>
-                                        <td>' . $row['id'] . '</td>
-                                        <td>' . $row['name'] . '</td>
-                                        <td>' . $row['email'] . '</td>
-                                        <td>' . $row['user_type'] . '</td>
+                                        <td>'.$row['id'].'</td>
+                                        <td>'.$row['name'].'</td>
+                                        <td>'.$row['email'].'</td>
+                                        <td>'.$row['user_type'].'</td>
                                         <td>
                                         <form method="post">
-                                            <input type="hidden" name="user_id" value="' . $row['id'] . '">
+                                            <input type="hidden" name="user_id" value="'.$row['id'].'">
                                             
                                         </form>
                                         </td>
