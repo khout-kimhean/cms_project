@@ -231,18 +231,6 @@ main {
   margin-top: 50px;
 }
 
-/* .container2 {
-  background-color: var(--color-white);
-  padding: var(--card-padding);
-  border-radius: var(--card-border-radius);
-  box-shadow: var(--box-shadow);
-  height: 690px;
-  overflow-y: auto;
-  color: var(--color-dark);
-  max-width: 960px;
-  margin: 0 auto;
-} */
-
 .container2 .form-list {
   margin: 0;
 }

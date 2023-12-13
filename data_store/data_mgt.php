@@ -34,28 +34,28 @@
                     <h3>Dashboard</h3>
                 </a>
 
-                <a href="../data_store/search.php">
+                <!-- <a href="../data_store/search.php">
                     <span class="fa fa-search">
                     </span>
                     <h3>Search</h3>
-                </a>
+                </a> -->
                 <a href="../contact/contact.php">
                     <span class="fa fa-address-card">
                     </span>
                     <h3>Contact</h3>
                 </a>
-                <a href="../data_store/upload_file.php">
+                <a href="../data_store/data_mgt.php" class="active">
                     <span class="fa fa-upload">
                     </span>
                     <h3>Data Store</h3>
                 </a>
 
-                <a href="../data_store/list_upload.php">
+                <!-- <a href="../data_store/list_upload.php">
                     <span class="material-icons-sharp">
                         inventory
                     </span>
                     <h3>View File</h3>
-                </a>
+                </a> -->
                 <a href="../assessment/assessment.php">
                     <span class="fa fa-address-book">
                         <!-- fab fa-app-store-ios -->
@@ -73,11 +73,11 @@
                     </span>
                     <h3>To-do List</h3>
                 </a>
-                <a href="../data_store/data_mgt.php" class="active">
+                <!-- <a href="../data_store/data_mgt.php">
                     <span class="fa fa-briefcase">
                     </span>
                     <h3>Stock Mgt</h3>
-                </a>
+                </a> -->
 
 
                 <a href="../user_mgt/logout.php">

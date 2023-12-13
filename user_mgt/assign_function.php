@@ -1,3 +1,110 @@
+<?php
+
+require '../vendor/autoload.php';
+
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "demo";
+
+$alertType = "";
+$alertMessage = "";
+
+// Check if the ID is provided and is numeric
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $id = $_GET['id'];
+
+    $id = $_GET['id'];
+    // echo "ID is valid: $id";
+    // Create a database connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    // Check the connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+
+    $sql = "SELECT name, user_type FROM login_register WHERE id = ?";
+
+    // Prepare the SQL statement
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt === false) {
+        die("Error: " . $conn->error);
+    }
+
+    // Bind the ID parameter to the SQL statement
+    $stmt->bind_param("i", $id);
+
+    if ($stmt->execute()) {
+        $stmt->store_result();
+
+        if ($stmt->num_rows > 0) {
+            $stmt->bind_result($name, $user_type);
+            $stmt->fetch();
+
+            // Display the content (you can use the appropriate HTML tags)
+        } else {
+            echo "Content not found.";
+        }
+    } else {
+        echo "Error executing the SQL query: " . $stmt->error;
+    }
+
+    $stmt->close();
+
+} else {
+    // echo "Invalid ID: ";
+}
+
+
+// if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//     $id = $_POST["id"];
+//     $display_name = $_POST['display_name'];
+//     $position = $_POST['position'];
+//     $function = $_POST['function'];
+//     $role = $_POST['role'];
+//     $branch = $_POST['branch'];
+//     $status = $_POST['status'];
+//     $requester = $_POST['requester'];
+//     $approver = $_POST['approver'];
+//     $start_date = $_POST['start_date'];
+//     $end_date = $_POST['end_date'];
+//     $command = $_POST['command'];
+
+//     $conn = new mysqli($servername, $username, $password, $dbname);
+
+//     if ($conn->connect_error) {
+//         die("Connection failed: " . $conn->connect_error);
+//     }
+//     $sql = "INSERT INTO move_user (display_name, position, function, role, branch, status, requester,  approver, start_date, end_date, command) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+//     // $sql = "UPDATE sumary_data SET display_name = ?, position = ?, function = ?, role = ?, branch = ?, status = ?, requester = ?, approver = ?, start_date = ?, end_date = ?, command = ? WHERE id = ?";
+//     $stmt = $conn->prepare($sql);
+
+//     if ($stmt === false) {
+//         die("Error: " . $conn->error);
+//     }
+//     $stmt->bind_param("sssssssssss", $display_name, $position, $function, $role, $branch, $status, $requester, $approver, $start_date, $end_date, $command);
+//     // $stmt->bind_param("sssssssssssi", $display_name, $position, $function, $role, $branch, $status, $requester, $approver, $start_date, $end_date, $command, $id);
+
+//     if ($stmt->execute()) {
+//         $alertType = "success"; // Set success alert type
+//         $alertMessage = "User Moved successfully.";
+//     } else {
+//         $alertType = "danger"; // Set danger alert type
+//         $alertMessage = "Error User Move: " . $stmt->error;
+//     }
+//     $stmt->close();
+//     $conn->close();
+// }
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +113,7 @@
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../Admin Dashboard/styles/assign_function.css">
+    <link rel="stylesheet" type="text/css" href="../styles/user_mgt/assign_function.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
 </head>
@@ -35,28 +142,28 @@
                     <h3>Dashboard</h3>
                 </a>
 
-                <a href="../data_store/search.php">
+                <!-- <a href="../data_store/search.php">
                     <span class="fa fa-search">
                     </span>
                     <h3>Search</h3>
-                </a>
+                </a> -->
                 <a href="../contact/contact.php">
                     <span class="fa fa-address-card">
                     </span>
                     <h3>Contact</h3>
                 </a>
-                <a href="../data_store/upload_file.php">
+                <a href="../data_store/data_mgt.php">
                     <span class="fa fa-upload">
                     </span>
                     <h3>Data Store</h3>
                 </a>
 
-                <a href="../data_store/list_upload.php">
+                <!-- <a href="../data_store/list_upload.php">
                     <span class="material-icons-sharp">
                         inventory
                     </span>
                     <h3>View File</h3>
-                </a>
+                </a> -->
                 <a href="../assessment/assessment.php">
                     <span class="fa fa-address-book">
                         <!-- fab fa-app-store-ios -->
@@ -74,11 +181,11 @@
                     </span>
                     <h3>To-do List</h3>
                 </a>
-                <a href="../data_store/data_mgt.php">
+                <!-- <a href="../data_store/data_mgt.php">
                     <span class="fa fa-briefcase">
                     </span>
                     <h3>Stock Mgt</h3>
-                </a>
+                </a> -->
 
 
                 <a href="../user_mgt/logout.php">
@@ -91,28 +198,24 @@
         </aside>
         <main>
             <div class="container2">
-                <div class="back_button">
-                    <a href="../templates/user_management.php" class="back-button">
-                        <i class="fa fa-chevron-circle-left" style="font-size: 25px">Back</i>
-                    </a>
-                </div>
                 <h2>Add Function to Role/Team User</h2>
                 <div class="select_role">
-                    <label for="role">Select User Role</label>
-                    <select name="user_type">
-                        <option value="admin">Admin</option>
-                        <option value="card payment team">Card Payment Team</option>
-                        <option value="digital branch team">Digital Branch Team</option>
-                        <option value="atm team">ATM Team</option>
-                        <option value="terminal team">Terminal Team</option>
-                        <option value="user">User</option>
-                    </select>
-                    <label class="label_input" for="role">User Name</label>
-                    <input type="text" name="name" required placeholder="enter your name">
+                    <div class="user">
+                        <label class="label_input" for="role">User Name</label>
+                        <input type="text" name="name" required placeholder="Name"
+                            value="<?php echo htmlspecialchars($name); ?>">
+                        <label class="label_input" for="user type">User Type</label>
+                        <input type="text" name="user type" required placeholder="User Type"
+                            value="<?php echo htmlspecialchars($user_type); ?>">
+                    </div>
+
                 </div>
 
-                <div class="dashboard">
-                    <h2>Dashboard</h2>
+                <div class="select1">
+                    <h2>Permission</h2>
+                </div>
+
+                <div class="box">
                     <div class="container3">
                         <input type="checkbox" id="input-1" class="check-input">
                         <label for="input-1" class="checkbox">
@@ -120,7 +223,7 @@
                                 <path d="M1 6.85L8.09677 14L21 1" />
                             </svg>
                         </label>
-                        <span>User Mgt</span>
+                        <span>ChatBot</span>
                     </div>
                     <div class="container3">
                         <input type="checkbox" id="input-2" class="check-input">
@@ -129,63 +232,7 @@
                                 <path d="M1 6.85L8.09677 14L21 1" />
                             </svg>
                         </label>
-                        <span>Todo List</span>
-                        <div class="list">
-                            <div class="container3">
-                                <input type="checkbox" id="input-18" class="check-input">
-                                <label for="input-18" class="checkbox">
-                                    <svg viewBox="0 0 22 16" fill="none">
-                                        <path d="M1 6.85L8.09677 14L21 1" />
-                                    </svg>
-                                </label>
-                                <span>Admin</span>
-                            </div>
-                            <div class="container3">
-                                <input type="checkbox" id="input-19" class="check-input">
-                                <label for="input-19" class="checkbox">
-                                    <svg viewBox="0 0 22 16" fill="none">
-                                        <path d="M1 6.85L8.09677 14L21 1" />
-                                    </svg>
-                                </label>
-                                <span>User</span>
-                            </div>
-                            <div class="container3">
-                                <input type="checkbox" id="input-20" class="check-input">
-                                <label for="input-20" class="checkbox">
-                                    <svg viewBox="0 0 22 16" fill="none">
-                                        <path d="M1 6.85L8.09677 14L21 1" />
-                                    </svg>
-                                </label>
-                                <span>Card Payment Team</span>
-                            </div>
-                            <div class="container3">
-                                <input type="checkbox" id="input-21" class="check-input">
-                                <label for="input-21" class="checkbox">
-                                    <svg viewBox="0 0 22 16" fill="none">
-                                        <path d="M1 6.85L8.09677 14L21 1" />
-                                    </svg>
-                                </label>
-                                <span>Digital Branch Team</span>
-                            </div>
-                            <div class="container3">
-                                <input type="checkbox" id="input-22" class="check-input">
-                                <label for="input-22" class="checkbox">
-                                    <svg viewBox="0 0 22 16" fill="none">
-                                        <path d="M1 6.85L8.09677 14L21 1" />
-                                    </svg>
-                                </label>
-                                <span>ATM Network Team</span>
-                            </div>
-                            <div class="container3">
-                                <input type="checkbox" id="input-23" class="check-input">
-                                <label for="input-23" class="checkbox">
-                                    <svg viewBox="0 0 22 16" fill="none">
-                                        <path d="M1 6.85L8.09677 14L21 1" />
-                                    </svg>
-                                </label>
-                                <span>Terminal Mgt Team</span>
-                            </div>
-                        </div>
+                        <span>DataChat</span>
                     </div>
                     <div class="container3">
                         <input type="checkbox" id="input-3" class="check-input">
@@ -194,7 +241,7 @@
                                 <path d="M1 6.85L8.09677 14L21 1" />
                             </svg>
                         </label>
-                        <span>Stock Mgt</span>
+                        <span>Find Error</span>
                     </div>
                     <div class="container3">
                         <input type="checkbox" id="input-4" class="check-input">
@@ -203,8 +250,10 @@
                                 <path d="M1 6.85L8.09677 14L21 1" />
                             </svg>
                         </label>
-                        <span>Chatbot</span>
+                        <span>Data Store</span>
                     </div>
+                </div>
+                <div class="box">
                     <div class="container3">
                         <input type="checkbox" id="input-5" class="check-input">
                         <label for="input-5" class="checkbox">
@@ -212,7 +261,7 @@
                                 <path d="M1 6.85L8.09677 14L21 1" />
                             </svg>
                         </label>
-                        <span>Upload Chat</span>
+                        <span>Assessment</span>
                     </div>
                     <div class="container3">
                         <input type="checkbox" id="input-6" class="check-input">
@@ -221,63 +270,7 @@
                                 <path d="M1 6.85L8.09677 14L21 1" />
                             </svg>
                         </label>
-                        <span>View</span>
-                        <div class="list">
-                            <div class="container3">
-                                <input type="checkbox" id="input-24" class="check-input">
-                                <label for="input-24" class="checkbox">
-                                    <svg viewBox="0 0 22 16" fill="none">
-                                        <path d="M1 6.85L8.09677 14L21 1" />
-                                    </svg>
-                                </label>
-                                <span>Admin</span>
-                            </div>
-                            <div class="container3">
-                                <input type="checkbox" id="input-25" class="check-input">
-                                <label for="input-25" class="checkbox">
-                                    <svg viewBox="0 0 22 16" fill="none">
-                                        <path d="M1 6.85L8.09677 14L21 1" />
-                                    </svg>
-                                </label>
-                                <span>User</span>
-                            </div>
-                            <div class="container3">
-                                <input type="checkbox" id="input-26" class="check-input">
-                                <label for="input-26" class="checkbox">
-                                    <svg viewBox="0 0 22 16" fill="none">
-                                        <path d="M1 6.85L8.09677 14L21 1" />
-                                    </svg>
-                                </label>
-                                <span>Card Payment Team</span>
-                            </div>
-                            <div class="container3">
-                                <input type="checkbox" id="input-27" class="check-input">
-                                <label for="input-27" class="checkbox">
-                                    <svg viewBox="0 0 22 16" fill="none">
-                                        <path d="M1 6.85L8.09677 14L21 1" />
-                                    </svg>
-                                </label>
-                                <span>Digital Branch Team</span>
-                            </div>
-                            <div class="container3">
-                                <input type="checkbox" id="input-28" class="check-input">
-                                <label for="input-28" class="checkbox">
-                                    <svg viewBox="0 0 22 16" fill="none">
-                                        <path d="M1 6.85L8.09677 14L21 1" />
-                                    </svg>
-                                </label>
-                                <span>ATM Network Team</span>
-                            </div>
-                            <div class="container3">
-                                <input type="checkbox" id="input-29" class="check-input">
-                                <label for="input-29" class="checkbox">
-                                    <svg viewBox="0 0 22 16" fill="none">
-                                        <path d="M1 6.85L8.09677 14L21 1" />
-                                    </svg>
-                                </label>
-                                <span>Terminal Mgt Team</span>
-                            </div>
-                        </div>
+                        <span>User Management</span>
                     </div>
                     <div class="container3">
                         <input type="checkbox" id="input-7" class="check-input">
@@ -286,7 +279,7 @@
                                 <path d="M1 6.85L8.09677 14L21 1" />
                             </svg>
                         </label>
-                        <span>User Assessment</span>
+                        <span>To_do List</span>
                     </div>
                     <div class="container3">
                         <input type="checkbox" id="input-8" class="check-input">
@@ -295,151 +288,13 @@
                                 <path d="M1 6.85L8.09677 14L21 1" />
                             </svg>
                         </label>
-                        <span>Search</span>
-                        <div class="list">
-                            <div class="container3">
-                                <input type="checkbox" id="input-30" class="check-input">
-                                <label for="input-30" class="checkbox">
-                                    <svg viewBox="0 0 22 16" fill="none">
-                                        <path d="M1 6.85L8.09677 14L21 1" />
-                                    </svg>
-                                </label>
-                                <span>Admin</span>
-                            </div>
-                            <div class="container3">
-                                <input type="checkbox" id="input-31" class="check-input">
-                                <label for="input-31" class="checkbox">
-                                    <svg viewBox="0 0 22 16" fill="none">
-                                        <path d="M1 6.85L8.09677 14L21 1" />
-                                    </svg>
-                                </label>
-                                <span>User</span>
-                            </div>
-                            <div class="container3">
-                                <input type="checkbox" id="input-32" class="check-input">
-                                <label for="input-32" class="checkbox">
-                                    <svg viewBox="0 0 22 16" fill="none">
-                                        <path d="M1 6.85L8.09677 14L21 1" />
-                                    </svg>
-                                </label>
-                                <span>Card Payment Team</span>
-                            </div>
-                            <div class="container3">
-                                <input type="checkbox" id="input-33" class="check-input">
-                                <label for="input-33" class="checkbox">
-                                    <svg viewBox="0 0 22 16" fill="none">
-                                        <path d="M1 6.85L8.09677 14L21 1" />
-                                    </svg>
-                                </label>
-                                <span>Digital Branch Team</span>
-                            </div>
-                            <div class="container3">
-                                <input type="checkbox" id="input-34" class="check-input">
-                                <label for="input-34" class="checkbox">
-                                    <svg viewBox="0 0 22 16" fill="none">
-                                        <path d="M1 6.85L8.09677 14L21 1" />
-                                    </svg>
-                                </label>
-                                <span>ATM Network Team</span>
-                            </div>
-                            <div class="container3">
-                                <input type="checkbox" id="input-35" class="check-input">
-                                <label for="input-35" class="checkbox">
-                                    <svg viewBox="0 0 22 16" fill="none">
-                                        <path d="M1 6.85L8.09677 14L21 1" />
-                                    </svg>
-                                </label>
-                                <span>Terminal Mgt Team</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container3">
-                        <input type="checkbox" id="input-9" class="check-input">
-                        <label for="input-9" class="checkbox">
-                            <svg viewBox="0 0 22 16" fill="none">
-                                <path d="M1 6.85L8.09677 14L21 1" />
-                            </svg>
-                        </label>
                         <span>Contact</span>
                     </div>
-                    <div class="container3">
-                        <input type="checkbox" id="input-10" class="check-input">
-                        <label for="input-10" class="checkbox">
-                            <svg viewBox="0 0 22 16" fill="none">
-                                <path d="M1 6.85L8.09677 14L21 1" />
-                            </svg>
-                        </label>
-                        <span>Upload File</span>
-                    </div>
-                    <div class="container3">
-                        <input type="checkbox" id="input-11" class="check-input">
-                        <label for="input-11" class="checkbox">
-                            <svg viewBox="0 0 22 16" fill="none">
-                                <path d="M1 6.85L8.09677 14L21 1" />
-                            </svg>
-                        </label>
-                        <span>View File</span>
-                        <div class="list">
-                            <div class="container3">
-                                <input type="checkbox" id="input-12" class="check-input">
-                                <label for="input-12" class="checkbox">
-                                    <svg viewBox="0 0 22 16" fill="none">
-                                        <path d="M1 6.85L8.09677 14L21 1" />
-                                    </svg>
-                                </label>
-                                <span>Admin</span>
-                            </div>
-                            <div class="container3">
-                                <input type="checkbox" id="input-13" class="check-input">
-                                <label for="input-13" class="checkbox">
-                                    <svg viewBox="0 0 22 16" fill="none">
-                                        <path d="M1 6.85L8.09677 14L21 1" />
-                                    </svg>
-                                </label>
-                                <span>User</span>
-                            </div>
-                            <div class="container3">
-                                <input type="checkbox" id="input-14" class="check-input">
-                                <label for="input-14" class="checkbox">
-                                    <svg viewBox="0 0 22 16" fill="none">
-                                        <path d="M1 6.85L8.09677 14L21 1" />
-                                    </svg>
-                                </label>
-                                <span>Card Payment Team</span>
-                            </div>
-                            <div class="container3">
-                                <input type="checkbox" id="input-15" class="check-input">
-                                <label for="input-15" class="checkbox">
-                                    <svg viewBox="0 0 22 16" fill="none">
-                                        <path d="M1 6.85L8.09677 14L21 1" />
-                                    </svg>
-                                </label>
-                                <span>Digital Branch Team</span>
-                            </div>
-                            <div class="container3">
-                                <input type="checkbox" id="input-16" class="check-input">
-                                <label for="input-16" class="checkbox">
-                                    <svg viewBox="0 0 22 16" fill="none">
-                                        <path d="M1 6.85L8.09677 14L21 1" />
-                                    </svg>
-                                </label>
-                                <span>ATM Network Team</span>
-                            </div>
-                            <div class="container3">
-                                <input type="checkbox" id="input-17" class="check-input">
-                                <label for="input-17" class="checkbox">
-                                    <svg viewBox="0 0 22 16" fill="none">
-                                        <path d="M1 6.85L8.09677 14L21 1" />
-                                    </svg>
-                                </label>
-                                <span>Terminal Mgt Team </span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                <form action="../templates/assign_function.php">
-                    <input type="submit" name="submit" value="Assign Function" class="form-btn">
+                <form action="../user_mgt/assign_function.php">
+                    <input type="submit" name="submit" value="Save" class="form-btn">
                 </form>
+
 
             </div>
         </main>

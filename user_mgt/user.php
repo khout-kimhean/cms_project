@@ -141,9 +141,15 @@ if (isset($_POST['delete_user'])) {
         <main>
             <!-- <br /> -->
             <div class="container2">
+
                 <div class="row">
                     <div class="col-md-8 offset-md-2">
                         <div class="card">
+                            <a href="createuser.php">
+                                <button>
+                                    <h2>New User</h2>
+                                </button>
+                            </a>
                             <div class="card-header" class="back-button">
 
                                 <span>
@@ -154,7 +160,7 @@ if (isset($_POST['delete_user'])) {
 
                             </div>
                             <div class="card-body">
-                                <form action="search_user.php" method="post">
+                                <form action="user.php" method="post">
                                     <div class="form-group">
                                         <label for="searchTerm">Type here for search : </label>
                                         <input type="text" name="searchTerm" class="form-control" id="searchTerm">
@@ -171,7 +177,7 @@ if (isset($_POST['delete_user'])) {
                                                 <th>User Name</th>
                                                 <th>Email</th>
                                                 <th>Type User</th>
-                                                <th>Permission</th>
+                                                <th>Function/Role</th>
                                                 <th>Option</th>
                                             </tr>
                                         </thead>
@@ -195,9 +201,8 @@ if (isset($_POST['delete_user'])) {
                                                     <?php echo htmlspecialchars($row['user_type']); ?>
                                                 </td>
                                                 </td>
-                                                <td><a
-                                                        href="../user_mgt/assign_function.php?id=<?php echo $row['id']; ?>">
-                                                        Edit</a>
+                                                <td>
+                                                    <a href="edit_user.php?id=<?php echo $row['id']; ?>">Edit</a>
                                                 </td>
                                                 </td>
                                                 <td><a href="search_user.php?id=<?php echo $row['name']; ?>">Delete</a>

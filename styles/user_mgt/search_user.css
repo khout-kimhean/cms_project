@@ -391,6 +391,13 @@ a:hover {
   background-color: var(--color-dark);
   color: var(--color-white);
 }
+.container2 .card a button {
+  cursor: pointer;
+  color: var(--color-white);
+  background-color: rgb(196, 160, 6);
+  padding: 8px;
+  border-radius: 8px;
+}
 
 /* end container2 */
 

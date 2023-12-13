@@ -226,7 +226,7 @@ a:hover {
   box-shadow: var(--box-shadow);
   margin-top: 30px;
   margin-bottom: 30px;
-  max-height: 670px;
+  max-height: 100%;
   overflow-y: auto;
   color: var(--color-dark);
 }

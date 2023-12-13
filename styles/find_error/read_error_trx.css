@@ -230,6 +230,7 @@ aside .sidebar .message-count {
 a:hover {
   text-decoration: underline;
 }
+
 /* main  */
 .container2 .head {
   margin-bottom: 10px;
@@ -273,17 +274,7 @@ a:hover {
   border-radius: 20px;
   margin-bottom: 10px;
 }
-/* .container2 .button {
-  display: inline-flex !important;
-  margin-right: 20px;
-  margin-left: 85%;
-  background-color: rgb(196, 160, 6);
-  color: var(--color-white);
-  border-radius: 8px;
-  padding: 12px;
-  width: 15%;
-  cursor: pointer;
-} */
+
 .container2 button {
   margin-left: 85%;
   background-color: rgb(196, 160, 6);

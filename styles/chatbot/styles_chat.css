@@ -235,24 +235,12 @@ a:hover {
 }
 
 main .chat {
+  height: 100%;
+  width: 100%;
   margin-top: 50px;
   margin-bottom: auto;
   padding-bottom: auto;
 }
-
-/* main .card {
-  height: 700px;
-  border-radius: 20px !important;
-}
-
-main .background {
-  background-image: url('../images/background.jpg');
-  object-fit: cover;
-  z-index: 0;
-  filter: blur(2px);
-  background-size: cover;
-  background-position: center;
-} */
 
 #submitInput {
   background-color: rgb(196, 160, 6); /* Green background color */
@@ -265,11 +253,10 @@ main .background {
 
 #submitInput:hover {
   background-color: rgb(196, 160, 6);
-  /*  */
 }
 
 main .card {
-  height: 690px;
+  height: 100%px;
   border-radius: 20px !important;
   overflow: hidden;
   position: relative;
@@ -284,10 +271,8 @@ main .background::before {
   bottom: 0;
   z-index: -1;
   background-image: url("./background1.jpg");
-  /* background-image: url("./background.jpg"); */
   background-size: cover;
   background-position: center;
-  /* filter: blur(2px); */
 }
 
 main .background {

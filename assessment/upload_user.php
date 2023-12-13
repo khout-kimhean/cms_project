@@ -35,28 +35,28 @@
                     <h3>Dashboard</h3>
                 </a>
 
-                <a href="../data_store/search.php">
+                <!-- <a href="../data_store/search.php">
                     <span class="fa fa-search">
                     </span>
                     <h3>Search</h3>
-                </a>
+                </a> -->
                 <a href="../contact/contact.php">
                     <span class="fa fa-address-card">
                     </span>
                     <h3>Contact</h3>
                 </a>
-                <a href="../data_store/upload_file.php">
+                <a href="../data_store/data_mgt.php">
                     <span class="fa fa-upload">
                     </span>
                     <h3>Data Store</h3>
                 </a>
 
-                <a href="../data_store/list_upload.php">
+                <!-- <a href="../data_store/list_upload.php">
                     <span class="material-icons-sharp">
                         inventory
                     </span>
                     <h3>View File</h3>
-                </a>
+                </a> -->
                 <a href="../assessment/assessment.php" class="active">
                     <span class="fa fa-address-book">
                         <!-- fab fa-app-store-ios -->
@@ -74,11 +74,11 @@
                     </span>
                     <h3>To-do List</h3>
                 </a>
-                <a href="../data_store/data_mgt.php">
+                <!-- <a href="../data_store/data_mgt.php">
                     <span class="fa fa-briefcase">
                     </span>
                     <h3>Stock Mgt</h3>
-                </a>
+                </a> -->
 
 
                 <a href="../user_mgt/logout.php">
@@ -199,53 +199,53 @@
     </div>
     <script src="../script/index.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var fileInput = document.getElementById('fileInput');
-            var submitBtn = document.getElementById('submitBtn');
+    document.addEventListener('DOMContentLoaded', function() {
+        var fileInput = document.getElementById('fileInput');
+        var submitBtn = document.getElementById('submitBtn');
 
-            fileInput.addEventListener('change', function (event) {
-                var file = event.target.files[0];
+        fileInput.addEventListener('change', function(event) {
+            var file = event.target.files[0];
 
-                if (file) {
-                    var reader = new FileReader();
+            if (file) {
+                var reader = new FileReader();
 
-                    reader.onload = function (e) {
-                        var data = e.target.result;
+                reader.onload = function(e) {
+                    var data = e.target.result;
 
-                        var workbook = XLSX.read(data, {
-                            type: 'binary'
-                        });
-                        var sheetName = workbook.SheetNames[0];
-                        var sheet = workbook.Sheets[sheetName];
+                    var workbook = XLSX.read(data, {
+                        type: 'binary'
+                    });
+                    var sheetName = workbook.SheetNames[0];
+                    var sheet = workbook.Sheets[sheetName];
 
-                        var jsonData = XLSX.utils.sheet_to_json(sheet, {
-                            header: 1
-                        });
+                    var jsonData = XLSX.utils.sheet_to_json(sheet, {
+                        header: 1
+                    });
 
-                        displayData(jsonData);
-                    };
+                    displayData(jsonData);
+                };
 
-                    reader.readAsBinaryString(file);
-                }
-            });
-
-            function displayData(data) {
-                var outputDiv = document.getElementById('output');
-                outputDiv.innerHTML = '';
-
-                var table = document.createElement('table');
-
-                for (var i = 0; i < data.length; i++) {
-                    var row = table.insertRow();
-                    for (var j = 0; j < data[i].length; j++) {
-                        var cell = row.insertCell();
-                        cell.textContent = data[i][j];
-                    }
-                }
-
-                outputDiv.appendChild(table);
+                reader.readAsBinaryString(file);
             }
         });
+
+        function displayData(data) {
+            var outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = '';
+
+            var table = document.createElement('table');
+
+            for (var i = 0; i < data.length; i++) {
+                var row = table.insertRow();
+                for (var j = 0; j < data[i].length; j++) {
+                    var cell = row.insertCell();
+                    cell.textContent = data[i][j];
+                }
+            }
+
+            outputDiv.appendChild(table);
+        }
+    });
     </script>
 </body>
 

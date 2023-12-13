@@ -73,28 +73,28 @@ if (isset($_POST['search'])) {
                     <h3>Dashboard</h3>
                 </a>
 
-                <a href="../data_store/search.php">
+                <!-- <a href="../data_store/search.php">
                     <span class="fa fa-search">
                     </span>
                     <h3>Search</h3>
-                </a>
+                </a> -->
                 <a href="../contact/contact.php" class="active">
                     <span class="fa fa-address-card">
                     </span>
                     <h3>Contact</h3>
                 </a>
-                <a href="../data_store/upload_file.php">
+                <a href="../data_store/data_mgt.php">
                     <span class="fa fa-upload">
                     </span>
                     <h3>Data Store</h3>
                 </a>
 
-                <a href="../data_store/list_upload.php">
+                <!-- <a href="../data_store/list_upload.php">
                     <span class="material-icons-sharp">
                         inventory
                     </span>
                     <h3>View File</h3>
-                </a>
+                </a> -->
                 <a href="../assessment/assessment.php">
                     <span class="fa fa-address-book">
                         <!-- fab fa-app-store-ios -->
@@ -112,11 +112,11 @@ if (isset($_POST['search'])) {
                     </span>
                     <h3>To-do List</h3>
                 </a>
-                <a href="../data_store/data_mgt.php">
+                <!-- <a href="../data_store/data_mgt.php">
                     <span class="fa fa-briefcase">
                     </span>
                     <h3>Stock Mgt</h3>
-                </a>
+                </a> -->
 
 
                 <a href="../user_mgt/logout.php">
@@ -138,7 +138,7 @@ if (isset($_POST['search'])) {
                     Email List
                 </h1>
                 <div class="search">
-                    <form action="email.php" method="post">
+                    <form action="contact.php" method="post">
                         <div class="form-group">
                             <label for="searchTerm">Type here for search : </label>
                             <input type="text" name="searchTerm" class="form-control" id="searchTerm">
@@ -163,44 +163,44 @@ if (isset($_POST['search'])) {
                         </thead>
                         <tbody>
                             <?php if (!empty($searchResults)): ?>
-                                <?php foreach ($searchResults as $row): ?>
-                                    <tr>
-                                        <td title="<?php echo htmlspecialchars($row['name']); ?>">
-                                            <?php echo htmlspecialchars($row['name']); ?>
-                                        </td>
-                                        <td title="<?php echo htmlspecialchars($row['branch']); ?>">
-                                            <?php
+                            <?php foreach ($searchResults as $row): ?>
+                            <tr>
+                                <td title="<?php echo htmlspecialchars($row['name']); ?>">
+                                    <?php echo htmlspecialchars($row['name']); ?>
+                                </td>
+                                <td title="<?php echo htmlspecialchars($row['branch']); ?>">
+                                    <?php
                                             $branch = htmlspecialchars($row['branch']);
                                             echo strlen($branch) > 18 ? substr($branch, 0, 16) . '...' : $branch;
                                             ?>
-                                        </td>
-                                        <td title="<?php echo htmlspecialchars($row['position']); ?>">
-                                            <?php
+                                </td>
+                                <td title="<?php echo htmlspecialchars($row['position']); ?>">
+                                    <?php
                                             $position = htmlspecialchars($row['position']);
                                             echo strlen($position) > 18 ? substr($position, 0, 16) . '...' : $position;
                                             ?>
-                                        </td>
-                                        <td title="<?php echo htmlspecialchars($row['team']); ?>">
-                                            <?php
+                                </td>
+                                <td title="<?php echo htmlspecialchars($row['team']); ?>">
+                                    <?php
                                             $team = htmlspecialchars($row['team']);
                                             echo strlen($team) > 18 ? substr($team, 0, 16) . '...' : $team;
                                             ?>
-                                        </td>
-                                        <td title="<?php echo htmlspecialchars($row['email']); ?>">
-                                            <?php echo htmlspecialchars($row['email']); ?>
-                                        <td title="<?php echo htmlspecialchars($row['phone_number']); ?>">
-                                            <?php echo htmlspecialchars($row['phone_number']); ?>
-                                        </td>
-                                        <td title="<?php echo htmlspecialchars($row['avaya']); ?>">
-                                            <?php echo htmlspecialchars($row['avaya']); ?>
-                                        </td>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
+                                </td>
+                                <td title="<?php echo htmlspecialchars($row['email']); ?>">
+                                    <?php echo htmlspecialchars($row['email']); ?>
+                                <td title="<?php echo htmlspecialchars($row['phone_number']); ?>">
+                                    <?php echo htmlspecialchars($row['phone_number']); ?>
+                                </td>
+                                <td title="<?php echo htmlspecialchars($row['avaya']); ?>">
+                                    <?php echo htmlspecialchars($row['avaya']); ?>
+                                </td>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
                             <?php else: ?>
-                                <tr>
-                                    <td colspan='7'>No files found.</td>
-                                </tr>
+                            <tr>
+                                <td colspan='7'>No files found.</td>
+                            </tr>
                             <?php endif; ?>
                         </tbody>
                     </table>

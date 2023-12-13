@@ -1,3 +1,98 @@
+<?php
+require '../vendor/autoload.php';
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "demo";
+
+$alertType = "";
+$alertMessage = "";
+
+// Initialize variables
+$id = "";
+$name = "";
+$email = "";
+$user_type = "";
+
+// Database connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $id = $_POST['id'];
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $user_type = $_POST['user_type'];
+
+    // // Debugging statements
+    // echo "ID: $id<br>";
+    // echo "Name: $name<br>";
+    // echo "Email: $email<br>";
+    // echo "User Type: $user_type<br>";
+
+    // Prepare and execute the SQL statement
+    $sql = "UPDATE login_register SET name = ?, email = ?, user_type = ? WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt === false) {
+        $alertType = "danger";
+        $alertMessage = "Error preparing SQL statement: " . $conn->error;
+    } else {
+        $stmt->bind_param("sssi", $name, $email, $user_type, $id);
+
+        if ($stmt->execute()) {
+            $alertType = "success";
+            $alertMessage = "User updated successfully.";
+        } else {
+            $alertType = "danger";
+            $alertMessage = "Error updating user: " . $stmt->error;
+        }
+
+        $stmt->close();
+    }
+}
+
+// Retrieve user data for editing
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $id = $_GET['id'];
+
+    $sql = "SELECT name, user_type, email FROM login_register WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt === false) {
+        $alertType = "danger";
+        $alertMessage = "Error preparing SQL statement: " . $conn->error;
+    } else {
+        $stmt->bind_param("i", $id);
+
+        if ($stmt->execute()) {
+            $stmt->store_result();
+
+            if ($stmt->num_rows > 0) {
+                $stmt->bind_result($name, $user_type, $email);
+                $stmt->fetch();
+            } else {
+                $alertType = "warning";
+                $alertMessage = "User not found.";
+            }
+        } else {
+            $alertType = "danger";
+            $alertMessage = "Error executing the SQL query: " . $stmt->error;
+        }
+
+        $stmt->close();
+    }
+}
+
+$conn->close();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +101,7 @@
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../Admin Dashboard/styles/edit_user.css">
+    <link rel="stylesheet" type="text/css" href="../styles/user_mgt/edit_user.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
 </head>
@@ -17,7 +112,7 @@
         <aside>
             <div class="toggle">
                 <div class="logo">
-                    <img src="../images/profile.jpg">
+                    <img src="../images/logo/logo.jpg">
                     <h2>FTB <span class="danger">Bank</span></h2>
                 </div>
                 <div class="close" id="close-btn">
@@ -28,76 +123,60 @@
             </div>
 
             <div class="sidebar">
-                <a href="../Admin Dashboard/admin.php">
+                <a href="../dashboard/dashboard.php">
                     <span class="material-icons-sharp">
                         dashboard
                     </span>
                     <h3>Dashboard</h3>
                 </a>
-                <!-- <a href="../templates/createuser.php">
-                    <span class="fa fa-user-circle-o">
-                    </span>
-                    <h3>Create User</h3>
-                </a> -->
-                <a href="../templates/search.php">
+
+                <!-- <a href="../data_store/search.php">
                     <span class="fa fa-search">
                     </span>
                     <h3>Search</h3>
-                </a>
-
-                <!-- <a href="../templates/input_data.php">
-                    <span class="material-icons-sharp">
-                        insights
-                    </span>
-                    <h3>Analytics</h3>
                 </a> -->
-                <a href="../templates/email.php">
+                <a href="../contact/contact.php">
                     <span class="fa fa-address-card">
                     </span>
                     <h3>Contact</h3>
                 </a>
-                <a href="../templates/multi_upload.php">
+                <a href="../data_store/data_mgt.php">
                     <span class="fa fa-upload">
                     </span>
                     <h3>Data Store</h3>
                 </a>
-                <a href="../templates/list_upload.php">
+
+                <!-- <a href="../data_store/list_upload.php">
                     <span class="material-icons-sharp">
                         inventory
                     </span>
                     <h3>View File</h3>
-                </a>
-                <a href="../templates/assessment.php">
+                </a> -->
+                <a href="../assessment/assessment.php">
                     <span class="fa fa-address-book">
                         <!-- fab fa-app-store-ios -->
                     </span>
                     <h3>Assessment</h3>
                 </a>
-                <!-- <a href="../templates/query_tb.php">
-                    <span class="material-icons-sharp">
-                        report_gmailerrorred
-                    </span>
-                    <h3>Query Data</h3>
-                </a> -->
 
-                <a href="../templates/user_management.php" class="active">
+                <a href="../user_mgt/user_management.php" class="active">
                     <span class="fa fa-user-circle">
                     </span>
                     <h3>User Mgt</h3>
                 </a>
-                <a href="../templates/todo_management.php">
+                <a href="../to_do_list/todo_management.php">
                     <span class="fa fa-list-alt">
                     </span>
                     <h3>To-do List</h3>
                 </a>
-                <a href="../templates/stock_management.php">
+                <!-- <a href="../data_store/data_mgt.php">
                     <span class="fa fa-briefcase">
                     </span>
                     <h3>Stock Mgt</h3>
-                </a>
+                </a> -->
 
 
-                <a href="../templates/logout.php">
+                <a href="../user_mgt/logout.php">
                     <span class="material-icons-sharp">
                         logout
                     </span>
@@ -106,172 +185,56 @@
             </div>
         </aside>
         <main>
+
             <div class="container2">
-                <h2>Add Function to Role/Team User</h2>
-
-                <div class="select_role">
-                    <div class="user">
-                        <label class="label_input" for="role">User Name</label>
-                        <input type="text" name="name" required placeholder="Name">
-                        <label class="label_input" for="role">User Email</label>
-                        <input type="text" name="email" required placeholder="Email">
-                    </div>
-
-                </div>
-                <div class="select1">
-                    <h2>Dashboard</h2>
-                </div>
-                <div class="select">
-                    <div class="user_mgt">
-                        <label for="role">User Mgt</label>
-                        <select name="user_type">
-                            <option value="admin">Admin</option>
-                            <option value="card payment team">Card Payment Team</option>
-                            <option value="digital branch team">Digital Branch Team</option>
-                            <option value="atm team">ATM Team</option>
-                            <option value="terminal team">Terminal Team</option>
-                            <option value="user">User</option>
-                            <option value="none">Hide</option>
-                        </select>
-                    </div>
+                <div class="back_button">
+                    <a href="../user_mgt/user.php" class="back-button">
+                        <i class="fa fa-chevron-circle-left" style="font-size: 28px"> Back</i>
+                    </a>
                 </div>
 
-                <div class="select">
-                    <div class="todo_mgt">
-                        <label for="role">To-do Mgt</label>
+                <h2>Edit User</h2>
+
+                <form method="post" action="">
+
+                    <input type="hidden" name="id" value="<?php echo htmlspecialchars($id); ?>">
+
+                    <div class="select_role">
+                        <div class="user">
+                            <label class="label_input" for="role">User Name</label>
+                            <input type="text" name="name" required placeholder="Name"
+                                value="<?php echo htmlspecialchars($name); ?>">
+                            <label class="label_input" for="role">User Email</label>
+                            <input type="text" name="email" required placeholder="Email"
+                                value="<?php echo htmlspecialchars($email); ?>">
+                        </div>
                         <select name="user_type">
-                            <option value="admin">Admin</option>
-                            <option value="card payment team">Card Payment Team</option>
-                            <option value="digital branch team">Digital Branch Team</option>
-                            <option value="atm team">ATM Team</option>
-                            <option value="terminal team">Terminal Team</option>
-                            <option value="user">User</option>
-                            <option value="none">Hide</option>
+                            <option value="admin" <?php if ($user_type === "admin")
+                                echo "selected"; ?>>Admin</option>
+                            <option value="card payment team" <?php if ($user_type === "card payment team")
+                                echo "selected"; ?>>Card Payment Team</option>
+                            <option value="digital branch team" <?php if ($user_type === "digital branch team")
+                                echo "selected"; ?>>Digital Branch Team</option>
+                            <option value="atm team" <?php if ($user_type === "atm team")
+                                echo "selected"; ?>>ATM Team
+                            </option>
+                            <option value="terminal team" <?php if ($user_type === "terminal team")
+                                echo "selected"; ?>>Terminal Team
+                            </option>
+                            <option value="user" <?php if ($user_type === "user")
+                                echo "selected"; ?>>User</option>
                         </select>
+
                     </div>
-                    <div class="stock_mgt">
-                        <label for="role">Stock Mgt</label>
-                        <select name="user_type">
-                            <option value="admin">Admin</option>
-                            <option value="card payment team">Card Payment Team</option>
-                            <option value="digital branch team">Digital Branch Team</option>
-                            <option value="atm team">ATM Team</option>
-                            <option value="terminal team">Terminal Team</option>
-                            <option value="user">User</option>
-                            <option value="none">Hide</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="select">
-                    <div class="chatbot">
-                        <label for="role">Chatbot</label>
-                        <select name="user_type">
-                            <option value="admin">Admin</option>
-                            <option value="card payment team">Card Payment Team</option>
-                            <option value="digital branch team">Digital Branch Team</option>
-                            <option value="atm team">ATM Team</option>
-                            <option value="terminal team">Terminal Team</option>
-                            <option value="user">User</option>
-                            <option value="none">Hide</option>
-                        </select>
-                    </div>
-                    <div class="upload_chat">
-                        <label for="role">Upload chat</label>
-                        <select name="user_type">
-                            <option value="admin">Admin</option>
-                            <option value="card payment team">Card Payment Team</option>
-                            <option value="digital branch team">Digital Branch Team</option>
-                            <option value="atm team">ATM Team</option>
-                            <option value="terminal team">Terminal Team</option>
-                            <option value="user">User</option>
-                            <option value="none">Hide</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="select">
-                    <div class="data_input">
-                        <label for="role">Data Input</label>
-                        <select name="user_type">
-                            <option value="admin">Admin</option>
-                            <option value="card payment team">Card Payment Team</option>
-                            <option value="digital branch team">Digital Branch Team</option>
-                            <option value="atm team">ATM Team</option>
-                            <option value="terminal team">Terminal Team</option>
-                            <option value="user">User</option>
-                            <option value="none">Hide</option>
-                        </select>
-                    </div>
-                    <div class="user_assessment">
-                        <label for="role">User Assessment</label>
-                        <select name="user_type">
-                            <option value="admin">Admin</option>
-                            <option value="card payment team">Card Payment Team</option>
-                            <option value="digital branch team">Digital Branch Team</option>
-                            <option value="atm team">ATM Team</option>
-                            <option value="terminal team">Terminal Team</option>
-                            <option value="user">User</option>
-                            <option value="none">Hide</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="select">
-                    <div class="search">
-                        <label for="role">Search file</label>
-                        <select name="user_type">
-                            <option value="admin">Admin</option>
-                            <option value="card payment team">Card Payment Team</option>
-                            <option value="digital branch team">Digital Branch Team</option>
-                            <option value="atm team">ATM Team</option>
-                            <option value="terminal team">Terminal Team</option>
-                            <option value="user">User</option>
-                            <option value="none">Hide</option>
-                        </select>
-                    </div>
-                    <div class="contact">
-                        <label for="role">Contact</label>
-                        <select name="user_type">
-                            <option value="admin">Admin</option>
-                            <option value="card payment team">Card Payment Team</option>
-                            <option value="digital branch team">Digital Branch Team</option>
-                            <option value="atm team">ATM Team</option>
-                            <option value="terminal team">Terminal Team</option>
-                            <option value="user">User</option>
-                            <option value="none">Hide</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="select">
-                    <div class="data_stor">
-                        <label for="role">Data Stor</label>
-                        <select name="user_type">
-                            <option value="admin">Admin</option>
-                            <option value="card payment team">Card Payment Team</option>
-                            <option value="digital branch team">Digital Branch Team</option>
-                            <option value="atm team">ATM Team</option>
-                            <option value="terminal team">Terminal Team</option>
-                            <option value="user">User</option>
-                            <option value="none">Hide</option>
-                        </select>
-                    </div>
-                    <div class="file_list">
-                        <label for="role">File List</label>
-                        <select name="user_type">
-                            <option value="admin">Admin</option>
-                            <option value="card payment team">Card Payment Team</option>
-                            <option value="digital branch team">Digital Branch Team</option>
-                            <option value="atm team">ATM Team</option>
-                            <option value="terminal team">Terminal Team</option>
-                            <option value="user">User</option>
-                            <option value="none">Hide</option>
-                        </select>
-                    </div>
-                </div>
 
 
-                <form action="../templates/assign_function.php">
-                    <input type="submit" name="submit" value="Assign Function" class="form-btn">
+                    <input type="submit" name="submit" value="Save" class="form-btn">
+                    <?php if ($alertMessage !== ""): ?>
+                    <div class="alert alert-<?php echo $alertType; ?>" role="alert">
+                        <?php echo $alertMessage; ?>
+                    </div>
+                    <?php endif; ?>
                 </form>
-
             </div>
         </main>
         <div class="right-section">
@@ -296,7 +259,7 @@
                         <small class="text-muted">Admin</small>
                     </div>
                     <div class="profile-photo">
-                        <img src="../images/profile.jpg">
+                        <img src="../images/logo/logo.jpg">
                     </div>
                 </div>
 
@@ -306,7 +269,7 @@
             <div class="user-profile">
                 <div class="logo">
                     <a href="https://ftb.com.kh/en/">
-                        <img src="../images/profile.jpg">
+                        <img src="../images/logo/logo.jpg">
                         <h2>FTB Bank </h2>
                         <p>Welcome to FTB Bank</p>
                     </a>
@@ -374,9 +337,7 @@
     </div>
 
     <!-- <script src="orders.js"></script> -->
-    <script src="../Admin Dashboard/index.js"></script>
+    <script src="../script/index.js"></script>
 </body>
 
 </html>
-
-

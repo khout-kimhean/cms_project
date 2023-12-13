@@ -237,7 +237,7 @@ a:hover {
   padding: var(--card-padding);
   border-radius: var(--card-border-radius);
   box-shadow: var(--box-shadow);
-  height: 700px;
+  height: 88%;
   width: 100%;
   color: var(--color-dark);
 }
@@ -270,9 +270,7 @@ a:hover {
   color: #202528;
   border-radius: var(--card-border-radius);
 }
-.container2 .label_input {
-  margin-left: 60px;
-}
+
 .container2 input {
   width: 35%;
   font-size: 14px;
@@ -284,25 +282,35 @@ a:hover {
   border-radius: var(--card-border-radius);
 }
 
-.dashboard h2 {
+.container2 .box {
+  font-size: 22px;
+  display: flex;
+  margin-left: 20px;
+}
+.select1 h2 {
+  font-size: 30px;
+  margin-top: 20px;
   text-align: left;
 }
-
 .container3 {
-  margin: 0.6rem 0;
+  font-family: cursive, sans-serif;
+  padding: 20px;
+  margin: 0rem 0;
   display: flex;
   align-items: center;
 }
 .container3 span {
-  margin-left: 1rem;
+  color: var(--dark);
+  font-family: cursive, sans-serif;
+  margin-left: 0.5rem;
 }
 .container3 .check-input {
   display: none;
 }
 .container3 .checkbox {
-  width: 20px;
-  height: 20px;
-  border: 2px solid rgb(196, 160, 6);
+  width: 30px;
+  height: 30px;
+  border: 2px solid rgb(12, 77, 162);
   border-radius: 50%;
   display: flex;
   justify-content: center;
