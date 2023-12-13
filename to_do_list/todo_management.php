@@ -157,7 +157,6 @@
                 </div>
 
             </div>
-            <!-- End of Nav -->
 
             <div class="user-profile">
                 <div class="logo">

@@ -236,8 +236,8 @@ a:hover {
 
 main .chat {
   height: 100%;
-  width: 100%;
-  margin-top: 50px;
+  width: 140%;
+  margin-top: 70px;
   margin-bottom: auto;
   padding-bottom: auto;
 }
@@ -636,7 +636,7 @@ aside .sidebar .message-count {
   border-radius: 50%;
   overflow: hidden;
 }
-
+/* 
 .right-section .user-profile {
   display: flex;
   justify-content: center;
@@ -663,7 +663,7 @@ aside .sidebar .message-count {
 
 .right-section .user-profile h2 {
   margin-bottom: 0.2rem;
-}
+} */
 
 .right-section .reminders {
   margin-top: 2rem;

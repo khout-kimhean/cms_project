@@ -249,7 +249,15 @@ main .analyse > div {
   cursor: pointer;
   transition: all 0.3s ease;
 }
+/* main .analyse > div {
+  transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+}
 
+main .analyse > div:hover {
+  border: 1px solid rgb(196, 160, 6);
+  transform: scale(1.1) rotateX(5deg);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+} */
 main .analyse > div:hover {
   /* background-color: rgb(196, 160, 6); */
   box-shadow: none;

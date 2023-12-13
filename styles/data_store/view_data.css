@@ -227,8 +227,8 @@ a:hover {
   box-shadow: var(--box-shadow);
   margin-top: 30px;
   margin-bottom: 30px;
-  max-height: 680px;
-  width: 1290px;
+  max-height: 88%;
+  width: 100%;
   overflow-y: auto;
   color: var(--color-dark);
 }
@@ -253,6 +253,7 @@ li {
 }
 
 main {
+  width: 100%;
   font-family: Arial, sans-serif;
   background-color: var(--color-background);
   color: var(--color-dark);
@@ -328,7 +329,7 @@ main {
   cursor: pointer;
 }
 .table-container {
-  max-height: 470px;
+  max-height: 88%;
   overflow-y: auto;
 }
 .container2 .card-header a {
@@ -383,14 +384,13 @@ a:hover {
 }
 
 .container2 .container {
-  max-width: 1200px;
+  /* max-width: 1200px; */
   margin: 0 auto;
   padding: 20px;
 }
 
 .container2 .card {
   background-color: var(--color-white);
-  /* border: 1px solid #ccc; */
   border-radius: var(--card-border-radius);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding: var(--card-padding);
@@ -454,7 +454,7 @@ a:hover {
   width: 2.8rem;
   height: 2.8rem;
   border-radius: 50%;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .right-section .user-profile {
@@ -560,7 +560,6 @@ a:hover {
   align-items: center;
   gap: 0.6rem;
 }
-
 @media screen and (max-width: 1200px) {
   .container {
     width: 95%;

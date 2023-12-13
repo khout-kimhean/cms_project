@@ -325,7 +325,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                 </div>
 
             </div>
-            <!-- End of Nav -->
 
             <div class="user-profile">
                 <div class="logo">

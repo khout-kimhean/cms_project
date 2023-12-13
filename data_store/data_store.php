@@ -250,12 +250,7 @@ if (isset($_POST['submit'])) {
                     <h3>Data Store</h3>
                 </a>
 
-                <!-- <a href="../data_store/list_upload.php">
-                    <span class="material-icons-sharp">
-                        inventory
-                    </span>
-                    <h3>View File</h3>
-                </a> -->
+
                 <a href="../assessment/assessment.php">
                     <span class="fa fa-address-book">
                         <!-- fab fa-app-store-ios -->

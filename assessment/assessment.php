@@ -134,6 +134,7 @@
                 </div>
                 <!-- <h1>Assessment</h1> -->
                 <div class="analyse">
+
                     <div class="status" onclick="window.location.href='../assessment/Summary.php';"
                         style="cursor: pointer;">
                         <div class="status">
@@ -145,7 +146,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="visits" onclick="window.location.href='../assessment/assessment_list.php';"
                         style="cursor: pointer;">
                         <div class="status">

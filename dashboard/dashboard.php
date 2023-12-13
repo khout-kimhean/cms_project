@@ -201,7 +201,7 @@ $result = $conn->query($sql);
                         </a>
                     </div>
                     <div class="user">
-                        <a href="../data_store/view_upload.php">
+                        <a href="#p">
                             <img src="../images/file/file1.png" alt="Show File">
                             <h2>Data Input</h2>
                             <p>Click here to view data</p>
@@ -328,7 +328,7 @@ $result = $conn->query($sql);
                         <div class="info">
                             <h3>Support Time</h3>
                             <small class="text_muted">
-                                08:00 AM - 5:00 PM
+                                08:00 AM - 12:00 PM
                             </small>
                         </div>
                         <span class="material-icons-sharp">
@@ -347,7 +347,7 @@ $result = $conn->query($sql);
                         <div class="info">
                             <h3>Open Time</h3>
                             <small class="text_muted">
-                                08:00 AM - 5:00 PM
+                                01:00 PM - 5:00 PM
                             </small>
                         </div>
                         <span class="material-icons-sharp">

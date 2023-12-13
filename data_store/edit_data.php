@@ -233,11 +233,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <h3>Dashboard</h3>
                 </a>
 
-                <!-- <a href="../data_store/search.php">
-                    <span class="fa fa-search">
-                    </span>
-                    <h3>Search</h3>
-                </a> -->
+
                 <a href="../contact/contact.php">
                     <span class="fa fa-address-card">
                     </span>

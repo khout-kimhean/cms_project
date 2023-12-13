@@ -242,7 +242,7 @@ a:hover {
   padding: var(--card-padding);
   border-radius: var(--card-border-radius);
   box-shadow: var(--box-shadow);
-  height: 690px;
+  height: 88%;
   width: 100%;
   /* width: 1290px; */
   color: var(--color-dark);
@@ -267,11 +267,16 @@ a:hover {
   border: 1px solid #ccc;
 }
 
-.container2 .analyse > div:hover {
-  background-color: rgb(196, 160, 6);
-  box-shadow: none;
+.container2 .analyse > div {
+  transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
 }
 
+.container2 .analyse > div:hover {
+  border: 1px solid rgb(196, 160, 6);
+  /* background-color: rgb(196, 160, 6); */
+  transform: scale(1.05) rotateX(5deg);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
 .container2 .analyse > div .status {
   display: flex;
   align-items: center;

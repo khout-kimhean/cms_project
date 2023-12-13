@@ -216,7 +216,7 @@
         </div>
     </div>
     <!-- <script src="orders.js"></script> -->
-    <script src="../Admin Dashboard/index.js"></script>
+    <script src="../script/index.js"></script>
 </body>
 
 </html>

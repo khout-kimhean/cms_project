@@ -304,7 +304,6 @@ if (isset($_POST['submit'])) {
                 </div>
 
             </div>
-            <!-- End of Nav -->
 
             <div class="user-profile">
                 <div class="logo">

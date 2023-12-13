@@ -372,21 +372,11 @@ a:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding: var(--card-padding);
   /* margin: 20px 0; */
-  height: 670px;
+  height: 88%;
   width: 100%;
   /* width: 1290px; */
 }
-/* .container2 {
-  
-  margin-top: 70px;
-  display: inline-block;
-  background-color: var(--color-white);
-  padding: var(--card-padding);
-  border-radius: var(--card-border-radius);
-  box-shadow: var(--box-shadow);
-  
-  color: var(--color-dark);
-} */
+
 .container2 .dark-mode {
   background-color: var(--color-dark);
   color: var(--color-white);

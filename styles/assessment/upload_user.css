@@ -236,7 +236,7 @@ a:hover {
   padding: var(--card-padding);
   border-radius: var(--card-border-radius);
   box-shadow: var(--box-shadow);
-  height: 675px;
+  height: 88%;
   width: 100%;
   /* width: 1290px; */
   color: var(--color-dark);

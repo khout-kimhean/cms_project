@@ -245,7 +245,6 @@ if (isset($_POST['delete_user'])) {
                 </div>
 
             </div>
-            <!-- End of Nav -->
 
             <div class="user-profile">
                 <div class="logo">

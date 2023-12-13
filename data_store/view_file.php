@@ -38,7 +38,7 @@ if (isset($_GET['file'])) {
                     <pre>' . htmlspecialchars($content) . '</pre>
                 </body>
                 </html>';
-        }elseif (in_array($fileExt, ['docx'])) {
+        } elseif (in_array($fileExt, ['docx'])) {
             // Handle Word documents (docx)
             $phpWord = PhpWordIOFactory::load($filePath);
             $htmlWriter = PhpWordIOFactory::createWriter($phpWord, 'HTML');
@@ -109,3 +109,4 @@ if (isset($_GET['file'])) {
 }
 
 ?>
+<!--  -->

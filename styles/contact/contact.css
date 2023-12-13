@@ -139,7 +139,7 @@ aside .toggle {
 }
 
 .email h1 {
-  max-width: 400px;
+  max-width: 40%;
   font-size: 2rem;
   font-weight: 50px;
   /* margin-top: 75px; */
@@ -179,16 +179,18 @@ li {
   box-shadow: var(--box-shadow);
   margin-top: 75px;
   margin-bottom: 30px;
-  max-height: 690px;
-  /* overflow-y: auto; */
+
   color: var(--color-dark);
 }
 main {
+  width: 100%;
+  position: relative;
   font-family: Arial, sans-serif;
   background-color: var(--color-background);
   color: var(--color-dark);
   margin-top: 40px;
   padding: 0;
+  transition: all 0.3s ease;
 }
 
 .container2 h1 {
@@ -255,7 +257,7 @@ main {
   cursor: pointer;
 }
 .table-container {
-  max-height: 470px; /* Adjust the height as needed */
+  max-height: 100%; /* Adjust the height as needed */
   overflow-y: auto;
 }
 .container2 .card-header a {

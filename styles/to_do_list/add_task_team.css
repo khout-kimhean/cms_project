@@ -236,7 +236,7 @@ a:hover {
   padding: var(--card-padding);
   border-radius: var(--card-border-radius);
   box-shadow: var(--box-shadow);
-  height: 680px;
+  height: 88%;
   width: 100%;
   /* width: 1290px; */
   color: var(--color-dark);
@@ -255,7 +255,7 @@ a:hover {
   margin-left: 60px;
 }
 .container2 input {
-  width: 500px;
+  width: 50%;
   font-size: 14px;
   border: 2px solid #ccc;
   font-family: cursive, sans-serif;
@@ -277,7 +277,7 @@ a:hover {
   padding: 1rem;
   font-size: 1rem;
   cursor: pointer;
-  width: 150px;
+  width: 150%;
   padding: 10px;
   border-radius: 5px;
   font-size: 17px;

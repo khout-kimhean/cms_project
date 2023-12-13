@@ -110,11 +110,7 @@ if (isset($_POST['edit']) && is_numeric($_POST['edit_id'])) {
                     <h3>Dashboard</h3>
                 </a>
 
-                <!-- <a href="../data_store/search.php">
-                    <span class="fa fa-search">
-                    </span>
-                    <h3>Search</h3>
-                </a> -->
+
                 <a href="../contact/contact.php">
                     <span class="fa fa-address-card">
                     </span>
@@ -298,7 +294,6 @@ if (isset($_POST['edit']) && is_numeric($_POST['edit_id'])) {
                 </div>
 
             </div>
-            <!-- End of Nav -->
 
             <div class="user-profile">
                 <div class="logo">

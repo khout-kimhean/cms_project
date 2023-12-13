@@ -457,7 +457,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
 
             </div>
-            <!-- End of Nav -->
 
             <div class="user-profile">
                 <div class="logo">
