@@ -111,11 +111,11 @@ if (isset($_POST['edit']) && is_numeric($_POST['edit_id'])) {
                 </a>
 
 
-                <a href="../contact/contact.php">
+                <!-- <a href="../contact/contact.php">
                     <span class="fa fa-address-card">
                     </span>
                     <h3>Contact</h3>
-                </a>
+                </a> -->
                 <a href="../data_store/data_mgt.php" class="active">
                     <span class="fa fa-upload">
                     </span>
@@ -140,11 +140,11 @@ if (isset($_POST['edit']) && is_numeric($_POST['edit_id'])) {
                     </span>
                     <h3>User Mgt</h3>
                 </a>
-                <a href="../to_do_list/todo_management.php">
+                <!-- <a href="../to_do_list/todo_management.php">
                     <span class="fa fa-list-alt">
                     </span>
                     <h3>To-do List</h3>
-                </a>
+                </a> -->
                 <!-- <a href="../data_store/data_mgt.php">
                     <span class="fa fa-briefcase">
                     </span>
@@ -265,7 +265,7 @@ if (isset($_POST['edit']) && is_numeric($_POST['edit_id'])) {
                 </div>
             </div>
         </main>
-        <div class="right-section">
+        <!-- <div class="right-section">
             <div class="nav">
                 <button id="menu-btn">
                     <span class="material-icons-sharp">
@@ -358,7 +358,7 @@ if (isset($_POST['edit']) && is_numeric($_POST['edit_id'])) {
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
     <script src="../script/index.js"></script>
 </body>

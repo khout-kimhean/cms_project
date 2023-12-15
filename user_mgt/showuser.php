@@ -75,11 +75,11 @@ $result = $conn->query($sql);
                     </span>
                     <h3>Search</h3>
                 </a> -->
-                <a href="../contact/contact.php">
+                <!-- <a href="../contact/contact.php">
                     <span class="fa fa-address-card">
                     </span>
                     <h3>Contact</h3>
-                </a>
+                </a> -->
                 <a href="../data_store/data_mgt.php">
                     <span class="fa fa-upload">
                     </span>
@@ -104,11 +104,11 @@ $result = $conn->query($sql);
                     </span>
                     <h3>User Mgt</h3>
                 </a>
-                <a href="../to_do_list/todo_management.php">
+                <!-- <a href="../to_do_list/todo_management.php">
                     <span class="fa fa-list-alt">
                     </span>
                     <h3>To-do List</h3>
-                </a>
+                </a> -->
                 <!-- <a href="../data_store/data_mgt.php">
                     <span class="fa fa-briefcase">
                     </span>
@@ -129,16 +129,16 @@ $result = $conn->query($sql);
         <!-- Main Content -->
         <main>
             <!-- Recent Orders Table -->
-            <div class="recent-orders">
-                <h2>User Login</h2>
+            <div class="container2">
+
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>UserID</th>
-                            <th>UserName</th>
-                            <th>Email</th>
-                            <th>Type</th>
-                            <th>Details</th>
+                            <th>User ID</th>
+                            <th>User Name</th>
+                            <th>User Email</th>
+                            <th>User Type</th>
+                            <th>Option</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -155,7 +155,7 @@ $result = $conn->query($sql);
                                         <td>
                                         <form method="post">
                                             <input type="hidden" name="user_id" value="' . $row['id'] . '">
-                                            <input type="submit" name="delete_user" value="Delete">
+                                            <input  class="button" type="submit" name="delete_user" value="Delete">
                                         </form>
                                         </td>
                                     </tr>';

@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Database configuration
 $db_host = 'localhost';
 $db_username = 'root';
@@ -13,46 +14,56 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-session_start();
-
-$error = array(); // Initialize an error array
+$errors = array(); // Initialize an errors array
 
 if (isset($_POST['submit'])) {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = $_POST['password'];
 
-    $select = "SELECT * FROM login_register WHERE email = '$email'";
-    $result = mysqli_query($conn, $select);
+    $select = "SELECT id, name, user_type, password FROM login_register WHERE email = ?";
+    $stmt = $conn->prepare($select);
 
-    if ($result && mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_array($result);
+    if ($stmt === false) {
+        die("Error: " . $conn->error);
+    }
+
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
         $hashed_password = $row['password'];
 
         if (password_verify($password, $hashed_password)) {
-            $_SESSION['chat'] = $row['name'];
+            $_SESSION['user_name'] = $row['name'];
+            $_SESSION['user_id'] = $row['id'];
+            $_SESSION['user_role'] = $row['user_type']; // Store user role in the session
 
-            if ($row['user_type'] == 'admin') {
-                header('location: ../Admin Dashboard/admin.php');
-                exit();
-            } elseif ($row['user_type'] == 'user') {
-                header('location: ../Admin Dashboard/user.php');
+            // Regenerate session ID
+            session_regenerate_id(true);
+
+            $allowed_user_types = ['admin', 'user', 'card payment team', 'digital branch team', 'atm team', 'terminal team'];
+
+            if (in_array($row['user_type'], $allowed_user_types)) {
+                header('Location: auth.php');
                 exit();
             } else {
-                $error[] = 'Invalid user type';
+                $errors[] = 'Invalid user type';
             }
         } else {
-            $error[] = 'Incorrect password!';
+            $errors[] = 'Incorrect password!';
         }
     } else {
-        $error[] = 'User not found';
+        $errors[] = 'User not found';
     }
-}
 
+    $stmt->close();
+}
 
 // Close the database connection
 $conn->close();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -63,32 +74,27 @@ $conn->close();
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login form</title>
+    <title>Login Form</title>
     <link rel="stylesheet" type="text/css" href="../styles/user_mgt/login_form.css">
-
 </head>
 
 <body>
     <div class="form-container">
         <form action="" method="post">
             <!-- <img src="../images/logo/logo.jpg" alt=""> -->
-            <h3>login now</h3>
+            <h3>Login Now</h3>
             <?php
-            if (isset($error)) {
-                foreach ($error as $error) {
+            if (!empty($errors)) {
+                foreach ($errors as $error) {
                     echo '<span class="error-msg">' . $error . '</span>';
                 }
-                ;
             }
-            ;
             ?>
-            <input type="email" name="email" required placeholder="enter your email">
-            <input type="password" name="password" required placeholder="enter your password">
-            <input type="submit" name="submit" value="login now" class="form-btn">
+            <input type="email" name="email" required placeholder="Enter your email">
+            <input type="password" name="password" required placeholder="Enter your password">
+            <input type="submit" name="submit" value="Login Now" class="form-btn">
             <p><a href="forget_password.php">Forget Password</a></p>
-
         </form>
-
     </div>
     <script src="index.js"></script>
 </body>

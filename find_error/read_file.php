@@ -40,11 +40,11 @@
                     </span>
                     <h3>Search</h3>
                 </a> -->
-                <a href="../contact/contact.php">
+                <!-- <a href="../contact/contact.php">
                     <span class="fa fa-address-card">
                     </span>
                     <h3>Contact</h3>
-                </a>
+                </a> -->
                 <a href="../data_store/data_mgt.php">
                     <span class="fa fa-upload">
                     </span>
@@ -69,11 +69,11 @@
                     </span>
                     <h3>User Mgt</h3>
                 </a>
-                <a href="../to_do_list/todo_management.php">
+                <!-- <a href="../to_do_list/todo_management.php">
                     <span class="fa fa-list-alt">
                     </span>
                     <h3>To-do List</h3>
-                </a>
+                </a> -->
                 <!-- <a href="../data_store/data_mgt.php">
                     <span class="fa fa-briefcase">
                     </span>
@@ -94,33 +94,33 @@
         <!-- Main Content -->
         <main>
             <Div class="container2">
-                <h1 class="h1">Short Error From .log file</h1>
+                <h1 class="h1">Finding Error in log file</h1>
                 <!-- Analyses -->
                 <div class="analyse">
-                    <div class="sales" onclick="window.location.href='../find_error/read_by_keyword.php';"
+                    <div class="sales" onclick="window.location.href='../find_error/read_error_inlog.php';"
                         style="cursor: pointer;">
                         <div class="status">
                             <div class="info">
-                                <!-- <h3>Read Text</h3> -->
-                                <h1>Error Line</h1>
+                                <h1>Read Error</h1>
+                                <h2>In log file</h2>
                             </div>
                             <div>
                                 <img src="../images/file/file2.png">
                             </div>
                         </div>
                     </div>
-                    <div class="visits" onclick="window.location.href='../find_error/read_error_trx.php';"
+                    <div class="visits" onclick="window.location.href='../find_error/read_by_keyword.php';"
                         style="cursor: pointer;">
                         <div class="status">
                             <div class="info">
-                                <h1>Error + XML</h1>
+                                <h1>Show All Error </h1>
                             </div>
                             <div>
                                 <img src="../images/file/file2.png">
                             </div>
                         </div>
                     </div>
-                    <div class="searches" onclick="window.location.href='../find_error/v1.php';"
+                    <!-- <div class="searches" onclick="window.location.href='../find_error/v1.php';"
                         style="cursor: pointer;">
                         <div class="status">
                             <div class="info">
@@ -140,7 +140,7 @@
                                 <img src="../images/file/file2.png">
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </Div>
 

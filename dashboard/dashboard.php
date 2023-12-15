@@ -1,39 +1,26 @@
 <?php
+// session_start();
+
+// Include the file with the access check
+include '../dashboard/check_access.php';
+
 // Database configuration
 $db_host = 'localhost';
 $db_username = 'root';
 $db_password = '';
 $db_name = 'demo';
 
-// Create a new database connection for displaying users
 $conn = new mysqli($db_host, $db_username, $db_password, $db_name);
 
-// Check for connection errors
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Define an array to store errors
 $error = array();
 
-// Delete user if the delete button is clicked
-if (isset($_POST['delete_user'])) {
-    $user_id = $_POST['user_id'];
-    $delete_sql = "DELETE FROM login_register WHERE id = $user_id";
-    if ($conn->query($delete_sql) === TRUE) {
-        header('Location: admin.php'); // Redirect to refresh the user list
-        exit();
-    } else {
-        $error[] = 'Error deleting user: ' . $conn->error;
-    }
-}
-
-// Retrieve user data from the database
 $sql = "SELECT * FROM login_register";
 $result = $conn->query($sql);
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,12 +32,37 @@ $result = $conn->query($sql);
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="dashboard.css">
     <title>Admin Dashboard</title>
+    <?php if (!in_array($user_role, $allowed_roles[$current_page])): ?>
+    <style>
+    /* Disable pointer events to block mouse interaction */
+    body {
+        pointer-events: none;
+    }
+
+    body * {
+        pointer-events: none;
+    }
+    </style>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // List of elements you want to disable
+        var elementsToDisable = document.querySelectorAll('.disable-for-restricted');
+
+        elementsToDisable.forEach(function(element) {
+            element.addEventListener('click', function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+            });
+        });
+    });
+    </script>
+    <?php endif; ?>
 </head>
 
 <body>
 
     <div class="container">
-        <!-- Sidebar Section -->
+
         <aside>
             <div class="toggle">
                 <div class="logo">
@@ -77,11 +89,11 @@ $result = $conn->query($sql);
                     </span>
                     <h3>Search</h3>
                 </a> -->
-                <a href="../contact/contact.php">
+                <!-- <a href="../contact/contact.php">
                     <span class="fa fa-address-card">
                     </span>
                     <h3>Contact</h3>
-                </a>
+                </a> -->
                 <a href="../data_store/data_mgt.php">
                     <span class="fa fa-upload">
                     </span>
@@ -106,11 +118,11 @@ $result = $conn->query($sql);
                     </span>
                     <h3>User Mgt</h3>
                 </a>
-                <a href="../to_do_list/todo_management.php">
+                <!-- <a href="../to_do_list/todo_management.php">
                     <span class="fa fa-list-alt">
                     </span>
                     <h3>To-do List</h3>
-                </a>
+                </a> -->
                 <!-- <a href="../data_store/data_mgt.php">
                     <span class="fa fa-briefcase">
                     </span>
@@ -126,8 +138,6 @@ $result = $conn->query($sql);
                 </a>
             </div>
         </aside>
-
-        <!-- Main Content -->
         <main>
             <h1>Analytics</h1>
             <!-- Analyses -->
@@ -185,14 +195,15 @@ $result = $conn->query($sql);
             <div class="new-users">
                 <h2>Option</h2>
                 <div class="user-list">
-                    <div class="user">
+
+                    <div class="user disable-for-restricted">
                         <a href="../chatbot/chat.html">
                             <img src="../images/background/chat.png" alt="ChatBot">
                             <h2>ChatBot</h2>
                             <p>User ChatBot Here</p>
                         </a>
                     </div>
-                    <div class="user">
+                    <div class="user disable-for-restricted">
                         <a href="../data_store/datachat.php">
                             <!-- <i class="fa fa-upload" style="font-size:75px;color:blue"></i> -->
                             <img src="../images/file/file.png" alt="Upload File">
@@ -200,14 +211,14 @@ $result = $conn->query($sql);
                             <p>input data for chat</p>
                         </a>
                     </div>
-                    <div class="user">
-                        <a href="#p">
-                            <img src="../images/file/file1.png" alt="Show File">
-                            <h2>Data Input</h2>
-                            <p>Click here to view data</p>
+                    <div class="user disable-for-restricted">
+                        <a href="../data_store/data_mgt.php">
+                            <img src="../images/file/upload.png" alt="Show File">
+                            <h2>Data Store</h2>
+                            <p>Store File here</p>
                         </a>
                     </div>
-                    <div class="user">
+                    <div class="user disable-for-restricted">
                         <a href="../find_error/read_file.php">
                             <img src="../images/file/file2.png" alt="More">
                             <h2>Find Error</h2>
@@ -292,7 +303,9 @@ $result = $conn->query($sql);
                 <div class="profile">
                     <div class="info">
                         <p>Welcome</p>
-                        <small class="text-muted">Admin</small>
+                        <small class="text-muted">
+                            <?php echo $_SESSION['user_name']; ?>
+                        </small>
                     </div>
                     <div class="profile-photo">
                         <img src="../images/logo/logo.jpg">

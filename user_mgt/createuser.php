@@ -46,7 +46,7 @@ if (isset($_POST['submit'])) {
         $insert->bind_param("ssss", $name, $email, $hash, $user_type);
 
         if ($insert->execute()) {
-            $success_message = 'User create user successful.';
+            $success_message = 'User created successfully.';
         } else {
             $error[] = 'Error: ' . $conn->error;
         }
@@ -103,11 +103,11 @@ $conn->close();
                     </span>
                     <h3>Search</h3>
                 </a> -->
-                <a href="../contact/contact.php">
+                <!-- <a href="../contact/contact.php">
                     <span class="fa fa-address-card">
                     </span>
                     <h3>Contact</h3>
-                </a>
+                </a> -->
                 <a href="../data_store/data_mgt.php">
                     <span class="fa fa-upload">
                     </span>
@@ -132,11 +132,11 @@ $conn->close();
                     </span>
                     <h3>User Mgt</h3>
                 </a>
-                <a href="../to_do_list/todo_management.php">
+                <!-- <a href="../to_do_list/todo_management.php">
                     <span class="fa fa-list-alt">
                     </span>
                     <h3>To-do List</h3>
-                </a>
+                </a> -->
                 <!-- <a href="../data_store/data_mgt.php">
                     <span class="fa fa-briefcase">
                     </span>
@@ -159,7 +159,9 @@ $conn->close();
                     <h3>Create User</h3>
 
                     <?php
-                    if (!empty($error)) {
+                    if (!empty($success_message)) {
+                        echo '<div class="alert alert-success">' . $success_message . '</div>';
+                    } elseif (!empty($error)) {
                         foreach ($error as $errorMsg) {
                             echo '<div class="alert alert-danger">' . $errorMsg . '</div>';
                         }
@@ -186,8 +188,10 @@ $conn->close();
                         <option value="user">User</option>
                     </select>
                     <input type="submit" name="submit" value="Create User" class="form-btn">
+
                 </form>
             </div>
+
         </main>
         <div class="right-section">
             <div class="nav">
@@ -285,6 +289,7 @@ $conn->close();
 
         </div>
     </div>
+
     <!-- <script src="orders.js"></script> -->
     <script src="../script/index.js"></script>
 </body>

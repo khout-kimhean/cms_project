@@ -255,10 +255,8 @@ a:hover {
 }
 
 .container2 .analyse > div {
-  /* background-color: rgb(12, 77, 162); */
-  /* color: #edeffd; */
   padding: var(--card-padding);
-  border-radius: var(--card-border-radius);
+  border-radius: var(--border-radius-2);
   margin-top: 2rem;
   margin-bottom: 2rem;
   box-shadow: var(--box-shadow);

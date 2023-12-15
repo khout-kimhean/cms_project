@@ -31,17 +31,7 @@ if (isset($_POST['search'])) {
         }
     }
 }
-// Delete user if the delete button is clicked
-if (isset($_POST['delete_user'])) {
-    $user_id = $_POST['user_id'];
-    $delete_sql = "DELETE FROM login_register WHERE id = $user_id";
-    if ($conn->query($delete_sql) === TRUE) {
-        header('Location: showuser.php'); // Redirect to refresh the user list
-        exit();
-    } else {
-        $error[] = 'Error deleting user: ' . $conn->error;
-    }
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +42,7 @@ if (isset($_POST['delete_user'])) {
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../styles/user_mgt/search_user.css">
+    <link rel="stylesheet" type="text/css" href="../styles/user_mgt/user.css">
     <title>Admin Dashboard</title>
 </head>
 
@@ -86,11 +76,11 @@ if (isset($_POST['delete_user'])) {
                     </span>
                     <h3>Search</h3>
                 </a> -->
-                <a href="../contact/contact.php">
+                <!-- <a href="../contact/contact.php">
                     <span class="fa fa-address-card">
                     </span>
                     <h3>Contact</h3>
-                </a>
+                </a> -->
                 <a href="../data_store/data_mgt.php">
                     <span class="fa fa-upload">
                     </span>
@@ -115,11 +105,11 @@ if (isset($_POST['delete_user'])) {
                     </span>
                     <h3>User Mgt</h3>
                 </a>
-                <a href="../to_do_list/todo_management.php">
+                <!-- <a href="../to_do_list/todo_management.php">
                     <span class="fa fa-list-alt">
                     </span>
                     <h3>To-do List</h3>
-                </a>
+                </a> -->
                 <!-- <a href="../data_store/data_mgt.php">
                     <span class="fa fa-briefcase">
                     </span>
@@ -177,10 +167,10 @@ if (isset($_POST['delete_user'])) {
                                                 <th>User Name</th>
                                                 <th>Email</th>
                                                 <th>Type User</th>
-                                                <th>Function/Role</th>
                                                 <th>Option</th>
                                             </tr>
                                         </thead>
+
                                         <tbody>
                                             <?php
                                             if (!empty($searchResults)) {
@@ -204,8 +194,6 @@ if (isset($_POST['delete_user'])) {
                                                 <td>
                                                     <a href="edit_user.php?id=<?php echo $row['id']; ?>">Edit</a>
                                                 </td>
-                                                </td>
-                                                <td><a href="search_user.php?id=<?php echo $row['name']; ?>">Delete</a>
                                                 </td>
                                             </tr>
                                             <?php

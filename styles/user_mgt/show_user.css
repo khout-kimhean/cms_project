@@ -226,31 +226,14 @@ aside .sidebar .message-count {
 a:hover {
   text-decoration: underline;
 }
-main {
-  margin-top: 1.4rem;
-}
-
-main .analyse {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.6rem;
-}
-
-main .analyse > div {
+main .container2 {
+  padding: 20px;
+  width: 100%;
   background-color: var(--color-white);
-  padding: var(--card-padding);
-  border-radius: var(--card-border-radius);
-  margin-top: 1rem;
-  box-shadow: var(--box-shadow);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-main .recent-orders a {
-  color: #ff0060;
-  text-align: center;
-  display: block;
-  margin: 1rem auto;
+  border-radius: var(--border-radius-2);
+  height: 670px;
+  overflow-y: auto;
+  margin-top: 70px;
 }
 
 main .new-users .user-list:hover {
@@ -271,26 +254,25 @@ main .new-users .user-list .user img {
   border-radius: 50%;
 }
 
-main .recent-orders {
-  margin-top: 1.3rem;
-}
-
-main .recent-orders h2 {
-  margin-bottom: 0.8rem;
-}
-
-main .recent-orders table {
-  background-color: var(--color-white);
+.container2 table {
+  height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
   width: 100%;
-  padding: var(--card-padding);
+  max-height: 10%;
   text-align: center;
-  box-shadow: var(--box-shadow);
-  border-radius: var(--card-border-radius);
   transition: all 0.3s ease;
 }
 
-main .recent-orders table:hover {
-  box-shadow: none;
+.container2 table:hover {
+  overflow-x: auto;
+}
+.button {
+  width: 100px;
+  cursor: pointer;
+  border-radius: var(--border-radius-2);
+  padding: 5px;
+  background-color: rgb(192, 160, 16);
 }
 
 main table tbody td {

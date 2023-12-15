@@ -48,7 +48,6 @@ html {
 }
 
 body {
-  display: inline-flex;
   width: 100vw;
   height: 100vh;
   font-family: "Poppins", sans-serif;
@@ -216,31 +215,19 @@ aside .sidebar a:hover {
 aside .sidebar a:hover span {
   margin-left: 0.6rem;
 }
+
+aside .sidebar .message-count {
+  background-color: var(--color-danger);
+  padding: 2px 6px;
+  color: var(--color-white);
+  font-size: 11px;
+  border-radius: var(--border-radius-1);
+}
 a:hover {
   text-decoration: underline;
 }
-
-.box {
-  background-color: var(--color-white);
-  padding: var(--card-padding);
-  border-radius: var(--card-border-radius);
-  box-shadow: var(--box-shadow);
-  margin-top: 30px;
-  margin-bottom: 30px;
-  max-height: 88%;
-  width: 100%;
-  overflow-y: auto;
-  color: var(--color-dark);
-}
-
 /* main container2 */
-.container2 .note h3 {
-  /* border: 1px solid red; */
-  font-size: 14px;
-  font-family: cursive, sans-serif;
-  margin-top: 20px;
-  color: rgb(196, 6, 16);
-}
+
 main,
 h1,
 h2,
@@ -254,18 +241,6 @@ li {
 .form-group label {
   font-family: cursive, sans-serif;
   font-size: 18px;
-}
-main {
-  width: 138%;
-  font-family: Arial, sans-serif;
-  background-color: var(--color-background);
-  color: var(--color-dark);
-  margin-top: 40px;
-  padding: 0;
-}
-
-.back_button a {
-  color: rgb(12, 77, 162);
 }
 .container2 h1 {
   font-size: 24px;
@@ -308,7 +283,6 @@ main {
 .container2 label[for="searchTerm"] {
   font-weight: bold;
   display: block;
-  margin-top: 10px;
   margin-bottom: 10px;
 }
 
@@ -332,7 +306,7 @@ main {
   cursor: pointer;
 }
 .table-container {
-  max-height: 88%;
+  max-height: 440px; /* Adjust the height as needed */
   overflow-y: auto;
 }
 .container2 .card-header a {
@@ -358,7 +332,7 @@ table {
 }
 
 th {
-  background-color: rgb(12, 77, 162);
+  background-color: var(--color-dark-variant);
   color: var(--color-white);
   font-weight: bold;
   padding: 10px;
@@ -387,22 +361,33 @@ a:hover {
 }
 
 .container2 .container {
-  /* max-width: 1200px; */
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
 
 .container2 .card {
+  margin-top: 60px;
+  font-family: cursive, sans-serif;
   background-color: var(--color-white);
   border-radius: var(--card-border-radius);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding: var(--card-padding);
-  margin: 20px 0;
+  height: 80%;
+  width: 100%;
+  /* width: 1290px; */
 }
 
 .container2 .dark-mode {
   background-color: var(--color-dark);
   color: var(--color-white);
+}
+.container2 .card a button {
+  cursor: pointer;
+  color: var(--color-white);
+  background-color: rgb(196, 160, 6);
+  padding: 8px;
+  border-radius: 8px;
 }
 
 /* end container2 */
@@ -423,6 +408,7 @@ a:hover {
 
 .right-section .dark-mode {
   background-color: var(--color-light);
+  /* background-color: var(--color-white); */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -443,7 +429,7 @@ a:hover {
 
 .right-section .dark-mode span.active {
   background-color: rgb(12, 77, 162);
-  color: white;
+  color: rgb(255, 255, 255);
   border-radius: var(--border-radius-1);
 }
 
@@ -457,7 +443,7 @@ a:hover {
   width: 2.8rem;
   height: 2.8rem;
   border-radius: 50%;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 .right-section .user-profile {
@@ -563,6 +549,7 @@ a:hover {
   align-items: center;
   gap: 0.6rem;
 }
+
 @media screen and (max-width: 1200px) {
   .container {
     width: 95%;

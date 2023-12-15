@@ -31,17 +31,7 @@ if (isset($_POST['search'])) {
         }
     }
 }
-// Delete user if the delete button is clicked
-if (isset($_POST['delete_user'])) {
-    $user_id = $_POST['user_id'];
-    $delete_sql = "DELETE FROM login_register WHERE id = $user_id";
-    if ($conn->query($delete_sql) === TRUE) {
-        header('Location: showuser.php'); // Redirect to refresh the user list
-        exit();
-    } else {
-        $error[] = 'Error deleting user: ' . $conn->error;
-    }
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -86,11 +76,11 @@ if (isset($_POST['delete_user'])) {
                     </span>
                     <h3>Search</h3>
                 </a> -->
-                <a href="../contact/contact.php">
+                <!-- <a href="../contact/contact.php">
                     <span class="fa fa-address-card">
                     </span>
                     <h3>Contact</h3>
-                </a>
+                </a> -->
                 <a href="../data_store/data_mgt.php">
                     <span class="fa fa-upload">
                     </span>
@@ -115,11 +105,11 @@ if (isset($_POST['delete_user'])) {
                     </span>
                     <h3>User Mgt</h3>
                 </a>
-                <a href="../to_do_list/todo_management.php">
+                <!-- <a href="../to_do_list/todo_management.php">
                     <span class="fa fa-list-alt">
                     </span>
                     <h3>To-do List</h3>
-                </a>
+                </a> -->
                 <!-- <a href="../data_store/data_mgt.php">
                     <span class="fa fa-briefcase">
                     </span>
@@ -172,7 +162,6 @@ if (isset($_POST['delete_user'])) {
                                                 <th>Email</th>
                                                 <th>Type User</th>
                                                 <th>Permission</th>
-                                                <th>Option</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -194,14 +183,12 @@ if (isset($_POST['delete_user'])) {
                                                 <td>
                                                     <?php echo htmlspecialchars($row['user_type']); ?>
                                                 </td>
-                                                </td>
+
                                                 <td><a
                                                         href="../user_mgt/assign_function.php?id=<?php echo $row['id']; ?>">
-                                                        Edit</a>
+                                                        Add Permission</a>
                                                 </td>
-                                                </td>
-                                                <td><a href="search_user.php?id=<?php echo $row['name']; ?>">Delete</a>
-                                                </td>
+
                                             </tr>
                                             <?php
                                                 }

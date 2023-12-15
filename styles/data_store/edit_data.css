@@ -226,17 +226,14 @@ aside .sidebar .message-count {
 a:hover {
   text-decoration: underline;
 }
-/*  */
-/* Apply the following styles to the main content */
+
 main {
   text-align: center;
-  /* background-color: var(--color-background); */
   background-color: var(--color-white);
   padding: var(--card-padding);
   border-radius: var(--card-border-radius);
   box-shadow: var(--box-shadow);
-  /* max-width: 1000px;
-    max-height: 1000px; */
+
   margin: 20px 0;
   margin-bottom: 30px;
   margin-top: 70px;

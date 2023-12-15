@@ -8,10 +8,10 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../styles/user_mgt/user_management.css">
     <title>Admin Dashboard</title>
+
 </head>
 
 <body>
-
     <div class="container">
         <aside>
             <div class="toggle">
@@ -39,11 +39,11 @@
                     </span>
                     <h3>Search</h3>
                 </a> -->
-                <a href="../contact/contact.php">
+                <!-- <a href="../contact/contact.php">
                     <span class="fa fa-address-card">
                     </span>
                     <h3>Contact</h3>
-                </a>
+                </a> -->
                 <a href="../data_store/data_mgt.php">
                     <span class="fa fa-upload">
                     </span>
@@ -68,17 +68,16 @@
                     </span>
                     <h3>User Mgt</h3>
                 </a>
-                <a href="../to_do_list/todo_management.php">
+                <!-- <a href="../to_do_list/todo_management.php">
                     <span class="fa fa-list-alt">
                     </span>
                     <h3>To-do List</h3>
-                </a>
+                </a> -->
                 <!-- <a href="../data_store/data_mgt.php">
                     <span class="fa fa-briefcase">
                     </span>
                     <h3>Stock Mgt</h3>
                 </a> -->
-
 
                 <a href="../user_mgt/logout.php">
                     <span class="material-icons-sharp">
@@ -109,6 +108,18 @@
                             <div class="info">
                                 <h2>Assign</h2>
                                 <h1>Function</h1>
+                            </div>
+                            <div>
+                                <img src="../images/usermgt/usermgt.png">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="visits" onclick="window.location.href='../user_mgt/showuser.php';"
+                        style="cursor: pointer;">
+                        <div class="status">
+                            <div class="info">
+                                <h2>Show</h2>
+                                <h1>Show User</h1>
                             </div>
                             <div>
                                 <img src="../images/usermgt/usermgt.png">

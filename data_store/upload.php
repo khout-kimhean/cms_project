@@ -138,11 +138,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
                     </span>
                     <h3>Analytics</h3>
                 </a> -->
-                <a href="../templates/email.php">
+                <!-- <a href="../templates/email.php">
                     <span class="fa fa-address-card">
                     </span>
                     <h3>Contact</h3>
-                </a>
+                </a> -->
                 <a href="../templates/multi_upload.php">
                     <span class="fa fa-upload">
                     </span>
@@ -207,39 +207,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
                 </div>
             </div>
             <script>
-                function submitForm(event) {
-                    event.preventDefault(); // Prevent the default form submission
+            function submitForm(event) {
+                event.preventDefault(); // Prevent the default form submission
 
-                    const form = document.getElementById("uploadForm");
-                    const fileInput = document.getElementById("file");
-                    const uploadButton = document.getElementById("uploadButton");
-                    const uploadMessage = document.getElementById("uploadMessage");
+                const form = document.getElementById("uploadForm");
+                const fileInput = document.getElementById("file");
+                const uploadButton = document.getElementById("uploadButton");
+                const uploadMessage = document.getElementById("uploadMessage");
 
-                    uploadMessage.innerHTML = ""; // Clear any previous message
-                    uploadButton.disabled = true; // Disable the submit button
+                uploadMessage.innerHTML = ""; // Clear any previous message
+                uploadButton.disabled = true; // Disable the submit button
 
-                    const formData = new FormData(form);
+                const formData = new FormData(form);
 
-                    fetch("upload.php", {
+                fetch("upload.php", {
                         method: "POST",
                         body: formData,
                     })
-                        .then((response) => response.json())
-                        .then((data) => {
-                            if (data.status === "success") {
-                                uploadMessage.innerHTML = '<div class="success-message">' + data.message + '</div>';
-                            } else {
-                                uploadMessage.innerHTML = '<div class="error-message">' + data.message + '</div>';
-                            }
-                        })
-                        .catch((error) => {
-                            uploadMessage.innerHTML = '<div class="error-message">Error: ' + error + '</div>';
-                        })
-                        .finally(() => {
-                            uploadButton.disabled = false; // Re-enable the submit button after processing
-                        });
-                }
-
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.status === "success") {
+                            uploadMessage.innerHTML = '<div class="success-message">' + data.message + '</div>';
+                        } else {
+                            uploadMessage.innerHTML = '<div class="error-message">' + data.message + '</div>';
+                        }
+                    })
+                    .catch((error) => {
+                        uploadMessage.innerHTML = '<div class="error-message">Error: ' + error + '</div>';
+                    })
+                    .finally(() => {
+                        uploadButton.disabled = false; // Re-enable the submit button after processing
+                    });
+            }
             </script>
         </main>
 

@@ -227,10 +227,14 @@ a:hover {
   text-decoration: underline;
 }
 /* main css */
-main {
+/* .container2 .card {
   margin-top: 70px;
-}
-
+  height: 470px;
+  width: 100%;
+  background-color: var(--color-white);
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--box-shadow);
+} */
 .container2 .form-list {
   margin: 0;
 }
@@ -258,14 +262,6 @@ main {
   background-color: #ddd;
 }
 
-.container2 .card {
-  height: 90%;
-  width: 100%;
-  background-color: var(--color-white);
-  border-radius: var(--card-border-radius);
-  box-shadow: var(--box-shadow);
-}
-
 .container2 .card-header {
   text-align: center;
   font-size: 18px;
@@ -276,11 +272,13 @@ main {
   border-top-right-radius: var(--card-border-radius);
 }
 
-.container2 .card-body {
+/* .container2 .card-body {
   padding: 1.5rem;
-}
+} */
 
 .container2 form {
+  width: 100%;
+  margin-top: 70px;
   background-color: var(--color-white);
   border-radius: var(--card-border-radius);
   padding: 1rem;

@@ -97,11 +97,11 @@ if (isset($_GET['id'])) {
                     </span>
                     <h3>Analytics</h3>
                 </a> -->
-                <a href="../templates/email.php">
+                <!-- <a href="../templates/email.php">
                     <span class="fa fa-address-card">
                     </span>
                     <h3>Contact</h3>
-                </a>
+                </a> -->
                 <a href="#">
                     <span class="fa fa-upload">
                     </span>
@@ -115,7 +115,7 @@ if (isset($_GET['id'])) {
                 </a>
                 <a href="../templates/assessment.php">
                     <span class="fa fa-address-book">
-                    <!-- fab fa-app-store-ios -->
+                        <!-- fab fa-app-store-ios -->
                     </span>
                     <h3>Assessment</h3>
                 </a>
@@ -152,7 +152,7 @@ if (isset($_GET['id'])) {
             <div class="delete">
                 <h1>Deleted from database</h1>
                 <a href="../templates/show_data.php" class="back-button"><i class="fa fa-chevron-circle-left"
-                                style="font-size:36px"></i></a>
+                        style="font-size:36px"></i></a>
             </div>
         </main>
         <!-- End of Main Content -->

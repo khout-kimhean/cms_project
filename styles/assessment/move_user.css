@@ -177,7 +177,7 @@ a:hover {
   padding: 1rem;
   font-size: 1rem;
   cursor: pointer;
-  width: 15%;
+  width: 30%;
   padding: 20px;
   font-size: 17px;
   padding: 10px 15px;
@@ -188,7 +188,7 @@ a:hover {
   padding: 4px;
   margin-bottom: 5px;
   /* margin-left: 150px; */
-  width: 30%;
+  width: 50%;
   font-size: 22px;
   text-align: center;
   border-radius: var(--card-border-radius);
@@ -205,21 +205,20 @@ a:hover {
 .container2 input[type="text"] {
   margin-left: 12%;
   /* margin-top: 10px; */
-  margin-bottom: 10px;
-  width: 60%;
+  margin-bottom: 5px;
+  width: 84%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 20px;
 }
 .container2 select {
-  width: 50%;
+  width: 65%;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   margin-top: 0px;
   font-family: cursive, sans-serif;
   outline: 0;
   background: var(--color-white);
-  /* color: #fff; */
   padding: 8px;
   border-radius: var(--card-border-radius);
 }
@@ -243,6 +242,26 @@ a:hover {
   padding: 10px;
 }
 
+.calendar-container {
+  /* font-family: Arial, sans-serif; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  text-align: center;
+}
+.calendar-container label {
+  border-radius: 8px;
+  margin-bottom: 10px;
+  margin-left: 60px;
+}
+.calendar-container select {
+  border-radius: 5px;
+  margin-left: 10px;
+  width: 100px;
+  padding: 5px;
+  font-size: 16px;
+}
 /* end container2 */
 
 aside .toggle .logo {

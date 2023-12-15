@@ -41,11 +41,11 @@
                     </span>
                     <h3>Search</h3>
                 </a> -->
-                <a href="../contact/contact.php">
+                <!-- <a href="../contact/contact.php">
                     <span class="fa fa-address-card">
                     </span>
                     <h3>Contact</h3>
-                </a>
+                </a> -->
                 <a href="../data_store/data_mgt.php">
                     <span class="fa fa-upload">
                     </span>
@@ -70,11 +70,11 @@
                     </span>
                     <h3>User Mgt</h3>
                 </a>
-                <a href="../to_do_list/todo_management.php">
+                <!-- <a href="../to_do_list/todo_management.php">
                     <span class="fa fa-list-alt">
                     </span>
                     <h3>To-do List</h3>
-                </a>
+                </a> -->
                 <!-- <a href="../data_store/data_mgt.php">
                     <span class="fa fa-briefcase">
                     </span>
@@ -133,9 +133,9 @@
 
                             // Display the result
                             if (result.trim() !== '') {
-                                outputDiv.innerText = result;
-                                outputDiv.innerHTML +=
-                                    'Please Re-Enter keyword and click show2 for show Error <button onclick="searchKeyword()">Show2</button>';
+                                outputDiv.innerText = result +
+                                    " \n*Please Re-Enter # Key-No # And click --> Show Detail  To Show Detail of TRX:\n\n ";
+                                outputDiv.innerHTML += '<button onclick="searchKeyword()">Show Detail</button>';
                             } else {
                                 outputDiv.innerText = "No log entry found for REF number '" + searchKeyNumber +
                                     "'.";
@@ -199,10 +199,10 @@
                     }
                 }
                 </script>
-
+                <!-- 
                 <div class="button_save">
                     <input type="submit" name="submit" value="Save" class="btn btn-info">
-                </div>
+                </div> -->
             </div>
         </main>
         <div class="right-section">

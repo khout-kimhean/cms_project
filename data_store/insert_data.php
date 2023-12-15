@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </span>
                     <h3>Create User</h3>
                 </a> -->
-                <a href="../templates/search.php" >
+                <a href="../templates/search.php">
                     <span class="fa fa-search">
                     </span>
                     <h3>Search</h3>
@@ -101,11 +101,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </span>
                     <h3>Analytics</h3>
                 </a> -->
-                <a href="../templates/email.php">
+                <!-- <a href="../templates/email.php">
                     <span class="fa fa-address-card">
                     </span>
                     <h3>Contact</h3>
-                </a>
+                </a> -->
                 <a href="../templates/multi_upload.php">
                     <span class="fa fa-upload">
                     </span>
@@ -117,9 +117,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </span>
                     <h3>View File</h3>
                 </a>
-                <a href="../templates/assessment.php"  class="active">
+                <a href="../templates/assessment.php" class="active">
                     <span class="fa fa-address-book">
-                    <!-- fab fa-app-store-ios -->
+                        <!-- fab fa-app-store-ios -->
                     </span>
                     <h3>Assessment</h3>
                 </a>

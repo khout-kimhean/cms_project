@@ -229,11 +229,11 @@ a:hover {
 }
 
 main {
-  margin-top: 65px;
-  margin-bottom: 30px;
+  margin-top: 70px;
+  /* margin-bottom: 30px; */
   height: 88%;
   width: 100%;
-  padding: 5px;
+  padding: 0;
   border-radius: 5px;
   font-size: 13px;
   background-color: var(--color-white);

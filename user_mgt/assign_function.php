@@ -1,108 +1,71 @@
 <?php
 
-require '../vendor/autoload.php';
+$db_host = 'localhost';
+$db_username = 'root';
+$db_password = '';
+$db_name = 'demo';
 
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "demo";
-
+$conn = new mysqli($db_host, $db_username, $db_password, $db_name);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 $alertType = "";
 $alertMessage = "";
-
-// Check if the ID is provided and is numeric
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $id = isset($_GET['id']) ? $_GET['id'] : 0; // Assuming you have the user ID in the URL
+    $permissions = isset($_POST['permissions']) ? $_POST['permissions'] : array();
+    if (!empty($permissions)) {
+        $permissionsPlaceholders = implode(', ', array_fill(0, count($permissions), '?'));
+        $sql = "UPDATE login_register SET permissions = ? WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        if ($stmt === false) {
+            die("Error: " . $conn->error);
+        }
+        $stmt->bind_param("ssi", $permissionsPlaceholders, $id, $permissions);
+        if ($stmt->execute()) {
+            $alertType = "success";
+            $alertMessage = "Permissions added successfully.";
+        } else {
+            $alertType = "danger";
+            $alertMessage = "Error adding permissions: " . $stmt->error;
+        }
+        $stmt->close();
+    } else {
+        $alertType = "danger";
+        $alertMessage = "No permissions selected.";
+    }
+}
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $id = $_GET['id'];
-
     $id = $_GET['id'];
-    // echo "ID is valid: $id";
-    // Create a database connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Check the connection
+    $conn = new mysqli($db_host, $db_username, $db_password, $db_name);
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-
-
     $sql = "SELECT name, user_type FROM login_register WHERE id = ?";
-
-    // Prepare the SQL statement
     $stmt = $conn->prepare($sql);
-
     if ($stmt === false) {
         die("Error: " . $conn->error);
     }
-
-    // Bind the ID parameter to the SQL statement
     $stmt->bind_param("i", $id);
-
     if ($stmt->execute()) {
         $stmt->store_result();
 
         if ($stmt->num_rows > 0) {
             $stmt->bind_result($name, $user_type);
             $stmt->fetch();
-
-            // Display the content (you can use the appropriate HTML tags)
         } else {
             echo "Content not found.";
         }
     } else {
         echo "Error executing the SQL query: " . $stmt->error;
     }
-
     $stmt->close();
-
 } else {
-    // echo "Invalid ID: ";
 }
-
-
-// if ($_SERVER["REQUEST_METHOD"] == "POST") {
-//     $id = $_POST["id"];
-//     $display_name = $_POST['display_name'];
-//     $position = $_POST['position'];
-//     $function = $_POST['function'];
-//     $role = $_POST['role'];
-//     $branch = $_POST['branch'];
-//     $status = $_POST['status'];
-//     $requester = $_POST['requester'];
-//     $approver = $_POST['approver'];
-//     $start_date = $_POST['start_date'];
-//     $end_date = $_POST['end_date'];
-//     $command = $_POST['command'];
-
-//     $conn = new mysqli($servername, $username, $password, $dbname);
-
-//     if ($conn->connect_error) {
-//         die("Connection failed: " . $conn->connect_error);
-//     }
-//     $sql = "INSERT INTO move_user (display_name, position, function, role, branch, status, requester,  approver, start_date, end_date, command) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-//     // $sql = "UPDATE sumary_data SET display_name = ?, position = ?, function = ?, role = ?, branch = ?, status = ?, requester = ?, approver = ?, start_date = ?, end_date = ?, command = ? WHERE id = ?";
-//     $stmt = $conn->prepare($sql);
-
-//     if ($stmt === false) {
-//         die("Error: " . $conn->error);
-//     }
-//     $stmt->bind_param("sssssssssss", $display_name, $position, $function, $role, $branch, $status, $requester, $approver, $start_date, $end_date, $command);
-//     // $stmt->bind_param("sssssssssssi", $display_name, $position, $function, $role, $branch, $status, $requester, $approver, $start_date, $end_date, $command, $id);
-
-//     if ($stmt->execute()) {
-//         $alertType = "success"; // Set success alert type
-//         $alertMessage = "User Moved successfully.";
-//     } else {
-//         $alertType = "danger"; // Set danger alert type
-//         $alertMessage = "Error User Move: " . $stmt->error;
-//     }
-//     $stmt->close();
-//     $conn->close();
-// }
-
-
-
+$conn->close();
 ?>
+
 
 
 <!DOCTYPE html>
@@ -129,11 +92,9 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                 </div>
                 <div class="close" id="close-btn">
                     <span class="material-icons-sharp">
-                        <!-- close -->
                     </span>
                 </div>
             </div>
-
             <div class="sidebar">
                 <a href="../dashboard/dashboard.php">
                     <span class="material-icons-sharp">
@@ -141,23 +102,21 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                     </span>
                     <h3>Dashboard</h3>
                 </a>
-
                 <!-- <a href="../data_store/search.php">
                     <span class="fa fa-search">
                     </span>
                     <h3>Search</h3>
                 </a> -->
-                <a href="../contact/contact.php">
+                <!-- <a href="../contact/contact.php">
                     <span class="fa fa-address-card">
                     </span>
                     <h3>Contact</h3>
-                </a>
+                </a> -->
                 <a href="../data_store/data_mgt.php">
                     <span class="fa fa-upload">
                     </span>
                     <h3>Data Store</h3>
                 </a>
-
                 <!-- <a href="../data_store/list_upload.php">
                     <span class="material-icons-sharp">
                         inventory
@@ -170,24 +129,21 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                     </span>
                     <h3>Assessment</h3>
                 </a>
-
                 <a href="../user_mgt/user_management.php" class="active">
                     <span class="fa fa-user-circle">
                     </span>
                     <h3>User Mgt</h3>
                 </a>
-                <a href="../to_do_list/todo_management.php">
+                <!-- <a href="../to_do_list/todo_management.php">
                     <span class="fa fa-list-alt">
                     </span>
                     <h3>To-do List</h3>
-                </a>
+                </a> -->
                 <!-- <a href="../data_store/data_mgt.php">
                     <span class="fa fa-briefcase">
                     </span>
                     <h3>Stock Mgt</h3>
                 </a> -->
-
-
                 <a href="../user_mgt/logout.php">
                     <span class="material-icons-sharp">
                         logout
@@ -208,94 +164,90 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                         <input type="text" name="user type" required placeholder="User Type"
                             value="<?php echo htmlspecialchars($user_type); ?>">
                     </div>
-
                 </div>
-
                 <div class="select1">
                     <h2>Permission</h2>
                 </div>
-
-                <div class="box">
-                    <div class="container3">
-                        <input type="checkbox" id="input-1" class="check-input">
-                        <label for="input-1" class="checkbox">
-                            <svg viewBox="0 0 22 16" fill="none">
-                                <path d="M1 6.85L8.09677 14L21 1" />
-                            </svg>
-                        </label>
-                        <span>ChatBot</span>
+                <form action="" method="post">
+                    <div class="box">
+                        <div class="container3">
+                            <input type="checkbox" id="permission-1" name="permissions[]" value="ChatBot"
+                                class="check-input">
+                            <label for="permission-1" class="checkbox">
+                                <svg viewBox="0 0 22 16" fill="none">
+                                    <path d="M1 6.85L8.09677 14L21 1" />
+                                </svg>
+                            </label>
+                            <span>ChatBot</span>
+                        </div>
+                        <div class="container3">
+                            <input type="checkbox" id="input-2" class="check-input">
+                            <label for="input-2" class="checkbox">
+                                <svg viewBox="0 0 22 16" fill="none">
+                                    <path d="M1 6.85L8.09677 14L21 1" />
+                                </svg>
+                            </label>
+                            <span>DataChat</span>
+                        </div>
+                        <div class="container3">
+                            <input type="checkbox" id="input-3" class="check-input">
+                            <label for="input-3" class="checkbox">
+                                <svg viewBox="0 0 22 16" fill="none">
+                                    <path d="M1 6.85L8.09677 14L21 1" />
+                                </svg>
+                            </label>
+                            <span>Find Error</span>
+                        </div>
+                        <div class="container3">
+                            <input type="checkbox" id="input-4" class="check-input">
+                            <label for="input-4" class="checkbox">
+                                <svg viewBox="0 0 22 16" fill="none">
+                                    <path d="M1 6.85L8.09677 14L21 1" />
+                                </svg>
+                            </label>
+                            <span>Data Store</span>
+                        </div>
                     </div>
-                    <div class="container3">
-                        <input type="checkbox" id="input-2" class="check-input">
-                        <label for="input-2" class="checkbox">
-                            <svg viewBox="0 0 22 16" fill="none">
-                                <path d="M1 6.85L8.09677 14L21 1" />
-                            </svg>
-                        </label>
-                        <span>DataChat</span>
+                    <div class="box">
+                        <div class="container3">
+                            <input type="checkbox" id="input-5" class="check-input">
+                            <label for="input-5" class="checkbox">
+                                <svg viewBox="0 0 22 16" fill="none">
+                                    <path d="M1 6.85L8.09677 14L21 1" />
+                                </svg>
+                            </label>
+                            <span>Assessment</span>
+                        </div>
+                        <div class="container3">
+                            <input type="checkbox" id="input-6" class="check-input">
+                            <label for="input-6" class="checkbox">
+                                <svg viewBox="0 0 22 16" fill="none">
+                                    <path d="M1 6.85L8.09677 14L21 1" />
+                                </svg>
+                            </label>
+                            <span>User Management</span>
+                        </div>
+                        <div class="container3">
+                            <input type="checkbox" id="input-7" class="check-input">
+                            <label for="input-7" class="checkbox">
+                                <svg viewBox="0 0 22 16" fill="none">
+                                    <path d="M1 6.85L8.09677 14L21 1" />
+                                </svg>
+                            </label>
+                            <span>To_do List</span>
+                        </div>
+                        <div class="container3">
+                            <input type="checkbox" id="input-8" class="check-input">
+                            <label for="input-8" class="checkbox">
+                                <svg viewBox="0 0 22 16" fill="none">
+                                    <path d="M1 6.85L8.09677 14L21 1" />
+                                </svg>
+                            </label>
+                            <span>Contact</span>
+                        </div>
                     </div>
-                    <div class="container3">
-                        <input type="checkbox" id="input-3" class="check-input">
-                        <label for="input-3" class="checkbox">
-                            <svg viewBox="0 0 22 16" fill="none">
-                                <path d="M1 6.85L8.09677 14L21 1" />
-                            </svg>
-                        </label>
-                        <span>Find Error</span>
-                    </div>
-                    <div class="container3">
-                        <input type="checkbox" id="input-4" class="check-input">
-                        <label for="input-4" class="checkbox">
-                            <svg viewBox="0 0 22 16" fill="none">
-                                <path d="M1 6.85L8.09677 14L21 1" />
-                            </svg>
-                        </label>
-                        <span>Data Store</span>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="container3">
-                        <input type="checkbox" id="input-5" class="check-input">
-                        <label for="input-5" class="checkbox">
-                            <svg viewBox="0 0 22 16" fill="none">
-                                <path d="M1 6.85L8.09677 14L21 1" />
-                            </svg>
-                        </label>
-                        <span>Assessment</span>
-                    </div>
-                    <div class="container3">
-                        <input type="checkbox" id="input-6" class="check-input">
-                        <label for="input-6" class="checkbox">
-                            <svg viewBox="0 0 22 16" fill="none">
-                                <path d="M1 6.85L8.09677 14L21 1" />
-                            </svg>
-                        </label>
-                        <span>User Management</span>
-                    </div>
-                    <div class="container3">
-                        <input type="checkbox" id="input-7" class="check-input">
-                        <label for="input-7" class="checkbox">
-                            <svg viewBox="0 0 22 16" fill="none">
-                                <path d="M1 6.85L8.09677 14L21 1" />
-                            </svg>
-                        </label>
-                        <span>To_do List</span>
-                    </div>
-                    <div class="container3">
-                        <input type="checkbox" id="input-8" class="check-input">
-                        <label for="input-8" class="checkbox">
-                            <svg viewBox="0 0 22 16" fill="none">
-                                <path d="M1 6.85L8.09677 14L21 1" />
-                            </svg>
-                        </label>
-                        <span>Contact</span>
-                    </div>
-                </div>
-                <form action="../user_mgt/assign_function.php">
                     <input type="submit" name="submit" value="Save" class="form-btn">
                 </form>
-
-
             </div>
         </main>
         <div class="right-section">
@@ -313,7 +265,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                         dark_mode
                     </span>
                 </div>
-
                 <div class="profile">
                     <div class="info">
                         <p>Welcome</p>
@@ -323,9 +274,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                         <img src="../images/logo/logo.jpg">
                     </div>
                 </div>
-
             </div>
-
             <div class="user-profile">
                 <div class="logo">
                     <a href="https://ftb.com.kh/en/">
@@ -335,7 +284,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                     </a>
                 </div>
             </div>
-
             <div class="reminders">
                 <div class="header">
                     <h2>Reminders</h2>
@@ -343,7 +291,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                         notifications_none
                     </span>
                 </div>
-
                 <div class="notification">
                     <div class="icon">
                         <span class="material-icons-sharp">
@@ -362,7 +309,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                         </span>
                     </div>
                 </div>
-
                 <div class="notification deactive">
                     <div class="icon">
                         <span class="material-icons-sharp">
@@ -381,7 +327,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                         </span>
                     </div>
                 </div>
-
                 <div class="notification add-reminder">
                     <div>
                         <span class="material-icons-sharp">
@@ -390,12 +335,9 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                         <h3>Add Reminder</h3>
                     </div>
                 </div>
-
             </div>
-
         </div>
     </div>
-
     <!-- <script src="orders.js"></script> -->
     <script src="../script/index.js"></script>
 </body>

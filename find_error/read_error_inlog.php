@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <!-- <link rel="stylesheet" type="text/css" href="../Admin Dashboard/styles/todo_management.css"> -->
-    <link rel="stylesheet" type="text/css" href="../styles/find_error/read_error_trx.css">
+    <link rel="stylesheet" type="text/css" href="../styles/find_error/read_errorinlog.css">
     <title>Admin Dashboard</title>
 
 </head>
@@ -40,11 +40,11 @@
                     </span>
                     <h3>Search</h3>
                 </a> -->
-                <a href="../contact/contact.php">
+                <!-- <a href="../contact/contact.php">
                     <span class="fa fa-address-card">
                     </span>
                     <h3>Contact</h3>
-                </a>
+                </a> -->
                 <a href="../data_store/data_mgt.php">
                     <span class="fa fa-upload">
                     </span>
@@ -69,11 +69,11 @@
                     </span>
                     <h3>User Mgt</h3>
                 </a>
-                <a href="../to_do_list/todo_management.php">
+                <!-- <a href="../to_do_list/todo_management.php">
                     <span class="fa fa-list-alt">
                     </span>
                     <h3>To-do List</h3>
-                </a>
+                </a> -->
                 <!-- <a href="../data_store/data_mgt.php">
                     <span class="fa fa-briefcase">
                     </span>
@@ -92,24 +92,16 @@
         <main>
             <div class="container2">
                 <div class="head">
-
-                    <a href="../templates/read_file.php" class="back-button"><i class="fa fa-chevron-circle-left"
-                            style="font-size:30px"></i></a>
-                    <h2>Find Error In .log File</h2>
-
+                    <h2>Read Error in log File</h2>
                 </div>
-
                 <!-- <label for="searchKeyNumberInput"></label> -->
                 <div class="item">
-
                     <input class="file" type="file" id="fileInput" />
                     <input class="search" type="text" id="searchKeyNumberInput"
-                        placeholder="Please Enter Reference Number Here............" />
+                        placeholder="Enter REF-No Here . . . . . . . " />
                     <br />
                 </div>
-                <!-- <button onclick="searchKeyword()">Show Detail</button> -->
                 <button onclick="processFile()">Show </button>
-                <!-- <div id="output"></div> -->
                 <div id="output"></div>
 
 
@@ -143,7 +135,7 @@
                             // Display the result
                             if (result.trim() !== '') {
                                 outputDiv.innerText = result +
-                                    " \n*Please Search Key Number in # keyNumber # And click <<Show Detail>> for more detail of that TRX:\n\n ";
+                                    " \n*Please Re-Enter # Key-No # And click --> Show Detail  To Show Detail of TRX:\n\n ";
                                 outputDiv.innerHTML += '<button onclick="searchKeyword()">Show Detail</button>';
                             } else {
                                 outputDiv.innerText = "No log entry found for REF number " + searchKeyNumber + ".";
@@ -320,14 +312,10 @@
 
 
                 <div class="note">
-                    <h2>* step1: Enter REF_No and click " Show " </h2>
-                    <h2>* step2: Re-Enter keyword and click " Show Detail "</h2>
-                    <!-- <h2>* 332809000170 332809000169 332809000174 332809000173</h2> -->
+                    <h2>*Step1: Enter REF-No --> click Show to find Key-No</h2>
+                    <h2>*Step2: Enter Key-No --> click Show Detail to show Error + XML</h2>
                 </div>
 
-                <!-- <div class="button_save">
-                    <input type="submit" name="submit" value="Save" class="btn btn-info">
-                </div> -->
             </div>
         </main>
         <div class="right-section">

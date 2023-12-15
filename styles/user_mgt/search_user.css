@@ -238,7 +238,10 @@ li {
   margin: 0;
   padding: 0;
 }
-
+.form-group label {
+  font-family: cursive, sans-serif;
+  font-size: 18px;
+}
 .container2 h1 {
   font-size: 24px;
   font-weight: bold;
@@ -364,14 +367,12 @@ a:hover {
 }
 
 .container2 .card {
-  margin-top: 60px;
+  margin-top: 70px;
   font-family: cursive, sans-serif;
   background-color: var(--color-white);
-  /* border: 1px solid #ccc; */
   border-radius: var(--card-border-radius);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding: var(--card-padding);
-  /* margin: 20px 0; */
   height: 88%;
   width: 100%;
   /* width: 1290px; */
