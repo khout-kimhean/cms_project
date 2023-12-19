@@ -5,6 +5,8 @@ $host = "localhost";
 $user = "root";
 $pass = "";
 $db = "demo";
+$sql = "SELECT * FROM login_register";
+$result = $conn->query($sql);
 
 // Create a connection to the database
 $con = mysqli_connect($host, $user, $pass, $db);
@@ -287,7 +289,7 @@ if (isset($_GET['delete'])) {
                 <div class="profile">
                     <div class="info">
                         <p>Welcome</p>
-                        <small class="text-muted">Admin</small>
+                        <small class="text-muted"><?php echo $_SESSION['user_name']; ?></small>
                     </div>
                     <div class="profile-photo">
                         <img src="../images/logo/logo.jpg">

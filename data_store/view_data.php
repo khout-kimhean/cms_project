@@ -11,6 +11,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+$sql = "SELECT * FROM login_register";
+$result = $conn->query($sql);
 
 
 $searchResults = array();
@@ -199,58 +201,58 @@ if (isset($_POST['edit']) && is_numeric($_POST['edit_id'])) {
                                 </thead>
                                 <tbody>
                                     <?php if (!empty($searchResults)): ?>
-                                    <?php
+                                        <?php
                                         $i = 1; // Initialize the ID counter to 1
                                         foreach ($searchResults as $row):
                                             ?>
-                                    <tr>
-                                        <td>
-                                            <?php echo $i; // Display the ID starting from 1 ?>
-                                        </td>
-                                        <td>
-                                            <?php echo htmlspecialchars($row['filename']); ?>
-                                        </td>
-                                        <td>
-                                            <?php echo htmlspecialchars($row['drop_file']); ?>
-                                        </td>
-                                        <td title="<?php echo htmlspecialchars($row['title']); ?>">
-                                            <?php
+                                            <tr>
+                                                <td>
+                                                    <?php echo $i; // Display the ID starting from 1 ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row['filename']); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row['drop_file']); ?>
+                                                </td>
+                                                <td title="<?php echo htmlspecialchars($row['title']); ?>">
+                                                    <?php
                                                     $title = htmlspecialchars($row['title']);
                                                     echo strlen($title) > 18 ? substr($title, 0, 40) . '...' : $title;
                                                     ?>
-                                        </td>
-                                        <td title="<?php echo htmlspecialchars($row['short_description']); ?>">
-                                            <?php
+                                                </td>
+                                                <td title="<?php echo htmlspecialchars($row['short_description']); ?>">
+                                                    <?php
                                                     $shortDescription = htmlspecialchars($row['short_description']);
                                                     echo strlen($shortDescription) > 20 ? substr($shortDescription, 0, 20) . '...' : $shortDescription;
                                                     ?>
-                                        </td>
+                                                </td>
 
 
-                                        <td><a href="../data_store/view_file.php?file=<?php echo $row['filename']; ?>"
-                                                target="_blank">View File Upload</a>
-                                        </td>
-                                        <td><a href="../data_store/view_1.php?id=<?php echo $row['id']; ?>">View
-                                                Data</a>
-                                        </td>
+                                                <td><a href="../data_store/view_file.php?file=<?php echo $row['filename']; ?>"
+                                                        target="_blank">View File Upload</a>
+                                                </td>
+                                                <td><a href="../data_store/view_1.php?id=<?php echo $row['id']; ?>">View
+                                                        Data</a>
+                                                </td>
 
 
 
-                                        <td>
-                                            <a href="edit_data.php?id=<?php echo $row['id']; ?>">Edit Data</a>
-                                        </td>
-                                        <td>
-                                            <a href="view_data.php?delete=<?php echo $row['id']; ?>">Delete Data</a>
-                                        </td>
-                                    </tr>
-                                    <?php
+                                                <td>
+                                                    <a href="edit_data.php?id=<?php echo $row['id']; ?>">Edit Data</a>
+                                                </td>
+                                                <td>
+                                                    <a href="view_data.php?delete=<?php echo $row['id']; ?>">Delete Data</a>
+                                                </td>
+                                            </tr>
+                                            <?php
                                             $i++; // Increment the ID counter for the next row
                                         endforeach;
                                         ?>
                                     <?php else: ?>
-                                    <tr>
-                                        <td colspan='7'>No files found.</td>
-                                    </tr>
+                                        <tr>
+                                            <td colspan='7'>No files found.</td>
+                                        </tr>
                                     <?php endif; ?>
                                 </tbody>
 
@@ -259,8 +261,9 @@ if (isset($_POST['edit']) && is_numeric($_POST['edit_id'])) {
                         </div>
                     </div>
                     <div class="note">
-                        <h3>* if data have filename please click "View File Upload " and if don't have filename please
-                            click"View Data " for view </h3>
+                        <h3>*ចំណាំ​ បើសិនជា​ data ​ដែលបាន​ Upload ជា File សូមចុច​ "View File" សម្រាប់បើកមើល​ តែបើ data
+                            ដែល Upload
+                            គ្រាន់តែ Input Description សូមចុច​ View Data ដើម្បីចូលមើល </h3>
                     </div>
                 </div>
             </div>

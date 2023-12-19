@@ -364,7 +364,7 @@ mysqli_close($con);
                 </form>
             </div>
         </main>
-        <div class="right-section">
+        <!-- <div class="right-section">
             <div class="nav">
                 <button id="menu-btn">
                     <span class="material-icons-sharp">
@@ -383,7 +383,8 @@ mysqli_close($con);
                 <div class="profile">
                     <div class="info">
                         <p>Welcome</p>
-                        <small class="text-muted">Admin</small>
+                        <small class="text-muted">
+                        </small>
                     </div>
                     <div class="profile-photo">
                         <img src="../images/logo/logo.jpg">
@@ -457,7 +458,7 @@ mysqli_close($con);
 
             </div>
 
-        </div>
+        </div> -->
     </div>
     <script src="../script/index.js"></script>
 </body>

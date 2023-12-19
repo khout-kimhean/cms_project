@@ -1,4 +1,9 @@
 <?php
+
+include '../dashboard/check_access.php';
+
+
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -54,7 +59,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 } else {
     // echo "Invalid ID: ";
 }
-
+$sql = "SELECT * FROM login_register";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST["id"];
@@ -453,7 +458,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="profile">
                     <div class="info">
                         <p>Welcome</p>
-                        <small class="text-muted">Admin</small>
+                        <small class="text-muted">
+                            <?php echo $_SESSION['user_name']; ?>
+                        </small>
                     </div>
                     <div class="profile-photo">
                         <img src="../images/logo/logo.jpg">

@@ -14,6 +14,8 @@ $conn = new mysqli($db_host, $db_username, $db_password, $db_name);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+$sql = "SELECT * FROM login_register";
+$result = $conn->query($sql);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
     $fileTmpPath = $_FILES['file']['tmp_name'];
@@ -264,7 +266,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
                 <div class="profile">
                     <div class="info">
                         <p>Welcome</p>
-                        <small class="text-muted">Admin</small>
+                        <small class="text-muted"><?php echo $_SESSION['user_name']; ?></small>
                     </div>
                     <div class="profile-photo">
                         <img src="../Admin Dashboard/images/profile.jpg ">

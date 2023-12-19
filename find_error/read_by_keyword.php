@@ -1,3 +1,27 @@
+<?php
+// session_start();
+
+// Include the file with the access check
+include '../dashboard/check_access.php';
+
+// Database configuration
+$db_host = 'localhost';
+$db_username = 'root';
+$db_password = '';
+$db_name = 'demo';
+
+$conn = new mysqli($db_host, $db_username, $db_password, $db_name);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$error = array();
+
+$sql = "SELECT * FROM login_register";
+$result = $conn->query($sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -105,99 +129,99 @@
                 <div id="output"></div>
 
                 <script>
-                function processFile() {
-                    const searchKeyNumberInput = document.getElementById('searchKeyNumberInput');
-                    const fileInput = document.getElementById('fileInput');
-                    const outputDiv = document.getElementById('output');
-                    outputDiv.innerHTML = ''; // Clear previous output
+                    function processFile() {
+                        const searchKeyNumberInput = document.getElementById('searchKeyNumberInput');
+                        const fileInput = document.getElementById('fileInput');
+                        const outputDiv = document.getElementById('output');
+                        outputDiv.innerHTML = ''; // Clear previous output
 
-                    const file = fileInput.files[0];
-                    const searchKeyNumber = searchKeyNumberInput.value.trim();
+                        const file = fileInput.files[0];
+                        const searchKeyNumber = searchKeyNumberInput.value.trim();
 
-                    if (file) {
-                        const reader = new FileReader();
+                        if (file) {
+                            const reader = new FileReader();
 
-                        reader.onload = function(e) {
-                            const fileContent = e.target.result;
-                            const entries = fileContent.split('\n');
+                            reader.onload = function (e) {
+                                const fileContent = e.target.result;
+                                const entries = fileContent.split('\n');
 
-                            let found = false;
-                            let result = '';
+                                let found = false;
+                                let result = '';
 
-                            entries.forEach(entry => {
-                                if (entry.includes(`RETR_REF_NO :${searchKeyNumber}`)) {
-                                    found = true;
-                                    result += entry + '\n';
+                                entries.forEach(entry => {
+                                    if (entry.includes(`RETR_REF_NO :${searchKeyNumber}`)) {
+                                        found = true;
+                                        result += entry + '\n';
+                                    }
+                                });
+
+                                // Display the result
+                                if (result.trim() !== '') {
+                                    outputDiv.innerText = result +
+                                        " \n*Please Re-Enter # Key-No # And click --> Show Detail  To Show Detail of TRX:\n\n ";
+                                    outputDiv.innerHTML += '<button onclick="searchKeyword()">Show Detail</button>';
+                                } else {
+                                    outputDiv.innerText = "No log entry found for REF number '" + searchKeyNumber +
+                                        "'.";
                                 }
-                            });
+                            };
 
-                            // Display the result
-                            if (result.trim() !== '') {
-                                outputDiv.innerText = result +
-                                    " \n*Please Re-Enter # Key-No # And click --> Show Detail  To Show Detail of TRX:\n\n ";
-                                outputDiv.innerHTML += '<button onclick="searchKeyword()">Show Detail</button>';
-                            } else {
-                                outputDiv.innerText = "No log entry found for REF number '" + searchKeyNumber +
-                                    "'.";
-                            }
-                        };
-
-                        reader.readAsText(file);
-                    } else {
-                        alert("Please choose a file.");
+                            reader.readAsText(file);
+                        } else {
+                            alert("Please choose a file.");
+                        }
                     }
-                }
 
-                function searchKeyword() {
-                    const searchKeyNumberInput = document.getElementById('searchKeyNumberInput');
-                    const fileInput = document.getElementById('fileInput');
-                    const outputDiv = document.getElementById('output');
-                    outputDiv.innerHTML = ''; // Clear previous output
+                    function searchKeyword() {
+                        const searchKeyNumberInput = document.getElementById('searchKeyNumberInput');
+                        const fileInput = document.getElementById('fileInput');
+                        const outputDiv = document.getElementById('output');
+                        outputDiv.innerHTML = ''; // Clear previous output
 
-                    const file = fileInput.files[0];
-                    const searchKeyNumber = searchKeyNumberInput.value.trim();
+                        const file = fileInput.files[0];
+                        const searchKeyNumber = searchKeyNumberInput.value.trim();
 
-                    if (file) {
-                        const reader = new FileReader();
+                        if (file) {
+                            const reader = new FileReader();
 
-                        reader.onload = function(e) {
-                            const fileContent = e.target.result;
+                            reader.onload = function (e) {
+                                const fileContent = e.target.result;
 
-                            // Extract lines and filter by searchKeyNumber and specific pattern
-                            const lines = fileContent.split(/\r?\n/);
-                            const matchingLines = lines.filter(line => {
-                                return (
-                                    (line.includes(`ERROR # ${searchKeyNumber} #`)) || (line.includes(
+                                // Extract lines and filter by searchKeyNumber and specific pattern
+                                const lines = fileContent.split(/\r?\n/);
+                                const matchingLines = lines.filter(line => {
+                                    return (
+                                        (line.includes(`ERROR # ${searchKeyNumber} #`)) || (line.includes(
                                             `ERROR # ${searchKeyNumber} #`) && line.toUpperCase()
-                                        .includes('ERROR') && line.includes('failed')) ||
-                                    (line.includes(`# ${searchKeyNumber} #`) && line.toUpperCase()
-                                        .includes('INFO') && line.includes(
-                                            'SETTING ERROR RESPONSE CODE'))
+                                                .includes('ERROR') && line.includes('failed')) ||
+                                        (line.includes(`# ${searchKeyNumber} #`) && line.toUpperCase()
+                                            .includes('INFO') && line.includes(
+                                                'SETTING ERROR RESPONSE CODE'))
 
-                                    // (line.includes(`ERROR # ${searchKeyNumber} #`) && line.toUpperCase().includes('ERROR') && line.includes('failed')) ||
-                                    // (line.includes(`# ${searchKeyNumber} #`) && line.toUpperCase().includes('INFO') && line.includes('SETTING ERROR RESPONSE CODE'))
+                                        // (line.includes(`ERROR # ${searchKeyNumber} #`) && line.toUpperCase().includes('ERROR') && line.includes('failed')) ||
+                                        // (line.includes(`# ${searchKeyNumber} #`) && line.toUpperCase().includes('INFO') && line.includes('SETTING ERROR RESPONSE CODE'))
 
 
-                                );
-                            });
+                                    );
+                                });
 
-                            // Display the result
-                            if (matchingLines.length > 0) {
-                                outputDiv.innerText = "Here is Error in that TRX :'" + searchKeyNumber + "':\n \n" +
-                                    matchingLines.join('\n');
-                            } else {
-                                outputDiv.innerText =
-                                    "No lines containing the keyword 'ERROR' found for the search key number '" +
-                                    searchKeyNumber + "'.";
+                                // Display the result
+                                if (matchingLines.length > 0) {
+                                    outputDiv.innerText = "Here is Error in that TRX :'" + searchKeyNumber + "':\n \n" +
+                                        matchingLines.join('\n');
+                                } else {
+                                    outputDiv.innerText =
+                                        "No lines containing the keyword 'ERROR' found for the search key number '" +
+                                        searchKeyNumber + "'.";
 
-                            }
-                        };
+                                }
+                            };
 
-                        reader.readAsText(file);
-                    } else {
-                        alert("Please choose a file.");
+                            reader.readAsText(file);
+                        } else {
+                            alert("Please choose a file.");
+                        }
                     }
-                }
                 </script>
                 <!-- 
                 <div class="button_save">
@@ -224,7 +248,9 @@
                 <div class="profile">
                     <div class="info">
                         <p>Welcome</p>
-                        <small class="text-muted">Admin</small>
+                        <small class="text-muted">
+                            <?php echo $_SESSION['user_name']; ?>
+                        </small>
                     </div>
                     <div class="profile-photo">
                         <img src="../images/logo/logo.jpg">

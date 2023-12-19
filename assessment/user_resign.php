@@ -1,4 +1,5 @@
 <?php
+include '../dashboard/check_access.php';
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -6,7 +7,7 @@ $dbname = "demo";
 
 $alertType = "";
 $alertMessage = "";
-
+$sql = "SELECT * FROM login_register";
 // Initialize variables
 $id = $display_name = $position = $function = $role = $branch = $command = $status = $requester = $approver = $start_date = $end_date = "";
 
@@ -419,7 +420,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <input type="text" name="command" required placeholder="Enter Command"
                                 value="<?php echo htmlspecialchars($command); ?>">
                             <input type="hidden" name="id" value="<?php echo $id; ?>">
-                            <input type="submit" name="submit" value="Save" class="form-btn">
+                            <input type="submit" name="submit" value="Resign" class="form-btn">
 
                             <div class="back_button">
                                 <!-- <a href="../templates/search_resign.php" class="back-button">
@@ -454,7 +455,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="profile">
                     <div class="info">
                         <p>Welcome</p>
-                        <small class="text-muted">Admin</small>
+                        <small class="text-muted">
+                            <?php echo $_SESSION['user_name']; ?>
+                        </small>
                     </div>
                     <div class="profile-photo">
                         <img src="../images/logo/logo.jpg">

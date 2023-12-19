@@ -32,31 +32,6 @@ $result = $conn->query($sql);
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="dashboard.css">
     <title>Admin Dashboard</title>
-    <?php if (!in_array($user_role, $allowed_roles[$current_page])): ?>
-    <style>
-    /* Disable pointer events to block mouse interaction */
-    body {
-        pointer-events: none;
-    }
-
-    body * {
-        pointer-events: none;
-    }
-    </style>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // List of elements you want to disable
-        var elementsToDisable = document.querySelectorAll('.disable-for-restricted');
-
-        elementsToDisable.forEach(function(element) {
-            element.addEventListener('click', function(event) {
-                event.preventDefault();
-                event.stopPropagation();
-            });
-        });
-    });
-    </script>
-    <?php endif; ?>
 </head>
 
 <body>
@@ -197,7 +172,7 @@ $result = $conn->query($sql);
                 <div class="user-list">
 
                     <div class="user disable-for-restricted">
-                        <a href="../chatbot/chat.html">
+                        <a href="../chatbot/chat.php">
                             <img src="../images/background/chat.png" alt="ChatBot">
                             <h2>ChatBot</h2>
                             <p>User ChatBot Here</p>
@@ -212,10 +187,10 @@ $result = $conn->query($sql);
                         </a>
                     </div>
                     <div class="user disable-for-restricted">
-                        <a href="../data_store/data_mgt.php">
+                        <a href="../file/file_mgt.php">
                             <img src="../images/file/upload.png" alt="Show File">
-                            <h2>Data Store</h2>
-                            <p>Store File here</p>
+                            <h2>File</h2>
+                            <p>Upload and View file</p>
                         </a>
                     </div>
                     <div class="user disable-for-restricted">

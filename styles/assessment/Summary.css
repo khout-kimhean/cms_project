@@ -50,12 +50,10 @@
   display: flex;
   background-color: gray;
   padding: var(--card-padding);
-  /* border-radius: var(--card-border-radius); */
   border-radius: 10px;
   box-shadow: var(--box-shadow);
-  /* max-height: 100%; */
   width: 3100px;
-  height: 770px;
+  height: 740px;
   color: var(--color-dark);
 }
 
@@ -73,11 +71,9 @@
 }
 
 .table-container {
-  /* width: 2700px; */
   margin-top: 0px;
-  max-height: 700px; /* Set a maximum height for the scrollable area */
-  overflow: auto; /* Enable vertical scrolling when the content exceeds the container height */
-  /* border-radius: var(--card-border-radius); */
+  max-height: 670px;
+  overflow: auto;
   border-radius: 15px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }

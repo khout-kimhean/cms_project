@@ -1,5 +1,8 @@
 <?php
-// Database configuration
+
+include '../dashboard/check_access.php';
+
+
 $db_host = 'localhost';
 $db_username = 'root';
 $db_password = '';
@@ -15,6 +18,10 @@ if ($conn->connect_error) {
 
 $error = array();
 $success_message = ''; // Initialize the success message variable
+
+
+
+$sql = "SELECT * FROM login_register";
 
 if (isset($_POST['submit'])) {
     $name = mysqli_real_escape_string($conn, $_POST['name']);
@@ -212,7 +219,9 @@ $conn->close();
                 <div class="profile">
                     <div class="info">
                         <p>Welcome</p>
-                        <small class="text-muted">Admin</small>
+                        <small class="text-muted">
+                            <?php echo $_SESSION['user_name']; ?>
+                        </small>
                     </div>
                     <div class="profile-photo">
                         <img src="../images/logo/logo.jpg">

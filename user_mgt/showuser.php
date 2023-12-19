@@ -1,4 +1,5 @@
 <?php
+include '../dashboard/check_access.php';
 // Database configuration
 $db_host = 'localhost';
 $db_username = 'root';
@@ -13,9 +14,11 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Define an array to store errors
+
+
 $error = array();
 
+$sql = "SELECT * FROM login_register";
 // Delete user if the delete button is clicked
 if (isset($_POST['delete_user'])) {
     $user_id = $_POST['user_id'];
@@ -196,7 +199,9 @@ $result = $conn->query($sql);
                 <div class="profile">
                     <div class="info">
                         <p>Welcome</p>
-                        <small class="text-muted">Admin</small>
+                        <small class="text-muted">
+                            <?php echo $_SESSION['user_name']; ?>
+                        </small>
                     </div>
                     <div class="profile-photo">
                         <img src="../images/logo/logo.jpg">

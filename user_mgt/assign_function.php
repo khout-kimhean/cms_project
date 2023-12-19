@@ -1,5 +1,5 @@
 <?php
-
+include '../dashboard/check_access.php';
 $db_host = 'localhost';
 $db_username = 'root';
 $db_password = '';
@@ -11,6 +11,11 @@ if ($conn->connect_error) {
 }
 $alertType = "";
 $alertMessage = "";
+
+$error = array();
+
+$sql = "SELECT * FROM login_register";
+$result = $conn->query($sql);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = isset($_GET['id']) ? $_GET['id'] : 0; // Assuming you have the user ID in the URL
     $permissions = isset($_POST['permissions']) ? $_POST['permissions'] : array();
@@ -268,7 +273,9 @@ $conn->close();
                 <div class="profile">
                     <div class="info">
                         <p>Welcome</p>
-                        <small class="text-muted">Admin</small>
+                        <small class="text-muted">
+                            <?php echo $_SESSION['user_name']; ?>
+                        </small>
                     </div>
                     <div class="profile-photo">
                         <img src="../images/logo/logo.jpg">

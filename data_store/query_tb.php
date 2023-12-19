@@ -4,6 +4,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = "root";
     $password = "";
     $database = "demo";
+    $sql = "SELECT * FROM login_register";
+    $result = $conn->query($sql);
 
     $conn = new mysqli($servername, $username, $password, $database);
 
@@ -182,7 +184,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <div class="profile">
                     <div class="info">
                         <p>Welcome</p>
-                        <small class="text-muted">Admin</small>
+                        <small class="text-muted">
+                            <?php echo $_SESSION['user_name']; ?>
+                        </small>
                     </div>
                     <div class="profile-photo">
                         <img src="../Admin Dashboard/images/profile.jpg">

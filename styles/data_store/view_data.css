@@ -226,20 +226,20 @@ a:hover {
   border-radius: var(--card-border-radius);
   box-shadow: var(--box-shadow);
   margin-top: 30px;
-  margin-bottom: 30px;
-  max-height: 88%;
+  /* margin-bottom: 30px; */
+  max-height: 100%;
   width: 100%;
-  overflow-y: auto;
+
   color: var(--color-dark);
 }
 
 /* main container2 */
 .container2 .note h3 {
-  /* border: 1px solid red; */
   font-size: 14px;
-  font-family: cursive, sans-serif;
+  /* font-family: cursive, sans-serif; */
   margin-top: 20px;
-  color: rgb(196, 6, 16);
+  padding: 4px;
+  color: rgb(40, 13, 174);
 }
 main,
 h1,
@@ -254,6 +254,8 @@ li {
 .form-group label {
   font-family: cursive, sans-serif;
   font-size: 18px;
+
+  overflow-y: auto;
 }
 main {
   width: 138%;
@@ -332,7 +334,8 @@ main {
   cursor: pointer;
 }
 .table-container {
-  max-height: 88%;
+  height: 400px;
+  max-height: 10%;
   overflow-y: auto;
 }
 .container2 .card-header a {

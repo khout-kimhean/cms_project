@@ -167,11 +167,10 @@ a:hover {
   border-radius: 10px;
   padding: 10px;
   max-width: 70%;
-  word-wrap: break-word;
+  /* word-wrap: break-word; */
   margin-bottom: 10px;
   display: flex;
   flex-direction: column;
-  align-items: end;
 }
 
 /* start  */
@@ -179,15 +178,6 @@ a:hover {
   justify-content: flex-end;
   margin-top: 10px;
   display: flex;
-}
-
-.msg_cotainer_send {
-  background-color: #97ff95;
-  border-radius: 10px;
-  padding: 10px;
-  max-width: 60%;
-  word-wrap: break-word;
-  white-space: pre-line;
 }
 
 .msg_cotainer {
@@ -349,7 +339,7 @@ main .send_btn {
   cursor: pointer;
 }
 
-.msg_cotainer_send {
+/* .msg_cotainer_send {
   background-color: #3498db;
   color: #fff;
   border-radius: 10px;
@@ -357,7 +347,7 @@ main .send_btn {
   max-width: 70%;
   word-wrap: break-word;
   margin-bottom: 10px;
-}
+} */
 
 .user_img_msgs span .msg_cotainer_send {
   width: 40px;
@@ -368,18 +358,6 @@ main .send_btn {
 }
 .msg_cotainer_send {
   margin-left: 200px;
-  background-color: var(--color-white);
-  color: var(--color-dark);
-  border-radius: 10px;
-  padding: 10px;
-  max-width: 70%;
-  word-wrap: break-word;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-}
-.msg_cotainer {
-  margin-left: 0;
   background-color: var(--color-white);
   color: var(--color-dark);
   border-radius: 10px;

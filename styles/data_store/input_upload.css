@@ -284,7 +284,7 @@ main {
 }
 
 .container2 .form-list select {
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   width: 100%;
   padding: 5px;
   border: 1px solid #ccc;
@@ -312,7 +312,7 @@ main {
 }
 
 .container2 .form-group {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .container2 input[type="text"] {

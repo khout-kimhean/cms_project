@@ -1,4 +1,5 @@
 <?php
+include '../dashboard/check_access.php';
 require '../vendor/autoload.php';
 
 $servername = "localhost";
@@ -22,6 +23,10 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+$error = array();
+
+$sql = "SELECT * FROM login_register";
+$result = $conn->query($sql);
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST['id'];
@@ -230,9 +235,9 @@ $conn->close();
 
                     <input type="submit" name="submit" value="Save" class="form-btn">
                     <?php if ($alertMessage !== ""): ?>
-                    <div class="alert alert-<?php echo $alertType; ?>" role="alert">
-                        <?php echo $alertMessage; ?>
-                    </div>
+                        <div class="alert alert-<?php echo $alertType; ?>" role="alert">
+                            <?php echo $alertMessage; ?>
+                        </div>
                     <?php endif; ?>
                 </form>
             </div>
@@ -256,7 +261,9 @@ $conn->close();
                 <div class="profile">
                     <div class="info">
                         <p>Welcome</p>
-                        <small class="text-muted">Admin</small>
+                        <small class="text-muted">
+                            <?php echo $_SESSION['user_name']; ?>
+                        </small>
                     </div>
                     <div class="profile-photo">
                         <img src="../images/logo/logo.jpg">

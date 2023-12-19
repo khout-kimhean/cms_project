@@ -1,5 +1,6 @@
 <?php
 require '../vendor/autoload.php';
+include '../dashboard/check_access.php';
 
 $host = "localhost";
 $user = "root";
@@ -13,6 +14,9 @@ if (!$con) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+
+$sql = "SELECT * FROM login_register";
+
 $searchResults = array();
 
 if (isset($_POST['search'])) {
@@ -23,16 +27,18 @@ if (isset($_POST['search'])) {
     $searchPattern = "%" . $searchTerm . "%";
     mysqli_stmt_bind_param($stmt, "s", $searchPattern);
     mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
+    $stmt_result = $stmt->get_result(); // Use this line instead
 
-    if ($result && mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
+    if ($stmt_result && mysqli_num_rows($stmt_result) > 0) {
+        while ($row = mysqli_fetch_assoc($stmt_result)) {
             $searchResults[] = $row;
         }
     }
 }
 
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -230,7 +236,9 @@ if (isset($_POST['search'])) {
                 <div class="profile">
                     <div class="info">
                         <p>Welcome</p>
-                        <small class="text-muted">Admin</small>
+                        <small class="text-muted">
+                            <?php echo $_SESSION['user_name']; ?>
+                        </small>
                     </div>
                     <div class="profile-photo">
                         <img src="../images/logo/logo.jpg">

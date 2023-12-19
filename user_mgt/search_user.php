@@ -1,5 +1,6 @@
 <?php
 require '../vendor/autoload.php';
+include '../dashboard/check_access.php';
 
 $host = "localhost";
 $user = "root";
@@ -13,7 +14,11 @@ if (!$con) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$searchResults = array();
+$error = array();
+
+
+$sql = "SELECT * FROM login_register";
+// $result = $conn->query($sql);
 
 if (isset($_POST['search'])) {
     $searchTerm = $_POST['searchTerm'];
@@ -170,27 +175,27 @@ if (isset($_POST['search'])) {
                                                 $i = 1;
                                                 foreach ($searchResults as $row) {
                                                     ?>
-                                            <tr>
-                                                <td>
-                                                    <?php echo $i++; ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo htmlspecialchars($row['name']); ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo htmlspecialchars($row['email']); ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo htmlspecialchars($row['user_type']); ?>
-                                                </td>
+                                                    <tr>
+                                                        <td>
+                                                            <?php echo $i++; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo htmlspecialchars($row['name']); ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo htmlspecialchars($row['email']); ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo htmlspecialchars($row['user_type']); ?>
+                                                        </td>
 
-                                                <td><a
-                                                        href="../user_mgt/assign_function.php?id=<?php echo $row['id']; ?>">
-                                                        Add Permission</a>
-                                                </td>
+                                                        <td><a
+                                                                href="../user_mgt/assign_function.php?id=<?php echo $row['id']; ?>">
+                                                                Add Permission</a>
+                                                        </td>
 
-                                            </tr>
-                                            <?php
+                                                    </tr>
+                                                    <?php
                                                 }
                                             } else {
                                                 echo "<tr><td colspan='5'>No matching files found.</td></tr>";
@@ -224,7 +229,9 @@ if (isset($_POST['search'])) {
                 <div class="profile">
                     <div class="info">
                         <p>Welcome</p>
-                        <small class="text-muted">Admin</small>
+                        <small class="text-muted">
+                            <?php echo $_SESSION['user_name']; ?>
+                        </small>
                     </div>
                     <div class="profile-photo">
                         <img src="../images/logo/logo.jpg">

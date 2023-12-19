@@ -44,6 +44,11 @@ if (isset($_GET['id'])) {
     // Handle the case when "id" is not provided in the URL
     echo "Invalid request. Please specify an 'id' parameter.";
 }
+
+$error = array();
+
+$sql = "SELECT * FROM login_register";
+$result = $conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -177,7 +182,9 @@ if (isset($_GET['id'])) {
                 <div class="profile">
                     <div class="info">
                         <p>Welcome</p>
-                        <small class="text-muted">Admin</small>
+                        <small class="text-muted">
+                            <?php echo $_SESSION['user_name']; ?>
+                        </small>
                     </div>
                     <div class="profile-photo">
                         <img src="../Admin Dashboard/images/profile.jpg">

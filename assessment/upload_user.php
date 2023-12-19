@@ -1,3 +1,27 @@
+<?php
+// session_start();
+
+// Include the file with the access check
+include '../dashboard/check_access.php';
+
+// Database configuration
+$db_host = 'localhost';
+$db_username = 'root';
+$db_password = '';
+$db_name = 'demo';
+
+$conn = new mysqli($db_host, $db_username, $db_password, $db_name);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$error = array();
+
+$sql = "SELECT * FROM login_register";
+$result = $conn->query($sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -120,7 +144,9 @@
                 <div class="profile">
                     <div class="info">
                         <p>Welcome</p>
-                        <small class="text-muted">Admin</small>
+                        <small class="text-muted">
+                            <?php echo $_SESSION['user_name']; ?>
+                        </small>
                     </div>
                     <div class="profile-photo">
                         <img src="../images/logo/logo.jpg">
@@ -198,53 +224,53 @@
     </div>
     <script src="../script/index.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var fileInput = document.getElementById('fileInput');
-        var submitBtn = document.getElementById('submitBtn');
+        document.addEventListener('DOMContentLoaded', function () {
+            var fileInput = document.getElementById('fileInput');
+            var submitBtn = document.getElementById('submitBtn');
 
-        fileInput.addEventListener('change', function(event) {
-            var file = event.target.files[0];
+            fileInput.addEventListener('change', function (event) {
+                var file = event.target.files[0];
 
-            if (file) {
-                var reader = new FileReader();
+                if (file) {
+                    var reader = new FileReader();
 
-                reader.onload = function(e) {
-                    var data = e.target.result;
+                    reader.onload = function (e) {
+                        var data = e.target.result;
 
-                    var workbook = XLSX.read(data, {
-                        type: 'binary'
-                    });
-                    var sheetName = workbook.SheetNames[0];
-                    var sheet = workbook.Sheets[sheetName];
+                        var workbook = XLSX.read(data, {
+                            type: 'binary'
+                        });
+                        var sheetName = workbook.SheetNames[0];
+                        var sheet = workbook.Sheets[sheetName];
 
-                    var jsonData = XLSX.utils.sheet_to_json(sheet, {
-                        header: 1
-                    });
+                        var jsonData = XLSX.utils.sheet_to_json(sheet, {
+                            header: 1
+                        });
 
-                    displayData(jsonData);
-                };
+                        displayData(jsonData);
+                    };
 
-                reader.readAsBinaryString(file);
+                    reader.readAsBinaryString(file);
+                }
+            });
+
+            function displayData(data) {
+                var outputDiv = document.getElementById('output');
+                outputDiv.innerHTML = '';
+
+                var table = document.createElement('table');
+
+                for (var i = 0; i < data.length; i++) {
+                    var row = table.insertRow();
+                    for (var j = 0; j < data[i].length; j++) {
+                        var cell = row.insertCell();
+                        cell.textContent = data[i][j];
+                    }
+                }
+
+                outputDiv.appendChild(table);
             }
         });
-
-        function displayData(data) {
-            var outputDiv = document.getElementById('output');
-            outputDiv.innerHTML = '';
-
-            var table = document.createElement('table');
-
-            for (var i = 0; i < data.length; i++) {
-                var row = table.insertRow();
-                for (var j = 0; j < data[i].length; j++) {
-                    var cell = row.insertCell();
-                    cell.textContent = data[i][j];
-                }
-            }
-
-            outputDiv.appendChild(table);
-        }
-    });
     </script>
 </body>
 

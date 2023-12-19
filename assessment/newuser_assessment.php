@@ -1,4 +1,5 @@
 <?php
+include '../dashboard/check_access.php';
 $alertMessage = '';
 $alertType = '';
 
@@ -14,7 +15,7 @@ if (isset($_POST['submit'])) {
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-
+    $sql = "SELECT * FROM login_register";
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $display_name = $_POST['display_name'];
@@ -296,7 +297,9 @@ if (isset($_POST['submit'])) {
                 <div class="profile">
                     <div class="info">
                         <p>Welcome</p>
-                        <small class="text-muted">Admin</small>
+                        <small class="text-muted">
+                            <?php echo $_SESSION['user_name']; ?>
+                        </small>
                     </div>
                     <div class="profile-photo">
                         <img src="../images/logo/logo.jpg">

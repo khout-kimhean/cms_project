@@ -4,13 +4,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = "root";
     $password = "";
     $database = "demo";
+    $sql = "SELECT * FROM login_register";
+    $result = $conn->query($sql);
 
     $conn = new mysqli($servername, $username, $password, $database);
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    
+
     $sqlMergecreate_user = "INSERT IGNORE INTO sumary_data (display_name, position, function, role, branch, status, requester, approver, command)
     SELECT display_name, position, function, role,branch, status, requester, approver, command
     FROM create_user";
@@ -41,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } else {
         $message .= "<br>Error merging data from resign_user: " . $conn->error;
     }
-    
+
 
     $conn->close();
 } else {
@@ -191,7 +193,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <div class="profile">
                     <div class="info">
                         <p>Welcome</p>
-                        <small class="text-muted">Admin</small>
+                        <small class="text-muted">
+                            <?php echo $_SESSION['user_name']; ?>
+                        </small>
                     </div>
                     <div class="profile-photo">
                         <img src="../Admin Dashboard/images/profile.jpg">
