@@ -1,5 +1,4 @@
 <?php
-// session_start();
 
 // Include the file with the access check
 include '../dashboard/check_access.php';

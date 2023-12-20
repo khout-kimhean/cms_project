@@ -387,7 +387,7 @@ a:hover {
   color: var(--color-white);
   background-color: rgb(196, 160, 6);
   padding: 8px;
-  border-radius: 8px;
+  border-radius: var(--border-radius-1);
 }
 
 /* end container2 */

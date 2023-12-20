@@ -16,7 +16,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
 $allowed_roles = [
     'dashboard.php' => ['admin', 'card payment team', 'digital branch team', 'atm team', 'terminal team', 'user'],
-    // 'user_management.php' => ['admin'],
+    'user_management.php' => ['admin'],
     'assessment.php' => ['admin', 'card payment team'],
     'todo_management.php' => ['admin', 'card payment team'],
     'read_file.php' => ['admin', 'card payment team'],
