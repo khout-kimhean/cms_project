@@ -55,7 +55,7 @@ if (isset($_POST['submit'])) {
 
             if ($result && $result->num_rows > 0) {
                 $row = mysqli_fetch_assoc($result);
-                $newFilename = $row['id'] + 1 . '-' . $filename; // Use the next available ID
+                $newFilename = $filename; // Use the next available ID
             } else {
                 $newFilename = '1-' . $filename;
             }
@@ -137,19 +137,19 @@ if (isset($_POST['submit'])) {
     <script src="../tinymce/tinymce.min.js"></script>
 
     <script>
-        tinymce.init({
-            selector: '#myTextarea',
-            plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
-            menubar: 'file edit view insert format tools table help',
-            toolbar: 'undo redo | bold italic underline strikethrough | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
-            toolbar_sticky: true,
-            autosave_ask_before_unload: true,
-            autosave_interval: '30s',
-            autosave_prefix: '{path}{query}-{id}-',
-            autosave_restore_when_empty: false,
-            autosave_retention: '2m',
-            image_advtab: true,
-            link_list: [{
+    tinymce.init({
+        selector: '#myTextarea',
+        plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
+        menubar: 'file edit view insert format tools table help',
+        toolbar: 'undo redo | bold italic underline strikethrough | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
+        toolbar_sticky: true,
+        autosave_ask_before_unload: true,
+        autosave_interval: '30s',
+        autosave_prefix: '{path}{query}-{id}-',
+        autosave_restore_when_empty: false,
+        autosave_retention: '2m',
+        image_advtab: true,
+        link_list: [{
                 title: 'My page 1',
                 value: 'https://www.test.com'
             },
@@ -157,8 +157,8 @@ if (isset($_POST['submit'])) {
                 title: 'My page 2',
                 value: 'http://www.test.com'
             }
-            ],
-            image_list: [{
+        ],
+        image_list: [{
                 title: 'My page 1',
                 value: 'https://www.test.com'
             },
@@ -166,8 +166,8 @@ if (isset($_POST['submit'])) {
                 title: 'My page 2',
                 value: 'http://www.test.com'
             }
-            ],
-            image_class_list: [{
+        ],
+        image_class_list: [{
                 title: 'None',
                 value: ''
             },
@@ -175,32 +175,32 @@ if (isset($_POST['submit'])) {
                 title: 'Some class',
                 value: 'class-name'
             }
-            ],
-            importcss_append: true,
-            file_picker_callback: (callback, value, meta) => {
-                /* Provide file and text for the link dialog */
-                if (meta.filetype === 'file') {
-                    callback('https://www.google.com/logos/google.jpg', {
-                        text: 'My text'
-                    });
-                }
+        ],
+        importcss_append: true,
+        file_picker_callback: (callback, value, meta) => {
+            /* Provide file and text for the link dialog */
+            if (meta.filetype === 'file') {
+                callback('https://www.google.com/logos/google.jpg', {
+                    text: 'My text'
+                });
+            }
 
-                /* Provide image and alt text for the image dialog */
-                if (meta.filetype === 'image') {
-                    callback('https://www.google.com/logos/google.jpg', {
-                        alt: 'My alt text'
-                    });
-                }
+            /* Provide image and alt text for the image dialog */
+            if (meta.filetype === 'image') {
+                callback('https://www.google.com/logos/google.jpg', {
+                    alt: 'My alt text'
+                });
+            }
 
-                /* Provide alternative source and posted for the media dialog */
-                if (meta.filetype === 'media') {
-                    callback('movie.mp4', {
-                        source2: 'alt.ogg',
-                        poster: 'https://www.google.com/logos/google.jpg'
-                    });
-                }
-            },
-            templates: [{
+            /* Provide alternative source and posted for the media dialog */
+            if (meta.filetype === 'media') {
+                callback('movie.mp4', {
+                    source2: 'alt.ogg',
+                    poster: 'https://www.google.com/logos/google.jpg'
+                });
+            }
+        },
+        templates: [{
                 title: 'New Table',
                 description: 'creates a new table',
                 content: '<div class="mceTmpl"><table width="98%%"  border="0" cellspacing="0" cellpadding="0"><tr><th scope="col"> </th><th scope="col"> </th></tr><tr><td> </td><td> </td></tr></table></div>'
@@ -215,17 +215,17 @@ if (isset($_POST['submit'])) {
                 description: 'New List with dates',
                 content: '<div class="mceTmpl"><span class="cdate">cdate</span><br><span class="mdate">mdate</span><h2>My List</h2><ul><li></li><li></li></ul></div>'
             }
-            ],
-            template_cdate_format: '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
-            template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
-            height: 400,
-            image_caption: true,
-            quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
-            noneditable_class: 'mceNonEditable',
-            toolbar_mode: 'sliding',
-            contextmenu: 'link image table',
-            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
-        });
+        ],
+        template_cdate_format: '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
+        template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
+        height: 400,
+        image_caption: true,
+        quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+        noneditable_class: 'mceNonEditable',
+        toolbar_mode: 'sliding',
+        contextmenu: 'link image table',
+        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
+    });
     </script>
 </head>
 
@@ -246,7 +246,7 @@ if (isset($_POST['submit'])) {
             </div>
 
             <div class="sidebar">
-                <a href="../dashboard/dashboard.php" class="active">
+                <a href="../dashboard/dashboard.php">
                     <span class="material-icons-sharp">
                         dashboard
                     </span>
@@ -263,10 +263,10 @@ if (isset($_POST['submit'])) {
                     </span>
                     <h3>Contact</h3>
                 </a> -->
-                <a href="../data_store/data_mgt.php">
+                <a href="../file/file_mgt.php" class="active">
                     <span class="fa fa-upload">
                     </span>
-                    <h3>Data Store</h3>
+                    <h3>Store File</h3>
                 </a>
 
 
@@ -311,7 +311,11 @@ if (isset($_POST['submit'])) {
 
                             <div class="card-body">
                                 <form action="upload_file.php" method="post" enctype="multipart/form-data">
-
+                                    <div class="back_button">
+                                        <a href="../file/file_mgt.php" class="back-button">
+                                            <i class="fa fa-chevron-circle-left" style="font-size: 24px">Back</i>
+                                        </a>
+                                    </div>
                                     <div class="form-group">
                                         <label for="file1">Select Files to Upload:</label>
                                         <input type="file" name="file1[]" class="form-control-file" id="file1" multiple
@@ -344,46 +348,46 @@ if (isset($_POST['submit'])) {
                 </div>
             </div>
             <?php if (isset($_GET['st']) && $_GET['st'] === 'error') { ?>
-                <div class="alert alert-danger text-center">
-                    <?php echo isset($_GET['msg']) ? htmlspecialchars($_GET['msg']) : 'An error occurred.'; ?>
-                </div>
+            <div class="alert alert-danger text-center">
+                <?php echo isset($_GET['msg']) ? htmlspecialchars($_GET['msg']) : 'An error occurred.'; ?>
+            </div>
             <?php } ?>
 
 
             <script>
-                let selectedFiles = [];
+            let selectedFiles = [];
 
-                function displaySelectedFiles() {
-                    const fileInput = document.getElementById('file1');
-                    const selectedFilesContainer = document.getElementById('selected-files-container');
+            function displaySelectedFiles() {
+                const fileInput = document.getElementById('file1');
+                const selectedFilesContainer = document.getElementById('selected-files-container');
 
-                    // Clear previous selections
-                    selectedFilesContainer.innerHTML = '';
-                    selectedFiles = [];
+                // Clear previous selections
+                selectedFilesContainer.innerHTML = '';
+                selectedFiles = [];
 
-                    // Display selected files
-                    // for (let i = 0; i < fileInput.files.length; i++) {
-                    //     const fileName = fileInput.files[i].name;
+                // Display selected files
+                // for (let i = 0; i < fileInput.files.length; i++) {
+                //     const fileName = fileInput.files[i].name;
 
-                    //     selectedFiles.push(fileInput.files[i]);
+                //     selectedFiles.push(fileInput.files[i]);
 
-                    //     const fileItem = document.createElement('div');
-                    //     fileItem.innerHTML =
-                    //         `<span>${fileName}</span> <button type="button" onclick="removeFile(${i})">Remove</button>`;
+                //     const fileItem = document.createElement('div');
+                //     fileItem.innerHTML =
+                //         `<span>${fileName}</span> <button type="button" onclick="removeFile(${i})">Remove</button>`;
 
-                    //     selectedFilesContainer.appendChild(fileItem);
-                    // }
-                }
+                //     selectedFilesContainer.appendChild(fileItem);
+                // }
+            }
 
-                function removeFile(index) {
-                    const selectedFilesContainer = document.getElementById('selected-files-container');
+            function removeFile(index) {
+                const selectedFilesContainer = document.getElementById('selected-files-container');
 
-                    // Remove the file information from the displayed files
-                    selectedFilesContainer.removeChild(selectedFilesContainer.children[index]);
+                // Remove the file information from the displayed files
+                selectedFilesContainer.removeChild(selectedFilesContainer.children[index]);
 
-                    // Remove the corresponding file from the selected files array
-                    selectedFiles.splice(index, 1);
-                }
+                // Remove the corresponding file from the selected files array
+                selectedFiles.splice(index, 1);
+            }
             </script>
         </main>
         <!-- End of Main Content -->

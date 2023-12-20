@@ -69,10 +69,10 @@ $result = $conn->query($sql);
                     </span>
                     <h3>Contact</h3>
                 </a> -->
-                <a href="../data_store/data_mgt.php">
+                <a href="../file/file_mgt.php">
                     <span class="fa fa-upload">
                     </span>
-                    <h3>Data Store</h3>
+                    <h3>Store File</h3>
                 </a>
 
                 <!-- <a href="../data_store/list_upload.php">

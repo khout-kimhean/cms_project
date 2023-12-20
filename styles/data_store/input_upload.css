@@ -282,9 +282,12 @@ main {
   border-radius: 8px;
   padding: 10px 50px;
 }
-
+.container2 h1 {
+  font-family: cursive, sans-serif;
+  margin-bottom: 10px;
+  color: var(--color-dark);
+}
 .container2 .form-list select {
-  /* margin-bottom: 10px; */
   width: 100%;
   padding: 5px;
   border: 1px solid #ccc;
@@ -314,10 +317,13 @@ main {
 .container2 .form-group {
   margin-bottom: 5px;
 }
-
+.form-group label {
+  font-size: 16px;
+  color: var(--color-dark);
+}
 .container2 input[type="text"] {
   width: 100%;
-  padding: 5px;
+  padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;

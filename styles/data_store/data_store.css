@@ -295,7 +295,9 @@ a:hover {
   background-color: var(--color-light);
   color: var(--color-dark);
 }
-
+.back_button a {
+  color: rgb(196, 160, 6);
+}
 .container2 .btn.btn-info {
   margin-top: 5px !important;
   background-color: rgb(196, 160, 6);

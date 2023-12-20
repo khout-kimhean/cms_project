@@ -1,4 +1,5 @@
 <?php
+include '../dashboard/check_access.php';
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -10,8 +11,8 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
-$sql = "SELECT * FROM login_register";
+$sql = "SELECT * FROM upload_file";
+// $sql = "SELECT * FROM login_register";
 $result = $conn->query($sql);
 
 
@@ -20,10 +21,10 @@ $searchResults = array();
 if (isset($_POST['search'])) {
     $searchTerm = $_POST['searchTerm'];
 
-    $sql = "SELECT * FROM upload_file WHERE description LIKE ? OR title LIKE ? OR team LIKE ?";
+    $sql = "SELECT * FROM upload_file WHERE filename LIKE ? OR description LIKE ? OR title LIKE ? OR team LIKE ?";
     $stmt = $conn->prepare($sql);
     $searchPattern = "%" . $searchTerm . "%";
-    $stmt->bind_param("sss", $searchPattern, $searchPattern, $searchPattern);
+    $stmt->bind_param("ssss", $searchPattern, $searchPattern, $searchPattern, $searchPattern);
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -33,22 +34,125 @@ if (isset($_POST['search'])) {
         }
     }
 }
+// Function to get logged-in user's name
+function getLoggedInUserName($conn, $userId)
+{
+    $userSql = "SELECT name FROM login_register WHERE id = ?";
+    $userStmt = $conn->prepare($userSql);
+
+    if (!$userStmt) {
+        die("Prepare failed: " . $conn->error);
+    }
+
+    $userStmt->bind_param("i", $userId);
+
+    if (!$userStmt->execute()) {
+        die("Execute failed: " . $userStmt->error);
+    }
+
+    $userResult = $userStmt->get_result();
+
+    if (!$userResult) {
+        die("Get result failed: " . $userStmt->error);
+    }
+
+    if ($userResult->num_rows > 0) {
+        $userData = $userResult->fetch_assoc();
+        return $userData['name'];
+    } else {
+        return false; // User not found
+    }
+}
 
 // Delete action
 if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
-    $idToDelete = $_GET['delete'];
-    $deleteSql = "DELETE FROM data_store WHERE id = ?";
-    $stmt = $conn->prepare($deleteSql);
-    $stmt->bind_param("i", $idToDelete);
+    // Check if the user is logged in
+    if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
+        $idToDelete = $_GET['delete'];
+        $loggedInUserId = $_SESSION['user_id'];
 
-    if ($stmt->execute()) {
-        header("Location: view_file.php?st=delete-success");
-        exit;
+        // Get the logged-in user's name
+        $loggedInUser = getLoggedInUserName($conn, $loggedInUserId);
+
+        if ($loggedInUser !== false) {
+            // Retrieve file details before deleting
+            $fileDetailsSql = "SELECT filename, title, team, description FROM upload_file WHERE id = ?";
+            $fileDetailsStmt = $conn->prepare($fileDetailsSql);
+
+            if (!$fileDetailsStmt) {
+                die("Prepare failed: " . $conn->error);
+            }
+
+            $fileDetailsStmt->bind_param("i", $idToDelete);
+
+            if (!$fileDetailsStmt->execute()) {
+                die("Execute failed: " . $fileDetailsStmt->error);
+            }
+
+            $fileDetailsResult = $fileDetailsStmt->get_result();
+
+            if (!$fileDetailsResult) {
+                die("Get result failed: " . $fileDetailsStmt->error);
+            }
+
+            if ($fileDetailsResult->num_rows > 0) {
+                $fileDetails = $fileDetailsResult->fetch_assoc();
+
+                // Insert into recover_file table
+                $recoverSql = "INSERT INTO recover_file (filename, title, team, description, delete_by) VALUES (?, ?, ?, ?, ?)";
+                $recoverStmt = $conn->prepare($recoverSql);
+
+                if (!$recoverStmt) {
+                    die("Prepare failed: " . $conn->error);
+                }
+
+                $recoverStmt->bind_param("sssss", $fileDetails['filename'], $fileDetails['title'], $fileDetails['team'], $fileDetails['description'], $loggedInUser);
+
+                if (!$recoverStmt->execute()) {
+                    die("Execute failed: " . $recoverStmt->error);
+                }
+
+                // Now, delete the file from upload_file table
+                $deleteSql = "DELETE FROM upload_file WHERE id = ?";
+                $deleteStmt = $conn->prepare($deleteSql);
+
+                if (!$deleteStmt) {
+                    die("Prepare failed: " . $conn->error);
+                }
+
+                $deleteStmt->bind_param("i", $idToDelete);
+
+                if ($deleteStmt->execute()) {
+                    header("Location: view_file.php?st=delete-success");
+                    exit;
+                } else {
+                    echo "Deletion Error: " . $deleteStmt->error;
+                }
+            } else {
+                echo "No file details found for ID: $idToDelete";
+            }
+        } else {
+            echo "Error: Logged-in user not found.";
+        }
     } else {
-        header("Location: view_file.php?st=delete-error");
-        exit;
+        // Handle the case where the user is not logged in
+        echo "Error: User not logged in.";
     }
 }
+// if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
+//     $idToDelete = $_GET['delete'];
+//     $deleteSql = "DELETE FROM upload_file WHERE id = ?";
+//     $stmt = $conn->prepare($deleteSql);
+//     $stmt->bind_param("i", $idToDelete);
+
+//     if ($stmt->execute()) {
+//         header("Location: view_file.php?st=delete-success");
+//         exit;
+//     } else {
+//         header("Location: view_file.php?st=delete-error");
+//         exit;
+//     }
+// }
 
 // Edit action
 if (isset($_POST['edit']) && is_numeric($_POST['edit_id'])) {
@@ -57,7 +161,7 @@ if (isset($_POST['edit']) && is_numeric($_POST['edit_id'])) {
     $newdescription = strip_tags($_POST['new_description']);
     $newdescription = strip_tags($_POST['new_description']);
 
-    $editSql = "UPDATE data_store SET title = ?, description = ? WHERE id = ?";
+    $editSql = "UPDATE upload_file SET title = ?, description = ? WHERE id = ?";
     $stmt = $conn->prepare($editSql);
     $stmt->bind_param("ssi", $newTitle, $newdescription, $editId);
 
@@ -105,7 +209,7 @@ if (isset($_POST['edit']) && is_numeric($_POST['edit_id'])) {
             </div>
 
             <div class="sidebar">
-                <a href="../dashboard/dashboard.php" class="active">
+                <a href="../dashboard/dashboard.php">
                     <span class="material-icons-sharp">
                         dashboard
                     </span>
@@ -118,10 +222,10 @@ if (isset($_POST['edit']) && is_numeric($_POST['edit_id'])) {
                     </span>
                     <h3>Contact</h3>
                 </a> -->
-                <a href="../data_store/data_mgt.php">
+                <a href="../file/file_mgt.php" class="active">
                     <span class="fa fa-upload">
                     </span>
-                    <h3>Data Store</h3>
+                    <h3>Store File</h3>
                 </a>
 
                 <!-- <a href="../data_store/list_upload.php">
@@ -201,60 +305,94 @@ if (isset($_POST['edit']) && is_numeric($_POST['edit_id'])) {
                                 </thead>
                                 <tbody>
                                     <?php if (!empty($searchResults)): ?>
-                                        <?php
+                                    <?php
                                         $i = 1; // Initialize the ID counter to 1
                                         foreach ($searchResults as $row):
                                             ?>
-                                            <tr>
-                                                <td>
-                                                    <?php echo $i; // Display the ID starting from 1 ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo htmlspecialchars($row['filename']); ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo htmlspecialchars($row['team']); ?>
-                                                </td>
-                                                <td title="<?php echo htmlspecialchars($row['title']); ?>">
-                                                    <?php
+                                    <tr>
+                                        <td>
+                                            <?php echo $i; // Display the ID starting from 1 ?>
+                                        </td>
+                                        <td>
+                                            <?php echo htmlspecialchars($row['filename']); ?>
+                                        </td>
+                                        <td>
+                                            <?php echo htmlspecialchars($row['team']); ?>
+                                        </td>
+                                        <td title="<?php echo htmlspecialchars($row['title']); ?>">
+                                            <?php
                                                     $title = htmlspecialchars($row['title']);
                                                     echo strlen($title) > 18 ? substr($title, 0, 40) . '...' : $title;
                                                     ?>
-                                                </td>
-                                                <td title="<?php echo htmlspecialchars($row['description']); ?>">
-                                                    <?php
+                                        </td>
+                                        <td title="<?php echo htmlspecialchars($row['description']); ?>">
+                                            <?php
                                                     $description = htmlspecialchars($row['description']);
                                                     echo strlen($description) > 20 ? substr($description, 0, 20) . '...' : $description;
                                                     ?>
-                                                </td>
-
-
-                                                <td><a href="../file/view.php?file=<?php echo $row['filename']; ?>"
-                                                        target="_blank">View File</a>
-                                                </td>
-                                                <td><a href="../data_store/view_1.php?id=<?php echo $row['id']; ?>">View
-                                                        Data</a>
-                                                </td>
-
-
-
-                                                <td>
-                                                    <a href="edit_data.php?id=<?php echo $row['id']; ?>">Edit Data</a>
-                                                </td>
-                                                <td>
-                                                    <a href="view_file.php?delete=<?php echo $row['id']; ?>">Delete Data</a>
-                                                </td>
-                                            </tr>
-                                            <?php
+                                        </td>
+                                        <td><a href="../file/view.php?file=<?php echo $row['filename']; ?>"
+                                                target="_blank">View File</a></td>
+                                        <td><a href="../file/view_data.php?id=<?php echo $row['id']; ?>">View Data</a>
+                                        </td>
+                                        <td><a href="../file/edit_data.php?id=<?php echo $row['id']; ?>">Edit Data</a>
+                                        </td>
+                                        <td><a href="../file/view_file.php?delete=<?php echo $row['id']; ?>">Delete
+                                                Data</a></td>
+                                    </tr>
+                                    <?php
                                             $i++; // Increment the ID counter for the next row
                                         endforeach;
                                         ?>
                                     <?php else: ?>
-                                        <tr>
-                                            <td colspan='7'>No files found.</td>
-                                        </tr>
+                                    <?php if ($result->num_rows > 0): ?>
+                                    <?php
+                                            $i = 1; // Initialize the ID counter to 1
+                                            while ($row = $result->fetch_assoc()):
+                                                ?>
+                                    <tr>
+                                        <td>
+                                            <?php echo $i; // Display the ID starting from 1 ?>
+                                        </td>
+                                        <td>
+                                            <?php echo htmlspecialchars($row['filename']); ?>
+                                        </td>
+                                        <td>
+                                            <?php echo htmlspecialchars($row['team']); ?>
+                                        </td>
+                                        <td title="<?php echo htmlspecialchars($row['title']); ?>">
+                                            <?php
+                                                        $title = htmlspecialchars($row['title']);
+                                                        echo strlen($title) > 18 ? substr($title, 0, 40) . '...' : $title;
+                                                        ?>
+                                        </td>
+                                        <td title="<?php echo htmlspecialchars($row['description']); ?>">
+                                            <?php
+                                                        $description = htmlspecialchars($row['description']);
+                                                        echo strlen($description) > 20 ? substr($description, 0, 20) . '...' : $description;
+                                                        ?>
+                                        </td>
+                                        <td><a href="../file/view.php?file=<?php echo $row['filename']; ?>"
+                                                target="_blank">View File</a></td>
+                                        <td><a href="../file/view_data.php?id=<?php echo $row['id']; ?>">View Data</a>
+                                        </td>
+                                        <td><a href="../file/edit_data.php?id=<?php echo $row['id']; ?>">Edit Data</a>
+                                        </td>
+                                        <td><a href="../file/view_file.php?delete=<?php echo $row['id']; ?>">Delete
+                                                Data</a></td>
+                                    </tr>
+                                    <?php
+                                                $i++; // Increment the ID counter for the next row
+                                            endwhile;
+                                            ?>
+                                    <?php else: ?>
+                                    <tr>
+                                        <td colspan='7'>No files found.</td>
+                                    </tr>
+                                    <?php endif; ?>
                                     <?php endif; ?>
                                 </tbody>
+
 
 
                             </table>
@@ -263,100 +401,7 @@ if (isset($_POST['edit']) && is_numeric($_POST['edit_id'])) {
                 </div>
             </div>
         </main>
-        <!-- <div class="right-section">
-            <div class="nav">
-                <button id="menu-btn">
-                    <span class="material-icons-sharp">
-                        menu
-                    </span>
-                </button>
-                <div class="dark-mode">
-                    <span class="material-icons-sharp active">
-                        light_mode
-                    </span>
-                    <span class="material-icons-sharp">
-                        dark_mode
-                    </span>
-                </div>
 
-                <div class="profile">
-                    <div class="info">
-                        <p>Welcome, <b>
-                                <KIM>
-                        </p>
-                        <small class="text-muted">Admin</small>
-                    </div>
-                    <div class="profile-photo">
-                        <img src="../images/logo/logo.jpg">
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="user-profile">
-                <div class="logo">
-                    <img src="../images/logo/logo.jpg">
-                    <h2>FTB Bank</h2>
-                    <p>Welcome to FTB Bank</p>
-                </div>
-            </div>
-
-            <div class="reminders">
-                <div class="header">
-                    <h2>Reminders</h2>
-                    <span class="material-icons-sharp">
-                        notifications_none
-                    </span>
-                </div>
-
-                <div class="notification">
-                    <div class="icon">
-                        <span class="material-icons-sharp">
-                            volume_up
-                        </span>
-                    </div>
-                    <div class="content">
-                        <div class="info">
-                            <h3>Workshop</h3>
-                            <small class="text_muted">
-                                08:00 AM - 5:00 PM
-                            </small>
-                        </div>
-                        <span class="material-icons-sharp">
-                            more_vert
-                        </span>
-                    </div>
-                </div>
-
-                <div class="notification deactive">
-                    <div class="icon">
-                        <span class="material-icons-sharp">
-                            edit
-                        </span>
-                    </div>
-                    <div class="content">
-                        <div class="info">
-                            <h3>Workshop</h3>
-                            <small class="text_muted">
-                                08:00 AM - :00 PM
-                            </small>
-                        </div>
-                        <span class="material-icons-sharp">
-                            more_vert
-                        </span>
-                    </div>
-                </div>
-
-                <div class="notification add-reminder">
-                    <div>
-                        <span class="material-icons-sharp">
-                            add
-                        </span>
-                        <h3>Add Reminder</h3>
-                    </div>
-                </div>
-            </div>
-        </div> -->
     </div>
     <script src="../script/index.js"></script>
 </body>

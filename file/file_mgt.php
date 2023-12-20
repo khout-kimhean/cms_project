@@ -50,7 +50,7 @@ $result = $conn->query($sql);
             </div>
 
             <div class="sidebar">
-                <a href="../dashboard/dashboard.php" class="active">
+                <a href="../dashboard/dashboard.php">
                     <span class="material-icons-sharp">
                         dashboard
                     </span>
@@ -67,10 +67,10 @@ $result = $conn->query($sql);
                     </span>
                     <h3>Contact</h3>
                 </a> -->
-                <a href="../data_store/data_mgt.php">
+                <a href="../file/file_mgt.php" class="active">
                     <span class="fa fa-upload">
                     </span>
-                    <h3>Data Store</h3>
+                    <h3>Store File</h3>
                 </a>
 
                 <!-- <a href="../data_store/list_upload.php">
@@ -121,7 +121,8 @@ $result = $conn->query($sql);
                         <div class="status">
                             <div class="info">
                                 <!-- <h3>Read Text</h3> -->
-                                <h1>Upload File</h1>
+                                <h1>Upload</h1>
+                                <h2>File</h2>
                             </div>
                             <div>
                                 <img src="../images/file/upload.png">
@@ -132,10 +133,22 @@ $result = $conn->query($sql);
                         style="cursor: pointer;">
                         <div class="status">
                             <div class="info">
-                                <h1>View File</h1>
+                                <h1>View</h1>
+                                <h2>File</h2>
                             </div>
                             <div>
                                 <img src="../images/file/view.png">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="visits" onclick="window.location.href='../file/report.php';" style="cursor: pointer;">
+                        <div class="status">
+                            <div class="info">
+                                <h1>Recover</h1>
+                                <h2>File</h2>
+                            </div>
+                            <div>
+                                <img src="../images/file/file2.png">
                             </div>
                         </div>
                     </div>

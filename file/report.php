@@ -11,17 +11,85 @@ $db_password = '';
 $db_name = 'demo';
 
 $conn = new mysqli($db_host, $db_username, $db_password, $db_name);
-
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
 $error = array();
+$alertType = ""; // Define the alert type (success or danger)
+$alertMessage = "";
+echo $alertMessage;
+$sql = "SELECT * FROM recover_file";
 
-$sql = "SELECT * FROM login_register";
+if (isset($_POST['delete'])) {
+    $filename = $_POST['filename'];
+    $delete_sql = "DELETE FROM recover_file WHERE id = ?";
+    $stmt = $conn->prepare($delete_sql);
+    $stmt->bind_param('s', $filename);
+
+    if ($stmt->execute()) {
+        // Successful deletion
+        $alertType = "success";
+        $alertMessage = "User deleted successfully.";
+        header('Location: report.php'); // Redirect to refresh the user list
+        exit();
+    } else {
+        // Error deleting user
+        $error[] = 'Error deleting user: ' . $conn->error;
+    }
+
+    $stmt->close();
+}
+
+
+if (isset($_POST['recover'])) {
+    $filenameToRecover = $_POST['filename'];
+
+    // Use prepared statement to prevent SQL injection
+    $recoverQuery = $conn->prepare("SELECT * FROM recover_file WHERE id = ?");
+    $recoverQuery->bind_param('s', $filenameToRecover);
+    $recoverQuery->execute();
+
+    $recoverResult = $recoverQuery->get_result();
+
+    if ($recoverResult->num_rows > 0) {
+        $recoverRow = $recoverResult->fetch_assoc();
+
+        // Insert recovered data into upload_file table
+        $insertQuery = $conn->prepare("INSERT INTO upload_file (id, filename, title, team, description) VALUES (?, ?, ?, ?, ?)");
+        $insertQuery->bind_param('sssss', $recoverRow['id'], $recoverRow['filename'], $recoverRow['title'], $recoverRow['team'], $recoverRow['description']);
+
+        if ($insertQuery->execute()) {
+            // File recovered successfully
+
+            // Delete the recovered record from recover_file table
+            $deleteQuery = $conn->prepare("DELETE FROM recover_file WHERE id = ?");
+            $deleteQuery->bind_param('s', $filenameToRecover);
+            $deleteQuery->execute();
+
+            $alertType = 'success';
+            $alertMessage = 'File recovered successfully.';
+            header('Location: report.php');
+            exit();
+        } else {
+            // Error recovering file
+            $alertType = 'danger';
+            $alertMessage = 'Error recovering file: ' . $conn->error;
+        }
+
+        $insertQuery->close();
+    }
+
+    $recoverQuery->close();
+}
+
+
+
+
+
+// $sql = "SELECT * FROM login_register";
 $result = $conn->query($sql);
-?>
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,8 +98,7 @@ $result = $conn->query($sql);
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../Admin Dashboard/styles/todo_management.css">
-    <link rel="stylesheet" type="text/css" href="../styles/find_error/read_by_keyword.css">
+    <link rel="stylesheet" type="text/css" href="../styles/file/report.css">
     <title>Admin Dashboard</title>
 
 </head>
@@ -53,7 +120,7 @@ $result = $conn->query($sql);
             </div>
 
             <div class="sidebar">
-                <a href="../dashboard/dashboard.php" class="active">
+                <a href="../dashboard/dashboard.php">
                     <span class="material-icons-sharp">
                         dashboard
                     </span>
@@ -70,7 +137,7 @@ $result = $conn->query($sql);
                     </span>
                     <h3>Contact</h3>
                 </a> -->
-                <a href="../file/file_mgt.php">
+                <a href="../file/file_mgt.php" class="active">
                     <span class="fa fa-upload">
                     </span>
                     <h3>Store File</h3>
@@ -116,117 +183,64 @@ $result = $conn->query($sql);
         </aside>
         <main>
             <div class="container2">
-                <!-- <a href="../templates/read_file.php" class="back-button"><i class="fa fa-chevron-circle-left"
-                        style="font-size:30px"></i></a> -->
-                <h2>Read Error in .Log file</h2>
-                <label for="searchKeyNumberInput">Enter Reference Number:</label>
-                <div class="item">
-                    <input class="file" type="file" id="fileInput" />
-                    <input class="search" type="text" id="searchKeyNumberInput" />
-                    <br />
+                <div class="back_button">
+                    <a href="../file/file_mgt.php" class="back-button">
+                        <i class="fa fa-chevron-circle-left" style="font-size: 24px">Back</i>
+                    </a>
+                    <h2>Recover and Report</h2>
                 </div>
-                <button onclick="processFile()">Show </button>
-                <div id="output"></div>
+                <div class="table-container">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Filename</th>
+                                <th>Title</th>
+                                <th>Team</th>
+                                <th>Description</th>
+                                <th>Delete By</th>
+                                <th>Option</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $userCount = 0; // Initialize a counter variable
+                            
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    $title = htmlspecialchars($row['title']);
+                                    $shortenedTitle = strlen($title) > 18 ? substr($title, 0, 10) . '...' : $title;
 
-                <script>
-                    function processFile() {
-                        const searchKeyNumberInput = document.getElementById('searchKeyNumberInput');
-                        const fileInput = document.getElementById('fileInput');
-                        const outputDiv = document.getElementById('output');
-                        outputDiv.innerHTML = ''; // Clear previous output
+                                    $description = htmlspecialchars($row['description']);
+                                    $shortenedDescription = strlen($description) > 18 ? substr($description, 0, 10) . '...' : $description;
 
-                        const file = fileInput.files[0];
-                        const searchKeyNumber = searchKeyNumberInput.value.trim();
-
-                        if (file) {
-                            const reader = new FileReader();
-
-                            reader.onload = function (e) {
-                                const fileContent = e.target.result;
-                                const entries = fileContent.split('\n');
-
-                                let found = false;
-                                let result = '';
-
-                                entries.forEach(entry => {
-                                    if (entry.includes(`RETR_REF_NO :${searchKeyNumber}`)) {
-                                        found = true;
-                                        result += entry + '\n';
-                                    }
-                                });
-
-                                // Display the result
-                                if (result.trim() !== '') {
-                                    outputDiv.innerText = result +
-                                        " \n*Please Re-Enter # Key-No # And click --> Show Detail  To Show Detail of TRX:\n\n ";
-                                    outputDiv.innerHTML += '<button onclick="searchKeyword()">Show Detail</button>';
-                                } else {
-                                    outputDiv.innerText = "No log entry found for REF number '" + searchKeyNumber +
-                                        "'.";
+                                    echo '<tr>
+                                        <td>' . ($userCount + 1) . '</td>
+                                        <td>' . $row['filename'] . '</td>
+                                        <td title="' . $title . '">' . $shortenedTitle . '</td>
+                                        <td>' . $row['team'] . '</td>
+                                        <td title="' . $description . '">' . $shortenedDescription . '</td>
+                                        <td>' . $row['delete_by'] . '</td>
+                                        <td>
+                                            <form method="post">
+                                                <input type="hidden" name="filename" value="' . $row['id'] . '">
+                                                <input class="button1" type="submit" name="recover" value="Recover">
+                                                <input class="button2" type="submit" name="delete" value="Delete">
+                                            </form>
+                                        </td>
+                                    </tr>';
+                                    $userCount++; // Increment the counter
                                 }
-                            };
+                            } else {
+                                echo "<tr><td colspan='5'>No users found.</td></tr>";
+                            }
+                            $conn->close();
+                            ?>
+                        </tbody>
+                    </table>
 
-                            reader.readAsText(file);
-                        } else {
-                            alert("Please choose a file.");
-                        }
-                    }
+                </div>
 
-                    function searchKeyword() {
-                        const searchKeyNumberInput = document.getElementById('searchKeyNumberInput');
-                        const fileInput = document.getElementById('fileInput');
-                        const outputDiv = document.getElementById('output');
-                        outputDiv.innerHTML = ''; // Clear previous output
-
-                        const file = fileInput.files[0];
-                        const searchKeyNumber = searchKeyNumberInput.value.trim();
-
-                        if (file) {
-                            const reader = new FileReader();
-
-                            reader.onload = function (e) {
-                                const fileContent = e.target.result;
-
-                                // Extract lines and filter by searchKeyNumber and specific pattern
-                                const lines = fileContent.split(/\r?\n/);
-                                const matchingLines = lines.filter(line => {
-                                    return (
-                                        (line.includes(`ERROR # ${searchKeyNumber} #`)) || (line.includes(
-                                            `ERROR # ${searchKeyNumber} #`) && line.toUpperCase()
-                                                .includes('ERROR') && line.includes('failed')) ||
-                                        (line.includes(`# ${searchKeyNumber} #`) && line.toUpperCase()
-                                            .includes('INFO') && line.includes(
-                                                'SETTING ERROR RESPONSE CODE'))
-
-                                        // (line.includes(`ERROR # ${searchKeyNumber} #`) && line.toUpperCase().includes('ERROR') && line.includes('failed')) ||
-                                        // (line.includes(`# ${searchKeyNumber} #`) && line.toUpperCase().includes('INFO') && line.includes('SETTING ERROR RESPONSE CODE'))
-
-
-                                    );
-                                });
-
-                                // Display the result
-                                if (matchingLines.length > 0) {
-                                    outputDiv.innerText = "Here is Error in that TRX :'" + searchKeyNumber + "':\n \n" +
-                                        matchingLines.join('\n');
-                                } else {
-                                    outputDiv.innerText =
-                                        "No lines containing the keyword 'ERROR' found for the search key number '" +
-                                        searchKeyNumber + "'.";
-
-                                }
-                            };
-
-                            reader.readAsText(file);
-                        } else {
-                            alert("Please choose a file.");
-                        }
-                    }
-                </script>
-                <!-- 
-                <div class="button_save">
-                    <input type="submit" name="submit" value="Save" class="btn btn-info">
-                </div> -->
             </div>
         </main>
         <div class="right-section">
@@ -258,6 +272,7 @@ $result = $conn->query($sql);
                 </div>
 
             </div>
+            <!-- End of Nav -->
 
             <div class="user-profile">
                 <div class="logo">
@@ -326,7 +341,6 @@ $result = $conn->query($sql);
 
         </div>
     </div>
-
     <!-- <script src="orders.js"></script> -->
     <script src="../script/index.js"></script>
 </body>

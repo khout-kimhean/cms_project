@@ -87,10 +87,10 @@ if (isset($_POST['search'])) {
                     </span>
                     <h3>Contact</h3>
                 </a> -->
-                <a href="../data_store/data_mgt.php">
+                <a href="../file/file_mgt.php">
                     <span class="fa fa-upload">
                     </span>
-                    <h3>Data Store</h3>
+                    <h3>Store File</h3>
                 </a>
 
                 <!-- <a href="../data_store/list_upload.php">
@@ -183,26 +183,26 @@ if (isset($_POST['search'])) {
                                                 $i = 1;
                                                 foreach ($searchResults as $row) {
                                                     ?>
-                                            <tr>
-                                                <td>
-                                                    <?php echo $i++; ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo htmlspecialchars($row['name']); ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo htmlspecialchars($row['email']); ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo htmlspecialchars($row['user_type']); ?>
-                                                </td>
-                                                </td>
-                                                <td>
-                                                    <a href="edit_user.php?id=<?php echo $row['id']; ?>">Edit</a>
-                                                </td>
-                                                </td>
-                                            </tr>
-                                            <?php
+                                                    <tr>
+                                                        <td>
+                                                            <?php echo $i++; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo htmlspecialchars($row['name']); ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo htmlspecialchars($row['email']); ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo htmlspecialchars($row['user_type']); ?>
+                                                        </td>
+                                                        </td>
+                                                        <td>
+                                                            <a href="edit_user.php?id=<?php echo $row['id']; ?>">Edit</a>
+                                                        </td>
+                                                        </td>
+                                                    </tr>
+                                                    <?php
                                                 }
                                             } else {
                                                 echo "<tr><td colspan='5'>No matching files found.</td></tr>";

@@ -1,30 +1,20 @@
 <?php
 include '../dashboard/check_access.php';
 
-// Database configuration
-$db_host = 'localhost';
-$db_username = 'root';
-$db_password = '';
-$db_name = 'demo';
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "demo";
 
-$conn = new mysqli($db_host, $db_username, $db_password, $db_name);
+$alertType = ""; // Define the alert type (success or danger)
+$alertMessage = ""; // Define the alert message
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-$alertMessage = ''; // Initialize alert message
-$alertType = ''; // Initialize alert type
 $sql = "SELECT * FROM login_register";
-$result = $conn->query($sql);
 
-if (isset($_POST['submit'])) {
-    // Include your database connection code here
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "demo";
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $id = $_GET['id'];
 
+    // Create a database connection
     $conn = new mysqli($servername, $username, $password, $dbname);
 
     // Check the connection
@@ -32,34 +22,80 @@ if (isset($_POST['submit'])) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
-        $title = $_POST["title"];
-        $short_description = trim(strip_tags($_POST['short_description'])); // Remove HTML tags
-        $description = trim(strip_tags($_POST['description'])); // Remove HTML tags
+    // Query the database to retrieve the content based on the ID
+    $sql = "SELECT filename, title, team, description FROM upload_file WHERE id = ?";
 
-        $sql = "INSERT INTO chat_data (title, short_description, description) VALUES (?, ?, ?)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sss", $title, $short_description, $description);
 
-        if ($stmt->execute()) {
-            $alertType = 'success';
-            $alertMessage = 'File uploaded and record inserted successfully!';
-        } else {
-            $alertType = 'danger';
-            $alertMessage = 'Error: ' . $stmt->error;
-        }
+    // Prepare the SQL statement
+    $stmt = $conn->prepare($sql);
 
-        // Close the database connection
-        $stmt->close();
-    } else {
-        $alertType = 'danger';
-        $alertMessage = 'Content is empty. Please enter content before uploading.';
+    if ($stmt === false) {
+        die("Error: " . $conn->error);
     }
 
+    // Bind the ID parameter to the SQL statement
+    $stmt->bind_param("i", $id);
+
+    if ($stmt->execute()) {
+        $stmt->store_result();
+
+        if ($stmt->num_rows > 0) {
+            $stmt->bind_result($filename, $title, $team, $description);
+            $stmt->fetch();
+
+            // Display the content (you can use the appropriate HTML tags)
+        } else {
+            echo "Content not found.";
+        }
+    } else {
+        echo "Error executing the SQL query: " . $stmt->error;
+    }
+
+    $stmt->close();
+    $conn->close();
+} else {
+    echo "Invalid ID.";
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $id = $_POST["id"];
+    $filename = $_POST["filename"];
+    $title = $_POST["title"];
+    $team = $_POST["team"];
+    $description = $_POST["description"];
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "UPDATE upload_file SET filename = ? , title = ?, team = ?, description = ? WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt === false) {
+        die("Error: " . $conn->error);
+    }
+
+    $stmt->bind_param("ssssi", $filename, $title, $team, $description, $id);
+
+    if ($stmt->execute()) {
+        $alertType = "success"; // Set success alert type
+        $alertMessage = "Data updated successfully.";
+    } else {
+        $alertType = "danger"; // Set danger alert type
+        $alertMessage = "Error updating data: " . $stmt->error;
+    }
+
+    $stmt->close();
     $conn->close();
 }
 
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en-US">
@@ -94,20 +130,20 @@ if (isset($_POST['submit'])) {
             image_advtab: true,
             link_list: [{
                 title: 'My page 1',
-                value: 'https://www.test.com'
+                value: 'https://www.codexworld.com'
             },
             {
                 title: 'My page 2',
-                value: 'http://www.test.com'
+                value: 'http://www.codexqa.com'
             }
             ],
             image_list: [{
                 title: 'My page 1',
-                value: 'https://www.test.com'
+                value: 'https://www.codexworld.com'
             },
             {
                 title: 'My page 2',
-                value: 'http://www.test.com'
+                value: 'http://www.codexqa.com'
             }
             ],
             image_class_list: [{
@@ -189,7 +225,7 @@ if (isset($_POST['submit'])) {
             </div>
 
             <div class="sidebar">
-                <a href="../dashboard/dashboard.php" class="active">
+                <a href="../dashboard/dashboard.php">
                     <span class="material-icons-sharp">
                         dashboard
                     </span>
@@ -202,7 +238,7 @@ if (isset($_POST['submit'])) {
                     </span>
                     <h3>Contact</h3>
                 </a> -->
-                <a href="../file/file_mgt.php">
+                <a href="../file/file_mgt.php" class="active">
                     <span class="fa fa-upload">
                     </span>
                     <h3>Store File</h3>
@@ -249,34 +285,47 @@ if (isset($_POST['submit'])) {
         <main>
             <div class="container2">
                 <div class="wrapper">
-                    <h1>Input Data for Chatbot</h1>
-                    <!-- <div class="back_button">
-                        <a href="../Admin Dashboard/admin.php" class="back-button">
-                            <i class="fa fa-chevron-circle-left" style="font-size: 30px">Back</i>
+                    <div class="back_button">
+                        <a href="../file/view_file.php" class="back-button">
+                            <i class="fa fa-chevron-circle-left" style="font-size: 28px">Back</i>
                         </a>
-                    </div> -->
+                    </div>
                     <form method="post" enctype="multipart/form-data">
-                        <!-- Replace with your PHP file name -->
                         <div class="form-group">
-                            <label for="title">Input Response Code :</label>
-                            <input type="text" name="title" class="form-control" id="title">
+                            <?php if ($filename != "") { ?>
+                                <p>Current file:
+                                    <?php echo htmlspecialchars($filename); ?>
+                                </p>
+                            <?php } ?>
                         </div>
+
                         <div class="form-group">
-                            <label for="short_description">Input Error Message :</label>
-                            <input type="text" name="short_description" class="form-control" id="short_description">
+                            <label for="title">Title:</label>
+                            <input type="text" name="title" class="form-control" id="title"
+                                value="<?php echo htmlspecialchars($title); ?>">
                         </div>
-                        <!-- <label for="short_description">Description:</label> -->
-                        <textarea id="myTextarea" name="description"></textarea>
-                        <div class="form-group">
-                            <input type="submit" name="submit" value="Upload" class="btn btn-primary">
+                        <div class="form-list">
+                            <label for="team">Select:</label>
+                            <select name="team" class="form-control" id="team">
+                                <option value="Team Card Payment" <?php if ($team === "Team Card Payment")
+                                    echo "selected"; ?>>Team Card Payment</option>
+                                <option value="Team ATM" <?php if ($team === "Team ATM")
+                                    echo "selected"; ?>>Team ATM
+                                </option>
+                                <option value="Team Digital Branch" <?php if ($team === "Team Digital Branch")
+                                    echo "selected"; ?>>Team Digital Branch</option>
+                            </select>
                         </div>
+
+                        <textarea id="myTextarea"
+                            name="description"><?php echo htmlspecialchars($description); ?></textarea>
+
                     </form>
                     <div class="alert alert-<?php echo $alertType; ?> text-center">
                         <?php echo $alertMessage; ?>
                     </div>
                 </div>
             </div>
-
         </main>
         <div class="right-section">
             <div class="nav">
@@ -307,6 +356,7 @@ if (isset($_POST['submit'])) {
                 </div>
 
             </div>
+            <!-- End of Nav -->
 
             <div class="user-profile">
                 <div class="logo">
