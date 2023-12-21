@@ -158,33 +158,33 @@ mysqli_close($con);
     <link rel="stylesheet" type="text/css" href="../styles/assessment/assessment_list.css">
     <title>Admin Dashboard</title>
     <script>
-        function exportTableToExcel(tableId, filename = '') {
-            let downloadLink;
-            const dataType = 'application/vnd.ms-excel';
-            const table = document.getElementById(tableId);
-            const tableHTML = table.outerHTML.replace(/ /g, '%20');
+    function exportTableToExcel(tableId, filename = '') {
+        let downloadLink;
+        const dataType = 'application/vnd.ms-excel';
+        const table = document.getElementById(tableId);
+        const tableHTML = table.outerHTML.replace(/ /g, '%20');
 
-            // Create a download link element
-            downloadLink = document.createElement('a');
+        // Create a download link element
+        downloadLink = document.createElement('a');
 
-            document.body.appendChild(downloadLink);
+        document.body.appendChild(downloadLink);
 
-            if (navigator.msSaveOrOpenBlob) {
-                const blob = new Blob(['\ufeff', tableHTML], {
-                    type: dataType
-                });
-                navigator.msSaveOrOpenBlob(blob, filename);
-            } else {
-                // Create a link to the file
-                downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+        if (navigator.msSaveOrOpenBlob) {
+            const blob = new Blob(['\ufeff', tableHTML], {
+                type: dataType
+            });
+            navigator.msSaveOrOpenBlob(blob, filename);
+        } else {
+            // Create a link to the file
+            downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
 
-                // Setting the file name
-                downloadLink.download = filename;
+            // Setting the file name
+            downloadLink.download = filename;
 
-                //triggering the function
-                downloadLink.click();
-            }
+            //triggering the function
+            downloadLink.click();
         }
+    }
     </script>
 
 </head>
@@ -300,43 +300,43 @@ mysqli_close($con);
                                 if ($result && mysqli_num_rows($result) > 0) {
                                     $i = 1;
                                     while ($row = mysqli_fetch_assoc($result)) { ?>
-                                        <tr>
+                                <tr>
 
-                                            <td>
-                                                <?php echo htmlspecialchars($row['display_name']); ?>
-                                            </td>
-                                            <td title="<?php echo htmlspecialchars($row['branch']); ?>">
-                                                <?php
+                                    <td>
+                                        <?php echo htmlspecialchars($row['display_name']); ?>
+                                    </td>
+                                    <td title="<?php echo htmlspecialchars($row['branch']); ?>">
+                                        <?php
                                                 $branch = htmlspecialchars($row['branch']);
                                                 echo strlen($branch) > 20 ? substr($branch, 0, 16) . '...' : $branch;
                                                 ?>
-                                            </td>
-                                            <td title="<?php echo htmlspecialchars($row['position']); ?>">
-                                                <?php
+                                    </td>
+                                    <td title="<?php echo htmlspecialchars($row['position']); ?>">
+                                        <?php
                                                 $position = htmlspecialchars($row['position']);
                                                 echo strlen($position) > 20 ? substr($position, 0, 16) . '...' : $position;
                                                 ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['function']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['role']); ?>
-                                            </td>
-                                            <td title="<?php echo htmlspecialchars($row['command']); ?>">
-                                                <?php
+                                    </td>
+                                    <td>
+                                        <?php echo htmlspecialchars($row['function']); ?>
+                                    </td>
+                                    <td>
+                                        <?php echo htmlspecialchars($row['role']); ?>
+                                    </td>
+                                    <td title="<?php echo htmlspecialchars($row['command']); ?>">
+                                        <?php
                                                 $command = htmlspecialchars($row['command']);
                                                 echo strlen($command) > 20 ? substr($command, 0, 10) . '...' : $command;
                                                 ?>
-                                            </td>
-                                            <td>
-                                                <a href="../templates/assessment_list.php?delete=<?php echo $row['id']; ?>">
-                                                    Delete</a>
+                                    </td>
+                                    <td>
+                                        <a href="../templates/assessment_list.php?delete=<?php echo $row['id']; ?>">
+                                            Delete</a>
 
-                                            </td>
+                                    </td>
 
-                                        </tr>
-                                    <?php }
+                                </tr>
+                                <?php }
                                 } else {
                                     echo "<tr><td colspan='7'>No files found.</td></tr>";
                                 }
@@ -387,7 +387,7 @@ mysqli_close($con);
                         </small>
                     </div>
                     <div class="profile-photo">
-                        <img src="../images/logo/logo.jpg">
+                        <img src="../images/logo/user.png">
                     </div>
                 </div>
 

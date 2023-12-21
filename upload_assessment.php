@@ -95,50 +95,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
     </div>
 
     <script>
-        $(document).ready(function () {
-            $("#uploadForm").on("submit", function (e) {
-                e.preventDefault(); // Prevent the default form submission
-                // Show a message
-                $("#uploadResult").text("Uploading file...");
+    $(document).ready(function() {
+        $("#uploadForm").on("submit", function(e) {
+            e.preventDefault(); // Prevent the default form submission
+            // Show a message
+            $("#uploadResult").text("Uploading file...");
 
-                // Create a FormData object to send the file data
-                var formData = new FormData(this);
+            // Create a FormData object to send the file data
+            var formData = new FormData(this);
 
-                // Send the form data to the server using AJAX
-                $.ajax({
-                    type: "POST",
-                    url: "upload.php", // Specify the URL to your PHP script
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function (response) {
-                        // Display the response in the uploadResult div
-                        $("#uploadResult").html(response);
-                        // Reset the background after the form submission is complete
-                        resetBackground();
-                        // Show a success message
-                        $("#uploadResult").text("File uploaded successfully!");
-                    },
-                    error: function (xhr, status, error) {
-                        console.error("Error: " + error);
-                        // Reset the background after the form submission is complete
-                        resetBackground();
-                        // Show an error message
-                        $("#uploadResult").text("Error uploading file: " + error);
-                    }
-                });
+            // Send the form data to the server using AJAX
+            $.ajax({
+                type: "POST",
+                url: "upload.php", // Specify the URL to your PHP script
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    // Display the response in the uploadResult div
+                    $("#uploadResult").html(response);
+                    // Reset the background after the form submission is complete
+                    resetBackground();
+                    // Show a success message
+                    $("#uploadResult").text("File uploaded successfully!");
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error: " + error);
+                    // Reset the background after the form submission is complete
+                    resetBackground();
+                    // Show an error message
+                    $("#uploadResult").text("Error uploading file: " + error);
+                }
             });
         });
+    });
 
-        function changeBackground() {
-            // Change the background when the form is submitted
-            document.body.classList.add("background-change");
-        }
+    function changeBackground() {
+        // Change the background when the form is submitted
+        document.body.classList.add("background-change");
+    }
 
-        function resetBackground() {
-            // Reset the background to its original state
-            document.body.classList remove("background-change");
-        }
+    function resetBackground() {
+        // Reset the background to its original state
+        // document.body.classList remove("background-change");
+    }
     </script>
 </body>
 

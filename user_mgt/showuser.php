@@ -146,12 +146,12 @@ $result = $conn->query($sql);
                     </thead>
                     <tbody>
                         <?php
-                        $userCount = 0; // Initialize a counter variable
+                        $id = 0; // Initialize a counter variable
                         
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
                                 echo '<tr>
-                                        <td>' . $row['id'] . '</td>
+                                        <td>' . ($id + 1) . '</td>
                                         <td>' . $row['name'] . '</td>
                                         <td>' . $row['email'] . '</td>
                                         <td>' . $row['user_type'] . '</td>
@@ -162,7 +162,7 @@ $result = $conn->query($sql);
                                         </form>
                                         </td>
                                     </tr>';
-                                $userCount++; // Increment the counter
+                                $id++; // Increment the counter
                             }
                         } else {
                             echo "<tr><td colspan='5'>No users found.</td></tr>";
@@ -204,7 +204,7 @@ $result = $conn->query($sql);
                         </small>
                     </div>
                     <div class="profile-photo">
-                        <img src="../images/logo/logo.jpg">
+                        <img src="../images/logo/user.png">
                     </div>
                 </div>
 

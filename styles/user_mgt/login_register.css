@@ -237,7 +237,10 @@ main .form-container form {
   text-align: center;
   margin: 70px 10px;
 }
-
+.form-container span {
+  color: rgb(12, 77, 162);
+  padding: 10px;
+}
 main .form-container form h3 {
   font-weight: 500;
   font-size: 1.5rem;

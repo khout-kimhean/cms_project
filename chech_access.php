@@ -1,15 +1,19 @@
 <?php
 session_start();
+
 function redirect($location)
 {
     header("Location: $location");
     exit();
 }
+
 if (!isset($_SESSION['user_role'])) {
     redirect('login.php');
 }
+
 $user_role = $_SESSION['user_role'];
 $current_page = basename($_SERVER['PHP_SELF']);
+
 $allowed_roles = [
     'dashboard.php' => ['admin', 'card payment team', 'digital branch team', 'atm team', 'terminal team', 'user'],
     'user_management.php' => ['admin'],
@@ -45,17 +49,58 @@ $allowed_roles = [
     'view_file.php' => ['admin'],
 ];
 
+// if (isset($allowed_roles[$current_page]) && !in_array($user_role, $allowed_roles[$current_page])) {
+//     redirect('error.php');
+// }
+
+// if (!in_array($user_role, $allowed_roles[$current_page])) {
+//     // Generate JavaScript to disable clicks on blocked pages
+//     echo <<<HTML
+//         <script>
+//             document.addEventListener("DOMContentLoaded", function() {
+//                 // Create overlay
+//                 var overlay = document.createElement("div");
+//                 overlay.style.cssText = "position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 9999; display: flex; align-items: center; justify-content: center; pointer-events: none;";
+
+//                 // Create message element
+//                 var message = document.createElement("p");
+//                 message.style.cssText = "color: rgb(192, 12, 16); font-size: 18px; pointer-events: auto;";
+//                 // message.textContent = "You do not have permission to access this page.";
+
+//                 // Append message to overlay
+//                 overlay.appendChild(message);
+
+//                 // Append overlay to body
+//                 document.body.appendChild(overlay);
+//             });
+//         </script>
+// HTML;
+// }
+
+
+
 if (!in_array($user_role, $allowed_roles[$current_page])) {
+    // Generate JavaScript to disable clicks on blocked pages
     echo <<<HTML
         <script>
             document.addEventListener("DOMContentLoaded", function() {
+                // Check if the user role is not admin
                 if ("$user_role" !== "admin") {
+                    // Create overlay
                     var overlay = document.createElement("div");
                     overlay.style.cssText = "position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 9999; display: flex; align-items: center; justify-content: center;";
+
+                    // Create message element
                     var message = document.createElement("p");
                     message.style.cssText = "color: rgb(192, 12, 16); font-size: 18px;";
+
+                    // Append message to overlay
                     overlay.appendChild(message);
+
+                    // Append overlay to body
                     document.body.appendChild(overlay);
+
+                    // Disable clicks on the message element
                     message.addEventListener("click", function(event) {
                         event.stopPropagation();
                     });

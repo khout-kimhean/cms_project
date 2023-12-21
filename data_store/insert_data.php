@@ -198,7 +198,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         </small>
                     </div>
                     <div class="profile-photo">
-                        <img src="../Admin Dashboard/images/profile.jpg">
+                        <img src="../images/logo/user.png">
                     </div>
                 </div>
 

@@ -224,7 +224,7 @@ $conn->close();
                         </small>
                     </div>
                     <div class="profile-photo">
-                        <img src="../images/logo/logo.jpg">
+                        <img src="../images/logo/user.png">
                     </div>
                 </div>
 

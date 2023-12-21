@@ -16,6 +16,7 @@ if ($conn->connect_error) {
 session_start();
 
 $error = array(); // Initialize an error array
+$success_message = '';
 
 if (isset($_POST['submit'])) {
 
@@ -34,18 +35,31 @@ if (isset($_POST['submit'])) {
     } elseif ($new_password != $confirm_password) {
         $error[] = 'Passwords do not match.';
     } else {
-        // Update the user's password with the new password
-        $new_password_hash = md5($new_password);
-        $update = "UPDATE login_register SET password = '$new_password_hash' WHERE email = '$email'";
-        mysqli_query($conn, $update);
+        // Use password_hash for secure password hashing
+        $new_password_hash = password_hash($new_password, PASSWORD_DEFAULT);
 
-        // Password has been successfully reset
-        $success_message = "Your password has been successfully reset.";
+        // Use prepared statement to prevent SQL injection
+        $update = $conn->prepare("UPDATE login_register SET password = ? WHERE email = ?");
+        $update->bind_param("ss", $new_password_hash, $email);
+
+        if ($update->execute()) {
+            $success_message = "Your password has been successfully reset.";
+        } else {
+            $error[] = "Error updating password: " . $conn->error;
+        }
+
+        $update->close();
     }
-
 }
 
-// Close the database connection
+// Check if the user exists after the password change
+$selectUser = $conn->prepare("SELECT * FROM login_register WHERE email = ?");
+$selectUser->bind_param("s", $email);
+$selectUser->execute();
+$result = $selectUser->get_result();
+$user = $result->fetch_assoc();
+
+$selectUser->close();
 $conn->close();
 ?>
 
@@ -76,6 +90,10 @@ $conn->close();
                 foreach ($error as $err) {
                     echo '<span class="error-msg">' . $err . '</span>';
                 }
+            }
+            if (!empty($success_message)) {
+                // echo '<script>alert("' . $success_message . '");</script>';
+                echo '<span class="error-msg">' . $success_message . '</span>';
             }
             ?>
             <input type="email" name="email" required placeholder="Enter your email">

@@ -149,9 +149,10 @@
 .form-container form .error-msg {
   margin: 10px 0;
   display: block;
-  background: var(--color-button);
+  /* background: var(--color-button); */
+  background-color: #c42020;
   color: #fff;
-  border-radius: 5px;
-  font-size: 20px;
-  padding: 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  padding: 8px;
 }

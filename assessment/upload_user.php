@@ -125,6 +125,48 @@ $result = $conn->query($sql);
                         <button type="button" id="submitBtn">Submit</button>
                     </div>
                 </form>
+                <div class="table">
+                    <table>
+                        <th>#</th>
+                        <th>Request.No</th>
+                        <th>Fill Name</th>
+                        <th>Branch</th>
+                        <th>Department</th>
+                        <th>Position</th>
+                        <th>Application</th>
+                        <th>Role</th>
+                        <th>Function</th>
+                        <th>M_Branch</th>
+                        <th>M_Department</th>
+                        <th>M_Position</th>
+                        <th>M_Application</th>
+                        <th>M_Role</th>
+                        <th>M_Function</th>
+                        <th>Requester</th>
+                        <th>Comment</th>
+                    </table>
+                    <tbody>
+                        <tr>
+                            <!-- <th>#</th>
+                            <th>Request.No</th>
+                            <th>Fill Name</th>
+                            <th>Branch</th>
+                            <th>Department</th>
+                            <th>Position</th>
+                            <th>Application</th>
+                            <th>Role</th>
+                            <th>Function</th>
+                            <th>M_Branch</th>
+                            <th>M_Department</th>
+                            <th>M_Position</th>
+                            <th>M_Application</th>
+                            <th>M_Role</th>
+                            <th>M_Function</th>
+                            <th>Requester</th>
+                            <th>Comment</th> -->
+                        </tr>
+                    </tbody>
+                </div>
                 <div id="output"></div>
             </div>
         </main>
@@ -152,7 +194,7 @@ $result = $conn->query($sql);
                         </small>
                     </div>
                     <div class="profile-photo">
-                        <img src="../images/logo/logo.jpg">
+                        <img src="../images/logo/user.png">
                     </div>
                 </div>
 

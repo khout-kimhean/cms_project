@@ -227,38 +227,38 @@ if (isset($_GET['delete'])) {
                                     if ($result && mysqli_num_rows($result) > 0) {
                                         $i = 1;
                                         while ($row = mysqli_fetch_assoc($result)) { ?>
-                                    <tr>
-                                        <td>
-                                            <?php echo $i++; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo htmlspecialchars($row['filename']); ?>
-                                        </td>
-                                        <td>
-                                            <?php echo htmlspecialchars($row['drop_file']); ?>
-                                        </td>
-                                        <td title="<?php echo htmlspecialchars($row['title']); ?>">
-                                            <?php
+                                            <tr>
+                                                <td>
+                                                    <?php echo $i++; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row['filename']); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row['drop_file']); ?>
+                                                </td>
+                                                <td title="<?php echo htmlspecialchars($row['title']); ?>">
+                                                    <?php
                                                     $title = htmlspecialchars($row['title']);
                                                     echo strlen($title) > 18 ? substr($title, 0, 20) . '...' : $title;
                                                     ?>
-                                        </td>
+                                                </td>
 
-                                        <td title="<?php echo htmlspecialchars($row['short_description']); ?>">
-                                            <?php
+                                                <td title="<?php echo htmlspecialchars($row['short_description']); ?>">
+                                                    <?php
                                                     $shortDescription = htmlspecialchars($row['short_description']);
                                                     echo strlen($shortDescription) > 20 ? substr($shortDescription, 0, 20) . '...' : $shortDescription;
                                                     ?>
-                                        </td>
+                                                </td>
 
 
-                                        <td><a href="../data_store/view.php?file=<?php echo $row['filename']; ?>"
-                                                target="_blank">View</a></td>
-                                        <td><a
-                                                href="../data_store/list_upload.php?delete=<?php echo $row['filename']; ?>">Delete</a>
-                                        </td>
-                                    </tr>
-                                    <?php }
+                                                <td><a href="../data_store/view.php?file=<?php echo $row['filename']; ?>"
+                                                        target="_blank">View</a></td>
+                                                <td><a
+                                                        href="../data_store/list_upload.php?delete=<?php echo $row['filename']; ?>">Delete</a>
+                                                </td>
+                                            </tr>
+                                        <?php }
                                     } else {
                                         echo "<tr><td colspan='7'>No files found.</td></tr>";
                                     }
@@ -289,10 +289,12 @@ if (isset($_GET['delete'])) {
                 <div class="profile">
                     <div class="info">
                         <p>Welcome</p>
-                        <small class="text-muted"><?php echo $_SESSION['user_name']; ?></small>
+                        <small class="text-muted">
+                            <?php echo $_SESSION['user_name']; ?>
+                        </small>
                     </div>
                     <div class="profile-photo">
-                        <img src="../images/logo/logo.jpg">
+                        <img src="../images/logo/user.png">
                     </div>
                 </div>
 

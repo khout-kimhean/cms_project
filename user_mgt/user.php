@@ -183,26 +183,26 @@ if (isset($_POST['search'])) {
                                                 $i = 1;
                                                 foreach ($searchResults as $row) {
                                                     ?>
-                                                    <tr>
-                                                        <td>
-                                                            <?php echo $i++; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo htmlspecialchars($row['name']); ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo htmlspecialchars($row['email']); ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo htmlspecialchars($row['user_type']); ?>
-                                                        </td>
-                                                        </td>
-                                                        <td>
-                                                            <a href="edit_user.php?id=<?php echo $row['id']; ?>">Edit</a>
-                                                        </td>
-                                                        </td>
-                                                    </tr>
-                                                    <?php
+                                            <tr>
+                                                <td>
+                                                    <?php echo $i++; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row['name']); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row['email']); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row['user_type']); ?>
+                                                </td>
+                                                </td>
+                                                <td>
+                                                    <a href="edit_user.php?id=<?php echo $row['id']; ?>">Edit</a>
+                                                </td>
+                                                </td>
+                                            </tr>
+                                            <?php
                                                 }
                                             } else {
                                                 echo "<tr><td colspan='5'>No matching files found.</td></tr>";
@@ -241,7 +241,7 @@ if (isset($_POST['search'])) {
                         </small>
                     </div>
                     <div class="profile-photo">
-                        <img src="../images/logo/logo.jpg">
+                        <img src="../images/logo/user.png">
                     </div>
                 </div>
 

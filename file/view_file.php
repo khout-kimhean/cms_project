@@ -188,7 +188,7 @@ if (isset($_POST['edit']) && is_numeric($_POST['edit_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" type="text/css"> -->
-    <link rel="stylesheet" type="text/css" href="../styles/data_store/view_data.css">
+    <link rel="stylesheet" type="text/css" href="../styles/file/view_file.css">
     <!-- <link rel="stylesheet" type="text/css" href="../Admin Dashboard/styles/search.css"> -->
     <title>Responsive Dashboard</title>
 </head>

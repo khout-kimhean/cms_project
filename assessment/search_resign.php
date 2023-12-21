@@ -161,41 +161,41 @@ if (isset($_POST['search'])) {
                                 </thead>
                                 <tbody>
                                     <?php if (!empty($searchResults)): ?>
-                                        <?php
+                                    <?php
                                         $i = 1; // Initialize the ID counter to 1
                                         foreach ($searchResults as $row):
                                             ?>
-                                            <tr>
-                                                <td>
-                                                    <?php echo $i; // Display the ID starting from 1 ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo htmlspecialchars($row['display_name']); ?>
-                                                </td>
-                                                <td title="<?php echo htmlspecialchars($row['branch']); ?>">
-                                                    <?php
+                                    <tr>
+                                        <td>
+                                            <?php echo $i; // Display the ID starting from 1 ?>
+                                        </td>
+                                        <td>
+                                            <?php echo htmlspecialchars($row['display_name']); ?>
+                                        </td>
+                                        <td title="<?php echo htmlspecialchars($row['branch']); ?>">
+                                            <?php
                                                     $branch = htmlspecialchars($row['branch']);
                                                     echo strlen($branch) > 18 ? substr($branch, 0, 40) . '...' : $branch;
                                                     ?>
-                                                </td>
-                                                <td title="<?php echo htmlspecialchars($row['position']); ?>">
-                                                    <?php
+                                        </td>
+                                        <td title="<?php echo htmlspecialchars($row['position']); ?>">
+                                            <?php
                                                     $position = htmlspecialchars($row['position']);
                                                     echo strlen($position) > 20 ? substr($position, 0, 20) . '...' : $position;
                                                     ?>
-                                                </td>
-                                                <td>
-                                                    <a href="user_resign.php?id=<?php echo $row['id']; ?>">Resign User</a>
-                                                </td>
-                                            </tr>
-                                            <?php
+                                        </td>
+                                        <td>
+                                            <a href="user_resign.php?id=<?php echo $row['id']; ?>">Resign User</a>
+                                        </td>
+                                    </tr>
+                                    <?php
                                             $i++; // Increment the ID counter for the next row
                                         endforeach;
                                         ?>
                                     <?php else: ?>
-                                        <tr>
-                                            <td colspan='7'>No files found.</td>
-                                        </tr>
+                                    <tr>
+                                        <td colspan='7'>No files found.</td>
+                                    </tr>
                                     <?php endif; ?>
                                 </tbody>
 
@@ -231,7 +231,7 @@ if (isset($_POST['search'])) {
                         </small>
                     </div>
                     <div class="profile-photo">
-                        <img src="../images/logo/logo.jpg">
+                        <img src="../images/logo/user.png">
                     </div>
                 </div>
 

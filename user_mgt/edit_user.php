@@ -235,9 +235,9 @@ $conn->close();
 
                     <input type="submit" name="submit" value="Save" class="form-btn">
                     <?php if ($alertMessage !== ""): ?>
-                        <div class="alert alert-<?php echo $alertType; ?>" role="alert">
-                            <?php echo $alertMessage; ?>
-                        </div>
+                    <div class="alert alert-<?php echo $alertType; ?>" role="alert">
+                        <?php echo $alertMessage; ?>
+                    </div>
                     <?php endif; ?>
                 </form>
             </div>
@@ -266,7 +266,7 @@ $conn->close();
                         </small>
                     </div>
                     <div class="profile-photo">
-                        <img src="../images/logo/logo.jpg">
+                        <img src="../images/logo/user.png">
                     </div>
                 </div>
 

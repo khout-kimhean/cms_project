@@ -219,13 +219,13 @@ $result = $conn->query($sql);
                     </thead>
                     <tbody>
                         <?php
-                        $userCount = 0; // Initialize a counter variable
+                        $id = 0; // Initialize a counter variable
                         
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
-                                if ($userCount < 3) { // Display only 3 users
+                                if ($id < 3) { // Display only 3 users
                                     echo '<tr>
-                                        <td>' . $row['id'] . '</td>
+                                        <td>' . ($id + 1) . '</td>
                                         <td>' . $row['name'] . '</td>
                                         <td>' . $row['email'] . '</td>
                                         <td>' . $row['user_type'] . '</td>
@@ -236,7 +236,7 @@ $result = $conn->query($sql);
                                         </form>
                                         </td>
                                     </tr>';
-                                    $userCount++; // Increment the counter
+                                    $id++; // Increment the counter
                                 } else {
                                     break; // Exit the loop after displaying 3 users
                                 }
@@ -281,9 +281,11 @@ $result = $conn->query($sql);
                             <?php echo $_SESSION['user_name']; ?>
                         </small>
                     </div>
+                    <!-- <a href="../user_mgt/change_password.php"> -->
                     <div class="profile-photo">
-                        <img src="../images/logo/logo.jpg">
+                        <img src="../images/logo/user.png">
                     </div>
+                    <!-- </a> -->
                 </div>
 
             </div>

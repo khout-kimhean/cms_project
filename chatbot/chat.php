@@ -167,7 +167,8 @@ $result = $conn->query($sql);
                         </small>
                     </div>
                     <div class="profile-photo">
-                        <img src="http://localhost/template/Admin%20Dashboard/images/profile.jpg">
+                        <img src="../images/logo/user.png">
+                        <img src="http://localhost/cms_project/images/logo/user.png">
                     </div>
                 </div>
             </div>

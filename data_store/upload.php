@@ -266,10 +266,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
                 <div class="profile">
                     <div class="info">
                         <p>Welcome</p>
-                        <small class="text-muted"><?php echo $_SESSION['user_name']; ?></small>
+                        <small class="text-muted">
+                            <?php echo $_SESSION['user_name']; ?>
+                        </small>
                     </div>
                     <div class="profile-photo">
-                        <img src="../Admin Dashboard/images/profile.jpg ">
+                        <img src="../images/logo/user.png">
                     </div>
                 </div>
 
