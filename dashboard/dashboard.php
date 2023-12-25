@@ -15,11 +15,33 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+$totalUsersSql = "SELECT COUNT(*) as total_users FROM login_register";
+$totalUsersResult = $conn->query($totalUsersSql);
+
+if ($totalUsersResult) {
+    $row = $totalUsersResult->fetch_assoc();
+    $_SESSION['total_users'] = $row['total_users'];
+} else {
+    echo "Error: " . $conn->error;
+}
+
+// total file
+$totalFileSql = "SELECT COUNT(*) as total_file FROM upload_file ";
+$totalFileResult = $conn->query($totalFileSql);
+if ($totalFileResult) {
+    $row = $totalFileResult->fetch_assoc();
+    $_SESSION['total_file'] = $row['total_file'];
+} else {
+    echo "Error: " . $conn->error;
+}
+
+
 $error = array();
 
 $sql = "SELECT * FROM login_register";
 $result = $conn->query($sql);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -119,15 +141,17 @@ $result = $conn->query($sql);
                 <div class="sales" onclick="window.location.href='#';" style="cursor: pointer;">
                     <div class="status">
                         <div class="info">
-                            <h3>Total Sales</h3>
-                            <h1>$70,000</h1>
+                            <h3>Total User</h3>
+                            <h1>
+                                <?php echo $_SESSION['total_users']; ?> user
+                            </h1>
                         </div>
                         <div class="progresss">
                             <svg>
                                 <circle cx="38" cy="38" r="36"></circle>
                             </svg>
                             <div class="percentage">
-                                <p>+81%</p>
+                                <p>User</p>
                             </div>
                         </div>
                     </div>
@@ -135,15 +159,17 @@ $result = $conn->query($sql);
                 <div class="visits" onclick="window.location.href='#';" style="cursor: pointer;">
                     <div class="status">
                         <div class="info">
-                            <h3>Site Visit</h3>
-                            <h1>9,854</h1>
+                            <h3>Total File</h3>
+                            <h1>
+                                <?php echo $_SESSION['total_file']; ?> file
+                            </h1>
                         </div>
                         <div class="progresss">
                             <svg>
                                 <circle cx="38" cy="38" r="36"></circle>
                             </svg>
                             <div class="percentage">
-                                <p>-48%</p>
+                                <p>File</p>
                             </div>
                         </div>
                     </div>

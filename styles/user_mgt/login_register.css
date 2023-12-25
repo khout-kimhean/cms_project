@@ -236,6 +236,11 @@ main .form-container form {
   box-shadow: var(--box-shadow);
   text-align: center;
   margin: 70px 10px;
+  width: 138%;
+}
+.form-container .back_button {
+  text-align: left;
+  color: rgb(12, 77, 162);
 }
 .form-container span {
   color: rgb(12, 77, 162);
@@ -243,8 +248,8 @@ main .form-container form {
 }
 main .form-container form h3 {
   font-weight: 500;
-  font-size: 1.5rem;
-  /* margin-top: 1rem; */
+  font-size: 2rem;
+  margin-bottom: 1rem;
   color: var(--color-dark);
 }
 
@@ -258,13 +263,13 @@ main .form-container form input[type="text"],
 main .form-container form input[type="email"],
 main .form-container form input[type="password"],
 main .form-container form select {
+  color: var(--color-dark);
   width: 100%;
   padding: 1rem;
   margin-top: 5px;
   margin-bottom: 10px;
-  /* margin-right: 150px;
-  margin-left: 150px; */
-  border: 1px solid var(--color-light);
+
+  border: 1px solid rgb(160, 156, 156);
   border-radius: var(--border-radius-1);
   font-size: 13px;
 }

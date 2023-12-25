@@ -131,7 +131,7 @@ if (isset($_POST['submit'])) {
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../styles/data_store/data_store.css">
+    <link rel="stylesheet" type="text/css" href="../styles/file/data_store.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Dashboard</title>
     <script src="../tinymce/tinymce.min.js"></script>
@@ -424,7 +424,7 @@ if (isset($_POST['submit'])) {
             </div>
             <!-- End of Nav -->
 
-            <div class="user-profile">
+            <!-- <div class="user-profile">
                 <div class="logo">
                     <img src="../images/logo/logo.jpg">
                     <h2>FTB Bank</h2>
@@ -487,7 +487,7 @@ if (isset($_POST['submit'])) {
                     </div>
                 </div>
 
-            </div>
+            </div> -->
 
         </div>
     </div>

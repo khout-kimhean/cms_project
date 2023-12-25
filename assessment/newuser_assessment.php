@@ -264,7 +264,7 @@ if (isset($_POST['submit'])) {
                             <input type="text" name="requester" required placeholder="Enter Requester">
                             <input type="text" name="approver" required placeholder="Enter Approver">
                             <input type="text" name="command" placeholder="Enter Command">
-                            <input type="submit" name="submit" value="Create User" class="form-btn">
+                            <input type="submit" name="submit" value="Submit" class="form-btn">
                             <!-- <div class="back_button">
                                 <a href="../templates/assessment.php" class="back-button">
                                     <i class="fa fa-chevron-circle-left" style="font-size: 30px">Back</i>
@@ -308,7 +308,7 @@ if (isset($_POST['submit'])) {
 
             </div>
 
-            <div class="user-profile">
+            <!-- <div class="user-profile">
                 <div class="logo">
                     <img src="../images/logo/logo.jpg">
                     <h2>FTB Bank </h2>
@@ -371,7 +371,7 @@ if (isset($_POST['submit'])) {
                     </div>
                 </div>
 
-            </div>
+            </div> -->
 
         </div>
     </div>

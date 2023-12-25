@@ -228,13 +228,12 @@ aside .sidebar .message-count {
   text-decoration: underline;
 } */
 main {
-  margin-top: 1.4rem;
+  margin-top: 1.6rem;
 }
 main h1 {
   font-family: cursive, sans-serif;
 }
 main .analyse {
-  /* font-family: cursive, sans-serif; */
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.6rem;
@@ -312,6 +311,9 @@ main .analyse .searches svg circle {
 }
 
 main .analyse .progresss .percentage {
+  font-family: cursive;
+  color: var(--color-dark);
+  font-size: 16px;
   position: absolute;
   top: -3px;
   left: -1px;
@@ -321,7 +323,9 @@ main .analyse .progresss .percentage {
   height: 100%;
   width: 100%;
 }
-
+main .percentage p {
+  color: var(--color-dark);
+}
 main .new-users {
   margin-top: 1.3rem;
 }

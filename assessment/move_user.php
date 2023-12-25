@@ -425,7 +425,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 value="<?php echo htmlspecialchars($command); ?>">
                             <input type="hidden" name="id" value="<?php echo $id; ?>">
 
-                            <input type="submit" name="submit" value="Move" class="form-btn">
+                            <input type="submit" name="submit" value="Submit" class="form-btn">
                             <div class="back_button">
                                 <!-- <a href="../templates/search_move.php" class="back-button">
                                     <i class="fa fa-chevron-circle-left" style="font-size: 25px">Back</i>
@@ -469,119 +469,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             </div>
 
-            <div class="user-profile">
-                <div class="logo">
-                    <img src="../images/logo/logo.jpg">
-                    <h2>FTB Bank </h2>
-                    <p>Welcome to FTB Bank</p>
-                </div>
-            </div>
 
-            <div class="reminders">
-                <div class="header">
-                    <h2>Reminders</h2>
-                    <span class="material-icons-sharp">
-                        notifications_none
-                    </span>
-                </div>
-
-                <div class="notification">
-                    <div class="icon">
-                        <span class="material-icons-sharp">
-                            volume_up
-                        </span>
-                    </div>
-                    <div class="content">
-                        <div class="info">
-                            <h3>Support Time</h3>
-                            <small class="text_muted">
-                                08:00 AM - 5:00 PM
-                            </small>
-                        </div>
-                        <span class="material-icons-sharp">
-                            more_vert
-                        </span>
-                    </div>
-                </div>
-
-                <div class="notification deactive">
-                    <div class="icon">
-                        <span class="material-icons-sharp">
-                            edit
-                        </span>
-                    </div>
-                    <div class="content">
-                        <div class="info">
-                            <h3>Open Time</h3>
-                            <small class="text_muted">
-                                08:00 AM - 5:00 PM
-                            </small>
-                        </div>
-                        <span class="material-icons-sharp">
-                            more_vert
-                        </span>
-                    </div>
-                </div>
-
-                <div class="notification add-reminder">
-                    <div>
-                        <span class="material-icons-sharp">
-                            add
-                        </span>
-                        <h3>Add Reminder</h3>
-                    </div>
-                </div>
-
-            </div>
 
         </div>
     </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Function to populate the dropdowns
-            function populateDropdowns(dateSelect, monthSelect, yearSelect) {
-                // Populate the date dropdown
-                for (let i = 1; i <= 31; i++) {
-                    const option = document.createElement("option");
-                    option.text = i;
-                    dateSelect.add(option);
-                }
-
-                // Populate the month dropdown
-                const months = [
-                    "January", "February", "March", "April",
-                    "May", "June", "July", "August",
-                    "September", "October", "November", "December"
-                ];
-                for (let i = 0; i < months.length; i++) {
-                    const option = document.createElement("option");
-                    option.text = months[i];
-                    monthSelect.add(option);
-                }
-
-                // Populate the year dropdown (adjust the range as needed)
-                const currentYear = new Date().getFullYear();
-                for (let i = currentYear - 25; i <= currentYear + 25; i++) {
-                    const option = document.createElement("option");
-                    option.text = i;
-                    yearSelect.add(option);
-                }
+    document.addEventListener("DOMContentLoaded", function() {
+        // Function to populate the dropdowns
+        function populateDropdowns(dateSelect, monthSelect, yearSelect) {
+            // Populate the date dropdown
+            for (let i = 1; i <= 31; i++) {
+                const option = document.createElement("option");
+                option.text = i;
+                dateSelect.add(option);
             }
 
-            // Populate the start date dropdowns
-            const startDateDateSelect = document.getElementById("startDateDateSelect");
-            const startDateMonthSelect = document.getElementById("startDateMonthSelect");
-            const startDateYearSelect = document.getElementById("startDateYearSelect");
+            // Populate the month dropdown
+            const months = [
+                "January", "February", "March", "April",
+                "May", "June", "July", "August",
+                "September", "October", "November", "December"
+            ];
+            for (let i = 0; i < months.length; i++) {
+                const option = document.createElement("option");
+                option.text = months[i];
+                monthSelect.add(option);
+            }
 
-            populateDropdowns(startDateDateSelect, startDateMonthSelect, startDateYearSelect);
+            // Populate the year dropdown (adjust the range as needed)
+            const currentYear = new Date().getFullYear();
+            for (let i = currentYear - 25; i <= currentYear + 25; i++) {
+                const option = document.createElement("option");
+                option.text = i;
+                yearSelect.add(option);
+            }
+        }
 
-            // Populate the end date dropdowns
-            const endDateDateSelect = document.getElementById("endDateDateSelect");
-            const endDateMonthSelect = document.getElementById("endDateMonthSelect");
-            const endDateYearSelect = document.getElementById("endDateYearSelect");
+        // Populate the start date dropdowns
+        const startDateDateSelect = document.getElementById("startDateDateSelect");
+        const startDateMonthSelect = document.getElementById("startDateMonthSelect");
+        const startDateYearSelect = document.getElementById("startDateYearSelect");
 
-            populateDropdowns(endDateDateSelect, endDateMonthSelect, endDateYearSelect);
-        });
+        populateDropdowns(startDateDateSelect, startDateMonthSelect, startDateYearSelect);
+
+        // Populate the end date dropdowns
+        const endDateDateSelect = document.getElementById("endDateDateSelect");
+        const endDateMonthSelect = document.getElementById("endDateMonthSelect");
+        const endDateYearSelect = document.getElementById("endDateYearSelect");
+
+        populateDropdowns(endDateDateSelect, endDateMonthSelect, endDateYearSelect);
+    });
     </script>
     <!-- <script src="orders.js"></script> -->
     <script src="../script/index.js"></script>

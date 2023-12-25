@@ -374,7 +374,7 @@ a:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding: var(--card-padding);
   height: 80%;
-  width: 100%;
+  width: 138%;
   /* width: 1290px; */
 }
 
@@ -383,16 +383,23 @@ a:hover {
   color: var(--color-white);
 }
 .container2 .card a button {
+  width: 150px;
   cursor: pointer;
   color: var(--color-white);
   background-color: rgb(196, 160, 6);
   padding: 8px;
-  border-radius: var(--border-radius-1);
+  /* border-radius: var(--border-radius-1); */
+  border-radius: 20px;
 }
 
+/* .container2 .card a:hover {
+  color: var(--color-white);
+  
+} */
 /* end container2 */
 
 .right-section {
+  height: 50px;
   margin-top: 1.4rem;
 }
 

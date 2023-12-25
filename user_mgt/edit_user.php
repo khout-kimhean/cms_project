@@ -272,7 +272,7 @@ $conn->close();
 
             </div>
 
-            <div class="user-profile">
+            <!-- <div class="user-profile">
                 <div class="logo">
                     <a href="https://ftb.com.kh/en/">
                         <img src="../images/logo/logo.jpg">
@@ -337,7 +337,7 @@ $conn->close();
                     </div>
                 </div>
 
-            </div>
+            </div> -->
 
         </div>
     </div>

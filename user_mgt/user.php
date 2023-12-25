@@ -247,7 +247,7 @@ if (isset($_POST['search'])) {
 
             </div>
 
-            <div class="user-profile">
+            <!-- <div class="user-profile">
                 <div class="logo">
                     <img src="../images/logo/logo.jpg">
                     <h2>FTB Bank</h2>
@@ -310,7 +310,7 @@ if (isset($_POST['search'])) {
                     </div>
                 </div>
 
-            </div>
+            </div> -->
 
         </div>
     </div>

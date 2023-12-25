@@ -228,7 +228,7 @@ a:hover {
 }
 main .container2 {
   padding: 20px;
-  width: 100%;
+  width: 138%;
   background-color: var(--color-white);
   border-radius: var(--border-radius-2);
   height: 670px;
@@ -286,6 +286,7 @@ main table tbody tr:last-child td {
 }
 
 .right-section {
+  height: 50px;
   margin-top: 1.4rem;
 }
 

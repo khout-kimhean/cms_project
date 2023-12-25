@@ -162,7 +162,11 @@ $conn->close();
         <main>
             <div class="form-container">
                 <form action="" method="post" id="create_user_form">
-                    <!-- Add the id attribute to the form -->
+                    <div class="back_button">
+                        <a href="../user_mgt/user.php" class="back-button">
+                            <i class="fa fa-chevron-circle-left" style="font-size: 22px"> Back</i>
+                        </a>
+                    </div>
                     <h3>Create User</h3>
 
                     <?php
@@ -231,7 +235,7 @@ $conn->close();
             </div>
             <!-- End of Nav -->
 
-            <div class="user-profile">
+            <!-- <div class="user-profile">
                 <div class="logo">
                     <img src="../images/logo/logo.jpg">
                     <h2>FTB Bank</h2>
@@ -294,7 +298,7 @@ $conn->close();
                     </div>
                 </div>
 
-            </div>
+            </div> -->
 
         </div>
     </div>

@@ -116,6 +116,9 @@ $result = $conn->query($sql);
         <main>
             <div class="container2">
                 <div class="head">
+                    <a href="../find_error/read_file.php" class="back-button">
+                        <i class="fa fa-chevron-circle-left" style="font-size:28px">Back</i>
+                    </a>
                     <h2>Read Error in log File</h2>
                 </div>
                 <div class="item">
@@ -131,208 +134,208 @@ $result = $conn->query($sql);
 
 
                 <script>
-                function processFile() {
-                    const searchKeyNumberInput = document.getElementById('searchKeyNumberInput');
-                    const fileInput = document.getElementById('fileInput');
-                    const outputDiv = document.getElementById('output');
-                    outputDiv.innerHTML = ''; // Clear previous output
+                    function processFile() {
+                        const searchKeyNumberInput = document.getElementById('searchKeyNumberInput');
+                        const fileInput = document.getElementById('fileInput');
+                        const outputDiv = document.getElementById('output');
+                        outputDiv.innerHTML = ''; // Clear previous output
 
-                    const file = fileInput.files[0];
-                    const searchKeyNumber = searchKeyNumberInput.value.trim();
+                        const file = fileInput.files[0];
+                        const searchKeyNumber = searchKeyNumberInput.value.trim();
 
-                    if (file) {
-                        const reader = new FileReader();
+                        if (file) {
+                            const reader = new FileReader();
 
-                        reader.onload = function(e) {
-                            const fileContent = e.target.result;
-                            const entries = fileContent.split('\n');
+                            reader.onload = function (e) {
+                                const fileContent = e.target.result;
+                                const entries = fileContent.split('\n');
 
-                            let found = false;
-                            let result = '';
+                                let found = false;
+                                let result = '';
 
-                            entries.forEach(entry => {
-                                if (entry.includes(`RETR_REF_NO :${searchKeyNumber}`)) {
-                                    found = true;
-                                    result += entry + '\n';
+                                entries.forEach(entry => {
+                                    if (entry.includes(`RETR_REF_NO :${searchKeyNumber}`)) {
+                                        found = true;
+                                        result += entry + '\n';
+                                    }
+                                });
+
+                                // Display the result
+                                if (result.trim() !== '') {
+                                    outputDiv.innerText = result +
+                                        " \n*Please Re-Enter # Key-No # And click --> Show Detail  To Show Detail of TRX:\n\n ";
+                                    outputDiv.innerHTML += '<button onclick="searchKeyword()">Show Detail</button>';
+                                } else {
+                                    outputDiv.innerText = "No log entry found for REF number " + searchKeyNumber + ".";
                                 }
-                            });
+                            };
 
-                            // Display the result
-                            if (result.trim() !== '') {
-                                outputDiv.innerText = result +
-                                    " \n*Please Re-Enter # Key-No # And click --> Show Detail  To Show Detail of TRX:\n\n ";
-                                outputDiv.innerHTML += '<button onclick="searchKeyword()">Show Detail</button>';
-                            } else {
-                                outputDiv.innerText = "No log entry found for REF number " + searchKeyNumber + ".";
-                            }
-                        };
-
-                        reader.readAsText(file);
-                    } else {
-                        alert("Please choose a file.");
+                            reader.readAsText(file);
+                        } else {
+                            alert("Please choose a file.");
+                        }
                     }
-                }
 
 
-                function searchKeyword() {
-                    const searchKeyNumberInput = document.getElementById('searchKeyNumberInput');
-                    const fileInput = document.getElementById('fileInput');
-                    const outputDiv = document.getElementById('output');
-                    outputDiv.innerHTML = ''; // Clear previous output
+                    function searchKeyword() {
+                        const searchKeyNumberInput = document.getElementById('searchKeyNumberInput');
+                        const fileInput = document.getElementById('fileInput');
+                        const outputDiv = document.getElementById('output');
+                        outputDiv.innerHTML = ''; // Clear previous output
 
-                    const file = fileInput.files[0];
-                    const searchKeyNumber = searchKeyNumberInput.value.trim();
+                        const file = fileInput.files[0];
+                        const searchKeyNumber = searchKeyNumberInput.value.trim();
 
-                    if (file) {
-                        const reader = new FileReader();
+                        if (file) {
+                            const reader = new FileReader();
 
-                        reader.onload = function(e) {
-                            const fileContent = e.target.result;
+                            reader.onload = function (e) {
+                                const fileContent = e.target.result;
 
-                            // Extract lines and filter by searchKeyNumber and specific pattern
-                            const lines = fileContent.split(/\r?\n/);
-                            let capturingXml = false;
-                            const matchingLines = [];
-                            const xmlLines = [];
+                                // Extract lines and filter by searchKeyNumber and specific pattern
+                                const lines = fileContent.split(/\r?\n/);
+                                let capturingXml = false;
+                                const matchingLines = [];
+                                const xmlLines = [];
 
-                            for (let i = 0; i < lines.length; i++) {
-                                const line = lines[i];
+                                for (let i = 0; i < lines.length; i++) {
+                                    const line = lines[i];
 
-                                // Replace the condition to check for the specific keyword
-                                if (line.includes(`INFO  # ${searchKeyNumber} # SETTING ERROR RESPONSE CODE`)) {
-                                    capturingXml = true;
+                                    // Replace the condition to check for the specific keyword
+                                    if (line.includes(`INFO  # ${searchKeyNumber} # SETTING ERROR RESPONSE CODE`)) {
+                                        capturingXml = true;
 
-                                    // Go up 20 lines and start capturing
-                                    const startIndex = Math.max(0, i - 18);
-                                    for (let j = startIndex; j < i; j++) {
-                                        if (
-                                            !lines[j].includes('RESPONSE CODE FROM ARQC VERIFY REPLY') &&
-                                            !lines[j].includes('------------------------------------') &&
-                                            !lines[j].includes('CLOSING SOCKET') &&
-                                            !lines[j].includes(
-                                                'CLOSE THE SOCKET TO CASTOR ######################### ............'
-                                            ) &&
-                                            !lines[j].includes('CONNETING AGAIN') &&
-                                            !lines[j].includes('FAILURE IN SENDING MESSAGE!!!!') &&
-                                            !lines[j].includes('----------------------------') &&
-                                            !lines[j].includes('NtwkProfileHandler::getBackupRouteProfile') &&
+                                        // Go up 20 lines and start capturing
+                                        const startIndex = Math.max(0, i - 18);
+                                        for (let j = startIndex; j < i; j++) {
+                                            if (
+                                                !lines[j].includes('RESPONSE CODE FROM ARQC VERIFY REPLY') &&
+                                                !lines[j].includes('------------------------------------') &&
+                                                !lines[j].includes('CLOSING SOCKET') &&
+                                                !lines[j].includes(
+                                                    'CLOSE THE SOCKET TO CASTOR ######################### ............'
+                                                ) &&
+                                                !lines[j].includes('CONNETING AGAIN') &&
+                                                !lines[j].includes('FAILURE IN SENDING MESSAGE!!!!') &&
+                                                !lines[j].includes('----------------------------') &&
+                                                !lines[j].includes('NtwkProfileHandler::getBackupRouteProfile') &&
 
-                                            lines[j].trim() !== ''
-                                        ) {
-                                            matchingLines.push(lines[j]);
+                                                lines[j].trim() !== ''
+                                            ) {
+                                                matchingLines.push(lines[j]);
+                                            }
+                                        }
+                                    } else if (capturingXml) {
+                                        // Check for the end pattern
+                                        if (line.includes('')) {
+                                            capturingXml = false;
+                                            break;
                                         }
                                     }
-                                } else if (capturingXml) {
-                                    // Check for the end pattern
-                                    if (line.includes('')) {
-                                        capturingXml = false;
+                                }
+
+                                // Display the result for general information
+                                if (matchingLines.length > 0) {
+                                    outputDiv.innerText = "*Here is Detail of that TRX :\n\n" + matchingLines.join(
+                                        '\n');
+                                } else {
+                                    outputDiv.innerText = "*Don't have error in ARQC Verify.";
+                                }
+
+                                // Extract lines and filter by searchKeyNumber and specific pattern for errors
+                                const errorLines = lines.filter(line => {
+                                    return (
+                                        (line.includes(`ERROR # ${searchKeyNumber} #`) && line.includes(
+                                            'failed')) ||
+                                        (line.includes(`ERROR # ${searchKeyNumber} #`) && line.toUpperCase()
+                                            .includes('FAILED') && line.includes('CONNECT')) ||
+                                        (line.includes(`# ${searchKeyNumber} #`) && line.toUpperCase()
+                                            .includes('INFO') && line.includes(
+                                                'SETTING ERROR RESPONSE CODE'))
+                                    );
+                                });
+
+                                // Display the result for errors
+                                if (errorLines.length > 0) {
+                                    outputDiv.innerText += "\n\n*Here is Error of that TRX :'" + searchKeyNumber +
+                                        "':\n \n" + errorLines.join('\n');
+                                } else {
+                                    outputDiv.innerText += "\n\n*No Error Found for that TRX'" + searchKeyNumber + "'.";
+                                }
+
+
+                                capturingXml = false;
+                                let xmlStartIndex = -1;
+
+                                for (let i = 0; i < lines.length; i++) {
+                                    const line = lines[i];
+
+                                    // Replace the condition to check for the specific keyword
+                                    if (line.includes(`INFO  # ${searchKeyNumber} # COMPLETE MSG [MASKED] :`)) {
+                                        capturingXml = true;
+
+                                        xmlStartIndex = i;
+                                        while (xmlStartIndex >= 0 && !lines[xmlStartIndex].includes(
+                                            'xml version="1.0" encoding="UTF-8"')) {
+                                            xmlStartIndex--; // Move up one line
+                                        }
+
+                                        // Start capturing
+                                        const startIndex = Math.max(0, xmlStartIndex - 0);
+                                        for (let j = startIndex; j < i; j++) {
+                                            if (!lines[j].includes('----POS PURCHASE TRXN VALIDATION END') &&
+                                                !lines[j].includes('Reply to router')) {
+                                                xmlLines.push(lines[j]);
+                                            }
+                                        }
+
+                                        // Break out of the loop after capturing the XML
                                         break;
                                     }
                                 }
-                            }
+                                for (let i = 0; i < lines.length; i++) {
+                                    const line = lines[i];
 
-                            // Display the result for general information
-                            if (matchingLines.length > 0) {
-                                outputDiv.innerText = "*Here is Detail of that TRX :\n\n" + matchingLines.join(
-                                    '\n');
-                            } else {
-                                outputDiv.innerText = "*Don't have error in ARQC Verify.";
-                            }
+                                    // Replace the condition to check for the specific keyword
+                                    if (line.includes(`INFO  # ${searchKeyNumber} # READ MSG [MASKED] :`)) {
+                                        capturingXml = true;
 
-                            // Extract lines and filter by searchKeyNumber and specific pattern for errors
-                            const errorLines = lines.filter(line => {
-                                return (
-                                    (line.includes(`ERROR # ${searchKeyNumber} #`) && line.includes(
-                                        'failed')) ||
-                                    (line.includes(`ERROR # ${searchKeyNumber} #`) && line.toUpperCase()
-                                        .includes('FAILED') && line.includes('CONNECT')) ||
-                                    (line.includes(`# ${searchKeyNumber} #`) && line.toUpperCase()
-                                        .includes('INFO') && line.includes(
-                                            'SETTING ERROR RESPONSE CODE'))
-                                );
-                            });
-
-                            // Display the result for errors
-                            if (errorLines.length > 0) {
-                                outputDiv.innerText += "\n\n*Here is Error of that TRX :'" + searchKeyNumber +
-                                    "':\n \n" + errorLines.join('\n');
-                            } else {
-                                outputDiv.innerText += "\n\n*No Error Found for that TRX'" + searchKeyNumber + "'.";
-                            }
-
-
-                            capturingXml = false;
-                            let xmlStartIndex = -1;
-
-                            for (let i = 0; i < lines.length; i++) {
-                                const line = lines[i];
-
-                                // Replace the condition to check for the specific keyword
-                                if (line.includes(`INFO  # ${searchKeyNumber} # COMPLETE MSG [MASKED] :`)) {
-                                    capturingXml = true;
-
-                                    xmlStartIndex = i;
-                                    while (xmlStartIndex >= 0 && !lines[xmlStartIndex].includes(
+                                        xmlStartIndex = i;
+                                        while (xmlStartIndex >= 0 && !lines[xmlStartIndex].includes(
                                             'xml version="1.0" encoding="UTF-8"')) {
-                                        xmlStartIndex--; // Move up one line
-                                    }
-
-                                    // Start capturing
-                                    const startIndex = Math.max(0, xmlStartIndex - 0);
-                                    for (let j = startIndex; j < i; j++) {
-                                        if (!lines[j].includes('----POS PURCHASE TRXN VALIDATION END') &&
-                                            !lines[j].includes('Reply to router')) {
-                                            xmlLines.push(lines[j]);
+                                            xmlStartIndex--; // Move up one line
                                         }
-                                    }
 
-                                    // Break out of the loop after capturing the XML
-                                    break;
-                                }
-                            }
-                            for (let i = 0; i < lines.length; i++) {
-                                const line = lines[i];
-
-                                // Replace the condition to check for the specific keyword
-                                if (line.includes(`INFO  # ${searchKeyNumber} # READ MSG [MASKED] :`)) {
-                                    capturingXml = true;
-
-                                    xmlStartIndex = i;
-                                    while (xmlStartIndex >= 0 && !lines[xmlStartIndex].includes(
-                                            'xml version="1.0" encoding="UTF-8"')) {
-                                        xmlStartIndex--; // Move up one line
-                                    }
-
-                                    // Start capturing
-                                    const startIndex = Math.max(0, xmlStartIndex - 0);
-                                    for (let j = startIndex; j < i; j++) {
-                                        if (!lines[j].includes('----POS PURCHASE TRXN VALIDATION END') &&
-                                            !lines[j].includes('Reply to router')) {
-                                            xmlLines.push(lines[j]);
+                                        // Start capturing
+                                        const startIndex = Math.max(0, xmlStartIndex - 0);
+                                        for (let j = startIndex; j < i; j++) {
+                                            if (!lines[j].includes('----POS PURCHASE TRXN VALIDATION END') &&
+                                                !lines[j].includes('Reply to router')) {
+                                                xmlLines.push(lines[j]);
+                                            }
                                         }
+
+                                        // Break out of the loop after capturing the XML
+                                        break;
                                     }
-
-                                    // Break out of the loop after capturing the XML
-                                    break;
                                 }
-                            }
 
-                            // Display the result for XML
-                            if (xmlLines.length > 0) {
-                                outputDiv.innerText += "\n\n*Here is XML Detail of that TRX :\n\n" + xmlLines.join(
-                                    '\n');
-                            } else {
-                                outputDiv.innerText += "\n\n*No XML Found for that TRX'.";
-                            }
-                        };
-
+                                // Display the result for XML
+                                if (xmlLines.length > 0) {
+                                    outputDiv.innerText += "\n\n*Here is XML Detail of that TRX :\n\n" + xmlLines.join(
+                                        '\n');
+                                } else {
+                                    outputDiv.innerText += "\n\n*No XML Found for that TRX'.";
+                                }
+                            };
 
 
-                        reader.readAsText(file);
-                    } else {
-                        alert("Please choose a file.");
+
+                            reader.readAsText(file);
+                        } else {
+                            alert("Please choose a file.");
+                        }
                     }
-                }
                 </script>
 
 
@@ -370,7 +373,7 @@ $result = $conn->query($sql);
 
             </div>
 
-            <div class="user-profile">
+            <!-- <div class="user-profile">
                 <div class="logo">
                     <img src="../images/logo/logo.jpg">
                     <h2>FTB Bank</h2>
@@ -433,7 +436,7 @@ $result = $conn->query($sql);
                     </div>
                 </div>
 
-            </div>
+            </div> -->
 
         </div>
     </div>

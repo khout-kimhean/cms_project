@@ -120,7 +120,7 @@ $result = $conn->query($sql);
                             <div class="card-header msg_head">
                                 <div class="d-flex bd-highlight">
                                     <div class="img_cont">
-                                        <img src="http://localhost/template/Admin%20Dashboard/images/profile.jpg"
+                                        <img src="http://localhost/cms_project/images/logo/logo.jpg"
                                             class="rounded-circle user_img">
                                     </div>
                                     <div class="user_info">

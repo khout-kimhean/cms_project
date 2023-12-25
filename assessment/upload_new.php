@@ -29,13 +29,14 @@ $result = $conn->query($sql);
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../styles/file/data_mgt.css">
-    <title>Admin Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="../styles/assessment/upload.css">
+    <title>Assessment</title>
 </head>
 
 <body>
 
     <div class="container">
+        <!-- Sidebar Section -->
         <aside>
             <div class="toggle">
                 <div class="logo">
@@ -44,7 +45,7 @@ $result = $conn->query($sql);
                 </div>
                 <div class="close" id="close-btn">
                     <span class="material-icons-sharp">
-                        <!-- close -->
+                        close
                     </span>
                 </div>
             </div>
@@ -67,7 +68,7 @@ $result = $conn->query($sql);
                     </span>
                     <h3>Contact</h3>
                 </a> -->
-                <a href="../file/file_mgt.php" class="active">
+                <a href="../file/file_mgt.php">
                     <span class="fa fa-upload">
                     </span>
                     <h3>Store File</h3>
@@ -79,7 +80,7 @@ $result = $conn->query($sql);
                     </span>
                     <h3>View File</h3>
                 </a> -->
-                <a href="../assessment/assessment.php">
+                <a href="../assessment/assessment.php" class="active">
                     <span class="fa fa-address-book">
                         <!-- fab fa-app-store-ios -->
                     </span>
@@ -111,48 +112,20 @@ $result = $conn->query($sql);
                 </a>
             </div>
         </aside>
+        <!-- End of Sidebar Section -->
+
+        <!-- Main Content -->
         <main>
             <div class="container2">
-                <h1 class="h1">Store File</h1>
-                <!-- Analyses -->
-                <div class="analyse">
-                    <div class="sales" onclick="window.location.href='../file/upload_file.php';"
-                        style="cursor: pointer;">
-                        <div class="status">
-                            <div class="info">
-                                <!-- <h3>Read Text</h3> -->
-                                <h1>Upload</h1>
-                                <h2>File</h2>
-                            </div>
-                            <div>
-                                <img src="../images/file/upload.png">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="visits" onclick="window.location.href='../file/view_file.php';"
-                        style="cursor: pointer;">
-                        <div class="status">
-                            <div class="info">
-                                <h1>View</h1>
-                                <h2>File</h2>
-                            </div>
-                            <div>
-                                <img src="../images/file/view.png">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="visits" onclick="window.location.href='../file/report.php';" style="cursor: pointer;">
-                        <div class="status">
-                            <div class="info">
-                                <h1>Recover</h1>
-                                <h2>File</h2>
-                            </div>
-                            <div>
-                                <img src="../images/file/file2.png">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <a href="../assessment/assessment.php" class="back-button">
+                    <i class="fa fa-chevron-circle-left" style="font-size:28px">Back</i>
+                </a>
+                <h2>Upload New User</h2>
+                <form method="post" enctype="multipart/form-data" id="uploadForm" onsubmit="changeBackground()">
+                    <label for="file">Select file Excel to Upload:</label>
+                    <input class="upload" type="file" name="file" id="file">
+                    <input class="submit" type="submit" name="submit" value="Upload File" id="uploadButton">
+                </form>
             </div>
         </main>
         <div class="right-section">
@@ -184,75 +157,11 @@ $result = $conn->query($sql);
                 </div>
 
             </div>
-            <!-- End of Nav -->
 
-            <!-- <div class="user-profile">
-                <div class="logo">
-                    <img src="../images/logo/logo.jpg">
-                    <h2>FTB Bank</h2>
-                    <p>Welcome to FTB Bank</p>
-                </div>
-            </div>
-
-            <div class="reminders">
-                <div class="header">
-                    <h2>Reminders</h2>
-                    <span class="material-icons-sharp">
-                        notifications_none
-                    </span>
-                </div>
-
-                <div class="notification">
-                    <div class="icon">
-                        <span class="material-icons-sharp">
-                            volume_up
-                        </span>
-                    </div>
-                    <div class="content">
-                        <div class="info">
-                            <h3>Support Time</h3>
-                            <small class="text_muted">
-                                08:00 AM - 5:00 PM
-                            </small>
-                        </div>
-                        <span class="material-icons-sharp">
-                            more_vert
-                        </span>
-                    </div>
-                </div>
-
-                <div class="notification deactive">
-                    <div class="icon">
-                        <span class="material-icons-sharp">
-                            edit
-                        </span>
-                    </div>
-                    <div class="content">
-                        <div class="info">
-                            <h3>Open Time</h3>
-                            <small class="text_muted">
-                                08:00 AM - 5:00 PM
-                            </small>
-                        </div>
-                        <span class="material-icons-sharp">
-                            more_vert
-                        </span>
-                    </div>
-                </div>
-
-                <div class="notification add-reminder">
-                    <div>
-                        <span class="material-icons-sharp">
-                            add
-                        </span>
-                        <h3>Add Reminder</h3>
-                    </div>
-                </div>
-
-            </div> -->
 
         </div>
     </div>
+
     <!-- <script src="orders.js"></script> -->
     <script src="../script/index.js"></script>
 </body>

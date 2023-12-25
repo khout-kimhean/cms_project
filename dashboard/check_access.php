@@ -8,8 +8,10 @@ function redirect($location)
 if (!isset($_SESSION['user_role'])) {
     redirect('login.php');
 }
+
 $user_role = $_SESSION['user_role'];
 $current_page = basename($_SERVER['PHP_SELF']);
+
 $allowed_roles = [
     'dashboard.php' => ['admin', 'card payment team', 'digital branch team', 'atm team', 'terminal team', 'user'],
     'user_management.php' => ['admin'],
@@ -43,6 +45,10 @@ $allowed_roles = [
     'upload_file.php' => ['admin'],
     'report.php' => ['admin'],
     'view_file.php' => ['admin'],
+    'upload_new.php' => ['admin'],
+    'upload_move.php' => ['admin'],
+    'upload_resign.php' => ['admin'],
+    'assessment_user.php' => ['admin'],
 ];
 
 if (!in_array($user_role, $allowed_roles[$current_page])) {

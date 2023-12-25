@@ -211,7 +211,7 @@ $result = $conn->query($sql);
             </div>
             <!-- End of Nav -->
 
-            <div class="user-profile">
+            <!-- <div class="user-profile">
                 <div class="logo">
                     <img src="../images/logo/logo.jpg">
                     <h2>FTB Bank</h2>
@@ -274,7 +274,7 @@ $result = $conn->query($sql);
                     </div>
                 </div>
 
-            </div>
+            </div> -->
 
         </div>
     </div>

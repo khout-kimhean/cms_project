@@ -305,91 +305,91 @@ if (isset($_POST['edit']) && is_numeric($_POST['edit_id'])) {
                                 </thead>
                                 <tbody>
                                     <?php if (!empty($searchResults)): ?>
-                                    <?php
+                                        <?php
                                         $i = 1; // Initialize the ID counter to 1
                                         foreach ($searchResults as $row):
                                             ?>
-                                    <tr>
-                                        <td>
-                                            <?php echo $i; // Display the ID starting from 1 ?>
-                                        </td>
-                                        <td>
-                                            <?php echo htmlspecialchars($row['filename']); ?>
-                                        </td>
-                                        <td>
-                                            <?php echo htmlspecialchars($row['team']); ?>
-                                        </td>
-                                        <td title="<?php echo htmlspecialchars($row['title']); ?>">
-                                            <?php
+                                            <tr>
+                                                <td>
+                                                    <?php echo $i; // Display the ID starting from 1 ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row['filename']); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row['team']); ?>
+                                                </td>
+                                                <td title="<?php echo htmlspecialchars($row['title']); ?>">
+                                                    <?php
                                                     $title = htmlspecialchars($row['title']);
                                                     echo strlen($title) > 18 ? substr($title, 0, 40) . '...' : $title;
                                                     ?>
-                                        </td>
-                                        <td title="<?php echo htmlspecialchars($row['description']); ?>">
-                                            <?php
+                                                </td>
+                                                <td title="<?php echo htmlspecialchars($row['description']); ?>">
+                                                    <?php
                                                     $description = htmlspecialchars($row['description']);
                                                     echo strlen($description) > 20 ? substr($description, 0, 20) . '...' : $description;
                                                     ?>
-                                        </td>
-                                        <td><a href="../file/view.php?file=<?php echo $row['filename']; ?>"
-                                                target="_blank">View File</a></td>
-                                        <td><a href="../file/view_data.php?id=<?php echo $row['id']; ?>">View Data</a>
-                                        </td>
-                                        <td><a href="../file/edit_data.php?id=<?php echo $row['id']; ?>">Edit Data</a>
-                                        </td>
-                                        <td><a href="../file/view_file.php?delete=<?php echo $row['id']; ?>">Delete
-                                                Data</a></td>
-                                    </tr>
-                                    <?php
+                                                </td>
+                                                <td><a href="../file/view.php?file=<?php echo $row['filename']; ?>"
+                                                        target="_blank">View File</a></td>
+                                                <td><a href="../file/view_data.php?id=<?php echo $row['id']; ?>">View Data</a>
+                                                </td>
+                                                <td><a href="../file/edit_data.php?id=<?php echo $row['id']; ?>">Edit Data</a>
+                                                </td>
+                                                <td><a href="../file/view_file.php?delete=<?php echo $row['id']; ?>">Delete
+                                                        Data</a></td>
+                                            </tr>
+                                            <?php
                                             $i++; // Increment the ID counter for the next row
                                         endforeach;
                                         ?>
                                     <?php else: ?>
-                                    <?php if ($result->num_rows > 0): ?>
-                                    <?php
+                                        <?php if ($result->num_rows > 0): ?>
+                                            <?php
                                             $i = 1; // Initialize the ID counter to 1
                                             while ($row = $result->fetch_assoc()):
                                                 ?>
-                                    <tr>
-                                        <td>
-                                            <?php echo $i; // Display the ID starting from 1 ?>
-                                        </td>
-                                        <td>
-                                            <?php echo htmlspecialchars($row['filename']); ?>
-                                        </td>
-                                        <td>
-                                            <?php echo htmlspecialchars($row['team']); ?>
-                                        </td>
-                                        <td title="<?php echo htmlspecialchars($row['title']); ?>">
-                                            <?php
+                                                <tr>
+                                                    <td>
+                                                        <?php echo $i; // Display the ID starting from 1 ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo htmlspecialchars($row['filename']); ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo htmlspecialchars($row['team']); ?>
+                                                    </td>
+                                                    <td title="<?php echo htmlspecialchars($row['title']); ?>">
+                                                        <?php
                                                         $title = htmlspecialchars($row['title']);
                                                         echo strlen($title) > 18 ? substr($title, 0, 40) . '...' : $title;
                                                         ?>
-                                        </td>
-                                        <td title="<?php echo htmlspecialchars($row['description']); ?>">
-                                            <?php
+                                                    </td>
+                                                    <td title="<?php echo htmlspecialchars($row['description']); ?>">
+                                                        <?php
                                                         $description = htmlspecialchars($row['description']);
                                                         echo strlen($description) > 20 ? substr($description, 0, 20) . '...' : $description;
                                                         ?>
-                                        </td>
-                                        <td><a href="../file/view.php?file=<?php echo $row['filename']; ?>"
-                                                target="_blank">View File</a></td>
-                                        <td><a href="../file/view_data.php?id=<?php echo $row['id']; ?>">View Data</a>
-                                        </td>
-                                        <td><a href="../file/edit_data.php?id=<?php echo $row['id']; ?>">Edit Data</a>
-                                        </td>
-                                        <td><a href="../file/view_file.php?delete=<?php echo $row['id']; ?>">Delete
-                                                Data</a></td>
-                                    </tr>
-                                    <?php
+                                                    </td>
+                                                    <td><a href="../file/view.php?file=<?php echo $row['filename']; ?>"
+                                                            target="_blank">View File</a></td>
+                                                    <td><a href="../file/view_data.php?id=<?php echo $row['id']; ?>">View Data</a>
+                                                    </td>
+                                                    <td><a href="../file/edit_data.php?id=<?php echo $row['id']; ?>">Edit Data</a>
+                                                    </td>
+                                                    <td><a href="../file/view_file.php?delete=<?php echo $row['id']; ?>">Delete
+                                                            Data</a></td>
+                                                </tr>
+                                                <?php
                                                 $i++; // Increment the ID counter for the next row
                                             endwhile;
                                             ?>
-                                    <?php else: ?>
-                                    <tr>
-                                        <td colspan='7'>No files found.</td>
-                                    </tr>
-                                    <?php endif; ?>
+                                        <?php else: ?>
+                                            <tr>
+                                                <td colspan='7'>No files found.</td>
+                                            </tr>
+                                        <?php endif; ?>
                                     <?php endif; ?>
                                 </tbody>
 
@@ -401,7 +401,36 @@ if (isset($_POST['edit']) && is_numeric($_POST['edit_id'])) {
                 </div>
             </div>
         </main>
+        <div class="right-section">
+            <div class="nav">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">
+                        menu
+                    </span>
+                </button>
+                <div class="dark-mode">
+                    <span class="material-icons-sharp active">
+                        light_mode
+                    </span>
+                    <span class="material-icons-sharp">
+                        dark_mode
+                    </span>
+                </div>
 
+                <div class="profile">
+                    <div class="info">
+                        <p>Welcome</p>
+                        <small class="text-muted">
+                            <?php echo $_SESSION['user_name']; ?>
+                        </small>
+                    </div>
+                    <div class="profile-photo">
+                        <img src="../images/logo/user.png">
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
     <script src="../script/index.js"></script>
 </body>

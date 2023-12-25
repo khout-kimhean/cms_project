@@ -120,31 +120,32 @@ $result = $conn->query($sql);
                     <div class="sales" onclick="window.location.href='../user_mgt/user.php';" style="cursor: pointer;">
                         <div class="status">
                             <div class="info">
-                                <h1>Create User</h1>
+                                <h1>Create</h1>
+                                <h2>& Edit User</h2>
                             </div>
                             <div>
                                 <img src="../images/usermgt/adduser.png">
                             </div>
                         </div>
                     </div>
-                    <div class="visits" onclick="window.location.href='../user_mgt/search_user.php';"
+                    <!-- <div class="visits" onclick="window.location.href='../user_mgt/search_user.php';"
                         style="cursor: pointer;">
                         <div class="status">
                             <div class="info">
-                                <h2>Assign</h2>
-                                <h1>Function</h1>
+                                <h1>Assign</h1>
+                                <h2>Function user</h2>
                             </div>
                             <div>
                                 <img src="../images/usermgt/usermgt.png">
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="visits" onclick="window.location.href='../user_mgt/showuser.php';"
                         style="cursor: pointer;">
                         <div class="status">
                             <div class="info">
-                                <h2>Show</h2>
-                                <h1>Show User</h1>
+                                <h1>Show</h1>
+                                <h2>Show User</h2>
                             </div>
                             <div>
                                 <img src="../images/usermgt/usermgt.png">
@@ -184,7 +185,7 @@ $result = $conn->query($sql);
 
             </div>
 
-            <div class="user-profile">
+            <!-- <div class="user-profile">
                 <div class="logo">
                     <img src="../images/logo/logo.jpg">
                     <h2>FTB Bank</h2>
@@ -247,7 +248,7 @@ $result = $conn->query($sql);
                     </div>
                 </div>
 
-            </div>
+            </div> -->
 
         </div>
     </div>

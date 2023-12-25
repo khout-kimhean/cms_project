@@ -226,6 +226,7 @@ a:hover {
   text-decoration: underline;
 }
 .container2 .back_button a {
+  border-radius: 20px;
   color: rgb(196, 160, 6);
 }
 .container2 {
@@ -236,7 +237,7 @@ a:hover {
   font-family: cursive, sans-serif;
   margin-top: 70px;
   height: 88%;
-  width: 100%;
+  width: 138%;
   color: var(--color-dark);
 }
 .container2 h2 {
@@ -299,7 +300,7 @@ a:hover {
 .container2 form input[type="submit"] {
   background-color: var(--color-primary);
   border: none;
-  border-radius: var(--border-radius-1);
+  /* border-radius: 20px; */
   color: var(--color-white);
   padding: 1rem;
   font-size: 1rem;
@@ -307,11 +308,10 @@ a:hover {
   margin-top: 5px;
   width: 150px;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 20px;
   font-size: 17px;
-  padding: 10px 15px;
+  padding: 10px;
   background: rgb(196, 160, 6);
-  border-radius: 5px;
 }
 
 .container2 .select .user_mgt {
@@ -365,6 +365,7 @@ a:hover {
   margin-left: 10px;
 }
 .right-section {
+  height: 50px;
   margin-top: 1.4rem;
 }
 

@@ -227,7 +227,7 @@ a:hover {
   text-decoration: underline;
 }
 .container2 {
-  width: 100%;
+  width: 138%;
   font-family: cursive, sans-serif;
   margin-top: 70px;
   display: inline-block;
@@ -239,12 +239,18 @@ a:hover {
   /* width: 1290px; */
   color: var(--color-dark);
 }
-
+/* .container2 h1 {
+  margin-bottom: 20px;
+} */
 .container2 .analyse img {
   width: 5rem;
   height: 5rem;
   /* border-radius: 50%; */
   overflow: hidden;
+}
+.analyse p {
+  color: var(--color-dark);
+  font-size: 16px;
 }
 .container2 .analyse .sales img {
   width: 4.5rem;
@@ -253,8 +259,9 @@ a:hover {
   overflow: hidden;
 }
 .container2 .analyse {
+  margin-top: 20px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.6rem;
 }
 
@@ -313,7 +320,9 @@ a:hover {
 }
 
 .right-section {
+  /* background-color: #181a1e; */
   margin-top: 1.4rem;
+  height: 50px;
 }
 
 .right-section .nav {
@@ -328,7 +337,7 @@ a:hover {
 
 .right-section .dark-mode {
   background-color: var(--color-light);
-  /* background-color: var(--color-white); */
+  background-color: var(--color-white);
   display: flex;
   justify-content: space-between;
   align-items: center;

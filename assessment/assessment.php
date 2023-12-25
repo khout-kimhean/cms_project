@@ -119,12 +119,13 @@ $result = $conn->query($sql);
             <Div class="container2">
                 <h1 class="h1">Assessment</h1>
                 <!-- Analyses -->
-                <div class="analyse">
+                <!-- <div class="analyse">
                     <div class="sales" onclick="window.location.href='../assessment/newuser_assessment.php';"
                         style="cursor: pointer;">
                         <div class="status">
                             <div class="info">
                                 <h1>New User</h1>
+                                <p>Manual Create</p>
                             </div>
                             <div>
                                 <img src="../images/usermgt/adduser.png">
@@ -136,6 +137,7 @@ $result = $conn->query($sql);
                         <div class="status">
                             <div class="info">
                                 <h1>Move User</h1>
+                                <p>Manual Create</p>
                             </div>
                             <div>
                                 <img src="../images/usermgt/usermgt.png">
@@ -147,44 +149,70 @@ $result = $conn->query($sql);
                         <div class="status">
                             <div class="info">
                                 <h1>User Resign</h1>
+                                <p>Manual Create</p>
                             </div>
                             <div>
                                 <img src="../images/usermgt/move.png">
                             </div>
                         </div>
                     </div>
-
-                </div>
-                <!-- <h1>Assessment</h1> -->
-                <div class="analyse">
-
-                    <div class="status" onclick="window.location.href='../assessment/Summary.php';"
+                    <div class="status" onclick="window.location.href='../assessment/assessment_list.php';"
                         style="cursor: pointer;">
                         <div class="status">
                             <div class="info">
-                                <h1>View Data</h1>
+                                <h1>List User</h1>
+                                <p>Assessment</p>
                             </div>
                             <div>
                                 <img src="../images/file/file1.png">
                             </div>
                         </div>
                     </div>
-                    <div class="visits" onclick="window.location.href='../assessment/assessment_list.php';"
+                </div> -->
+                <!-- <h1>Assessment</h1> -->
+                <div class="analyse">
+                    <div class="status" onclick="window.location.href='../assessment/upload_new.php';"
                         style="cursor: pointer;">
                         <div class="status">
                             <div class="info">
-                                <h1>List Assessment</h1>
+                                <h1>New User</h1>
+                                <p>Upload User</p>
                             </div>
                             <div>
-                                <img src="../images/file/file2.png">
+                                <img src="../images/usermgt/adduser.png">
                             </div>
                         </div>
                     </div>
-                    <div class="visits" onclick="window.location.href='../assessment/upload_user.php';"
+                    <div class="status" onclick="window.location.href='../assessment/upload_move.php';"
                         style="cursor: pointer;">
                         <div class="status">
                             <div class="info">
-                                <h1>Upload User</h1>
+                                <h1>Move User</h1>
+                                <p>Upload User</p>
+                            </div>
+                            <div>
+                                <img src="../images/usermgt/usermgt.png">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="visits" onclick="window.location.href='../assessment/upload_resign.php';"
+                        style="cursor: pointer;">
+                        <div class="status">
+                            <div class="info">
+                                <h1>Resign User</h1>
+                                <p>Upload User</p>
+                            </div>
+                            <div>
+                                <img src="../images/usermgt/move.png">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="visits" onclick="window.location.href='../assessment/assessment_user.php';"
+                        style="cursor: pointer;">
+                        <div class="status">
+                            <div class="info">
+                                <h1>List User</h1>
+                                <p>Assessment</p>
                             </div>
                             <div>
                                 <img src="../images/file/file.png">
@@ -226,7 +254,7 @@ $result = $conn->query($sql);
             </div>
             <!-- End of Nav -->
 
-            <div class="user-profile">
+            <!-- <div class="user-profile">
                 <div class="logo">
                     <img src="../images/logo/logo.jpg">
                     <h2>FTB Bank</h2>
@@ -289,7 +317,7 @@ $result = $conn->query($sql);
                     </div>
                 </div>
 
-            </div>
+            </div> -->
 
         </div>
     </div>
