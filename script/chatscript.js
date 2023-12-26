@@ -79,8 +79,8 @@ $(document).ready(function () {
                     <input type="text" id="keyNumber" placeholder="Enter Key Number">
         
                     <button id="submitInput">Submit</button>
-                </div>
-            `;
+                </div>`
+                ;
 
             // Display input boxes in the chat container
             displayBotMessage(inputHtml);

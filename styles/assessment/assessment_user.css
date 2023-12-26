@@ -229,18 +229,19 @@ a:hover {
 /* container2 */
 
 .buttonx #exportButton {
-  margin-top: 3px;
+  /* margin-top: 3px; */
   font-family: cursive, sans-serif;
   background-color: rgb(196, 160, 6);
   color: var(--color-white);
-  padding: 10px 20px;
+  padding: 10px 10px;
   border-radius: var(--card-border-radius);
   cursor: pointer;
 }
 
 .buttonx {
+  margin-bottom: 10px;
   display: inline-flex;
-  margin-top: 10px;
+  /* margin-top: 10px; */
   text-align: left;
 }
 .buttonx form {
@@ -253,14 +254,22 @@ main h2 {
   font-family: cursive;
 }
 .container2 {
+  width: 1300px;
+  height: 680px;
+  padding: 10px;
+  margin-top: 5px;
+  background-color: var(--color-white);
+  border-radius: 20px;
+}
+.container2 .row {
   margin-top: 5px;
   display: flex;
-  background-color: var(--color-white);
+  /* background-color: var(--color-white);
   padding: var(--card-padding);
   border-radius: var(--card-border-radius);
-  box-shadow: var(--box-shadow);
-  height: 620px;
-  width: 1300px;
+  box-shadow: var(--box-shadow); */
+  height: 610px;
+  width: 1280px;
   color: var(--color-dark);
   overflow-y: auto;
 }

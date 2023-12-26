@@ -17,6 +17,9 @@ darkMode.addEventListener('click', () => {
     document.body.classList.toggle('dark-mode-variables');
     darkMode.querySelector('span:nth-child(1)').classList.toggle('active');
     darkMode.querySelector('span:nth-child(2)').classList.toggle('active');
+    // document.body.classList.toggle("light-mode");
+    // localStorage.setItem("themeColor", themeButton.innerText);
+    // themeButton.innerText = document.body.classList.contains("light-mode") ? "dark_mode" : "light_mode";
 })
 
 

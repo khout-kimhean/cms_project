@@ -320,7 +320,6 @@ a:hover {
 }
 
 .right-section {
-  /* background-color: #181a1e; */
   margin-top: 1.4rem;
   height: 50px;
 }
@@ -337,7 +336,7 @@ a:hover {
 
 .right-section .dark-mode {
   background-color: var(--color-light);
-  background-color: var(--color-white);
+  /* background-color: var(--color-white); */
   display: flex;
   justify-content: space-between;
   align-items: center;

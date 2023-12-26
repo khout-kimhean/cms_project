@@ -15,6 +15,7 @@ if ($con->connect_error) {
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $servername = "localhost";
     $username = "root";
@@ -26,8 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-
-    // Use prepared statements to prevent SQL injection
     $sqlMergesumary_data = "
     INSERT IGNORE INTO assessment_user (
         request_no, request_for, branch, department, position, 
@@ -60,6 +59,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         comment
     FROM 
         user_move";
+
+    // Use prepared statements to prevent SQL injection
 
     if (isset($_POST['export'])) {
 
@@ -133,19 +134,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (mysqli_query($con, $deleteQuery)) {
             $alertType = 'success';
             $alertMessage = 'All data deleted successfully!';
+            header("Location: assessment_user.php"); // Redirect after successful delete
+            exit();
         } else {
             $alertType = 'danger';
-            $alertMessage = 'Error: ' . mysqli_error($con);
-            echo "Error executing delete query: " . $deleteQuery . "<br>" . mysqli_error($con);
+            $alertMessage = 'Error: Data deletion failed. Please contact the administrator.';
+            // Log the error to a secure location
+            error_log("Error executing delete query: " . $deleteQuery . "\n" . mysqli_error($con));
         }
     }
 
     if ($conn->query($sqlMergesumary_data) === TRUE) {
-        // Redirect only after processing the form data
-        header("Location: assessment_user.php");
-        exit();
+        // Code for other operations after data insertion
     } else {
-        echo "Error executing insert query: " . $sqlMergesumary_data . "<br>" . $conn->error;
+        $alertType = 'danger';
+        $alertMessage = 'Error: Data insertion failed. Please contact the administrator.';
+        // Log the error to a secure location
+        error_log("Error executing insert query: " . $sqlMergesumary_data . "\n" . $conn->error);
     }
 
     $conn->close();
@@ -279,7 +284,23 @@ mysqli_close($con);
         <main>
             <h2>List User Assessment</h2>
             <div class="container2">
+                <div class="buttonx">
+                    <form method="post" action="assessment_user.php">
+                        <button id="exportButton" type="submit" name="export">Export to Excel</button>
+                    </form>
 
+                    <!-- <button id="exportButton" onclick="exportTableToExcel('exportTable', 'data')">Export to Excel</button>   -->
+                    <form method="post" action="assessment_user.php">
+                        <button id="exportButton" type="submit" name="delete" class="form-btn-delete">Delete All
+                            Data</button>
+                    </form>
+                    <form action="assessment_user.php" method="post">
+                        <input id="exportButton" type="submit" value="Insert Data">
+                    </form>
+                    <form action="../assessment/assessment.php" method="post">
+                        <input id="exportButton" type="submit" value="<< Back">
+                    </form>
+                </div>
                 <div class="row">
                     <div class="col-md-8 offset-md-2">
                         <table class="table table-striped table-hover">
@@ -331,79 +352,79 @@ mysqli_close($con);
                                         <tr>
                                             <td>
                                                 <?php echo ++$id; ?>
-        </td>
-        <td>
-            <?php echo htmlspecialchars($row['request_no']); ?>
-        </td>
-        <td>
-            <?php echo htmlspecialchars($row['request_for']); ?>
-        </td>
-        <td>
-            <?php echo htmlspecialchars($row['branch']); ?>
-        </td>
-        <td>
-            <?php echo htmlspecialchars($row['department']); ?>
-        </td>
-        <td>
-            <?php echo htmlspecialchars($row['position']); ?>
-        </td>
-        <td>
-            <?php echo htmlspecialchars($row['function']); ?>
-        </td>
-        <td>
-            <?php echo htmlspecialchars($row['role']); ?>
-        </td>
-        <td>
-            <?php echo htmlspecialchars($row['m_branch']); ?>
-        </td>
-        <td>
-            <?php echo htmlspecialchars($row['m_department']); ?>
-        </td>
-        <td>
-            <?php echo htmlspecialchars($row['m_position']); ?>
-        </td>
-        <td>
-            <?php echo htmlspecialchars($row['m_function']); ?>
-        </td>
-        <td>
-            <?php echo htmlspecialchars($row['m_role']); ?>
-        </td>
-        <td>
-            <?php echo htmlspecialchars($row['duration']); ?>
-        </td>
-        <td>
-            <?php echo htmlspecialchars($row['requester']); ?>
-        </td>
-        <td>
-            <?php echo htmlspecialchars($row['request_date']); ?>
-        </td>
-        <td>
-            <?php echo htmlspecialchars($row['approver']); ?>
-        </td>
-        <td>
-            <?php echo htmlspecialchars($row['process_by']); ?>
-        </td>
-        <td>
-            <?php echo htmlspecialchars($row['technical_process']); ?>
-        </td>
-        <td>
-            <?php echo htmlspecialchars($row['status']); ?>
-        </td>
-        <td t itle="<?php echo htmlspecialchars($row['comment']); ?>">
-            <?php
-            $comment = htmlspecialchars($row['comment']);
-            echo strlen($comment) > 20 ? substr($comment, 0, 20) . '...' : $comment;
-            ?>
+                                            </td>
+                                            <td>
+                                                <?php echo htmlspecialchars($row['request_no']); ?>
+                                            </td>
+                                            <td>
+                                                <?php echo htmlspecialchars($row['request_for']); ?>
+                                            </td>
+                                            <td>
+                                                <?php echo htmlspecialchars($row['branch']); ?>
+                                            </td>
+                                            <td>
+                                                <?php echo htmlspecialchars($row['department']); ?>
+                                            </td>
+                                            <td>
+                                                <?php echo htmlspecialchars($row['position']); ?>
+                                            </td>
+                                            <td>
+                                                <?php echo htmlspecialchars($row['function']); ?>
+                                            </td>
+                                            <td>
+                                                <?php echo htmlspecialchars($row['role']); ?>
+                                            </td>
+                                            <td>
+                                                <?php echo htmlspecialchars($row['m_branch']); ?>
+                                            </td>
+                                            <td>
+                                                <?php echo htmlspecialchars($row['m_department']); ?>
+                                            </td>
+                                            <td>
+                                                <?php echo htmlspecialchars($row['m_position']); ?>
+                                            </td>
+                                            <td>
+                                                <?php echo htmlspecialchars($row['m_function']); ?>
+                                            </td>
+                                            <td>
+                                                <?php echo htmlspecialchars($row['m_role']); ?>
+                                            </td>
+                                            <td>
+                                                <?php echo htmlspecialchars($row['duration']); ?>
+                                            </td>
+                                            <td>
+                                                <?php echo htmlspecialchars($row['requester']); ?>
+                                            </td>
+                                            <td>
+                                                <?php echo htmlspecialchars($row['request_date']); ?>
+                                            </td>
+                                            <td>
+                                                <?php echo htmlspecialchars($row['approver']); ?>
+                                            </td>
+                                            <td>
+                                                <?php echo htmlspecialchars($row['process_by']); ?>
+                                            </td>
+                                            <td>
+                                                <?php echo htmlspecialchars($row['technical_process']); ?>
+                                            </td>
+                                            <td>
+                                                <?php echo htmlspecialchars($row['status']); ?>
+                                            </td>
+                                            <td <?php echo htmlspecialchars($row['comment']); ?>>
+                                                <?php
+                                                $comment = htmlspecialchars($row['comment']);
+                                                echo strlen($comment) > 20 ? substr($comment, 0, 20) . '...' : $comment;
+                                                ?>
                                             </td>
                                             <td>
 
                                                 <a href=" ../templates/assessment_user.php?delete=<?php echo $row['id']; ?>">
-            Delete</a>
+                                                    Delete</a>
 
-        </td>
+                                            </td>
 
-        </tr>
-    <?php }
+                                        </tr>
+                                    <?php }
                                 } else {
                                     echo "<tr><td colspan='7'>No files found.</td></tr>";
                                 }
@@ -413,23 +434,7 @@ mysqli_close($con);
                     </div>
                 </div>
             </div>
-            <div class="buttonx">
-                <form method="post" action="assessment_user.php">
-                    <button id="exportButton" type="submit" name="export">Export to Excel</button>
-                </form>
 
-                <!-- <button id="exportButton" onclick="exportTableToExcel('exportTable', 'data')">Export to Excel</button>   -->
-                <form method="post" action="assessment_user.php">
-                    <button id="exportButton" type="submit" name="delete" class="form-btn-delete">Delete All
-                        Data</button>
-                </form>
-                <form action="assessment_user.php" method="post">
-                    <input id="exportButton" type="submit" value="Insert Data">
-                </form>
-                <form action="../assessment/assessment.php" method="post">
-                    <input id="exportButton" type="submit" value="<< Back">
-                </form>
-            </div>
 
         </main>
         <div class="right-section">
@@ -453,19 +458,19 @@ mysqli_close($con);
                         <p>Welcome</p>
                         <small class="text-muted">
                             <?php echo $_SESSION['user_name']; ?>
-</small>
-</div>
-<div class="profile-photo">
-    <img src="../images/logo/user.png">
-</div>
-</div>
+                        </small>
+                    </div>
+                    <div class="profile-photo">
+                        <img src="../images/logo/user.png">
+                    </div>
+                </div>
 
-</div>
-</div>
-</div>
+            </div>
+        </div>
+    </div>
 
 
-<script src="../script/index.js"></script>
+    <script src="../script/index.js"></script>
 </body>
 
 </html>

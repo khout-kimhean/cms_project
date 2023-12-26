@@ -1,26 +1,8 @@
 <?php
-// session_start();
-
-// Include the file with the access check
-include '../dashboard/check_access.php';
-
-// Database configuration
-$db_host = 'localhost';
-$db_username = 'root';
-$db_password = '';
-$db_name = 'demo';
-
-$conn = new mysqli($db_host, $db_username, $db_password, $db_name);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-$error = array();
-
-$sql = "SELECT * FROM login_register";
-$result = $conn->query($sql);
+include '../connect/conectdb.php';
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,29 +11,30 @@ $result = $conn->query($sql);
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../styles/assessment/upload.css">
-    <title>Assessment</title>
+    <link rel="stylesheet" type="text/css" href="../styles/notification/notification.css">
+    <title>Admin Dashboard</title>
 </head>
 
 <body>
 
     <div class="container">
-        <!-- Sidebar Section -->
+
         <aside>
             <div class="toggle">
+
                 <div class="logo">
                     <img src="../images/logo/logo.jpg">
                     <h2>FTB <span class="danger">Bank</span></h2>
                 </div>
                 <div class="close" id="close-btn">
                     <span class="material-icons-sharp">
-                        close
+                        <!-- close -->
                     </span>
                 </div>
             </div>
 
             <div class="sidebar">
-                <a href="../dashboard/dashboard.php">
+                <a href="./dashboard.php">
                     <span class="material-icons-sharp">
                         dashboard
                     </span>
@@ -80,7 +63,7 @@ $result = $conn->query($sql);
                     </span>
                     <h3>View File</h3>
                 </a> -->
-                <a href="../assessment/assessment.php" class="active">
+                <a href="../assessment/assessment.php">
                     <span class="fa fa-address-book">
                         <!-- fab fa-app-store-ios -->
                     </span>
@@ -114,25 +97,18 @@ $result = $conn->query($sql);
         </aside>
         <main>
             <div class="container2">
-                <a href="../assessment/assessment.php" class="back-button">
-                    <i class="fa fa-chevron-circle-left" style="font-size:28px">Back</i>
-                </a>
-                <h2>Upload User Resign</h2>
-                <!-- <div class="content">
-                    <h2>Upload User Resign Or</h2>
-                    <a href="#">
-                        <button class="input">Input Manual</button>
+                <div class="back_button">
+                    <a href="../dashboard/dashboard.php" class="back-button">
+                        <i class="fa fa-chevron-circle-left" style="font-size: 25px">Back</i>
                     </a>
-                </div> -->
-                <form method="post" enctype="multipart/form-data" id="uploadForm" onsubmit="changeBackground()">
-                    <label for="file">Select file Excel to Upload:</label>
-                    <input class="upload" type="file" name="file" id="file">
-                    <input class="submit" type="submit" name="submit" value="Upload File" id="uploadButton">
-                </form>
+                    <h1>Reminder</h1>
+                </div>
+
             </div>
         </main>
         <div class="right-section">
             <div class="nav">
+
                 <button id="menu-btn">
                     <span class="material-icons-sharp">
                         menu
@@ -154,12 +130,16 @@ $result = $conn->query($sql);
                             <?php echo $_SESSION['user_name']; ?>
                         </small>
                     </div>
+                    <!-- <a href="../user_mgt/change_password.php"> -->
                     <div class="profile-photo">
                         <img src="../images/logo/user.png">
                     </div>
+                    <!-- </a> -->
                 </div>
 
             </div>
+            <!-- End of Nav -->
+
 
 
         </div>

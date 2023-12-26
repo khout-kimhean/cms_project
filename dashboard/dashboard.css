@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
 
 :root {
+  --color-notification: red;
   /* --color-primary: #6c9bcf; */
   --color-primary: rgb(12, 77, 162);
   --color-danger: #ff0060;
@@ -400,6 +401,34 @@ main .recent-orders a {
   margin: 1rem auto;
   color: var(--color-primary);
 }
+
+/* notification */
+.right-section .notification img {
+  margin-right: 50px;
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.notification .count {
+  font-family: cursive;
+  margin-top: 20px;
+  position: absolute;
+  top: -5px;
+  right: 315px;
+  width: 24px;
+  height: 24px;
+  background: var(--color-danger);
+  border-radius: 50%;
+  color: var(--light);
+  border: 2px solid var(--color-dark);
+  font-weight: 400;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* end  */
 
 .right-section {
   margin-top: 1.4rem;

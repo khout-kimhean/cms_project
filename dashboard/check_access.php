@@ -50,6 +50,7 @@ $allowed_roles = [
     'upload_resign.php' => ['admin'],
     'assessment_user.php' => ['admin'],
     'asscess_new_user.php' => ['admin'],
+    'notification.php' => ['admin'],
 
 ];
 

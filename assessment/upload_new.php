@@ -265,12 +265,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
                 <a href="../assessment/assessment.php" class="back-button">
                     <i class="fa fa-chevron-circle-left" style="font-size: 28px;">Back</i>
                 </a>
-                <div class="content">
+                <h2>Upload New User</h2>
+                <!-- <div class="content">
                     <h2>Upload New User Or</h2>
                     <a href="../assessment/asscess_new_user.php">
                         <button class="input">Input Manual</button>
                     </a>
-                </div>
+                </div> -->
                 <form method="post" enctype="multipart/form-data" id="uploadForm" onsubmit="changeBackground()">
                     <label for="file">Select Excel File to Upload:</label>
                     <input class="upload" type="file" name="file" id="file" accept=".xls, .xlsx">

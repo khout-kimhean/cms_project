@@ -61,6 +61,7 @@ $result = $conn->query($sql);
 
         <aside>
             <div class="toggle">
+
                 <div class="logo">
                     <img src="../images/logo/logo.jpg">
                     <h2>FTB <span class="danger">Bank</span></h2>
@@ -177,15 +178,15 @@ $result = $conn->query($sql);
                 <div class="searches" onclick="window.location.href='#';" style="cursor: pointer;">
                     <div class="status">
                         <div class="info">
-                            <h3>Searches</h3>
-                            <h1>14,147</h1>
+                            <h3>Recover File</h3>
+                            <h1>4,000</h1>
                         </div>
                         <div class="progresss">
                             <svg>
                                 <circle cx="38" cy="38" r="36"></circle>
                             </svg>
                             <div class="percentage">
-                                <p>+21%</p>
+                                <p>+70%</p>
                             </div>
                         </div>
                     </div>
@@ -286,11 +287,16 @@ $result = $conn->query($sql);
         <!-- Right Section -->
         <div class="right-section">
             <div class="nav">
+
                 <button id="menu-btn">
                     <span class="material-icons-sharp">
                         menu
                     </span>
                 </button>
+                <a href="../dashboard/notification.php" class="notification">
+                    <i><img src="../images/logo/reminder2.png"></i>
+                    <span class="count">1</span>
+                </a>
                 <div class="dark-mode">
                     <span class="material-icons-sharp active">
                         light_mode
@@ -317,7 +323,7 @@ $result = $conn->query($sql);
             </div>
             <!-- End of Nav -->
 
-            <div class="user-profile" onclick="window.location.href='https://ftb.com.kh/en/'">
+            <div class="user-profile" onclick="window.location.href='../dashboard/chatgpt.html'">
                 <div class="logo">
                     <img src="../images/logo/logo.jpg" alt="FTB Bank Logo">
                     <h2>FTB Bank</h2>
@@ -328,8 +334,8 @@ $result = $conn->query($sql);
             <div class="reminders">
                 <div class="header">
                     <h2>Reminders</h2>
-                    <span class="material-icons-sharp">
-                        notifications_none
+                    <!-- <span class="material-icons-sharp"> -->
+                    <!-- notifications_none -->
                     </span>
                 </div>
 
