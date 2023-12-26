@@ -72,7 +72,7 @@ if (isset($_POST['submit'])) {
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../styles/file/input_upload.css">
+    <link rel="stylesheet" type="text/css" href="../styles/file/datachat.css">
     <title>Admin Dashboard</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -249,7 +249,12 @@ if (isset($_POST['submit'])) {
         <main>
             <div class="container2">
                 <div class="wrapper">
-                    <h1>Input Data for Chatbot</h1>
+                    <div class="content">
+                        <a href="../dashboard/dashboard.php" class="back-button">
+                            <i class="fa fa-chevron-circle-left" style="font-size: 26px">Back</i>
+                        </a>
+                        <h1>Input Data for Chatbot</h1>
+                    </div>
                     <!-- <div class="back_button">
                         <a href="../Admin Dashboard/admin.php" class="back-button">
                             <i class="fa fa-chevron-circle-left" style="font-size: 30px">Back</i>

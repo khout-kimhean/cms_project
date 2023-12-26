@@ -204,7 +204,7 @@ $result = $conn->query($sql);
                         </a>
                     </div>
                     <div class="user disable-for-restricted">
-                        <a href="../data_store/datachat.php">
+                        <a href="../file/datachat.php">
                             <!-- <i class="fa fa-upload" style="font-size:75px;color:blue"></i> -->
                             <img src="../images/file/file.png" alt="Upload File">
                             <h2>Data Chat</h2>
