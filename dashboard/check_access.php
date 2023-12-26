@@ -49,6 +49,8 @@ $allowed_roles = [
     'upload_move.php' => ['admin'],
     'upload_resign.php' => ['admin'],
     'assessment_user.php' => ['admin'],
+    'asscess_new_user.php' => ['admin'],
+
 ];
 
 if (!in_array($user_role, $allowed_roles[$current_page])) {

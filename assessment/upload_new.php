@@ -1,26 +1,171 @@
 <?php
-// session_start();
 
-// Include the file with the access check
-include '../dashboard/check_access.php';
+require '../vendor/autoload.php';
 
-// Database configuration
-$db_host = 'localhost';
-$db_username = 'root';
-$db_password = '';
-$db_name = 'demo';
+include '../connect/conectdb.php';
 
-$conn = new mysqli($db_host, $db_username, $db_password, $db_name);
+$alertType = "";
+$alertMessage = "";
+// Create a database connection
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
+    $fileTmpPath = $_FILES['file']['tmp_name'];
+    $fileName = $_FILES['file']['name'];
+    $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+    if (!empty($fileName) && in_array($fileExtension, ['xlsx', 'xls'])) {
+        // Load the Excel file
+        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($fileTmpPath);
+        $worksheet = $spreadsheet->getActiveSheet();
+
+        // Prepare the SQL statement outside the loop
+        $sql = "INSERT INTO user_move (request_no, fullname, branch, department, position, application, function, role, m_branch, m_department, m_position, m_function, m_role,  requester,duration, comment , request_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+
+        if (!$stmt) {
+            echo "Error preparing SQL statement: " . $conn->error;
+            exit;
+        }
+
+        // Bind parameters outside the loop
+        $stmt->bind_param("sssssssssssssssss", $request_no, $fullname, $branch, $department, $position, $application, $function, $role, $m_branch, $m_department, $m_position, $m_function, $m_role, $requester, $duration, $comment, $request_date);
+
+        // Iterate through rows starting from the 7th row (adjust based on your data)
+        for ($rowIndex = 7; $rowIndex <= 10; $rowIndex++) {
+            // Extracting values based on the structure of your data
+            $request_no_cell = $worksheet->getCell('B' . ($rowIndex - 4));
+            $request_no_value = $request_no_cell->getValue();
+            $matches = [];
+            preg_match('/Request No: (\d+)/', $request_no_value, $matches);
+            $request_no = isset($matches[1]) ? $matches[1] : '';
+
+
+            $fullname = $worksheet->getCell('C' . ($rowIndex + 12))->getValue();
+
+            // Remove unnecessary text from the fullname
+            $fullname = str_replace('Name: ', '', $fullname);
+            if ($rowIndex % 7 !== 0) {
+                continue;
+            }
+
+            $branch = $worksheet->getCell('C' . $rowIndex)->getValue();
+
+            $branch = str_replace('Branch: ', '', $branch);
+            if ($rowIndex % 7 !== 0) {
+                continue;
+            }
+
+            // m_branch
+            $m_branch = $worksheet->getCell('C' . $rowIndex)->getValue();
+
+            $m_branch = str_replace('Branch: ', '', $m_branch);
+            if ($rowIndex % 7 !== 0) {
+                continue;
+            }
+
+
+
+            $department = $worksheet->getCell('D' . $rowIndex)->getValue();
+
+            $department = str_replace('Department: ', '', $department);
+            if ($rowIndex % 7 !== 0) {
+                continue;
+            }
+
+
+            // m_department
+            $m_department = $worksheet->getCell('D' . ($rowIndex + 6))->getValue();
+
+            $m_department = str_replace('Department: ', '', $m_department);
+            if ($rowIndex % 7 !== 0) {
+                continue;
+            }
+
+
+
+            $position = $worksheet->getCell('F' . $rowIndex)->getValue();
+
+            $position = str_replace('Position: ', '', $position);
+            if ($rowIndex % 7 !== 0) {
+                continue;
+            }
+            // m_position
+            $m_position = $worksheet->getCell('F' . ($rowIndex + 6))->getValue();
+
+            $m_position = str_replace('Position: ', '', $m_position);
+            if ($rowIndex % 7 !== 0) {
+                continue;
+            }
+
+
+            $application = $worksheet->getCell('C' . ($rowIndex + 4))->getValue();
+            $function = $worksheet->getCell('F' . ($rowIndex + 4))->getValue();
+            $function = str_replace(': ', '', $function);
+            if ($rowIndex % 7 !== 0) {
+                continue;
+            }
+            // m_function
+            $m_function = $worksheet->getCell('F' . ($rowIndex + 10))->getValue();
+            $m_function = str_replace(': ', '', $m_function);
+            if ($rowIndex % 7 !== 0) {
+                continue;
+            }
+            $m_role = $worksheet->getCell('D' . ($rowIndex + 10))->getValue();
+
+            $role = $worksheet->getCell('D' . ($rowIndex + 4))->getValue();
+
+            $requester = $worksheet->getCell('B' . ($rowIndex + 15))->getValue();
+
+            $requester = preg_replace('/(?:Name:|Date: \d{1,2}\/[a-zA-Z]+\/\d{4})/', '', $requester);
+            if ($rowIndex % 7 !== 0) {
+                continue;
+            }
+
+            $duration = $worksheet->getCell('C' . ($rowIndex - 1))->getValue();
+
+            $duration = str_replace(': ', '', $duration);
+            if ($rowIndex % 7 !== 0) {
+                continue;
+            }
+
+            $comment = $worksheet->getCell('C' . ($rowIndex + 14))->getValue();
+
+            $comment = str_replace('Description: ', '', $comment);
+            if ($rowIndex % 7 !== 0) {
+                continue;
+            }
+            $request_date_cell = $worksheet->getCell('B' . ($rowIndex + 15));
+            $request_date_value = $request_date_cell->getValue();
+            $matches = [];
+            preg_match('/Date: (\S+)/', $request_date_value, $matches);
+            $request_date = isset($matches[1]) ? $matches[1] : '';
+            $alertType = "success";
+            $alertMessage = "File uploaded successfully.";
+            if (!$stmt->execute()) {
+                $alertType = "danger";
+                $alertMessage = "Error inserting data: " . $stmt->error;
+                $stmt->close();
+                $conn->close();
+                break;  // Exit the loop if there's an error
+            }
+
+            $alertType = "success";
+            $alertMessage = "File uploaded successfully.";
+        }
+
+        $stmt->close();
+        $conn->close();
+
+    } else {
+        $alertType = "danger";
+        $alertMessage = "Invalid file format. Please upload an Excel file.";
+    }
 }
-
-$error = array();
-
-$sql = "SELECT * FROM login_register";
-$result = $conn->query($sql);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -118,12 +263,17 @@ $result = $conn->query($sql);
         <main>
             <div class="container2">
                 <a href="../assessment/assessment.php" class="back-button">
-                    <i class="fa fa-chevron-circle-left" style="font-size:28px">Back</i>
+                    <i class="fa fa-chevron-circle-left" style="font-size: 28px;">Back</i>
                 </a>
-                <h2>Upload New User</h2>
+                <div class="content">
+                    <h2>Upload New User Or</h2>
+                    <a href="../assessment/asscess_new_user.php">
+                        <button class="input">Input Manual</button>
+                    </a>
+                </div>
                 <form method="post" enctype="multipart/form-data" id="uploadForm" onsubmit="changeBackground()">
-                    <label for="file">Select file Excel to Upload:</label>
-                    <input class="upload" type="file" name="file" id="file">
+                    <label for="file">Select Excel File to Upload:</label>
+                    <input class="upload" type="file" name="file" id="file" accept=".xls, .xlsx">
                     <input class="submit" type="submit" name="submit" value="Upload File" id="uploadButton">
                 </form>
             </div>

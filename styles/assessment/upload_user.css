@@ -106,7 +106,7 @@ b {
 }
 
 .danger {
-  color: var(--color-danger);
+  color: rgb(40, 13, 174);
 }
 
 .success {

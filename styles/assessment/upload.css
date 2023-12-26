@@ -104,7 +104,7 @@ b {
 }
 
 .danger {
-  color: var(--color-danger);
+  color: rgb(40, 13, 174);
 }
 
 .success {
@@ -240,20 +240,12 @@ main {
   /* width: 1290px; */
   color: var(--color-dark);
 }
-.container2 a {
-  font-size: 12px;
-  color: rgb(12, 77, 162);
-}
+
 .alert {
   text-align: center;
   margin-top: 50px;
   font-size: 16px;
   color: var(--color-dark);
-}
-.container2 h2 {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  font-size: 24px;
 }
 .container2 .upload {
   cursor: pointer;
@@ -276,6 +268,26 @@ main {
   padding: 12px;
   background-color: rgb(192, 160, 16);
   color: var(--color-dark);
+}
+.back-button {
+  color: rgb(12, 77, 162);
+}
+.content .input {
+  margin-left: 30%;
+  font-family: cursive;
+  font-size: 16px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  color: var(--color-dark);
+  background-color: rgb(192, 160, 16);
+  width: 150%;
+  padding: 8px;
+  border-radius: 20px;
+}
+.content {
+  margin-top: 20px;
+  padding: 8px;
+  display: flex;
 }
 .right-section {
   /* background-color: #181a1e; */

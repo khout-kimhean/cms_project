@@ -118,56 +118,19 @@ $result = $conn->query($sql);
         </aside>
         <main>
             <div class="container2">
-                <h1 class="h1">Upload User Assessment</h1>
+                <!-- <h1 class="h1">Upload User Assessment</h1> -->
+                <div class="content">
+                    <h1 class="h1">Upload User Assessment Or</h1>
+                    <a href="#">
+                        <button class="input">Input Manual</button>
+                    </a>
+                </div>
                 <form method="post" enctype="multipart/form-data" action="process_upload.php" id="uploadForm">
                     <div class="item">
                         <input class="file" type="file" name="fileInput" id="fileInput" />
                         <button type="button" id="submitBtn">Submit</button>
                     </div>
                 </form>
-                <div class="table">
-                    <table>
-                        <th>#</th>
-                        <th>Request.No</th>
-                        <th>Fill Name</th>
-                        <th>Branch</th>
-                        <th>Department</th>
-                        <th>Position</th>
-                        <th>Application</th>
-                        <th>Role</th>
-                        <th>Function</th>
-                        <th>M_Branch</th>
-                        <th>M_Department</th>
-                        <th>M_Position</th>
-                        <th>M_Application</th>
-                        <th>M_Role</th>
-                        <th>M_Function</th>
-                        <th>Requester</th>
-                        <th>Comment</th>
-                    </table>
-                    <tbody>
-                        <tr>
-                            <!-- <th>#</th>
-                            <th>Request.No</th>
-                            <th>Fill Name</th>
-                            <th>Branch</th>
-                            <th>Department</th>
-                            <th>Position</th>
-                            <th>Application</th>
-                            <th>Role</th>
-                            <th>Function</th>
-                            <th>M_Branch</th>
-                            <th>M_Department</th>
-                            <th>M_Position</th>
-                            <th>M_Application</th>
-                            <th>M_Role</th>
-                            <th>M_Function</th>
-                            <th>Requester</th>
-                            <th>Comment</th> -->
-                        </tr>
-                    </tbody>
-                </div>
-                <div id="output"></div>
             </div>
         </main>
         <div class="right-section">

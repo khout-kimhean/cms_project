@@ -331,79 +331,79 @@ mysqli_close($con);
                                         <tr>
                                             <td>
                                                 <?php echo ++$id; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['request_no']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['request_for']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['branch']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['department']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['position']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['function']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['role']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['m_branch']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['m_department']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['m_position']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['m_function']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['m_role']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['duration']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['requester']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['request_date']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['approver']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['process_by']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['technical_process']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['status']); ?>
-                                            </td>
-                                            <td t itle="<?php echo htmlspecialchars($row['comment']); ?>">
-                                                <?php
-                                                $comment = htmlspecialchars($row['comment']);
-                                                echo strlen($comment) > 20 ? substr($comment, 0, 20) . '...' : $comment;
-                                                ?>
+        </td>
+        <td>
+            <?php echo htmlspecialchars($row['request_no']); ?>
+        </td>
+        <td>
+            <?php echo htmlspecialchars($row['request_for']); ?>
+        </td>
+        <td>
+            <?php echo htmlspecialchars($row['branch']); ?>
+        </td>
+        <td>
+            <?php echo htmlspecialchars($row['department']); ?>
+        </td>
+        <td>
+            <?php echo htmlspecialchars($row['position']); ?>
+        </td>
+        <td>
+            <?php echo htmlspecialchars($row['function']); ?>
+        </td>
+        <td>
+            <?php echo htmlspecialchars($row['role']); ?>
+        </td>
+        <td>
+            <?php echo htmlspecialchars($row['m_branch']); ?>
+        </td>
+        <td>
+            <?php echo htmlspecialchars($row['m_department']); ?>
+        </td>
+        <td>
+            <?php echo htmlspecialchars($row['m_position']); ?>
+        </td>
+        <td>
+            <?php echo htmlspecialchars($row['m_function']); ?>
+        </td>
+        <td>
+            <?php echo htmlspecialchars($row['m_role']); ?>
+        </td>
+        <td>
+            <?php echo htmlspecialchars($row['duration']); ?>
+        </td>
+        <td>
+            <?php echo htmlspecialchars($row['requester']); ?>
+        </td>
+        <td>
+            <?php echo htmlspecialchars($row['request_date']); ?>
+        </td>
+        <td>
+            <?php echo htmlspecialchars($row['approver']); ?>
+        </td>
+        <td>
+            <?php echo htmlspecialchars($row['process_by']); ?>
+        </td>
+        <td>
+            <?php echo htmlspecialchars($row['technical_process']); ?>
+        </td>
+        <td>
+            <?php echo htmlspecialchars($row['status']); ?>
+        </td>
+        <td t itle="<?php echo htmlspecialchars($row['comment']); ?>">
+            <?php
+            $comment = htmlspecialchars($row['comment']);
+            echo strlen($comment) > 20 ? substr($comment, 0, 20) . '...' : $comment;
+            ?>
                                             </td>
                                             <td>
 
                                                 <a href=" ../templates/assessment_user.php?delete=<?php echo $row['id']; ?>">
-                                                    Delete</a>
+            Delete</a>
 
-                                            </td>
+        </td>
 
-                                        </tr>
-                                    <?php }
+        </tr>
+    <?php }
                                 } else {
                                     echo "<tr><td colspan='7'>No files found.</td></tr>";
                                 }
@@ -453,19 +453,19 @@ mysqli_close($con);
                         <p>Welcome</p>
                         <small class="text-muted">
                             <?php echo $_SESSION['user_name']; ?>
-                        </small>
-                    </div>
-                    <div class="profile-photo">
-                        <img src="../images/logo/user.png">
-                    </div>
-                </div>
+</small>
+</div>
+<div class="profile-photo">
+    <img src="../images/logo/user.png">
+</div>
+</div>
 
-            </div>
-        </div>
-    </div>
+</div>
+</div>
+</div>
 
 
-    <script src="../script/index.js"></script>
+<script src="../script/index.js"></script>
 </body>
 
 </html>

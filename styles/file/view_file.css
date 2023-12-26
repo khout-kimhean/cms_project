@@ -102,10 +102,12 @@ b {
 
 .primary {
   color: var(--color-primary);
+  /* color: rgb(40, 13, 174); */
 }
 
 .danger {
-  color: var(--color-danger);
+  /* color: var(--color-danger); */
+  color: rgb(40, 13, 174);
 }
 
 .success {
@@ -254,7 +256,7 @@ li {
 .form-group label {
   font-family: cursive, sans-serif;
   font-size: 18px;
-
+  /* border-radius: 20px; */
   overflow-y: auto;
 }
 main {

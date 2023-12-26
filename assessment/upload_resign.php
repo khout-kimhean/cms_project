@@ -117,7 +117,13 @@ $result = $conn->query($sql);
                 <a href="../assessment/assessment.php" class="back-button">
                     <i class="fa fa-chevron-circle-left" style="font-size:28px">Back</i>
                 </a>
-                <h2>Upload User Resign</h2>
+
+                <div class="content">
+                    <h2>Upload User Resign Or</h2>
+                    <a href="#">
+                        <button class="input">Input Manual</button>
+                    </a>
+                </div>
                 <form method="post" enctype="multipart/form-data" id="uploadForm" onsubmit="changeBackground()">
                     <label for="file">Select file Excel to Upload:</label>
                     <input class="upload" type="file" name="file" id="file">
