@@ -1,7 +1,8 @@
 <?php
+include '../connect/role_access.php';
 require '../vendor/autoload.php';
 include '../dashboard/check_access.php';
-include '../connect/role_access.php';
+
 $host = "localhost";
 $user = "root";
 $pass = "";

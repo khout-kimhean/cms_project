@@ -13,9 +13,14 @@ function isLinkDisabled($link)
         'assessment.php' => ['admin', 'card payment team'],
         'showuser.php' => ['admin'],
         'chatgpt.php' => ['admin'],
+        'testchat.php' => ['admin'],
         'user_management.php' => ['admin'],
 
+
+        'search_user.php' => ['admin'],
+        'assign_function.php' => ['admin'],
         // <!-- store file -->
+        // 'upload_file.php' => ['admin'],
         'upload_file.php' => ['admin', 'card payment team', 'digital branch team', 'atm team', 'terminal team',],
         'view_file.php' => ['admin', 'card payment team', 'digital branch team', 'atm team', 'terminal team',],
         'view.php' => ['admin', 'card payment team', 'digital branch team', 'atm team', 'terminal team',],
@@ -42,6 +47,7 @@ function isLinkDisabled($link)
         'createuser.php' => ['admin'],
         'edit_user.php' => ['admin'],
 
+
         // <!-- find error -->
         'read_error_inlog.php' => ['admin', 'card payment team', 'digital branch team', 'user'],
         'read_by_keyword.php' => ['admin', 'card payment team', 'digital branch team', 'user'],
@@ -51,6 +57,7 @@ function isLinkDisabled($link)
 
     $userRole = $_SESSION['user_role'];
 
+    // Check if the link is in the allowed roles array and user role is not in the allowed roles
     if (isset($allowedRoles[$link]) && !in_array($userRole, $allowedRoles[$link])) {
         return 'style="pointer-events: none; opacity: 0.5;" onclick="event.preventDefault(); alert(\'You do not have permission to access this option.\');"';
     }

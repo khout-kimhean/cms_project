@@ -392,7 +392,7 @@ $result = $conn->query($sql);
                         </span>
                     </div>
                 </div>
-                <a href="../chatbot/bot.php">
+                <a href="../dashboard/testschat.php" <?php echo isLinkDisabled('testschat.php'); ?>>
                     <div class="notification add-reminder">
                         <div>
                             <span class="material-icons-sharp">
@@ -402,6 +402,8 @@ $result = $conn->query($sql);
                         </div>
                     </div>
                 </a>
+
+
             </div>
 
         </div>

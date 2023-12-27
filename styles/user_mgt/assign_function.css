@@ -238,7 +238,7 @@ a:hover {
   border-radius: var(--card-border-radius);
   box-shadow: var(--box-shadow);
   height: 88%;
-  width: 100%;
+  width: 138%;
   color: var(--color-dark);
 }
 .container2 .back_button a {
@@ -386,6 +386,7 @@ a:hover {
 /* end main  */
 
 .right-section {
+  height: 50px;
   margin-top: 1.4rem;
 }
 

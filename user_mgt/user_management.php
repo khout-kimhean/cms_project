@@ -130,7 +130,7 @@ $result = $conn->query($sql);
                             </div>
                         </div>
                     </div>
-                    <div class="visits" onclick="window.location.href='../user_mgt/search_user.php';"
+                    <!-- <div class="visits" onclick="window.location.href='../user_mgt/search_user.php';"
                         style="cursor: pointer;">
                         <div class="status">
                             <div class="info">
@@ -141,7 +141,7 @@ $result = $conn->query($sql);
                                 <img src="../images/usermgt/usermgt.png">
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="visits" onclick="window.location.href='../user_mgt/showuser.php';"
                         style="cursor: pointer;">
                         <div class="status">

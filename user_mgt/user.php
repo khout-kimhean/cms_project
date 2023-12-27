@@ -174,6 +174,7 @@ if (isset($_POST['search'])) {
                                                 <th>User Name</th>
                                                 <th>Email</th>
                                                 <th>Type User</th>
+                                                <!-- <th>Permission</th> -->
                                                 <th>Option</th>
                                             </tr>
                                         </thead>
@@ -197,11 +198,15 @@ if (isset($_POST['search'])) {
                                                         <td>
                                                             <?php echo htmlspecialchars($row['user_type']); ?>
                                                         </td>
-                                                        </td>
+
+                                                        <!-- <td><a
+                                                        href="../user_mgt/assign_function.php?id=<?php echo $row['id']; ?>">
+                                                        Permission</a>
+                                                </td> -->
                                                         <td>
                                                             <a href="edit_user.php?id=<?php echo $row['id']; ?>">Edit</a>
                                                         </td>
-                                                        </td>
+
                                                     </tr>
                                                     <?php
                                                 }
