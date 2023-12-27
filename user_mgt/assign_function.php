@@ -1,5 +1,7 @@
 <?php
+include '../connect/role_access.php';
 include '../dashboard/check_access.php';
+
 $db_host = 'localhost';
 $db_username = 'root';
 $db_password = '';
@@ -69,6 +71,8 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 } else {
 }
 $conn->close();
+
+
 ?>
 
 
@@ -117,24 +121,27 @@ $conn->close();
                     </span>
                     <h3>Contact</h3>
                 </a> -->
-                <a href="../file/file_mgt.php">
+                <a href="../file/file_mgt.php" <?php echo isLinkDisabled('file_mgt.php'); ?>>
                     <span class="fa fa-upload">
                     </span>
                     <h3>Store File</h3>
                 </a>
+
                 <!-- <a href="../data_store/list_upload.php">
                     <span class="material-icons-sharp">
                         inventory
                     </span>
                     <h3>View File</h3>
                 </a> -->
-                <a href="../assessment/assessment.php">
+                <a href="../assessment/assessment.php" <?php echo isLinkDisabled('assessment.php'); ?>>
                     <span class="fa fa-address-book">
                         <!-- fab fa-app-store-ios -->
                     </span>
                     <h3>Assessment</h3>
                 </a>
-                <a href="../user_mgt/user_management.php" class="active">
+
+                <a href="../user_mgt/user_management.php" <?php echo isLinkDisabled('user_management.php'); ?>
+                    class="active">
                     <span class="fa fa-user-circle">
                     </span>
                     <h3>User Mgt</h3>
@@ -345,7 +352,7 @@ $conn->close();
             </div>
         </div>
     </div>
-    <!-- <script src="orders.js"></script> -->
+    <script src="../script/role_check.js"></script>
     <script src="../script/index.js"></script>
 </body>
 

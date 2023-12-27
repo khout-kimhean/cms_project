@@ -1,4 +1,5 @@
 <?php
+include '../connect/role_access.php';
 include '../dashboard/check_access.php';
 $servername = "localhost";
 $username = "root";
@@ -83,7 +84,7 @@ if (isset($_POST['search'])) {
                     </span>
                     <h3>Contact</h3>
                 </a> -->
-                <a href="../file/file_mgt.php">
+                <a href="../file/file_mgt.php" <?php echo isLinkDisabled('file_mgt.php'); ?>>
                     <span class="fa fa-upload">
                     </span>
                     <h3>Store File</h3>
@@ -95,14 +96,14 @@ if (isset($_POST['search'])) {
                     </span>
                     <h3>View File</h3>
                 </a> -->
-                <a href="../assessment/assessment.php" class="active">
+                <a href="../assessment/assessment.php" <?php echo isLinkDisabled('assessment.php'); ?> class="active">
                     <span class="fa fa-address-book">
                         <!-- fab fa-app-store-ios -->
                     </span>
                     <h3>Assessment</h3>
                 </a>
 
-                <a href="../user_mgt/user_management.php">
+                <a href="../user_mgt/user_management.php" <?php echo isLinkDisabled('user_management.php'); ?>>
                     <span class="fa fa-user-circle">
                     </span>
                     <h3>User Mgt</h3>
@@ -161,41 +162,41 @@ if (isset($_POST['search'])) {
                                 </thead>
                                 <tbody>
                                     <?php if (!empty($searchResults)): ?>
-                                    <?php
+                                        <?php
                                         $i = 1; // Initialize the ID counter to 1
                                         foreach ($searchResults as $row):
                                             ?>
-                                    <tr>
-                                        <td>
-                                            <?php echo $i; // Display the ID starting from 1 ?>
-                                        </td>
-                                        <td>
-                                            <?php echo htmlspecialchars($row['display_name']); ?>
-                                        </td>
-                                        <td title="<?php echo htmlspecialchars($row['branch']); ?>">
-                                            <?php
+                                            <tr>
+                                                <td>
+                                                    <?php echo $i; // Display the ID starting from 1 ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row['display_name']); ?>
+                                                </td>
+                                                <td title="<?php echo htmlspecialchars($row['branch']); ?>">
+                                                    <?php
                                                     $branch = htmlspecialchars($row['branch']);
                                                     echo strlen($branch) > 18 ? substr($branch, 0, 40) . '...' : $branch;
                                                     ?>
-                                        </td>
-                                        <td title="<?php echo htmlspecialchars($row['position']); ?>">
-                                            <?php
+                                                </td>
+                                                <td title="<?php echo htmlspecialchars($row['position']); ?>">
+                                                    <?php
                                                     $position = htmlspecialchars($row['position']);
                                                     echo strlen($position) > 20 ? substr($position, 0, 20) . '...' : $position;
                                                     ?>
-                                        </td>
-                                        <td>
-                                            <a href="user_resign.php?id=<?php echo $row['id']; ?>">Resign User</a>
-                                        </td>
-                                    </tr>
-                                    <?php
+                                                </td>
+                                                <td>
+                                                    <a href="user_resign.php?id=<?php echo $row['id']; ?>">Resign User</a>
+                                                </td>
+                                            </tr>
+                                            <?php
                                             $i++; // Increment the ID counter for the next row
                                         endforeach;
                                         ?>
                                     <?php else: ?>
-                                    <tr>
-                                        <td colspan='7'>No files found.</td>
-                                    </tr>
+                                        <tr>
+                                            <td colspan='7'>No files found.</td>
+                                        </tr>
                                     <?php endif; ?>
                                 </tbody>
 
@@ -237,71 +238,10 @@ if (isset($_POST['search'])) {
 
             </div>
 
-            <div class="user-profile">
-                <div class="logo">
-                    <img src="../images/logo/logo.jpg">
-                    <h2>FTB Bank</h2>
-                    <p>Welcome to FTB Bank</p>
-                </div>
-            </div>
 
-            <div class="reminders">
-                <div class="header">
-                    <h2>Reminders</h2>
-                    <span class="material-icons-sharp">
-                        notifications_none
-                    </span>
-                </div>
-
-                <div class="notification">
-                    <div class="icon">
-                        <span class="material-icons-sharp">
-                            volume_up
-                        </span>
-                    </div>
-                    <div class="content">
-                        <div class="info">
-                            <h3>Workshop</h3>
-                            <small class="text_muted">
-                                08:00 AM - 5:00 PM
-                            </small>
-                        </div>
-                        <span class="material-icons-sharp">
-                            more_vert
-                        </span>
-                    </div>
-                </div>
-
-                <div class="notification deactive">
-                    <div class="icon">
-                        <span class="material-icons-sharp">
-                            edit
-                        </span>
-                    </div>
-                    <div class="content">
-                        <div class="info">
-                            <h3>Workshop</h3>
-                            <small class="text_muted">
-                                08:00 AM - :00 PM
-                            </small>
-                        </div>
-                        <span class="material-icons-sharp">
-                            more_vert
-                        </span>
-                    </div>
-                </div>
-
-                <div class="notification add-reminder">
-                    <div>
-                        <span class="material-icons-sharp">
-                            add
-                        </span>
-                        <h3>Add Reminder</h3>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
+    <script src="../script/role_check.js"></script>
     <script src="../script/index.js"></script>
 </body>
 

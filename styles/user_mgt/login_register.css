@@ -235,7 +235,7 @@ main .form-container form {
   border-radius: var(--card-border-radius);
   box-shadow: var(--box-shadow);
   text-align: center;
-  margin: 70px 10px;
+  margin: 70px 0px;
   width: 138%;
 }
 .form-container .back_button {

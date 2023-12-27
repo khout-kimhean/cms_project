@@ -1,7 +1,7 @@
 <?php
 require '../vendor/autoload.php';
 include '../dashboard/check_access.php';
-
+include '../connect/role_access.php';
 $host = "localhost";
 $user = "root";
 $pass = "";
@@ -86,7 +86,7 @@ if (isset($_POST['search'])) {
                     </span>
                     <h3>Contact</h3>
                 </a> -->
-                <a href="../file/file_mgt.php">
+                <a href="../file/file_mgt.php" <?php echo isLinkDisabled('file_mgt.php'); ?>>
                     <span class="fa fa-upload">
                     </span>
                     <h3>Store File</h3>
@@ -98,14 +98,15 @@ if (isset($_POST['search'])) {
                     </span>
                     <h3>View File</h3>
                 </a> -->
-                <a href="../assessment/assessment.php">
+                <a href="../assessment/assessment.php" <?php echo isLinkDisabled('assessment.php'); ?>>
                     <span class="fa fa-address-book">
                         <!-- fab fa-app-store-ios -->
                     </span>
                     <h3>Assessment</h3>
                 </a>
 
-                <a href="../user_mgt/user_management.php" class="active">
+                <a href="../user_mgt/user_management.php" <?php echo isLinkDisabled('user_management.php'); ?>
+                    class="active">
                     <span class="fa fa-user-circle">
                     </span>
                     <h3>User Mgt</h3>
@@ -175,27 +176,27 @@ if (isset($_POST['search'])) {
                                                 $i = 1;
                                                 foreach ($searchResults as $row) {
                                                     ?>
-                                            <tr>
-                                                <td>
-                                                    <?php echo $i++; ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo htmlspecialchars($row['name']); ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo htmlspecialchars($row['email']); ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo htmlspecialchars($row['user_type']); ?>
-                                                </td>
+                                                    <tr>
+                                                        <td>
+                                                            <?php echo $i++; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo htmlspecialchars($row['name']); ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo htmlspecialchars($row['email']); ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo htmlspecialchars($row['user_type']); ?>
+                                                        </td>
 
-                                                <td><a
-                                                        href="../user_mgt/assign_function.php?id=<?php echo $row['id']; ?>">
-                                                        Add Permission</a>
-                                                </td>
+                                                        <td><a
+                                                                href="../user_mgt/assign_function.php?id=<?php echo $row['id']; ?>">
+                                                                Add Permission</a>
+                                                        </td>
 
-                                            </tr>
-                                            <?php
+                                                    </tr>
+                                                    <?php
                                                 }
                                             } else {
                                                 echo "<tr><td colspan='5'>No matching files found.</td></tr>";
@@ -308,7 +309,7 @@ if (isset($_POST['search'])) {
         </div>
     </div>
 
-    <!-- <script src="orders.js"></script> -->
+    <script src="../script/role_check.js"></script>
     <script src="../script/index.js"></script>
 </body>
 

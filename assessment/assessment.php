@@ -1,6 +1,6 @@
 <?php
 // session_start();
-
+include '../connect/role_access.php';
 // Include the file with the access check
 include '../dashboard/check_access.php';
 
@@ -20,6 +20,8 @@ $error = array();
 
 $sql = "SELECT * FROM login_register";
 $result = $conn->query($sql);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,7 +70,7 @@ $result = $conn->query($sql);
                     </span>
                     <h3>Contact</h3>
                 </a> -->
-                <a href="../file/file_mgt.php">
+                <a href="../file/file_mgt.php" <?php echo isLinkDisabled('file_mgt.php'); ?>>
                     <span class="fa fa-upload">
                     </span>
                     <h3>Store File</h3>
@@ -80,14 +82,14 @@ $result = $conn->query($sql);
                     </span>
                     <h3>View File</h3>
                 </a> -->
-                <a href="../assessment/assessment.php" class="active">
+                <a href="../assessment/assessment.php" <?php echo isLinkDisabled('assessment.php'); ?> class="active">
                     <span class="fa fa-address-book">
                         <!-- fab fa-app-store-ios -->
                     </span>
                     <h3>Assessment</h3>
                 </a>
 
-                <a href="../user_mgt/user_management.php">
+                <a href="../user_mgt/user_management.php" <?php echo isLinkDisabled('user_management.php'); ?>>
                     <span class="fa fa-user-circle">
                     </span>
                     <h3>User Mgt</h3>
@@ -119,56 +121,7 @@ $result = $conn->query($sql);
             <Div class="container2">
                 <h1 class="h1">Assessment</h1>
                 <!-- Analyses -->
-                <!-- <div class="analyse">
-                    <div class="sales" onclick="window.location.href='../assessment/newuser_assessment.php';"
-                        style="cursor: pointer;">
-                        <div class="status">
-                            <div class="info">
-                                <h1>New User</h1>
-                                <p>Manual Create</p>
-                            </div>
-                            <div>
-                                <img src="../images/usermgt/adduser.png">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="visits" onclick="window.location.href='../assessment/search_move.php';"
-                        style="cursor: pointer;">
-                        <div class="status">
-                            <div class="info">
-                                <h1>Move User</h1>
-                                <p>Manual Create</p>
-                            </div>
-                            <div>
-                                <img src="../images/usermgt/usermgt.png">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="searches" onclick="window.location.href='../assessment/search_resign.php';"
-                        style="cursor: pointer;">
-                        <div class="status">
-                            <div class="info">
-                                <h1>User Resign</h1>
-                                <p>Manual Create</p>
-                            </div>
-                            <div>
-                                <img src="../images/usermgt/move.png">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="status" onclick="window.location.href='../assessment/assessment_list.php';"
-                        style="cursor: pointer;">
-                        <div class="status">
-                            <div class="info">
-                                <h1>List User</h1>
-                                <p>Assessment</p>
-                            </div>
-                            <div>
-                                <img src="../images/file/file1.png">
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
+
                 <!-- <h1>Assessment</h1> -->
                 <div class="analyse">
                     <div class="status" onclick="window.location.href='../assessment/upload_new.php';"
@@ -216,6 +169,56 @@ $result = $conn->query($sql);
                             </div>
                             <div>
                                 <img src="../images/file/file.png">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="analyse">
+                    <div class="sales" onclick="window.location.href='../assessment/newuser_assessment.php';"
+                        style="cursor: pointer;">
+                        <div class="status">
+                            <div class="info">
+                                <h1>New User</h1>
+                                <p>Manual Create</p>
+                            </div>
+                            <div>
+                                <img src="../images/usermgt/adduser.png">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="visits" onclick="window.location.href='../assessment/search_move.php';"
+                        style="cursor: pointer;">
+                        <div class="status">
+                            <div class="info">
+                                <h1>Move User</h1>
+                                <p>Manual Create</p>
+                            </div>
+                            <div>
+                                <img src="../images/usermgt/usermgt.png">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="searches" onclick="window.location.href='../assessment/search_resign.php';"
+                        style="cursor: pointer;">
+                        <div class="status">
+                            <div class="info">
+                                <h1>User Resign</h1>
+                                <p>Manual Create</p>
+                            </div>
+                            <div>
+                                <img src="../images/usermgt/move.png">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="status" onclick="window.location.href='../assessment/assessment_list.php';"
+                        style="cursor: pointer;">
+                        <div class="status">
+                            <div class="info">
+                                <h1>List User</h1>
+                                <p>Assessment</p>
+                            </div>
+                            <div>
+                                <img src="../images/file/file1.png">
                             </div>
                         </div>
                     </div>
@@ -321,7 +324,7 @@ $result = $conn->query($sql);
 
         </div>
     </div>
-
+    <script src="../script/role_check.js"></script>
     <!-- <script src="orders.js"></script> -->
     <script src="../script/index.js"></script>
 </body>

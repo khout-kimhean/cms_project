@@ -2,7 +2,7 @@
 
 // Include the file with the access check
 include '../dashboard/check_access.php';
-include '../connect/role_access.php';
+
 // Database configuration
 $db_host = 'localhost';
 $db_username = 'root';
@@ -35,22 +35,11 @@ if ($totalFileResult) {
     echo "Error: " . $conn->error;
 }
 
-// total file deleted
-$totalDeleteSql = "SELECT COUNT(*) as total_delete FROM recover_file ";
-$totalDeleteResult = $conn->query($totalDeleteSql);
-if ($totalDeleteResult) {
-    $row = $totalDeleteResult->fetch_assoc();
-    $_SESSION['total_delete'] = $row['total_delete'];
-} else {
-    echo "Error: " . $conn->error;
-}
 
 $error = array();
 
 $sql = "SELECT * FROM login_register";
 $result = $conn->query($sql);
-
-
 ?>
 
 
@@ -64,7 +53,6 @@ $result = $conn->query($sql);
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="dashboard.css">
     <title>Admin Dashboard</title>
-
 </head>
 
 <body>
@@ -87,8 +75,8 @@ $result = $conn->query($sql);
 
             <div class="sidebar">
                 <a href="./dashboard.php" class="active">
-                    <span class="material-icons-sharp">
-                        dashboard
+                    <span class="icon1">
+                        <img src="../images/icon/dashboard.png">
                     </span>
                     <h3>Dashboard</h3>
                 </a>
@@ -103,8 +91,10 @@ $result = $conn->query($sql);
                     </span>
                     <h3>Contact</h3>
                 </a> -->
-                <a href="../file/file_mgt.php" <?php echo isLinkDisabled('file_mgt.php'); ?>>
-                    <span class="fa fa-upload">
+                <a href="../file/file_mgt.php">
+                    <!-- <span class="fa fa-upload"> -->
+                    <span class="icon">
+                        <img src="../images/icon/upload.png">
                     </span>
                     <h3>Store File</h3>
                 </a>
@@ -115,15 +105,16 @@ $result = $conn->query($sql);
                     </span>
                     <h3>View File</h3>
                 </a> -->
-                <a href="../assessment/assessment.php" <?php echo isLinkDisabled('assessment.php'); ?>>
-                    <span class="fa fa-address-book">
-                        <!-- fab fa-app-store-ios -->
+                <a href="../assessment/assessment.php">
+                    <span class="icon2">
+                        <img src="../images/icon/contact.png">
                     </span>
                     <h3>Assessment</h3>
                 </a>
 
-                <a href="../user_mgt/user_management.php" <?php echo isLinkDisabled('user_management.php'); ?>>
-                    <span class="fa fa-user-circle">
+                <a href="../user_mgt/user_management.php">
+                    <span class="icon2">
+                        <img src="../images/icon/usermgt.png">
                     </span>
                     <h3>User Mgt</h3>
                 </a>
@@ -140,8 +131,8 @@ $result = $conn->query($sql);
 
 
                 <a href="../user_mgt/logout.php">
-                    <span class="material-icons-sharp">
-                        logout
+                    <span class="icon2">
+                        <img src="../images/icon/logout.png">
                     </span>
                     <h3>Logout</h3>
                 </a>
@@ -154,7 +145,7 @@ $result = $conn->query($sql);
                 <div class="sales" onclick="window.location.href='#';" style="cursor: pointer;">
                     <div class="status">
                         <div class="info">
-                            <h3>Total User </h3>
+                            <h3>Total User</h3>
                             <h1>
                                 <?php echo $_SESSION['total_users']; ?> user
                             </h1>
@@ -172,7 +163,7 @@ $result = $conn->query($sql);
                 <div class="visits" onclick="window.location.href='#';" style="cursor: pointer;">
                     <div class="status">
                         <div class="info">
-                            <h3>Total File Upload</h3>
+                            <h3>Total File</h3>
                             <h1>
                                 <?php echo $_SESSION['total_file']; ?> file
                             </h1>
@@ -190,17 +181,15 @@ $result = $conn->query($sql);
                 <div class="searches" onclick="window.location.href='#';" style="cursor: pointer;">
                     <div class="status">
                         <div class="info">
-                            <h3>Total File Deleted</h3>
-                            <h1>
-                                <?php echo $_SESSION['total_delete']; ?> file
-                            </h1>
+                            <h3>Recover File</h3>
+                            <h1>4,000</h1>
                         </div>
                         <div class="progresss">
                             <svg>
                                 <circle cx="38" cy="38" r="36"></circle>
                             </svg>
                             <div class="percentage">
-                                <p>Delete</p>
+                                <p>+70%</p>
                             </div>
                         </div>
                     </div>
@@ -211,30 +200,30 @@ $result = $conn->query($sql);
                 <h2>Option</h2>
                 <div class="user-list">
 
-                    <div class="user">
-                        <a href="../chatbot/chat.php" <?php echo isLinkDisabled('chat.php'); ?>>
+                    <div class="user disable-for-restricted">
+                        <a href="../chatbot/chat.php">
                             <img src="../images/background/chat.png" alt="ChatBot">
                             <h2>ChatBot</h2>
                             <p>User ChatBot Here</p>
                         </a>
                     </div>
-                    <div class="user">
-                        <a href="../file/datachat.php" <?php echo isLinkDisabled('datachat.php'); ?>>
+                    <div class="user disable-for-restricted">
+                        <a href="../file/datachat.php">
                             <!-- <i class="fa fa-upload" style="font-size:75px;color:blue"></i> -->
                             <img src="../images/file/file.png" alt="Upload File">
                             <h2>Data Chat</h2>
-                            <p>Input data for chat</p>
+                            <p>input data for chat</p>
                         </a>
                     </div>
-                    <div class="user">
-                        <a href="../file/file_mgt.php" <?php echo isLinkDisabled('file_mgt.php'); ?>>
+                    <div class="user disable-for-restricted">
+                        <a href="../file/file_mgt.php">
                             <img src="../images/file/upload.png" alt="Show File">
                             <h2>Store File</h2>
                             <p>Upload and View file</p>
                         </a>
                     </div>
-                    <div class="user">
-                        <a href="../find_error/read_file.php" <?php echo isLinkDisabled('read_file.php'); ?>>
+                    <div class="user disable-for-restricted">
+                        <a href="../find_error/read_file.php">
                             <img src="../images/file/file2.png" alt="More">
                             <h2>Find Error</h2>
                             <p>Short Error in Log File</p>
@@ -242,7 +231,6 @@ $result = $conn->query($sql);
                     </div>
                 </div>
             </div>
-
             <!-- End of New Users Section -->
 
             <!-- Recent Orders Table -->
@@ -292,7 +280,7 @@ $result = $conn->query($sql);
                 </table>
 
 
-                <a href="../user_mgt/showuser.php" <?php echo isLinkDisabled('showuser.php'); ?>>Show All</a>
+                <a href="../user_mgt/showuser.php">Show All</a>
             </div>
             <!-- End of Recent Orders -->
 
@@ -308,8 +296,7 @@ $result = $conn->query($sql);
                         menu
                     </span>
                 </button>
-                <a href="../dashboard/notification.php" class="notification"
-                    <?php echo isLinkDisabled('notification.php'); ?>>
+                <a href="../dashboard/notification.php" class="notification">
                     <i><img src="../images/logo/reminder2.png"></i>
                     <span class="count">1</span>
                 </a>
@@ -392,21 +379,22 @@ $result = $conn->query($sql);
                         </span>
                     </div>
                 </div>
-                <a href="../chatbot/bot.php">
-                    <div class="notification add-reminder">
-                        <div>
-                            <span class="material-icons-sharp">
-                                add
-                            </span>
-                            <h3>Add Reminder</h3>
-                        </div>
+
+                <div class="notification add-reminder">
+                    <div>
+                        <span class="material-icons-sharp">
+                            add
+                        </span>
+                        <h3>Add Reminder</h3>
                     </div>
-                </a>
+                </div>
+
             </div>
 
         </div>
     </div>
-    <script src="../script/role_check.js"></script>
+
+    <!-- <script src="orders.js"></script> -->
     <script src="../script/index.js"></script>
 </body>
 

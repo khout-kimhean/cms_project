@@ -1,6 +1,6 @@
 <?php
 include '../dashboard/check_access.php';
-
+include '../connect/role_access.php';
 // Database configuration
 $db_host = 'localhost';
 $db_username = 'root';
@@ -127,14 +127,12 @@ if (isset($_POST['submit'])) {
                         text: 'My text'
                     });
                 }
-
                 /* Provide image and alt text for the image dialog */
                 if (meta.filetype === 'image') {
                     callback('https://www.google.com/logos/google.jpg', {
                         alt: 'My alt text'
                     });
                 }
-
                 /* Provide alternative source and posted for the media dialog */
                 if (meta.filetype === 'media') {
                     callback('movie.mp4', {
@@ -202,7 +200,7 @@ if (isset($_POST['submit'])) {
                     </span>
                     <h3>Contact</h3>
                 </a> -->
-                <a href="../file/file_mgt.php">
+                <a href="../file/file_mgt.php" <?php echo isLinkDisabled('file_mgt.php'); ?>>
                     <span class="fa fa-upload">
                     </span>
                     <h3>Store File</h3>
@@ -214,14 +212,14 @@ if (isset($_POST['submit'])) {
                     </span>
                     <h3>View File</h3>
                 </a> -->
-                <a href="../assessment/assessment.php">
+                <a href="../assessment/assessment.php" <?php echo isLinkDisabled('assessment.php'); ?>>
                     <span class="fa fa-address-book">
                         <!-- fab fa-app-store-ios -->
                     </span>
                     <h3>Assessment</h3>
                 </a>
 
-                <a href="../user_mgt/user_management.php">
+                <a href="../user_mgt/user_management.php" <?php echo isLinkDisabled('user_management.php'); ?>>
                     <span class="fa fa-user-circle">
                     </span>
                     <h3>User Mgt</h3>
@@ -380,7 +378,7 @@ if (isset($_POST['submit'])) {
 
         </div>
     </div>
-
+    <script src="../script/role_check.js"></script>
     <script src="../script/index.js"></script>
 </body>
 

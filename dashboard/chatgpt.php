@@ -1,5 +1,9 @@
+<?php
+include '../connect/conectdb.php';
+include '../connect/role_access.php';
+?>
 <!DOCTYPE html>
-<!-- Coding By CodingNepal - www.codingnepalweb.com -->
+
 <html lang="en" dir="ltr">
 
 <head>
@@ -7,18 +11,19 @@
     <title>Chatbot</title>
     <link rel="stylesheet" href="../dashboard/chatgpt.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Google Fonts Link For Icons -->
+
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="../script/chatgpt.js" defer></script>
 </head>
 
-<body>
 
-    <!-- Chats container -->
+<body <?php echo $_SESSION['user_name']; ?>>
+
+
     <div class="chat-container"></div>
 
-    <!-- Typing container -->
+
     <div class="typing-container">
 
         <div class="typing-content">
@@ -33,10 +38,11 @@
                         href="../dashboard/dashboard.php">Back</a></span>
                 <span id="theme-btn" class="material-symbols-rounded">light_mode</span>
                 <span id="delete-btn" class="material-symbols-rounded">delete</span>
+
             </div>
 
         </div>
-
+        <script src="../script/role_check.js"></script>
 </body>
 
 </html>

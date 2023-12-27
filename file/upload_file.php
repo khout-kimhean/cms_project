@@ -1,7 +1,7 @@
 <?php
 require '../vendor/autoload.php';
 include '../dashboard/check_access.php';
-
+include '../connect/role_access.php';
 $host = "localhost";
 $user = "root";
 $pass = "";
@@ -115,6 +115,8 @@ if (isset($_POST['submit'])) {
         }
     }
 }
+
+
 ?>
 
 
@@ -263,21 +265,26 @@ if (isset($_POST['submit'])) {
                     </span>
                     <h3>Contact</h3>
                 </a> -->
-                <a href="../file/file_mgt.php" class="active">
+                <a href="../file/file_mgt.php" <?php echo isLinkDisabled('file_mgt.php'); ?> class="active">
                     <span class="fa fa-upload">
                     </span>
                     <h3>Store File</h3>
                 </a>
 
-
-                <a href="../assessment/assessment.php">
+                <!-- <a href="../data_store/list_upload.php">
+                    <span class="material-icons-sharp">
+                        inventory
+                    </span>
+                    <h3>View File</h3>
+                </a> -->
+                <a href="../assessment/assessment.php" <?php echo isLinkDisabled('assessment.php'); ?>>
                     <span class="fa fa-address-book">
                         <!-- fab fa-app-store-ios -->
                     </span>
                     <h3>Assessment</h3>
                 </a>
 
-                <a href="../user_mgt/user_management.php">
+                <a href="../user_mgt/user_management.php" <?php echo isLinkDisabled('user_management.php'); ?>>
                     <span class="fa fa-user-circle">
                     </span>
                     <h3>User Mgt</h3>
@@ -491,7 +498,7 @@ if (isset($_POST['submit'])) {
 
         </div>
     </div>
-
+    <script src="../script/role_check.js"></script>
     <!-- <script src="orders.js"></script> -->
     <script src="../script/index.js"></script>
 </body>

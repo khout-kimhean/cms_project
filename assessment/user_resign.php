@@ -1,4 +1,5 @@
 <?php
+include '../connect/role_access.php';
 include '../dashboard/check_access.php';
 $servername = "localhost";
 $username = "root";
@@ -95,7 +96,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 
-
 ?>
 
 
@@ -111,20 +111,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- <link rel="stylesheet" type="text/css" href="../Admin Dashboard/styles/style_culender.css"> -->
     <title>Admin Dashboard</title>
     <script>
-    function formatDateInput(inputField) {
-        // Get the user input
-        let userInput = inputField.value;
+        function formatDateInput(inputField) {
+            // Get the user input
+            let userInput = inputField.value;
 
-        // Remove any non-numeric characters
-        userInput = userInput.replace(/\D/g, '');
+            // Remove any non-numeric characters
+            userInput = userInput.replace(/\D/g, '');
 
-        // Check if the input length is at least 6 characters
-        if (userInput.length >= 6) {
-            // Format the date as MM/DD/YY
-            const formattedDate = userInput.replace(/(\d{2})(\m{2})(\y{4})/, '$1/$2/$3');
-            inputField.value = formattedDate;
+            // Check if the input length is at least 6 characters
+            if (userInput.length >= 6) {
+                // Format the date as MM/DD/YY
+                const formattedDate = userInput.replace(/(\d{2})(\m{2})(\y{4})/, '$1/$2/$3');
+                inputField.value = formattedDate;
+            }
         }
-    }
     </script>
 
 </head>
@@ -164,7 +164,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </span>
                     <h3>Contact</h3>
                 </a> -->
-                <a href="../file/file_mgt.php">
+                <a href="../file/file_mgt.php" <?php echo isLinkDisabled('file_mgt.php'); ?>>
                     <span class="fa fa-upload">
                     </span>
                     <h3>Store File</h3>
@@ -176,14 +176,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </span>
                     <h3>View File</h3>
                 </a> -->
-                <a href="../assessment/assessment.php" class="active">
+                <a href="../assessment/assessment.php" <?php echo isLinkDisabled('assessment.php'); ?> class="active">
                     <span class="fa fa-address-book">
                         <!-- fab fa-app-store-ios -->
                     </span>
                     <h3>Assessment</h3>
                 </a>
 
-                <a href="../user_mgt/user_management.php">
+                <a href="../user_mgt/user_management.php" <?php echo isLinkDisabled('user_management.php'); ?>>
                     <span class="fa fa-user-circle">
                     </span>
                     <h3>User Mgt</h3>
@@ -467,53 +467,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Function to populate the dropdowns
-        function populateDropdowns(dateSelect, monthSelect, yearSelect) {
-            // Populate the date dropdown
-            for (let i = 1; i <= 31; i++) {
-                const option = document.createElement("option");
-                option.text = i;
-                dateSelect.add(option);
+        document.addEventListener("DOMContentLoaded", function () {
+            // Function to populate the dropdowns
+            function populateDropdowns(dateSelect, monthSelect, yearSelect) {
+                // Populate the date dropdown
+                for (let i = 1; i <= 31; i++) {
+                    const option = document.createElement("option");
+                    option.text = i;
+                    dateSelect.add(option);
+                }
+
+                // Populate the month dropdown
+                const months = [
+                    "January", "February", "March", "April",
+                    "May", "June", "July", "August",
+                    "September", "October", "November", "December"
+                ];
+                for (let i = 0; i < months.length; i++) {
+                    const option = document.createElement("option");
+                    option.text = months[i];
+                    monthSelect.add(option);
+                }
+
+                // Populate the year dropdown (adjust the range as needed)
+                const currentYear = new Date().getFullYear();
+                for (let i = currentYear - 25; i <= currentYear + 25; i++) {
+                    const option = document.createElement("option");
+                    option.text = i;
+                    yearSelect.add(option);
+                }
             }
 
-            // Populate the month dropdown
-            const months = [
-                "January", "February", "March", "April",
-                "May", "June", "July", "August",
-                "September", "October", "November", "December"
-            ];
-            for (let i = 0; i < months.length; i++) {
-                const option = document.createElement("option");
-                option.text = months[i];
-                monthSelect.add(option);
-            }
+            // Populate the start date dropdowns
+            const startDateDateSelect = document.getElementById("startDateDateSelect");
+            const startDateMonthSelect = document.getElementById("startDateMonthSelect");
+            const startDateYearSelect = document.getElementById("startDateYearSelect");
 
-            // Populate the year dropdown (adjust the range as needed)
-            const currentYear = new Date().getFullYear();
-            for (let i = currentYear - 25; i <= currentYear + 25; i++) {
-                const option = document.createElement("option");
-                option.text = i;
-                yearSelect.add(option);
-            }
-        }
+            populateDropdowns(startDateDateSelect, startDateMonthSelect, startDateYearSelect);
 
-        // Populate the start date dropdowns
-        const startDateDateSelect = document.getElementById("startDateDateSelect");
-        const startDateMonthSelect = document.getElementById("startDateMonthSelect");
-        const startDateYearSelect = document.getElementById("startDateYearSelect");
+            // Populate the end date dropdowns
+            const endDateDateSelect = document.getElementById("endDateDateSelect");
+            const endDateMonthSelect = document.getElementById("endDateMonthSelect");
+            const endDateYearSelect = document.getElementById("endDateYearSelect");
 
-        populateDropdowns(startDateDateSelect, startDateMonthSelect, startDateYearSelect);
-
-        // Populate the end date dropdowns
-        const endDateDateSelect = document.getElementById("endDateDateSelect");
-        const endDateMonthSelect = document.getElementById("endDateMonthSelect");
-        const endDateYearSelect = document.getElementById("endDateYearSelect");
-
-        populateDropdowns(endDateDateSelect, endDateMonthSelect, endDateYearSelect);
-    });
+            populateDropdowns(endDateDateSelect, endDateMonthSelect, endDateYearSelect);
+        });
     </script>
     <!-- <script src="orders.js"></script> -->
+    <script src="../script/role_check.js"></script>
     <script src="../script/index.js"></script>
     <script src="../script/cscript.js"></script>
 </body>

@@ -225,6 +225,20 @@ aside .sidebar .message-count {
   font-size: 11px;
   border-radius: var(--border-radius-1);
 }
+
+aside .sidebar .icon {
+  /* color: var(--color-dark); */
+  width: 25px;
+  height: 25px;
+}
+aside .sidebar .icon1 {
+  width: 21px;
+  height: 21px;
+}
+aside .sidebar .icon2 {
+  width: 28px;
+  height: 28px;
+}
 /* a:hover {
   text-decoration: underline;
 } */
@@ -405,8 +419,8 @@ main .recent-orders a {
 /* notification */
 .right-section .notification img {
   margin-right: 50px;
-  width: 2.2rem;
-  height: 2.2rem;
+  width: 2.8rem;
+  height: 2.8rem;
 }
 
 .notification .count {
@@ -414,13 +428,14 @@ main .recent-orders a {
   margin-top: 20px;
   position: absolute;
   top: -5px;
-  right: 315px;
+  right: 310px;
   width: 24px;
   height: 24px;
-  background: var(--color-danger);
+  /* background: var(--color-danger); */
+  background-color: red;
   border-radius: 50%;
-  color: var(--light);
-  border: 2px solid var(--color-dark);
+  color: var(--color-white);
+  /* border: 2px solid var(--color-dark); */
   font-weight: 400;
   font-size: 15px;
   display: flex;

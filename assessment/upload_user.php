@@ -3,7 +3,7 @@
 
 // Include the file with the access check
 include '../dashboard/check_access.php';
-
+include '../connect/role_access.php';
 // Database configuration
 $db_host = 'localhost';
 $db_username = 'root';
@@ -20,7 +20,6 @@ $error = array();
 
 $sql = "SELECT * FROM login_register";
 $result = $conn->query($sql);
-
 
 
 ?>
@@ -72,7 +71,7 @@ $result = $conn->query($sql);
                     </span>
                     <h3>Contact</h3>
                 </a> -->
-                <a href="../file/file_mgt.php">
+                <a href="../file/file_mgt.php" <?php echo isLinkDisabled('file_mgt.php'); ?>>
                     <span class="fa fa-upload">
                     </span>
                     <h3>Store File</h3>
@@ -84,14 +83,14 @@ $result = $conn->query($sql);
                     </span>
                     <h3>View File</h3>
                 </a> -->
-                <a href="../assessment/assessment.php" class="active">
+                <a href="../assessment/assessment.php" <?php echo isLinkDisabled('assessment.php'); ?> class="active">
                     <span class="fa fa-address-book">
                         <!-- fab fa-app-store-ios -->
                     </span>
                     <h3>Assessment</h3>
                 </a>
 
-                <a href="../user_mgt/user_management.php">
+                <a href="../user_mgt/user_management.php" <?php echo isLinkDisabled('user_management.php'); ?>>
                     <span class="fa fa-user-circle">
                     </span>
                     <h3>User Mgt</h3>
@@ -280,6 +279,7 @@ $result = $conn->query($sql);
             }
         });
     </script>
+    <script src="../script/role_check.js"></script>
 </body>
 
 </html>

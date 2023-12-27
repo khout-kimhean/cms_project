@@ -1,7 +1,7 @@
 <?php
 include '../dashboard/check_access.php';
 require '../vendor/autoload.php';
-
+include '../connect/role_access.php';
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -95,6 +95,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 }
 
 $conn->close();
+
 ?>
 
 
@@ -145,7 +146,7 @@ $conn->close();
                     </span>
                     <h3>Contact</h3>
                 </a> -->
-                <a href="../file/file_mgt.php">
+                <a href="../file/file_mgt.php" <?php echo isLinkDisabled('file_mgt.php'); ?>>
                     <span class="fa fa-upload">
                     </span>
                     <h3>Store File</h3>
@@ -157,14 +158,15 @@ $conn->close();
                     </span>
                     <h3>View File</h3>
                 </a> -->
-                <a href="../assessment/assessment.php">
+                <a href="../assessment/assessment.php" <?php echo isLinkDisabled('assessment.php'); ?>>
                     <span class="fa fa-address-book">
                         <!-- fab fa-app-store-ios -->
                     </span>
                     <h3>Assessment</h3>
                 </a>
 
-                <a href="../user_mgt/user_management.php" class="active">
+                <a href="../user_mgt/user_management.php" <?php echo isLinkDisabled('user_management.php'); ?>
+                    class="active">
                     <span class="fa fa-user-circle">
                     </span>
                     <h3>User Mgt</h3>
@@ -235,9 +237,9 @@ $conn->close();
 
                     <input type="submit" name="submit" value="Save" class="form-btn">
                     <?php if ($alertMessage !== ""): ?>
-                    <div class="alert alert-<?php echo $alertType; ?>" role="alert">
-                        <?php echo $alertMessage; ?>
-                    </div>
+                        <div class="alert alert-<?php echo $alertType; ?>" role="alert">
+                            <?php echo $alertMessage; ?>
+                        </div>
                     <?php endif; ?>
                 </form>
             </div>
@@ -341,7 +343,7 @@ $conn->close();
 
         </div>
     </div>
-
+    <script src="../script/role_check.js"></script>
     <!-- <script src="orders.js"></script> -->
     <script src="../script/index.js"></script>
 </body>

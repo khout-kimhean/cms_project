@@ -20,4 +20,5 @@ $error = array();
 
 $sql = "SELECT * FROM login_register";
 $result = $conn->query($sql);
+
 ?>
