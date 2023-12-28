@@ -119,28 +119,32 @@ $result = $conn->query($sql);
                 <div class="analyse">
                     <div class="sales <?php echo isLinkDisabled('../file/upload_file.php'); ?>"
                         onclick="window.location.href='../file/upload_file.php';" style="cursor: pointer;">
-                        <div class="status">
-                            <div class="info">
-                                <!-- <h3>Read Text</h3> -->
-                                <h1>Upload</h1>
-                                <h2>File</h2>
+                        <a href="../file/upload_file.php" <?php echo isLinkDisabled('upload_file.php'); ?>>
+                            <div class="status">
+                                <div class="info">
+                                    <!-- <h3>Read Text</h3> -->
+                                    <h1>Upload</h1>
+                                    <h2>File</h2>
+                                </div>
+                                <div>
+                                    <img src="../images/file/upload.png">
+                                </div>
                             </div>
-                            <div>
-                                <img src="../images/file/upload.png">
-                            </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="visits <?php echo isLinkDisabled('../file/view_file.php'); ?>"
                         onclick="window.location.href='../file/view_file.php';" style="cursor: pointer;">
-                        <div class="status">
-                            <div class="info">
-                                <h1>View</h1>
-                                <h2>File</h2>
+                        <a href="../file/view_file.php" <?php echo isLinkDisabled('view_file.php'); ?>>
+                            <div class="status">
+                                <div class="info">
+                                    <h1>View</h1>
+                                    <h2>File</h2>
+                                </div>
+                                <div>
+                                    <img src="../images/file/view.png">
+                                </div>
                             </div>
-                            <div>
-                                <img src="../images/file/view.png">
-                            </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="visits"
                         onclick="window.location.href='../file/report.php'; <?php echo isLinkDisabled('report.php'); ?>">

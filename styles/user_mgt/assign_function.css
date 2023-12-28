@@ -225,9 +225,10 @@ aside .sidebar .message-count {
   font-size: 11px;
   border-radius: var(--border-radius-1);
 }
-a:hover {
+/* a:hover {
   text-decoration: underline;
-}
+} */
+
 /* main  */
 
 .container2 {
@@ -242,7 +243,7 @@ a:hover {
   color: var(--color-dark);
 }
 .container2 .back_button a {
-  color: rgb(196, 160, 6);
+  color: rgb(12, 77, 162);
 }
 .container2 h2 {
   font-family: cursive, sans-serif;
@@ -259,7 +260,7 @@ a:hover {
   outline: 0;
   background: var(--color-white);
   padding: 8px;
-  border-radius: var(--card-border-radius);
+  border-radius: 8px;
 }
 .container2 .select_role label {
   font-size: 14px;
@@ -268,7 +269,7 @@ a:hover {
   background-color: var(--color-white);
   padding: 10px;
   color: #202528;
-  border-radius: var(--card-border-radius);
+  border-radius: 8px;
 }
 
 .container2 input {
@@ -279,22 +280,23 @@ a:hover {
   background-color: var(--color-white);
   padding: 10px;
   color: #202528;
-  border-radius: var(--card-border-radius);
+  border-radius: 8px;
 }
 
 .container2 .box {
-  font-size: 22px;
-  display: flex;
-  margin-left: 20px;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  /* gap: 0.5rem; */
+  font-size: 13px;
 }
 .select1 h2 {
-  font-size: 30px;
+  font-size: 24px;
   margin-top: 20px;
   text-align: left;
 }
 .container3 {
   font-family: cursive, sans-serif;
-  padding: 20px;
+  padding: 10px;
   margin: 0rem 0;
   display: flex;
   align-items: center;
@@ -308,8 +310,8 @@ a:hover {
   display: none;
 }
 .container3 .checkbox {
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
   border: 2px solid rgb(12, 77, 162);
   border-radius: 50%;
   display: flex;
@@ -368,19 +370,17 @@ a:hover {
 .container2 form input[type="submit"] {
   background-color: var(--color-primary);
   border: none;
-  border-radius: var(--border-radius-1);
   color: var(--color-white);
   padding: 1rem;
   font-size: 1rem;
   cursor: pointer;
-  margin-top: 5px;
-  width: 150px;
+  margin-top: 20px;
+  width: 15%;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 20px !important;
   font-size: 17px;
-  padding: 10px 15px;
+  padding: 8px;
   background: rgb(196, 160, 6);
-  border-radius: 5px;
 }
 
 /* end main  */

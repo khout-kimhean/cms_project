@@ -223,9 +223,9 @@ aside .sidebar .message-count {
   font-size: 11px;
   border-radius: var(--border-radius-1);
 }
-a:hover {
+/* a:hover {
   text-decoration: underline;
-}
+} */
 
 main {
   width: 138%;
@@ -253,7 +253,7 @@ main {
 .container2 .upload {
   cursor: pointer;
   padding: 8px;
-  border-radius: 20px;
+  border-radius: 4px;
   border: 1px solid var(--color-dark);
 }
 .container2 label {

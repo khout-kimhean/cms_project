@@ -122,28 +122,34 @@ $result = $conn->query($sql);
                 <h1 class="h1">Finding Error in log file</h1>
                 <!-- Analyses -->
                 <div class="analyse">
-                    <div class="sales" onclick="window.location.href='../find_error/read_error_inlog.php';"
-                        style="cursor: pointer;">
-                        <div class="status">
-                            <div class="info">
-                                <h1>Read Error</h1>
-                                <h2>In log file</h2>
+                    <div class="sales <?php echo isLinkDisabled('../find_error/read_error_inlog.php'); ?>"
+                        onclick="window.location.href='../find_error/read_error_inlog.php';" style="cursor: pointer;">
+                        <a href="../find_error/read_error_inlog.php"
+                            <?php echo isLinkDisabled('read_error_inlog.php'); ?>>
+                            <div class="status">
+                                <div class="info">
+                                    <h1>Read Error</h1>
+                                    <h2>In log file</h2>
+                                </div>
+                                <div>
+                                    <img src="../images/file/file2.png">
+                                </div>
                             </div>
-                            <div>
-                                <img src="../images/file/file2.png">
-                            </div>
-                        </div>
+                        </a>
                     </div>
-                    <div class="visits" onclick="window.location.href='../find_error/read_by_keyword.php';"
-                        style="cursor: pointer;">
-                        <div class="status">
-                            <div class="info">
-                                <h1>Show All Error </h1>
+                    <div class="visits <?php echo isLinkDisabled('../find_error/read_by_keyword.php'); ?>"
+                        onclick="window.location.href='../find_error/read_by_keyword.php';" style="cursor: pointer;">
+                        <a href="../find_error/read_by_keyword.php"
+                            <?php echo isLinkDisabled('read_by_keyword.php'); ?>>
+                            <div class="status">
+                                <div class="info">
+                                    <h1>Show All Error </h1>
+                                </div>
+                                <div>
+                                    <img src="../images/file/file2.png">
+                                </div>
                             </div>
-                            <div>
-                                <img src="../images/file/file2.png">
-                            </div>
-                        </div>
+                        </a>
                     </div>
                     <!-- <div class="searches" onclick="window.location.href='../find_error/v1.php';"
                         style="cursor: pointer;">

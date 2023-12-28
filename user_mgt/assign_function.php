@@ -166,6 +166,11 @@ $conn->close();
         </aside>
         <main>
             <div class="container2">
+                <div class="back_button">
+                    <a href="../user_mgt/user.php" class="back-button">
+                        <i class="fa fa-chevron-circle-left" style="font-size: 28px">Back</i>
+                    </a>
+                </div>
                 <h2>Add Function to Role/Team User</h2>
                 <div class="select_role">
                     <div class="user">
@@ -190,16 +195,20 @@ $conn->close();
                                     <path d="M1 6.85L8.09677 14L21 1" />
                                 </svg>
                             </label>
-                            <span>ChatBot</span>
+                            <span>Dashboard</span>
                         </div>
+
+                    </div>
+                    <div class="box">
                         <div class="container3">
-                            <input type="checkbox" id="input-2" class="check-input">
-                            <label for="input-2" class="checkbox">
+                            <input type="checkbox" id="permission-2" name="permissions[]" value="ChatBot"
+                                class="check-input">
+                            <label for="permission-2" class="checkbox">
                                 <svg viewBox="0 0 22 16" fill="none">
                                     <path d="M1 6.85L8.09677 14L21 1" />
                                 </svg>
                             </label>
-                            <span>DataChat</span>
+                            <span>File Mgt</span>
                         </div>
                         <div class="container3">
                             <input type="checkbox" id="input-3" class="check-input">
@@ -208,7 +217,7 @@ $conn->close();
                                     <path d="M1 6.85L8.09677 14L21 1" />
                                 </svg>
                             </label>
-                            <span>Find Error</span>
+                            <span>Upload File</span>
                         </div>
                         <div class="container3">
                             <input type="checkbox" id="input-4" class="check-input">
@@ -217,10 +226,8 @@ $conn->close();
                                     <path d="M1 6.85L8.09677 14L21 1" />
                                 </svg>
                             </label>
-                            <span>Data Store</span>
+                            <span>View File</span>
                         </div>
-                    </div>
-                    <div class="box">
                         <div class="container3">
                             <input type="checkbox" id="input-5" class="check-input">
                             <label for="input-5" class="checkbox">
@@ -228,16 +235,17 @@ $conn->close();
                                     <path d="M1 6.85L8.09677 14L21 1" />
                                 </svg>
                             </label>
-                            <span>Assessment</span>
+                            <span>View</span>
                         </div>
                         <div class="container3">
-                            <input type="checkbox" id="input-6" class="check-input">
-                            <label for="input-6" class="checkbox">
+                            <input type="checkbox" id="permission-6" name="permissions[]" value="ChatBot"
+                                class="check-input">
+                            <label for="permission-6" class="checkbox">
                                 <svg viewBox="0 0 22 16" fill="none">
                                     <path d="M1 6.85L8.09677 14L21 1" />
                                 </svg>
                             </label>
-                            <span>User Management</span>
+                            <span>View Data</span>
                         </div>
                         <div class="container3">
                             <input type="checkbox" id="input-7" class="check-input">
@@ -246,7 +254,7 @@ $conn->close();
                                     <path d="M1 6.85L8.09677 14L21 1" />
                                 </svg>
                             </label>
-                            <span>To_do List</span>
+                            <span>Edit Data</span>
                         </div>
                         <div class="container3">
                             <input type="checkbox" id="input-8" class="check-input">
@@ -255,7 +263,193 @@ $conn->close();
                                     <path d="M1 6.85L8.09677 14L21 1" />
                                 </svg>
                             </label>
-                            <span>Contact</span>
+                            <span>Report</span>
+                        </div>
+                        <div class="container3">
+                            <input type="checkbox" id="input-9" class="check-input">
+                            <label for="input-9" class="checkbox">
+                                <svg viewBox="0 0 22 16" fill="none">
+                                    <path d="M1 6.85L8.09677 14L21 1" />
+                                </svg>
+                            </label>
+                            <span>Delete</span>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="container3">
+                            <input type="checkbox" id="permission-10" name="permissions[]" value="ChatBot"
+                                class="check-input">
+                            <label for="permission-10" class="checkbox">
+                                <svg viewBox="0 0 22 16" fill="none">
+                                    <path d="M1 6.85L8.09677 14L21 1" />
+                                </svg>
+                            </label>
+                            <span>User Mgt</span>
+                        </div>
+                        <div class="container3">
+                            <input type="checkbox" id="permission-11" name="permissions[]" value="ChatBot"
+                                class="check-input">
+                            <label for="permission-11" class="checkbox">
+                                <svg viewBox="0 0 22 16" fill="none">
+                                    <path d="M1 6.85L8.09677 14L21 1" />
+                                </svg>
+                            </label>
+                            <span>User</span>
+                        </div>
+                        <div class="container3">
+                            <input type="checkbox" id="input-12" class="check-input">
+                            <label for="input-12" class="checkbox">
+                                <svg viewBox="0 0 22 16" fill="none">
+                                    <path d="M1 6.85L8.09677 14L21 1" />
+                                </svg>
+                            </label>
+                            <span>Create User</span>
+                        </div>
+                        <div class="container3">
+                            <input type="checkbox" id="input-13" class="check-input">
+                            <label for="input-13" class="checkbox">
+                                <svg viewBox="0 0 22 16" fill="none">
+                                    <path d="M1 6.85L8.09677 14L21 1" />
+                                </svg>
+                            </label>
+                            <span>Edit User</span>
+                        </div>
+                        <div class="container3">
+                            <input type="checkbox" id="permission-15" name="permissions[]" value="ChatBot"
+                                class="check-input">
+                            <label for="permission-15" class="checkbox">
+                                <svg viewBox="0 0 22 16" fill="none">
+                                    <path d="M1 6.85L8.09677 14L21 1" />
+                                </svg>
+                            </label>
+                            <span>Add Permission</span>
+                        </div>
+                        <div class="container3">
+                            <input type="checkbox" id="permission-16" name="permissions[]" value="ChatBot"
+                                class="check-input">
+                            <label for="permission-16" class="checkbox">
+                                <svg viewBox="0 0 22 16" fill="none">
+                                    <path d="M1 6.85L8.09677 14L21 1" />
+                                </svg>
+                            </label>
+                            <span>Show User</span>
+                        </div>
+                        <div class="container3">
+                            <input type="checkbox" id="permission-17" name="permissions[]" value="ChatBot"
+                                class="check-input">
+                            <label for="permission-17" class="checkbox">
+                                <svg viewBox="0 0 22 16" fill="none">
+                                    <path d="M1 6.85L8.09677 14L21 1" />
+                                </svg>
+                            </label>
+                            <span>Delete</span>
+                        </div>
+
+                    </div>
+                    <div class="box">
+                        <div class="container3">
+                            <input type="checkbox" id="permission-18" name="permissions[]" value="ChatBot"
+                                class="check-input">
+                            <label for="permission-18" class="checkbox">
+                                <svg viewBox="0 0 22 16" fill="none">
+                                    <path d="M1 6.85L8.09677 14L21 1" />
+                                </svg>
+                            </label>
+                            <span>Find Error</span>
+                        </div>
+                        <div class="container3">
+                            <input type="checkbox" id="input-19" class="check-input">
+                            <label for="input-19" class="checkbox">
+                                <svg viewBox="0 0 22 16" fill="none">
+                                    <path d="M1 6.85L8.09677 14L21 1" />
+                                </svg>
+                            </label>
+                            <span>Error in Log</span>
+                        </div>
+                        <div class="container3">
+                            <input type="checkbox" id="input-20" class="check-input">
+                            <label for="input-20" class="checkbox">
+                                <svg viewBox="0 0 22 16" fill="none">
+                                    <path d="M1 6.85L8.09677 14L21 1" />
+                                </svg>
+                            </label>
+                            <span>Error</span>
+                        </div>
+
+                    </div>
+                    <div class="box">
+                        <div class="container3">
+                            <input type="checkbox" id="permission-21" name="permissions[]" value="ChatBot"
+                                class="check-input">
+                            <label for="permission-21" class="checkbox">
+                                <svg viewBox="0 0 22 16" fill="none">
+                                    <path d="M1 6.85L8.09677 14L21 1" />
+                                </svg>
+                            </label>
+                            <span>Data Chat</span>
+                        </div>
+
+                    </div>
+                    <div class="box">
+                        <div class="container3">
+                            <input type="checkbox" id="permission-22" name="permissions[]" value="ChatBot"
+                                class="check-input">
+                            <label for="permission-22" class="checkbox">
+                                <svg viewBox="0 0 22 16" fill="none">
+                                    <path d="M1 6.85L8.09677 14L21 1" />
+                                </svg>
+                            </label>
+                            <span>ChatBot</span>
+                        </div>
+
+                    </div>
+                    <div class="box">
+                        <div class="container3">
+                            <input type="checkbox" id="permission-23" name="permissions[]" value="ChatBot"
+                                class="check-input">
+                            <label for="permission-23" class="checkbox">
+                                <svg viewBox="0 0 22 16" fill="none">
+                                    <path d="M1 6.85L8.09677 14L21 1" />
+                                </svg>
+                            </label>
+                            <span>Assessment</span>
+                        </div>
+                        <div class="container3">
+                            <input type="checkbox" id="input-24" class="check-input">
+                            <label for="input-24" class="checkbox">
+                                <svg viewBox="0 0 22 16" fill="none">
+                                    <path d="M1 6.85L8.09677 14L21 1" />
+                                </svg>
+                            </label>
+                            <span>Upload New</span>
+                        </div>
+                        <div class="container3">
+                            <input type="checkbox" id="input-25" class="check-input">
+                            <label for="input-25" class="checkbox">
+                                <svg viewBox="0 0 22 16" fill="none">
+                                    <path d="M1 6.85L8.09677 14L21 1" />
+                                </svg>
+                            </label>
+                            <span>Upload Move</span>
+                        </div>
+                        <div class="container3">
+                            <input type="checkbox" id="input-26" class="check-input">
+                            <label for="input-26" class="checkbox">
+                                <svg viewBox="0 0 22 16" fill="none">
+                                    <path d="M1 6.85L8.09677 14L21 1" />
+                                </svg>
+                            </label>
+                            <span>Upload Resign</span>
+                        </div>
+                        <div class="container3">
+                            <input type="checkbox" id="permission-27" name="permissions[]" value="ChatBot"
+                                class="check-input">
+                            <label for="permission-27" class="checkbox">
+                                <svg viewBox="0 0 22 16" fill="none">
+                                    <path d="M1 6.85L8.09677 14L21 1" />
+                                </svg>
+                            </label>
+                            <span>List User</span>
                         </div>
                     </div>
                     <input type="submit" name="submit" value="Save" class="form-btn">

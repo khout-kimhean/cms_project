@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
         'testchat.php': ['admin'],
         'user_management.php': ['admin'],
 
-        'search_user.php': ['admin'],
+        'permission.php': ['admin'],
         'assign_function.php': ['admin'],
 
         // store file
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
     disableForRestricted(userRole, 'showuser.php');
     disableForRestricted(userRole, 'user.php');
     disableForRestricted(userRole, 'createuser.php');
-    disableForRestricted(userRole, 'search_user.php');
+    disableForRestricted(userRole, 'permission.php');
     disableForRestricted(userRole, 'assign_function.php');
     disableForRestricted(userRole, 'view.php');
     disableForRestricted(userRole, 'view_data.php');

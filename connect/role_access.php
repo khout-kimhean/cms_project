@@ -17,7 +17,7 @@ function isLinkDisabled($link)
         'user_management.php' => ['admin'],
 
 
-        'search_user.php' => ['admin'],
+        'permission.php' => ['admin'],
         'assign_function.php' => ['admin'],
         // <!-- store file -->
         // 'upload_file.php' => ['admin'],

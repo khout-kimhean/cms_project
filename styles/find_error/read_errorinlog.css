@@ -227,9 +227,9 @@ aside .sidebar .message-count {
   font-size: 11px;
   border-radius: var(--border-radius-1);
 }
-a:hover {
+/* a:hover {
   text-decoration: underline;
-}
+} */
 
 /* main  */
 .container2 .head {
@@ -274,7 +274,7 @@ a:hover {
   margin-left: 20px;
   width: 43%;
   border: 1px solid var(--color-dark);
-  border-radius: 20px;
+  border-radius: 8px;
   margin-bottom: 10px;
 }
 

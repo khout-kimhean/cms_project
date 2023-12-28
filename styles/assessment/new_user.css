@@ -223,9 +223,9 @@ aside .sidebar .message-count {
   font-size: 11px;
   border-radius: var(--border-radius-1);
 }
-a:hover {
+/* a:hover {
   text-decoration: underline;
-}
+} */
 
 main {
   width: 138%;

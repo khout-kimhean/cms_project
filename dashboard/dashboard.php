@@ -350,9 +350,9 @@ $result = $conn->query($sql);
             <div class="reminders">
                 <div class="header">
                     <h2>Reminders</h2>
-                    <!-- <span class="material-icons-sharp"> -->
-                    <!-- notifications_none -->
-                    </span>
+                    <!-- <a href="../to_do_list/todo_management.php"></a>
+                    <span class="fa fa-bell"> </span>
+                    </a> -->
                 </div>
 
                 <div class="notification">
@@ -392,18 +392,16 @@ $result = $conn->query($sql);
                         </span>
                     </div>
                 </div>
-                <a href="../dashboard/testschat.php" <?php echo isLinkDisabled('testschat.php'); ?>>
-                    <div class="notification add-reminder">
+                <div class="notification add-reminder">
+                    <a href="../dashboard/testchat.php" <?php echo isLinkDisabled('testchat.php'); ?>>
                         <div>
                             <span class="material-icons-sharp">
                                 add
                             </span>
                             <h3>Add Reminder</h3>
                         </div>
-                    </div>
-                </a>
-
-
+                    </a>
+                </div>
             </div>
 
         </div>

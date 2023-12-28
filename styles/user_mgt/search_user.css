@@ -223,9 +223,11 @@ aside .sidebar .message-count {
   font-size: 11px;
   border-radius: var(--border-radius-1);
 }
-a:hover {
+/* a:hover {
   text-decoration: underline;
 }
+ */
+
 /* main container2 */
 
 main,
@@ -374,7 +376,7 @@ a:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding: var(--card-padding);
   height: 88%;
-  width: 100%;
+  width: 138%;
   /* width: 1290px; */
 }
 
@@ -393,6 +395,7 @@ a:hover {
 /* end container2 */
 
 .right-section {
+  height: 50px;
   margin-top: 1.4rem;
 }
 

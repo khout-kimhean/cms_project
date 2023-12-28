@@ -1,8 +1,9 @@
 <?php
+// session_start();
+
 // Include the file with the access check
 include '../dashboard/check_access.php';
 include '../connect/role_access.php';
-
 // Database configuration
 $db_host = 'localhost';
 $db_username = 'root';
@@ -19,6 +20,7 @@ $error = array();
 
 $sql = "SELECT * FROM login_register";
 $result = $conn->query($sql);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,11 +68,11 @@ $result = $conn->query($sql);
                     </div>
                 </div>
             </div>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="../script/chatscript.js"></script>
         </main>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../script/chatscript.js"></script>
     <script src="../script/role_check.js"></script>
     <script src="../script/index.js"></script>
 </body>

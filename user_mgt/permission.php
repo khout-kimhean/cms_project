@@ -1,4 +1,5 @@
 <?php
+
 include '../connect/role_access.php';
 require '../vendor/autoload.php';
 include '../dashboard/check_access.php';
@@ -8,7 +9,6 @@ $user = "root";
 $pass = "";
 $db = "demo";
 
-// Create a connection to the database
 $con = mysqli_connect($host, $user, $pass, $db);
 
 if (!$con) {
@@ -16,16 +16,18 @@ if (!$con) {
 }
 
 $error = array();
-
-
-$sql = "SELECT * FROM login_register";
-// $result = $conn->query($sql);
+$searchResults = array();
 
 if (isset($_POST['search'])) {
     $searchTerm = $_POST['searchTerm'];
 
     $sql = "SELECT * FROM login_register WHERE name LIKE ?";
     $stmt = mysqli_prepare($con, $sql);
+
+    if ($stmt === false) {
+        die("Error: " . mysqli_error($con));
+    }
+
     $searchPattern = "%" . $searchTerm . "%";
     mysqli_stmt_bind_param($stmt, "s", $searchPattern);
     mysqli_stmt_execute($stmt);
@@ -40,6 +42,8 @@ if (isset($_POST['search'])) {
 
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,13 +53,13 @@ if (isset($_POST['search'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../styles/user_mgt/search_user.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
 </head>
 
 <body>
 
     <div class="container">
-        <!-- Sidebar Section -->
         <aside>
             <div class="toggle">
                 <div class="logo">
@@ -64,11 +68,9 @@ if (isset($_POST['search'])) {
                 </div>
                 <div class="close" id="close-btn">
                     <span class="material-icons-sharp">
-                        <!-- close -->
                     </span>
                 </div>
             </div>
-
             <div class="sidebar">
                 <a href="../dashboard/dashboard.php">
                     <span class="material-icons-sharp">
@@ -76,7 +78,6 @@ if (isset($_POST['search'])) {
                     </span>
                     <h3>Dashboard</h3>
                 </a>
-
                 <!-- <a href="../data_store/search.php">
                     <span class="fa fa-search">
                     </span>
@@ -122,8 +123,6 @@ if (isset($_POST['search'])) {
                     </span>
                     <h3>Stock Mgt</h3>
                 </a> -->
-
-
                 <a href="../user_mgt/logout.php">
                     <span class="material-icons-sharp">
                         logout
@@ -151,7 +150,7 @@ if (isset($_POST['search'])) {
 
                             </div>
                             <div class="card-body">
-                                <form action="search_user.php" method="post">
+                                <form action="permission.php" method="post">
                                     <div class="form-group">
                                         <label for="searchTerm">Type here for search : </label>
                                         <input type="text" name="searchTerm" class="form-control" id="searchTerm">
@@ -177,27 +176,27 @@ if (isset($_POST['search'])) {
                                                 $i = 1;
                                                 foreach ($searchResults as $row) {
                                                     ?>
-                                                    <tr>
-                                                        <td>
-                                                            <?php echo $i++; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo htmlspecialchars($row['name']); ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo htmlspecialchars($row['email']); ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo htmlspecialchars($row['user_type']); ?>
-                                                        </td>
+                                            <tr>
+                                                <td>
+                                                    <?php echo $i++; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row['name']); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row['email']); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row['user_type']); ?>
+                                                </td>
 
-                                                        <td><a
-                                                                href="../user_mgt/assign_function.php?id=<?php echo $row['id']; ?>">
-                                                                Add Permission</a>
-                                                        </td>
+                                                <td><a
+                                                        href="../user_mgt/assign_function.php?id=<?php echo $row['id']; ?>">
+                                                        Add Permission</a>
+                                                </td>
 
-                                                    </tr>
-                                                    <?php
+                                            </tr>
+                                            <?php
                                                 }
                                             } else {
                                                 echo "<tr><td colspan='5'>No matching files found.</td></tr>";
@@ -242,70 +241,7 @@ if (isset($_POST['search'])) {
 
             </div>
 
-            <div class="user-profile">
-                <div class="logo">
-                    <img src="../images/logo/logo.jpg">
-                    <h2>FTB Bank</h2>
-                    <p>Welcome to FTB Bank</p>
-                </div>
-            </div>
 
-            <div class="reminders">
-                <div class="header">
-                    <h2>Reminders</h2>
-                    <span class="material-icons-sharp">
-                        notifications_none
-                    </span>
-                </div>
-
-                <div class="notification">
-                    <div class="icon">
-                        <span class="material-icons-sharp">
-                            volume_up
-                        </span>
-                    </div>
-                    <div class="content">
-                        <div class="info">
-                            <h3>Support Time</h3>
-                            <small class="text_muted">
-                                08:00 AM - 5:00 PM
-                            </small>
-                        </div>
-                        <span class="material-icons-sharp">
-                            more_vert
-                        </span>
-                    </div>
-                </div>
-
-                <div class="notification deactive">
-                    <div class="icon">
-                        <span class="material-icons-sharp">
-                            edit
-                        </span>
-                    </div>
-                    <div class="content">
-                        <div class="info">
-                            <h3>Open Time</h3>
-                            <small class="text_muted">
-                                08:00 AM - 5:00 PM
-                            </small>
-                        </div>
-                        <span class="material-icons-sharp">
-                            more_vert
-                        </span>
-                    </div>
-                </div>
-
-                <div class="notification add-reminder">
-                    <div>
-                        <span class="material-icons-sharp">
-                            add
-                        </span>
-                        <h3>Add Reminder</h3>
-                    </div>
-                </div>
-
-            </div>
 
         </div>
     </div>

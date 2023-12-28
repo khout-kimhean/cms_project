@@ -166,7 +166,7 @@ $conn->close();
                 <form action="" method="post" id="create_user_form">
                     <div class="back_button">
                         <a href="../user_mgt/user.php" class="back-button">
-                            <i class="fa fa-chevron-circle-left" style="font-size: 22px"> Back</i>
+                            <i class="fa fa-chevron-circle-left" style="font-size: 26px"> Back</i>
                         </a>
                     </div>
                     <h3>Create User</h3>
@@ -180,26 +180,29 @@ $conn->close();
                         }
                     }
                     ?>
-                    <input type="text" name="name" required placeholder="enter your name">
-                    <input type="email" name="email" required placeholder="enter your email">
-                    <input type="password" name="password" id="password" required placeholder="enter your password">
-                    <!-- Add an id to the password input element -->
-                    <input type="password" name="cpassword" required placeholder="confirm your password">
+                    <div class="input">
+                        <input type="text" name="name" required placeholder="Enter your name">
+                        <input type="email" name="email" required placeholder="Enter your email">
+                        <input type="password" name="password" id="password" required placeholder="Enter your password">
+                        <!-- Add an id to the password input element -->
+                        <input type="password" name="cpassword" required placeholder="Confirm your password">
 
-                    <!-- Password and confirm password validation error message -->
-                    <?php
+                        <!-- Password and confirm password validation error message -->
+                        <?php
                     if (isset($error) && in_array('Passwords do not match!', $error)) {
                         echo '<span class="error-msg">Passwords do not match!</span>';
                     }
                     ?>
-                    <select name="user_type">
-                        <option value="admin">Admin</option>
-                        <option value="card payment team">Card Payment Team</option>
-                        <option value="digital branch team">Digital Branch Team</option>
-                        <option value="atm team">ATM Team</option>
-                        <option value="terminal team">Terminal Team</option>
-                        <option value="user">User</option>
-                    </select>
+                        <select name="user_type">
+                            <option value="admin">Admin</option>
+                            <option value="card payment team">Card Payment Team</option>
+                            <option value="digital branch team">Digital Branch Team</option>
+                            <option value="atm team">ATM Team</option>
+                            <option value="terminal team">Terminal Team</option>
+                            <option value="user">User</option>
+                        </select>
+                    </div>
+
                     <input type="submit" name="submit" value="Create User" class="form-btn">
 
                 </form>

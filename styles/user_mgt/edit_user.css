@@ -222,12 +222,13 @@ aside .sidebar .message-count {
   font-size: 11px;
   border-radius: var(--border-radius-1);
 }
-a:hover {
+/* a:hover {
   text-decoration: underline;
-}
+} */
+
 .container2 .back_button a {
   border-radius: 20px;
-  color: rgb(196, 160, 6);
+  color: rgb(12, 77, 162);
 }
 .container2 {
   box-shadow: var(--box-shadow);
@@ -253,7 +254,7 @@ a:hover {
   background-color: var(--color-white);
   padding: 10px;
   color: #202528;
-  border-radius: var(--card-border-radius);
+  border-radius: 8px;
 }
 
 .container2 input {
@@ -264,7 +265,7 @@ a:hover {
   background-color: var(--color-white);
   padding: 10px;
   color: #202528;
-  border-radius: var(--card-border-radius);
+  border-radius: 8px;
 }
 
 .container2 .select {
@@ -333,7 +334,7 @@ a:hover {
   outline: 0;
   background: var(--color-white);
   padding: 8px;
-  border-radius: var(--card-border-radius);
+  border-radius: 8px;
 }
 .container2 .select .user_mgt label {
   font-size: 14px;
@@ -354,7 +355,7 @@ a:hover {
   width: 45%;
   margin-top: 20px;
   padding: 10px;
-  border-radius: 20px;
+  border-radius: 8px;
   border: 1px solid var(--color-dark);
 }
 

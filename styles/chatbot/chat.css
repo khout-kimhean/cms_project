@@ -223,7 +223,7 @@ main .user_info p {
 }
 
 main .msg_card_body {
-  height: 75%;
+  height: 570px;
   overflow-y: auto;
   padding: 15px;
 }

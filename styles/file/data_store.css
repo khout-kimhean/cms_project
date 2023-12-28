@@ -223,9 +223,9 @@ aside .sidebar .message-count {
   font-size: 11px;
   border-radius: var(--border-radius-1);
 }
-a:hover {
+/* a:hover {
   text-decoration: underline;
-}
+} */
 /* main css */
 /* .container2 .card {
   margin-top: 70px;
@@ -296,7 +296,7 @@ a:hover {
   color: var(--color-dark);
 }
 .back_button a {
-  color: rgb(196, 160, 6);
+  color: rgb(12, 77, 162);
 }
 .container2 .btn.btn-info {
   margin-top: 5px !important;

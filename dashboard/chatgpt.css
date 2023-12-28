@@ -29,7 +29,23 @@
   --incoming-chat-border: #d9d9e3;
 }
 body {
-  background: var(--outgoing-chat-bg);
+  background-image: url(../images/background.png);
+  /* background: var(--outgoing-chat-bg); */
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background-size: cover;
+  /* border-radius: 20px; */
+  /* background-position: center; */
+  background-color: lightblue;
+}
+body .background {
+  position: relative;
+  z-index: 0;
 }
 
 /* Chats container styling */
@@ -115,10 +131,10 @@ body {
   justify-content: center;
   color: var(--text-color);
 }
-.chat-container .chat.outgoing {
+/* .chat-container .chat.outgoing {
   background: var(--outgoing-chat-bg);
   border: 1px solid var(--outgoing-chat-border);
-}
+} */
 /* .chat-container .chat.incoming {
   background: var(--incoming-chat-bg);
   border: 1px solid var(--incoming-chat-border);
@@ -204,7 +220,7 @@ span.material-symbols-rounded {
   display: flex;
   padding: 0px 10px;
   justify-content: center;
-  background: var(--outgoing-chat-bg);
+  /* background: var(--outgoing-chat-bg); */
   /* border-top: 1px solid var(--incoming-chat-border); */
 }
 .typing-container .typing-content {
@@ -225,11 +241,12 @@ span.material-symbols-rounded {
   border: none;
   padding: 15px 45px 15px 20px;
   color: var(--text-color);
+  background-color: var(--color-light);
   font-size: 0.9rem;
-  border-radius: 16px;
+  border-radius: 4px;
   max-height: 250px;
   overflow-y: auto;
-  background: var(--incoming-chat-bg);
+  /* background: var(--incoming-chat-bg); */
   outline: 1px solid var(--incoming-chat-border);
 }
 .typing-textarea textarea::placeholder {
@@ -239,7 +256,7 @@ span.material-symbols-rounded {
   width: 55px;
   height: 55px;
   display: flex;
-  border-radius: 16px;
+  border-radius: 4px;
   font-size: 1.35rem;
   align-items: center;
   justify-content: center;
@@ -260,7 +277,8 @@ span.material-symbols-rounded {
 .typing-controls span {
   margin-left: 7px;
   font-size: 1.4rem;
-  background: var(--incoming-chat-bg);
+  color: var(--text-color);
+  background-color: var(--color-light);
   outline: 1px solid var(--incoming-chat-border);
 }
 .typing-controls span:hover {

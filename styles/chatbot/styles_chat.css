@@ -153,9 +153,7 @@ aside .toggle .logo img {
   border-radius: 50%; /* Make the image circular */
   object-fit: cover;
 }
-a:hover {
-  text-decoration: underline;
-}
+
 /* main  */
 
 /* main */

@@ -133,9 +133,10 @@ aside .toggle {
   justify-content: space-between;
   margin-top: 1.4rem;
 }
-a:hover {
+/* a:hover {
   text-decoration: underline;
-}
+} */
+
 /* container2 */
 
 .button-container a {

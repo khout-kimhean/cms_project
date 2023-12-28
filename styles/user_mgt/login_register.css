@@ -223,11 +223,9 @@ aside .sidebar .message-count {
   font-size: 11px;
   border-radius: var(--border-radius-1);
 }
-a:hover {
-  text-decoration: underline;
-}
 
 /* Apply the following styles to the form within the main element */
+
 main .form-container form {
   display: inline-block;
   background-color: var(--color-white);
@@ -237,6 +235,7 @@ main .form-container form {
   text-align: center;
   margin: 70px 0px;
   width: 138%;
+  height: 620px;
 }
 .form-container .back_button {
   text-align: left;
@@ -264,13 +263,14 @@ main .form-container form input[type="email"],
 main .form-container form input[type="password"],
 main .form-container form select {
   color: var(--color-dark);
-  width: 100%;
+  align-items: center;
+  width: 50%;
   padding: 1rem;
   margin-top: 5px;
   margin-bottom: 10px;
 
-  border: 1px solid rgb(160, 156, 156);
-  border-radius: var(--border-radius-1);
+  border: 1px solid rgb(177, 170, 170);
+  border-radius: 5px;
   font-size: 13px;
 }
 /* Define CSS for the alert messages */
@@ -286,27 +286,27 @@ main .form-container form select {
 }
 
 .alert.alert-danger {
+  margin-bottom: 20px;
   background-color: #f2dede;
   color: #a94442;
   border-color: #ebccd1;
 }
 
 main .form-container form input[type="submit"] {
+  /* margin-left: 200%; */
   background-color: var(--color-primary);
   border: none;
-  border-radius: var(--border-radius-1);
   color: var(--color-white);
   padding: 1rem;
   font-size: 1rem;
   cursor: pointer;
-  margin-top: 20px;
-  width: 150px;
+  margin-top: 30px;
+  width: 20%;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 20px;
   font-size: 17px;
   padding: 10px 15px;
   background: rgb(196, 160, 6);
-  border-radius: 5px;
 }
 
 main .form-container form input[type="submit"]:hover {
@@ -322,13 +322,12 @@ main .form-container form a {
     text-decoration: underline;
 } */
 
-.main .form-container {
+/* .main .form-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* height: 100%; */
   text-align: center;
-}
+} */
 
 /* Responsive layout for smaller screens */
 @media (max-width: 768px) {
@@ -696,3 +695,10 @@ main .form-container form a {
     font-size: 2rem;
   }
 }
+
+/* .container2 .analyse {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.6rem;
+} */

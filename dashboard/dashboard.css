@@ -539,10 +539,12 @@ main .recent-orders a {
 }
 
 .right-section .reminders .header span {
-  padding: 10px;
+  cursor: pointer;
+  padding: 5px;
   box-shadow: var(--box-shadow);
   background-color: var(--color-white);
   border-radius: 50%;
+  font-size: 25px;
 }
 
 .right-section .reminders .notification {

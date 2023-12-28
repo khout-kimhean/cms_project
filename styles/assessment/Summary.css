@@ -105,6 +105,6 @@ a {
   color: var(--color-danger);
 }
 
-a:hover {
+/* a:hover {
   text-decoration: underline;
-}
+} */

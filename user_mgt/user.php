@@ -174,7 +174,7 @@ if (isset($_POST['search'])) {
                                                 <th>User Name</th>
                                                 <th>Email</th>
                                                 <th>Type User</th>
-                                                <!-- <th>Permission</th> -->
+                                                <th>Permission</th>
                                                 <th>Option</th>
                                             </tr>
                                         </thead>
@@ -185,30 +185,30 @@ if (isset($_POST['search'])) {
                                                 $i = 1;
                                                 foreach ($searchResults as $row) {
                                                     ?>
-                                                    <tr>
-                                                        <td>
-                                                            <?php echo $i++; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo htmlspecialchars($row['name']); ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo htmlspecialchars($row['email']); ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo htmlspecialchars($row['user_type']); ?>
-                                                        </td>
+                                            <tr>
+                                                <td>
+                                                    <?php echo $i++; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row['name']); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row['email']); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row['user_type']); ?>
+                                                </td>
 
-                                                        <!-- <td><a
+                                                <td><a
                                                         href="../user_mgt/assign_function.php?id=<?php echo $row['id']; ?>">
                                                         Permission</a>
-                                                </td> -->
-                                                        <td>
-                                                            <a href="edit_user.php?id=<?php echo $row['id']; ?>">Edit</a>
-                                                        </td>
+                                                </td>
+                                                <td>
+                                                    <a href="edit_user.php?id=<?php echo $row['id']; ?>">Edit</a>
+                                                </td>
 
-                                                    </tr>
-                                                    <?php
+                                            </tr>
+                                            <?php
                                                 }
                                             } else {
                                                 echo "<tr><td colspan='5'>No matching files found.</td></tr>";
