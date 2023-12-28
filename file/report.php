@@ -17,30 +17,34 @@ if ($conn->connect_error) {
 $error = array();
 $alertType = ""; // Define the alert type (success or danger)
 $alertMessage = "";
-echo $alertMessage;
+
 $sql = "SELECT * FROM recover_file";
 
 if (isset($_POST['delete'])) {
-
     $filename = $_POST['filename'];
     $delete_sql = "DELETE FROM recover_file WHERE id = ?";
     $stmt = $conn->prepare($delete_sql);
-    $stmt->bind_param('s', $filename);
 
-    if ($stmt->execute()) {
-        // Successful deletion
-        $alertType = "success";
-        $alertMessage = "User deleted successfully.";
-        header('Location: report.php'); // Redirect to refresh the user list
-        exit();
+    if (!$stmt) {
+        // Error preparing the statement
+        $error[] = 'Error preparing statement: ' . $conn->error;
     } else {
-        // Error deleting user
-        $error[] = 'Error deleting user: ' . $conn->error;
+        $stmt->bind_param('s', $filename);
+
+        if ($stmt->execute()) {
+            // Successful deletion
+            $alertType = "success";
+            $alertMessage = "File deleted successfully.";
+            header('Location: report.php'); // Redirect to refresh the file list
+            exit();
+        } else {
+            // Error deleting file
+            $error[] = 'Error deleting file: ' . $stmt->error;
+        }
+
+        $stmt->close();
     }
-
-    $stmt->close();
 }
-
 
 if (isset($_POST['recover'])) {
     $filenameToRecover = $_POST['filename'];
@@ -56,8 +60,8 @@ if (isset($_POST['recover'])) {
         $recoverRow = $recoverResult->fetch_assoc();
 
         // Insert recovered data into upload_file table
-        $insertQuery = $conn->prepare("INSERT INTO upload_file (id, filename, title, team, description) VALUES (?, ?, ?, ?, ?)");
-        $insertQuery->bind_param('sssss', $recoverRow['id'], $recoverRow['filename'], $recoverRow['title'], $recoverRow['team'], $recoverRow['description']);
+        $insertQuery = $conn->prepare("INSERT INTO upload_file (id, filename, title, team, user_type, description) VALUES (?, ?, ?, ?, ?, ?)");
+        $insertQuery->bind_param('ssssss', $recoverRow['id'], $recoverRow['filename'], $recoverRow['title'], $recoverRow['team'], $recoverRow['user_type'], $recoverRow['description']);
 
         if ($insertQuery->execute()) {
             // File recovered successfully
@@ -83,14 +87,9 @@ if (isset($_POST['recover'])) {
     $recoverQuery->close();
 }
 
-
-
-
-
-// $sql = "SELECT * FROM login_register";
 $result = $conn->query($sql);
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -199,6 +198,7 @@ $result = $conn->query($sql);
                                 <th>Title</th>
                                 <th>Team</th>
                                 <th>Description</th>
+                                <th>Upload By</th>
                                 <th>Delete By</th>
                                 <th>Option</th>
                             </tr>
@@ -221,6 +221,7 @@ $result = $conn->query($sql);
                                         <td title="' . $title . '">' . $shortenedTitle . '</td>
                                         <td>' . $row['team'] . '</td>
                                         <td title="' . $description . '">' . $shortenedDescription . '</td>
+                                        <td>' . $row['user_type'] . '</td>
                                         <td>' . $row['delete_by'] . '</td>
                                         <td>
                                             <form method="post">

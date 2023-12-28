@@ -2,6 +2,7 @@
 require '../vendor/autoload.php';
 include '../dashboard/check_access.php';
 include '../connect/role_access.php';
+
 $host = "localhost";
 $user = "root";
 $pass = "";
@@ -12,6 +13,36 @@ $con = mysqli_connect($host, $user, $pass, $db);
 
 if (!$con) {
     die("Connection failed: " . mysqli_connect_error());
+}
+
+// Function to get logged-in user's type
+function getLoggedInUserType($conn, $userId)
+{
+    $userSql = "SELECT user_type FROM login_register WHERE id = ?";
+    $userStmt = $conn->prepare($userSql);
+
+    if (!$userStmt) {
+        die("Prepare failed: " . $conn->error);
+    }
+
+    $userStmt->bind_param("i", $userId);
+
+    if (!$userStmt->execute()) {
+        die("Execute failed: " . $userStmt->error);
+    }
+
+    $userResult = $userStmt->get_result();
+
+    if (!$userResult) {
+        die("Get result failed: " . $userStmt->error);
+    }
+
+    if ($userResult->num_rows > 0) {
+        $userData = $userResult->fetch_assoc();
+        return $userData['user_type'];
+    } else {
+        return false; // User not found
+    }
 }
 
 if (isset($_POST['submit'])) {
@@ -76,12 +107,16 @@ if (isset($_POST['submit'])) {
         $date_upload = date('Y-m-d H:i:s');
         $description = strip_tags($_POST['description']);
         $title = $_POST['title'];
-        $team = $_POST['drop_file']; // Assuming 'drop_file' is the correct name
+        $team = $_POST['drop_file']; 
+
+        // Get the logged-in user's type
+        $loggedInUserId = $_SESSION['user_id'];
+        $loggedInUserType = getLoggedInUserType($con, $loggedInUserId);
 
         foreach ($uploadedFiles as $uploadedFile) {
-            $sql = "INSERT INTO upload_file (filename, title, team, description, date_upload) VALUES (?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO upload_file (filename, title, team, description, date_upload, user_type) VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = mysqli_prepare($con, $sql);
-            mysqli_stmt_bind_param($stmt, "sssss", $uploadedFile, $title, $team, $description, $date_upload);
+            mysqli_stmt_bind_param($stmt, "ssssss", $uploadedFile, $title, $team, $description, $date_upload, $loggedInUserType);
 
             if (mysqli_stmt_execute($stmt)) {
                 // Success
@@ -101,9 +136,13 @@ if (isset($_POST['submit'])) {
         $title = $_POST['title'];
         $team = $_POST['drop_file']; // Assuming 'drop_file' is the correct name
 
-        $sql = "INSERT INTO upload_file (filename, title, team, description, date_upload) VALUES (?, ?, ?, ?, ?)";
+        // Get the logged-in user's type
+        $loggedInUserId = $_SESSION['user_id'];
+        $loggedInUserType = getLoggedInUserType($con, $loggedInUserId);
+
+        $sql = "INSERT INTO upload_file (filename, title, team, description, date_upload, user_type) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($con, $sql);
-        mysqli_stmt_bind_param($stmt, "sssss", $newFilename, $title, $team, $description, $date_upload);
+        mysqli_stmt_bind_param($stmt, "ssssss", $newFilename, $title, $team, $description, $date_upload, $loggedInUserType);
 
         if (mysqli_stmt_execute($stmt)) {
             header("Location: upload_file.php?st=success");
@@ -115,8 +154,6 @@ if (isset($_POST['submit'])) {
         }
     }
 }
-
-
 ?>
 
 
@@ -336,9 +373,10 @@ if (isset($_POST['submit'])) {
                                     <div class="form-list">
                                         <label for="drop_file">Select:</label>
                                         <select name="drop_file" class="form-control" id="drop_file">
-                                            <option value="Team Card Payment">Team Card Payment</option>
-                                            <option value="Team ATM">Team ATM</option>
-                                            <option value="Team Digital Branch">Team Digital Branch</option>
+                                            <option value="card payment team">Card Payment Team</option>
+                                            <option value="digital branch team">Digital Branch Team</option>
+                                            <option value="atm team">ATM Team</option>
+                                            <option value="terminal team">Terminal Team</option>
                                         </select>
                                     </div>
                                     <textarea id="myTextarea" name="description"></textarea>

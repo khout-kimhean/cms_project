@@ -13,29 +13,37 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-$sql = "SELECT * FROM upload_file";
-// $sql = "SELECT * FROM login_register";
-$result = $conn->query($sql);
 
+// Function to get logged-in user's type
+function getLoggedInUserType($conn, $userId)
+{
+    $userSql = "SELECT user_type FROM login_register WHERE id = ?";
+    $userStmt = $conn->prepare($userSql);
 
-$searchResults = array();
+    if (!$userStmt) {
+        die("Prepare failed: " . $conn->error);
+    }
 
-if (isset($_POST['search'])) {
-    $searchTerm = $_POST['searchTerm'];
+    $userStmt->bind_param("i", $userId);
 
-    $sql = "SELECT * FROM upload_file WHERE filename LIKE ? OR description LIKE ? OR title LIKE ? OR team LIKE ?";
-    $stmt = $conn->prepare($sql);
-    $searchPattern = "%" . $searchTerm . "%";
-    $stmt->bind_param("ssss", $searchPattern, $searchPattern, $searchPattern, $searchPattern);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    if (!$userStmt->execute()) {
+        die("Execute failed: " . $userStmt->error);
+    }
 
-    if ($result && $result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $searchResults[] = $row;
-        }
+    $userResult = $userStmt->get_result();
+
+    if (!$userResult) {
+        die("Get result failed: " . $userStmt->error);
+    }
+
+    if ($userResult->num_rows > 0) {
+        $userData = $userResult->fetch_assoc();
+        return $userData['user_type'];
+    } else {
+        return false; // User not found
     }
 }
+
 // Function to get logged-in user's name
 function getLoggedInUserName($conn, $userId)
 {
@@ -66,6 +74,68 @@ function getLoggedInUserName($conn, $userId)
     }
 }
 
+// Get logged-in user's type
+$loggedInUserId = $_SESSION['user_id'];
+$loggedInUserType = getLoggedInUserType($conn, $loggedInUserId);
+
+$sql = "SELECT * FROM upload_file";
+
+// If user_type is set and not empty, filter by user_type
+if (!empty($loggedInUserType)) {
+    $sql .= " WHERE user_type = ?";
+}
+
+$result = $conn->prepare($sql);
+
+// If user_type is set and not empty, bind the parameter
+if (!empty($loggedInUserType)) {
+    $result->bind_param("s", $loggedInUserType);
+}
+
+$result->execute();
+$result = $result->get_result();
+
+
+
+
+$searchResults = array();
+
+if (isset($_POST['search'])) {
+    $searchTerm = $_POST['searchTerm'];
+
+    // Use a prepared statement to prevent SQL injection
+    $sql = "SELECT * FROM upload_file WHERE (filename LIKE ? OR description LIKE ? OR title LIKE ? ) AND user_type = ?";
+    $stmt = $conn->prepare($sql);
+
+    // Add wildcard characters to the search pattern
+    $searchPattern = "%" . $searchTerm . "%";
+
+    // Bind parameters, including the user type condition
+    $stmt->bind_param("ssss", $searchPattern, $searchPattern, $searchPattern, $loggedInUserType);
+
+    // Execute the query
+    $stmt->execute();
+
+    // Get the result set
+    $result = $stmt->get_result();
+
+    // Check if there are any results
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $searchResults[] = $row;
+        }
+    }
+
+    // Close the statement
+    $stmt->close();
+}
+
+// ... rest of your PHP code ...
+
+
+
+
+
 // Delete action
 if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
     // Check if the user is logged in
@@ -78,7 +148,7 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
 
         if ($loggedInUser !== false) {
             // Retrieve file details before deleting
-            $fileDetailsSql = "SELECT filename, title, team, description FROM upload_file WHERE id = ?";
+            $fileDetailsSql = "SELECT filename, title, team, description ,user_type FROM upload_file WHERE id = ?";
             $fileDetailsStmt = $conn->prepare($fileDetailsSql);
 
             if (!$fileDetailsStmt) {
@@ -101,14 +171,14 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
                 $fileDetails = $fileDetailsResult->fetch_assoc();
 
                 // Insert into recover_file table
-                $recoverSql = "INSERT INTO recover_file (filename, title, team, description, delete_by) VALUES (?, ?, ?, ?, ?)";
+                $recoverSql = "INSERT INTO recover_file (filename, title, team, description, user_type, delete_by) VALUES (?, ?, ?, ?, ?, ?)";
                 $recoverStmt = $conn->prepare($recoverSql);
 
                 if (!$recoverStmt) {
                     die("Prepare failed: " . $conn->error);
                 }
 
-                $recoverStmt->bind_param("sssss", $fileDetails['filename'], $fileDetails['title'], $fileDetails['team'], $fileDetails['description'], $loggedInUser);
+                $recoverStmt->bind_param("ssssss", $fileDetails['filename'], $fileDetails['title'], $fileDetails['team'], $fileDetails['description'] , $fileDetails['user_type'], $loggedInUser);
 
                 if (!$recoverStmt->execute()) {
                     die("Execute failed: " . $recoverStmt->error);
@@ -141,20 +211,7 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
         echo "Error: User not logged in.";
     }
 }
-// if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
-//     $idToDelete = $_GET['delete'];
-//     $deleteSql = "DELETE FROM upload_file WHERE id = ?";
-//     $stmt = $conn->prepare($deleteSql);
-//     $stmt->bind_param("i", $idToDelete);
 
-//     if ($stmt->execute()) {
-//         header("Location: view_file.php?st=delete-success");
-//         exit;
-//     } else {
-//         header("Location: view_file.php?st=delete-error");
-//         exit;
-//     }
-// }
 
 // Edit action
 if (isset($_POST['edit']) && is_numeric($_POST['edit_id'])) {
@@ -299,6 +356,7 @@ if (isset($_POST['edit']) && is_numeric($_POST['edit_id'])) {
                                         <th>Team</th>
                                         <th>Title</th>
                                         <th>Description</th>
+                                        <th>Upload By</th>
                                         <th>View File Upload</th>
                                         <th>View data</th>
                                         <th>Edit</th>
@@ -333,14 +391,17 @@ if (isset($_POST['edit']) && is_numeric($_POST['edit_id'])) {
                                                     echo strlen($description) > 20 ? substr($description, 0, 20) . '...' : $description;
                                                     ?>
                                         </td>
+                                        <td>
+                                            <?php echo htmlspecialchars($row['user_type']); ?>
+                                        </td>
                                         <td><a href="../file/view.php?file=<?php echo $row['filename']; ?>"
                                                 target="_blank">View File</a></td>
                                         <td><a href="../file/view_data.php?id=<?php echo $row['id']; ?>">View Data</a>
                                         </td>
-                                        <td><a href="../file/edit_data.php?id=<?php echo $row['id']; ?>">Edit Data</a>
+                                        <td><a href="../file/edit_data.php?id=<?php echo $row['id']; ?>">Edit</a>
                                         </td>
-                                        <td><a href="../file/view_file.php?delete=<?php echo $row['id']; ?>">Delete
-                                                Data</a></td>
+                                        <td><a href="../file/view_file.php?delete=<?php echo $row['id']; ?>">Delete</a>
+                                        </td>
                                     </tr>
                                     <?php
                                             $i++; // Increment the ID counter for the next row
@@ -374,14 +435,17 @@ if (isset($_POST['edit']) && is_numeric($_POST['edit_id'])) {
                                                         echo strlen($description) > 20 ? substr($description, 0, 20) . '...' : $description;
                                                         ?>
                                         </td>
+                                        <td>
+                                            <?php echo htmlspecialchars($row['user_type']); ?>
+                                        </td>
                                         <td><a href="../file/view.php?file=<?php echo $row['filename']; ?>"
                                                 target="_blank">View File</a></td>
                                         <td><a href="../file/view_data.php?id=<?php echo $row['id']; ?>">View Data</a>
                                         </td>
-                                        <td><a href="../file/edit_data.php?id=<?php echo $row['id']; ?>">Edit Data</a>
+                                        <td><a href="../file/edit_data.php?id=<?php echo $row['id']; ?>">Edit</a>
                                         </td>
-                                        <td><a href="../file/view_file.php?delete=<?php echo $row['id']; ?>">Delete
-                                                Data</a></td>
+                                        <td><a href="../file/view_file.php?delete=<?php echo $row['id']; ?>">Delete</a>
+                                        </td>
                                     </tr>
                                     <?php
                                                 $i++; // Increment the ID counter for the next row
