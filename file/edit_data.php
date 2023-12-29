@@ -290,7 +290,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="wrapper">
                     <div class="back_button">
                         <a href="../file/view_file.php" class="back-button">
-                            <i class="fa fa-chevron-circle-left" style="font-size: 20px">Back</i>
+                            <i class="fa fa-chevron-circle-left" style="font-size: 24px">Back</i>
                         </a>
                     </div>
                     <form method="post" enctype="multipart/form-data">

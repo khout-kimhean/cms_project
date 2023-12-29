@@ -223,18 +223,13 @@ aside .sidebar .message-count {
   font-size: 11px;
   border-radius: var(--border-radius-1);
 }
-/* a:hover {
-  text-decoration: underline;
-} */
-/* main css */
-/* .container2 .card {
-  margin-top: 70px;
-  height: 470px;
-  width: 100%;
-  background-color: var(--color-white);
-  border-radius: var(--card-border-radius);
-  box-shadow: var(--box-shadow);
-} */
+.container2 .card-body label {
+  font-size: 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  /* font-family: ; */
+  font-weight: 400;
+}
 .container2 .form-list {
   margin: 0;
 }

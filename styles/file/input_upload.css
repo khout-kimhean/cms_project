@@ -312,6 +312,7 @@ main {
   padding: 8px;
   background-color: var(--color-light);
   color: var(--color-dark);
+  margin-top: 10px;
 }
 
 .container2 .alert {
@@ -323,8 +324,8 @@ main {
 .container2 .form-group {
   margin-bottom: 5px;
 }
-.form-group label {
-  font-family: cursive;
+.container2 label {
+  /* font-family: cursive; */
   font-size: 16px;
   color: var(--color-dark);
 }
