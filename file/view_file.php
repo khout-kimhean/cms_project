@@ -80,23 +80,25 @@ $loggedInUserType = getLoggedInUserType($conn, $loggedInUserId);
 
 $sql = "SELECT * FROM upload_file";
 
-// If user_type is set and not empty, filter by user_type
-if (!empty($loggedInUserType)) {
-    $sql .= " WHERE user_type = ?";
-}
+// If the user is an admin, show all files
+if ($loggedInUserType == 'admin') {
+    $result = $conn->prepare($sql);
+} else {
+    // If user_type is set and not empty, filter by user_type
+    if (!empty($loggedInUserType)) {
+        $sql .= " WHERE user_type = ?";
+    }
 
-$result = $conn->prepare($sql);
+    $result = $conn->prepare($sql);
 
-// If user_type is set and not empty, bind the parameter
-if (!empty($loggedInUserType)) {
-    $result->bind_param("s", $loggedInUserType);
+    // If user_type is set and not empty, bind the parameter
+    if (!empty($loggedInUserType)) {
+        $result->bind_param("s", $loggedInUserType);
+    }
 }
 
 $result->execute();
 $result = $result->get_result();
-
-
-
 
 $searchResults = array();
 
@@ -104,14 +106,24 @@ if (isset($_POST['search'])) {
     $searchTerm = $_POST['searchTerm'];
 
     // Use a prepared statement to prevent SQL injection
-    $sql = "SELECT * FROM upload_file WHERE (filename LIKE ? OR description LIKE ? OR title LIKE ? ) AND user_type = ?";
+    $sql = "SELECT * FROM upload_file WHERE (filename LIKE ? OR description LIKE ? OR title LIKE ?)";
+
+    // If the user is not an admin, add user_type condition to the search query
+    if ($loggedInUserType != 'admin') {
+        $sql .= " AND user_type = ?";
+    }
+
     $stmt = $conn->prepare($sql);
 
     // Add wildcard characters to the search pattern
     $searchPattern = "%" . $searchTerm . "%";
 
-    // Bind parameters, including the user type condition
-    $stmt->bind_param("ssss", $searchPattern, $searchPattern, $searchPattern, $loggedInUserType);
+    // Bind parameters, including the user type condition if applicable
+    if ($loggedInUserType != 'admin') {
+        $stmt->bind_param("ssss", $searchPattern, $searchPattern, $searchPattern, $loggedInUserType);
+    } else {
+        $stmt->bind_param("sss", $searchPattern, $searchPattern, $searchPattern);
+    }
 
     // Execute the query
     $stmt->execute();
@@ -129,10 +141,6 @@ if (isset($_POST['search'])) {
     // Close the statement
     $stmt->close();
 }
-
-// ... rest of your PHP code ...
-
-
 
 
 
