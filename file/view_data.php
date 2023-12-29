@@ -23,7 +23,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     }
 
     // Query the database to retrieve the content based on the ID
-    $sql = "SELECT filename, title, team, description FROM upload_file WHERE id = ?";
+    $sql = "SELECT filename, title,  description FROM upload_file WHERE id = ?";
 
 
     // Prepare the SQL statement
@@ -40,7 +40,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $stmt->store_result();
 
         if ($stmt->num_rows > 0) {
-            $stmt->bind_result($filename, $title, $team, $description);
+            $stmt->bind_result($filename, $title,  $description);
             $stmt->fetch();
 
             // Display the content (you can use the appropriate HTML tags)
@@ -62,7 +62,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST["id"];
     $filename = $_POST["filename"];
     $title = $_POST["title"];
-    $team = $_POST["team"];
     $description = $_POST["description"];
 
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -71,14 +70,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "UPDATE upload_file SET filename = ? , title = ?, team = ?, description = ? WHERE id = ?";
+    $sql = "UPDATE upload_file SET filename = ? , title = ?,  description = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
 
     if ($stmt === false) {
         die("Error: " . $conn->error);
     }
 
-    $stmt->bind_param("ssssi", $filename, $title, $team, $description, $id);
+    $stmt->bind_param("sssi", $filename, $title,  $description, $id);
 
     if ($stmt->execute()) {
         $alertType = "success"; // Set success alert type
@@ -116,19 +115,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="../tinymce/tinymce.min.js"></script>
 
     <script>
-        tinymce.init({
-            selector: '#myTextarea',
-            plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
-            menubar: 'file edit view insert format tools table help',
-            toolbar: 'undo redo | bold italic underline strikethrough | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
-            toolbar_sticky: true,
-            autosave_ask_before_unload: true,
-            autosave_interval: '30s',
-            autosave_prefix: '{path}{query}-{id}-',
-            autosave_restore_when_empty: false,
-            autosave_retention: '2m',
-            image_advtab: true,
-            link_list: [{
+    tinymce.init({
+        selector: '#myTextarea',
+        plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
+        menubar: 'file edit view insert format tools table help',
+        toolbar: 'undo redo | bold italic underline strikethrough | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
+        toolbar_sticky: true,
+        autosave_ask_before_unload: true,
+        autosave_interval: '30s',
+        autosave_prefix: '{path}{query}-{id}-',
+        autosave_restore_when_empty: false,
+        autosave_retention: '2m',
+        image_advtab: true,
+        link_list: [{
                 title: 'My page 1',
                 value: 'https://www.codexworld.com'
             },
@@ -136,8 +135,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 title: 'My page 2',
                 value: 'http://www.codexqa.com'
             }
-            ],
-            image_list: [{
+        ],
+        image_list: [{
                 title: 'My page 1',
                 value: 'https://www.codexworld.com'
             },
@@ -145,8 +144,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 title: 'My page 2',
                 value: 'http://www.codexqa.com'
             }
-            ],
-            image_class_list: [{
+        ],
+        image_class_list: [{
                 title: 'None',
                 value: ''
             },
@@ -154,32 +153,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 title: 'Some class',
                 value: 'class-name'
             }
-            ],
-            importcss_append: true,
-            file_picker_callback: (callback, value, meta) => {
-                /* Provide file and text for the link dialog */
-                if (meta.filetype === 'file') {
-                    callback('https://www.google.com/logos/google.jpg', {
-                        text: 'My text'
-                    });
-                }
+        ],
+        importcss_append: true,
+        file_picker_callback: (callback, value, meta) => {
+            /* Provide file and text for the link dialog */
+            if (meta.filetype === 'file') {
+                callback('https://www.google.com/logos/google.jpg', {
+                    text: 'My text'
+                });
+            }
 
-                /* Provide image and alt text for the image dialog */
-                if (meta.filetype === 'image') {
-                    callback('https://www.google.com/logos/google.jpg', {
-                        alt: 'My alt text'
-                    });
-                }
+            /* Provide image and alt text for the image dialog */
+            if (meta.filetype === 'image') {
+                callback('https://www.google.com/logos/google.jpg', {
+                    alt: 'My alt text'
+                });
+            }
 
-                /* Provide alternative source and posted for the media dialog */
-                if (meta.filetype === 'media') {
-                    callback('movie.mp4', {
-                        source2: 'alt.ogg',
-                        poster: 'https://www.google.com/logos/google.jpg'
-                    });
-                }
-            },
-            templates: [{
+            /* Provide alternative source and posted for the media dialog */
+            if (meta.filetype === 'media') {
+                callback('movie.mp4', {
+                    source2: 'alt.ogg',
+                    poster: 'https://www.google.com/logos/google.jpg'
+                });
+            }
+        },
+        templates: [{
                 title: 'New Table',
                 description: 'creates a new table',
                 content: '<div class="mceTmpl"><table width="98%%"  border="0" cellspacing="0" cellpadding="0"><tr><th scope="col"> </th><th scope="col"> </th></tr><tr><td> </td><td> </td></tr></table></div>'
@@ -194,17 +193,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 description: 'New List with dates',
                 content: '<div class="mceTmpl"><span class="cdate">cdate</span><br><span class="mdate">mdate</span><h2>My List</h2><ul><li></li><li></li></ul></div>'
             }
-            ],
-            template_cdate_format: '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
-            template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
-            height: 400,
-            image_caption: true,
-            quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
-            noneditable_class: 'mceNonEditable',
-            toolbar_mode: 'sliding',
-            contextmenu: 'link image table',
-            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
-        });
+        ],
+        template_cdate_format: '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
+        template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
+        height: 400,
+        image_caption: true,
+        quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+        noneditable_class: 'mceNonEditable',
+        toolbar_mode: 'sliding',
+        contextmenu: 'link image table',
+        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
+    });
     </script>
 </head>
 
@@ -293,9 +292,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <form method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <?php if ($filename != "") { ?>
-                                <p>Current file:
-                                    <?php echo htmlspecialchars($filename); ?>
-                                </p>
+                            <p>Current file:
+                                <?php echo htmlspecialchars($filename); ?>
+                            </p>
                             <?php } ?>
                         </div>
 
@@ -304,19 +303,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <input type="text" name="title" class="form-control" id="title"
                                 value="<?php echo htmlspecialchars($title); ?>">
                         </div>
-                        <div class="form-list">
-                            <label for="team">Select:</label>
-                            <select name="team" class="form-control" id="team">
-                                <option value="Team Card Payment" <?php if ($team === "Team Card Payment")
-                                    echo "selected"; ?>>Team Card Payment</option>
-                                <option value="Team ATM" <?php if ($team === "Team ATM")
-                                    echo "selected"; ?>>Team ATM
-                                </option>
-                                <option value="Team Digital Branch" <?php if ($team === "Team Digital Branch")
-                                    echo "selected"; ?>>Team Digital Branch</option>
-                            </select>
-                        </div>
 
+                        <label for="description">Description:</label>
                         <textarea id="myTextarea"
                             name="description"><?php echo htmlspecialchars($description); ?></textarea>
 

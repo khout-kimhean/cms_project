@@ -156,7 +156,7 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
 
         if ($loggedInUser !== false) {
             // Retrieve file details before deleting
-            $fileDetailsSql = "SELECT filename, title, team, description ,user_type FROM upload_file WHERE id = ?";
+            $fileDetailsSql = "SELECT filename, title,  description ,user_type FROM upload_file WHERE id = ?";
             $fileDetailsStmt = $conn->prepare($fileDetailsSql);
 
             if (!$fileDetailsStmt) {
@@ -179,14 +179,14 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
                 $fileDetails = $fileDetailsResult->fetch_assoc();
 
                 // Insert into recover_file table
-                $recoverSql = "INSERT INTO recover_file (filename, title, team, description, user_type, delete_by) VALUES (?, ?, ?, ?, ?, ?)";
+                $recoverSql = "INSERT INTO recover_file (filename, title,  description, user_type, delete_by) VALUES (?,  ?, ?, ?, ?)";
                 $recoverStmt = $conn->prepare($recoverSql);
 
                 if (!$recoverStmt) {
                     die("Prepare failed: " . $conn->error);
                 }
 
-                $recoverStmt->bind_param("ssssss", $fileDetails['filename'], $fileDetails['title'], $fileDetails['team'], $fileDetails['description'] , $fileDetails['user_type'], $loggedInUser);
+                $recoverStmt->bind_param("sssss", $fileDetails['filename'], $fileDetails['title'],  $fileDetails['description'] , $fileDetails['user_type'], $loggedInUser);
 
                 if (!$recoverStmt->execute()) {
                     die("Execute failed: " . $recoverStmt->error);
@@ -361,7 +361,6 @@ if (isset($_POST['edit']) && is_numeric($_POST['edit_id'])) {
                                     <tr>
                                         <th>ID</th>
                                         <th>File Name</th>
-                                        <th>Team</th>
                                         <th>Title</th>
                                         <th>Description</th>
                                         <th>Upload By</th>
@@ -383,9 +382,6 @@ if (isset($_POST['edit']) && is_numeric($_POST['edit_id'])) {
                                         </td>
                                         <td>
                                             <?php echo htmlspecialchars($row['filename']); ?>
-                                        </td>
-                                        <td>
-                                            <?php echo htmlspecialchars($row['team']); ?>
                                         </td>
                                         <td title="<?php echo htmlspecialchars($row['title']); ?>">
                                             <?php
@@ -427,9 +423,6 @@ if (isset($_POST['edit']) && is_numeric($_POST['edit_id'])) {
                                         </td>
                                         <td>
                                             <?php echo htmlspecialchars($row['filename']); ?>
-                                        </td>
-                                        <td>
-                                            <?php echo htmlspecialchars($row['team']); ?>
                                         </td>
                                         <td title="<?php echo htmlspecialchars($row['title']); ?>">
                                             <?php

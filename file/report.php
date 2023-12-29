@@ -60,8 +60,8 @@ if (isset($_POST['recover'])) {
         $recoverRow = $recoverResult->fetch_assoc();
 
         // Insert recovered data into upload_file table
-        $insertQuery = $conn->prepare("INSERT INTO upload_file (id, filename, title, team, user_type, description) VALUES (?, ?, ?, ?, ?, ?)");
-        $insertQuery->bind_param('ssssss', $recoverRow['id'], $recoverRow['filename'], $recoverRow['title'], $recoverRow['team'], $recoverRow['user_type'], $recoverRow['description']);
+        $insertQuery = $conn->prepare("INSERT INTO upload_file (id, filename, title, user_type, description) VALUES (?,  ?, ?, ?, ?)");
+        $insertQuery->bind_param('sssss', $recoverRow['id'], $recoverRow['filename'], $recoverRow['title'], $recoverRow['user_type'], $recoverRow['description']);
 
         if ($insertQuery->execute()) {
             // File recovered successfully
@@ -196,7 +196,6 @@ $result = $conn->query($sql);
                                 <th>#</th>
                                 <th>Filename</th>
                                 <th>Title</th>
-                                <th>Team</th>
                                 <th>Description</th>
                                 <th>Upload By</th>
                                 <th>Delete By</th>
@@ -219,7 +218,6 @@ $result = $conn->query($sql);
                                         <td>' . ($userCount + 1) . '</td>
                                         <td>' . $row['filename'] . '</td>
                                         <td title="' . $title . '">' . $shortenedTitle . '</td>
-                                        <td>' . $row['team'] . '</td>
                                         <td title="' . $description . '">' . $shortenedDescription . '</td>
                                         <td>' . $row['user_type'] . '</td>
                                         <td>' . $row['delete_by'] . '</td>

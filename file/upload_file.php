@@ -107,16 +107,16 @@ if (isset($_POST['submit'])) {
         $date_upload = date('Y-m-d H:i:s');
         $description = strip_tags($_POST['description']);
         $title = $_POST['title'];
-        $team = $_POST['drop_file']; 
+        // $team = $_POST['drop_file']; 
 
         // Get the logged-in user's type
         $loggedInUserId = $_SESSION['user_id'];
         $loggedInUserType = getLoggedInUserType($con, $loggedInUserId);
 
         foreach ($uploadedFiles as $uploadedFile) {
-            $sql = "INSERT INTO upload_file (filename, title, team, description, date_upload, user_type) VALUES (?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO upload_file (filename, title,  description, date_upload, user_type) VALUES ( ?, ?, ?, ?, ?)";
             $stmt = mysqli_prepare($con, $sql);
-            mysqli_stmt_bind_param($stmt, "ssssss", $uploadedFile, $title, $team, $description, $date_upload, $loggedInUserType);
+            mysqli_stmt_bind_param($stmt, "sssss", $uploadedFile, $title,  $description, $date_upload, $loggedInUserType);
 
             if (mysqli_stmt_execute($stmt)) {
                 // Success
@@ -134,15 +134,14 @@ if (isset($_POST['submit'])) {
         $date_upload = date('Y-m-d H:i:s');
         $description = strip_tags($_POST['description']);
         $title = $_POST['title'];
-        $team = $_POST['drop_file']; // Assuming 'drop_file' is the correct name
 
         // Get the logged-in user's type
         $loggedInUserId = $_SESSION['user_id'];
         $loggedInUserType = getLoggedInUserType($con, $loggedInUserId);
 
-        $sql = "INSERT INTO upload_file (filename, title, team, description, date_upload, user_type) VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO upload_file (filename, title,  description, date_upload, user_type) VALUES (?,  ?, ?, ?, ?)";
         $stmt = mysqli_prepare($con, $sql);
-        mysqli_stmt_bind_param($stmt, "ssssss", $newFilename, $title, $team, $description, $date_upload, $loggedInUserType);
+        mysqli_stmt_bind_param($stmt, "sssss", $newFilename, $title,  $description, $date_upload, $loggedInUserType);
 
         if (mysqli_stmt_execute($stmt)) {
             header("Location: upload_file.php?st=success");
@@ -370,7 +369,7 @@ if (isset($_POST['submit'])) {
                                         <label for="title">Title:</label>
                                         <input type="text" name="title" class="form-control" id="title">
                                     </div>
-                                    <div class="form-list">
+                                    <!-- <div class="form-list">
                                         <label for="drop_file">Select:</label>
                                         <select name="drop_file" class="form-control" id="drop_file">
                                             <option value="card payment team">Card Payment Team</option>
@@ -378,7 +377,8 @@ if (isset($_POST['submit'])) {
                                             <option value="atm team">ATM Team</option>
                                             <option value="terminal team">Terminal Team</option>
                                         </select>
-                                    </div>
+                                    </div> -->
+                                    <label for="description">Description:</label>
                                     <textarea id="myTextarea" name="description"></textarea>
                                     <div class="form-group">
                                         <input type="submit" name="submit" value="Save" class="btn btn-info">
