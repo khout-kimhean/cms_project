@@ -31,7 +31,6 @@ $result = $conn->query($sql);
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../Admin Dashboard/styles/todo_management.css">
     <link rel="stylesheet" type="text/css" href="../styles/find_error/read_by_keyword.css">
     <title>Admin Dashboard</title>
 
@@ -125,12 +124,17 @@ $result = $conn->query($sql);
                 </div>
 
                 <!-- <label for="searchKeyNumberInput">Enter Reference Number:</label> -->
-                <div class="item">
-                    <input class="file" type="file" id="fileInput" />
-                    <input class="search" type="text" id="searchKeyNumberInput" />
-                    <br />
+                <div>
+
                 </div>
-                <button onclick="processFile()">Show </button>
+                <div class="item" class="button_show">
+                    <input class="file" type="file" id="fileInput" />
+                    <input class="search" type="text" id="searchKeyNumberInput"
+                        placeholder="Enter REF-No Here . . . . . . . " />
+                    <br />
+                    <button onclick="searchKeyword()">Show Detail</button>
+                    <button onclick="processFile()">Show </button>
+                </div>
                 <div id="output"></div>
 
                 <script>

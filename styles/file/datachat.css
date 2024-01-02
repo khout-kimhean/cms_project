@@ -240,7 +240,7 @@ main {
   border-radius: var(--card-border-radius);
 }
 .container2 .content {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   display: inline-flex;
 }
 .container2 .content a {
@@ -254,13 +254,13 @@ main {
 }
 
 .wrapper h2 {
-  font-size: 20px;
+  font-size: 16px;
   color: #444;
 }
 .wrapper h1 {
   margin-left: 400px;
   font-family: cursive;
-  font-size: 24px;
+  font-size: 20px;
 }
 .tox-promotion {
   display: none;
@@ -298,7 +298,7 @@ main {
   color: var(--color-dark);
 } */
 .container2 .form-list select {
-  margin-bottom: 5px;
+  margin-bottom: 0px;
   width: 100%;
   padding: 5px;
   border: 1px solid #ccc;
@@ -321,12 +321,12 @@ main {
 
 .container2 .alert {
   border-radius: var(--border-radius-1);
-  padding: 10px;
+  padding: 4px;
   text-align: center;
 }
 
 .container2 .form-group {
-  margin-bottom: 5px;
+  margin-bottom: 2px;
 }
 .form-group label {
   font-family: cursive;

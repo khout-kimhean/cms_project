@@ -12,7 +12,8 @@ if ($conn->connect_error) {
 
 $userMessage = $conn->real_escape_string($_POST['msg']);
 
-$sql = "SELECT answer_bot FROM tb_chat WHERE question_bot = ? OR error = ?"; // You can use OR condition here
+// $sql = "SELECT answer_bot FROM tb_chat WHERE question_bot = ? OR error = ?"; 
+$sql = "SELECT description FROM chat_data WHERE title = ? OR short_description = ?"; 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ss", $userMessage, $userMessage);
 $stmt->execute();
@@ -25,11 +26,11 @@ $result = $stmt->get_result();
 $messages = array();
 
 while ($row = $result->fetch_assoc()) {
-    $messages[] = $row['answer_bot'];
+    $messages[] = $row['description'];
 }
 
 if (empty($messages)) {
-    $messages[] = "We don't have an answer for that question. You can go to check in search or view data.";
+    $messages[] = "We don't have answer for that response code.";
 }
 
 $stmt->close();

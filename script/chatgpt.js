@@ -285,7 +285,7 @@ const submitUserInput = () => {
             // Optionally, you can remove the typing-animation or input elements here
         }
         chatContainer.scrollTo(0, chatContainer.scrollHeight);
-    }, 50);
+    }, 10);
 };
 
 // Function to generate a response based on user input
@@ -344,7 +344,7 @@ const generateResponseText = (userInput) => {
                     clearInterval(interval);
                 }
                 chatContainer.scrollTo(0, chatContainer.scrollHeight);
-            }, 50);
+            }, 10);
         })
         .catch(error => {
             console.error('Error fetching response:', error);
@@ -395,7 +395,7 @@ const displayContactCardLink = () => {
             incomingChatDiv.querySelector(".typing-animation")?.remove();
         }
         chatContainer.scrollTo(0, chatContainer.scrollHeight);
-    }, 20); // Adjust the duration as needed
+    }, 10); // Adjust the duration as needed
 };
 
 // link to C
@@ -427,7 +427,7 @@ const displayContactDigitalLink = () => {
             incomingChatDiv.querySelector(".typing-animation")?.remove();
         }
         chatContainer.scrollTo(0, chatContainer.scrollHeight);
-    }, 20);
+    }, 10);
 };
 // link to 
 const displayContactATMLink = () => {
@@ -458,7 +458,7 @@ const displayContactATMLink = () => {
             incomingChatDiv.querySelector(".typing-animation")?.remove();
         }
         chatContainer.scrollTo(0, chatContainer.scrollHeight);
-    }, 20);
+    }, 10);
 };
 // link to 
 const displayContactTerminalLink = () => {
@@ -489,7 +489,7 @@ const displayContactTerminalLink = () => {
             incomingChatDiv.querySelector(".typing-animation")?.remove();
         }
         chatContainer.scrollTo(0, chatContainer.scrollHeight);
-    }, 20);
+    }, 10);
 };
 
 
@@ -610,7 +610,7 @@ const displayBotResponse = (responseText) => {
             botResponseCounter++;
             console.log(`Bot Response ${String.fromCharCode(65 + botResponseCounter - 1)}:`);
         }
-    }, 20);
+    }, 10);
 };
 
 // end response writing bot 

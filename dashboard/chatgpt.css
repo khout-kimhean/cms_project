@@ -32,9 +32,9 @@ body {
   /* background-image: url(../images/background.png); */
   /* background-image: url(../images/background1.jpg); */
   /* background-image: url(../images/pic1.jpg); */
-  background-image: url(../styles/chatbot/background1.jpg);
+  /* background-image: url(../styles/chatbot/background1.jpg); */
 
-  /* background: var(--outgoing-chat-bg); */
+  background: var(--outgoing-chat-bg);
   content: "";
   position: absolute;
   top: 0;
@@ -43,9 +43,6 @@ body {
   bottom: 0;
   z-index: -1;
   background-size: cover;
-  /* border-radius: 20px; */
-  /* background-position: center; */
-  /* background-color: lightblue; */
 }
 body .background {
   position: relative;
@@ -95,7 +92,7 @@ body .background {
   color: white;
   padding: 8px 20px;
   border: none;
-  border-radius: 20px;
+  border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
 }
@@ -121,7 +118,7 @@ body .background {
   padding: 10px 20px;
   margin: 10px;
   border: none;
-  border-radius: 20px;
+  border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
   user-select: none;
