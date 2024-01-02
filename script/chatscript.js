@@ -117,7 +117,7 @@ $(document).ready(function () {
             '<div class="cotainer_send"><div class="msg_cotainer_send">'
             + message + '<span class="msg_time_send">'
             + str_time
-            + '</span></div><div class="img_cont_msg"><img src="http://localhost/cms_project//images/logo.jpg" class="rounded-circle user_img_msg"></div></div>';
+            + '</span></div><div class="img_cont_msg"><img src="http://localhost/support_team/images/logo.jpg" class="rounded-circle user_img_msg"></div></div>';
         $("#messageFormeight").append(userHtml);
         $("#messageFormeight").scrollTop($("#messageFormeight")[0].scrollHeight);
     }
@@ -126,7 +126,7 @@ $(document).ready(function () {
     function displayBotMessage(message) {
         var str_time = getTime();
         var botHtml =
-            '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="http://localhost/cms_project/images/logo/user.png" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">'
+            '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="http://localhost/support_team/images/logo/user.png" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">'
             + '<span class="typing-indicator"></span>' + '<span class="msg_time">' + str_time + '</span></div></div>';
 
         $("#messageFormeight").append(botHtml);
@@ -165,14 +165,14 @@ $(document).ready(function () {
             '<div class="cotainer_send"><div class="msg_cotainer_send">'
             + message + '<span class="msg_time_send">'
             + str_time
-            + '</span></div><div class="img_cont_msg"><img src="http://localhost/cms_project/images/logo/user.png" class="rounded-circle user_img_msg"></div></div>';
+            + '</span></div><div class="img_cont_msg"><img src="http://localhost/support_team/images/logo/user.png" class="rounded-circle user_img_msg"></div></div>';
         $("#messageFormeight").append(userHtml);
         $("#messageFormeight").scrollTop($("#messageFormeight")[0].scrollHeight);
     }
     function sendUserMessage(message) {
         $.ajax({
             type: "POST",
-            url: "chatbot.php",
+            url: "../chatbot/chatbot.php",
             data: { msg: message },
             success: function (response) {
                 displayBotMessage(response);
@@ -182,7 +182,7 @@ $(document).ready(function () {
     function displayBotMessage(message) {
         var str_time = getTime();
         var botHtml =
-            '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="http://localhost/cms_project/images/logo/logo.jpg" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">'
+            '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="http://localhost/support_team/images/logo/logo.jpg" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">'
             + message + '<span class="msg_time">' + str_time + '</span></div></div>';
 
         $("#messageFormeight").append(botHtml);

@@ -13,6 +13,8 @@ $con = mysqli_connect($host, $user, $pass, $db);
 if (!$con) {
     die("Connection failed: " . mysqli_connect_error());
 }
+$sql = "SELECT * FROM login_register";
+$result = mysqli_query($con, $sql);
 
 
 $sql = "SELECT * FROM login_register";
@@ -142,19 +144,19 @@ if (isset($_POST['search'])) {
                 <div class="row">
                     <div class="col-md-8 offset-md-2">
                         <div class="card">
+                            <!-- <a href="../templates/user_management.php" class="back-button"><i
+                                    class="fa fa-chevron-circle-left" style="font-size:32px"></i></a> -->
                             <a href="createuser.php">
                                 <button>
+
                                     <h2>New User</h2>
                                 </button>
                             </a>
                             <div class="card-header" class="back-button">
-
                                 <span>
-                                    <!-- <a href="../templates/user_management.php" class="back-button"><i
-                                            class="fa fa-chevron-circle-left" style="font-size:28px"></i></a> -->
+
                                     <h2>Search User Name/Role</h2>
                                 </span>
-
                             </div>
                             <div class="card-body">
                                 <form action="user.php" method="post">
@@ -178,41 +180,45 @@ if (isset($_POST['search'])) {
                                                 <th>Option</th>
                                             </tr>
                                         </thead>
-
                                         <tbody>
                                             <?php
                                             if (!empty($searchResults)) {
                                                 $i = 1;
                                                 foreach ($searchResults as $row) {
-                                                    ?>
+                                            ?>
                                             <tr>
-                                                <td>
-                                                    <?php echo $i++; ?>
+                                                <td><?php echo $i++; ?></td>
+                                                <td><?php echo htmlspecialchars($row['name']); ?></td>
+                                                <td><?php echo htmlspecialchars($row['email']); ?></td>
+                                                <td><?php echo htmlspecialchars($row['user_type']); ?></td>
+                                                <td><a class="click"
+                                                        href="../user_mgt/assign_function.php?id=<?php echo $row['id']; ?>">Permission</a>
                                                 </td>
-                                                <td>
-                                                    <?php echo htmlspecialchars($row['name']); ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo htmlspecialchars($row['email']); ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo htmlspecialchars($row['user_type']); ?>
-                                                </td>
-
-                                                <td><a
-                                                        href="../user_mgt/assign_function.php?id=<?php echo $row['id']; ?>">
-                                                        Permission</a>
-                                                </td>
-                                                <td>
-                                                    <a href="edit_user.php?id=<?php echo $row['id']; ?>">Edit</a>
-                                                </td>
-
+                                                <td><a class="click1"
+                                                        href="edit_user.php?id=<?php echo $row['id']; ?>">Edit</a></td>
                                             </tr>
                                             <?php
-                                                }
-                                            } else {
-                                                echo "<tr><td colspan='5'>No matching files found.</td></tr>";
                                             }
+                                                } elseif ($result->num_rows > 0) {
+                                                $i = 1;
+                                                while ($row = $result->fetch_assoc()) {
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $i++; ?></td>
+                                                <td><?php echo htmlspecialchars($row['name']); ?></td>
+                                                <td><?php echo htmlspecialchars($row['email']); ?></td>
+                                                <td><?php echo htmlspecialchars($row['user_type']); ?></td>
+                                                <td><a class="click"
+                                                        href="../user_mgt/assign_function.php?id=<?php echo $row['id']; ?>">Permission</a>
+                                                </td>
+                                                <td><a class="click1"
+                                                        href="edit_user.php?id=<?php echo $row['id']; ?>">Edit</a></td>
+                                            </tr>
+                                            <?php
+                                            }
+                                                } else {
+                                                echo "<tr><td colspan='6'>No matching users found.</td></tr>";
+                                                }
                                             ?>
                                         </tbody>
                                     </table>
@@ -238,7 +244,6 @@ if (isset($_POST['search'])) {
                         dark_mode
                     </span>
                 </div>
-
                 <div class="profile">
                     <div class="info">
                         <p>Welcome</p>
@@ -250,74 +255,7 @@ if (isset($_POST['search'])) {
                         <img src="../images/logo/user.png">
                     </div>
                 </div>
-
             </div>
-
-            <!-- <div class="user-profile">
-                <div class="logo">
-                    <img src="../images/logo/logo.jpg">
-                    <h2>FTB Bank</h2>
-                    <p>Welcome to FTB Bank</p>
-                </div>
-            </div>
-
-            <div class="reminders">
-                <div class="header">
-                    <h2>Reminders</h2>
-                    <span class="material-icons-sharp">
-                        notifications_none
-                    </span>
-                </div>
-
-                <div class="notification">
-                    <div class="icon">
-                        <span class="material-icons-sharp">
-                            volume_up
-                        </span>
-                    </div>
-                    <div class="content">
-                        <div class="info">
-                            <h3>Support Time</h3>
-                            <small class="text_muted">
-                                08:00 AM - 5:00 PM
-                            </small>
-                        </div>
-                        <span class="material-icons-sharp">
-                            more_vert
-                        </span>
-                    </div>
-                </div>
-
-                <div class="notification deactive">
-                    <div class="icon">
-                        <span class="material-icons-sharp">
-                            edit
-                        </span>
-                    </div>
-                    <div class="content">
-                        <div class="info">
-                            <h3>Open Time</h3>
-                            <small class="text_muted">
-                                08:00 AM - 5:00 PM
-                            </small>
-                        </div>
-                        <span class="material-icons-sharp">
-                            more_vert
-                        </span>
-                    </div>
-                </div>
-
-                <div class="notification add-reminder">
-                    <div>
-                        <span class="material-icons-sharp">
-                            add
-                        </span>
-                        <h3>Add Reminder</h3>
-                    </div>
-                </div>
-
-            </div> -->
-
         </div>
     </div>
     <script src="../script/role_check.js"></script>

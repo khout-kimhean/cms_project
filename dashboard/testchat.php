@@ -45,7 +45,7 @@ $result = $conn->query($sql);
                             <div class="card-header msg_head">
                                 <div class="d-flex bd-highlight">
                                     <div class="img_cont">
-                                        <img src="http://localhost/cms_project/images/logo/logo.jpg"
+                                        <img src="http://localhost/support_team/images/logo/logo.jpg"
                                             class="rounded-circle user_img" alt="User Image">
                                     </div>
                                     <div class="user_info">

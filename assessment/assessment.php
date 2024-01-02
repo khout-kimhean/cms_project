@@ -210,7 +210,7 @@ $result = $conn->query($sql);
                             </div>
                         </div>
                     </div>
-                    <div class="status" onclick="window.location.href='../assessment/assessment_list.php';"
+                    <!-- <div class="status" onclick="window.location.href='../assessment/assessment_list.php';"
                         style="cursor: pointer;">
                         <div class="status">
                             <div class="info">
@@ -221,7 +221,7 @@ $result = $conn->query($sql);
                                 <img src="../images/file/file1.png">
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </Div>
 
