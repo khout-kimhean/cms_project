@@ -305,7 +305,7 @@ li {
 }
 .table-container {
   font-size: 12px;
-  max-height: 440px;
+  max-height: 425px;
   overflow-y: auto;
 }
 .container2 .card-header a {

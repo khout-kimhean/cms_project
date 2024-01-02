@@ -240,106 +240,256 @@ const displayCardInfoButtons = () => {
     displayButtons(["1. Visa CashCard Gold", "2. Visa CashCard Blue", "3. Visa CashCard Silver", "4. Virtual Visa CashCard", "5. FTB ATM Debit Card", "6. FTB VIP Visa Debit", "7. Visa Debit Classic"]);
 };
 
+
+
+
+// response code 
 const displayCardResponseButtons = () => {
-    displayButtons(["ATM Issue 1", "ATM Issue 2"]);
+    const incomingChatDiv = createChatElement(`<div class="chat-content">
+        <div class="chat-details">
+            <img src="../images/background/chat.png" alt="chatbot-img">
+        </div>
+    </div>`, "incoming");
+
+    chatContainer.appendChild(incomingChatDiv);
+    chatContainer.scrollTo(0, chatContainer.scrollHeight);
+
+    // Display input field and submit button
+    const inputDiv = document.createElement("div");
+    inputDiv.innerHTML = `
+        <input class="input_text" type="number" id="userInput" placeholder="Enter a number">
+        <button class="submit" onclick="submitUserInput()">Submit</button>
+    `;
+    incomingChatDiv.querySelector(".chat-details").appendChild(inputDiv);
+    chatContainer.scrollTo(0, chatContainer.scrollHeight);
 };
+
+// Function to handle user input submission
+const submitUserInput = () => {
+    const userInputValue = document.getElementById("userInput").value;
+    const responseText = generateResponseText(userInputValue);
+
+    const responseDiv = document.createElement("div");
+    responseDiv.innerHTML = `<p></p>`;
+    chatContainer.appendChild(responseDiv);
+    chatContainer.scrollTo(0, chatContainer.scrollHeight);
+
+    let i = 0;
+
+    const interval = setInterval(() => {
+        if (i <= responseText.length) {
+            responseDiv.querySelector("p").innerHTML = responseText.slice(0, i);
+            i++;
+        } else {
+            clearInterval(interval);
+            // Optionally, you can remove the typing-animation or input elements here
+        }
+        chatContainer.scrollTo(0, chatContainer.scrollHeight);
+    }, 50);
+};
+
+// Function to generate a response based on user input
+// const generateResponseText = (userInput) => {
+//     const incomingChatDiv = createChatElement(`<div class="chat-content">
+//         <div class="chat-details">
+//             <img src="../images/background/chat.png" alt="chatbot-img">
+//         </div>
+//     </div>`, "incoming");
+
+//     const responseText = `You entered: ${userInput}. Thank you for your input!`;
+
+//     // Display the bot's response
+//     const responseDiv = document.createElement("div");
+//     responseDiv.innerHTML = `<p></p>`;
+//     incomingChatDiv.querySelector(".chat-details").appendChild(responseDiv);
+//     chatContainer.appendChild(incomingChatDiv);
+//     chatContainer.scrollTo(0, chatContainer.scrollHeight);
+
+//     let i = 0;
+
+//     const interval = setInterval(() => {
+//         if (i <= responseText.length) {
+//             responseDiv.querySelector("p").innerHTML = responseText.slice(0, i);
+//             i++;
+//         } else {
+//             clearInterval(interval);
+//         }
+//         chatContainer.scrollTo(0, chatContainer.scrollHeight);
+//     }, 50);
+// };
+const generateResponseText = (userInput) => {
+    const incomingChatDiv = createChatElement(`<div class="chat-content">
+        <div class="chat-details">
+            <img src="../images/background/chat.png" alt="chatbot-img">
+        </div>
+    </div>`, "incoming");
+
+    const responseDiv = document.createElement("div");
+    responseDiv.innerHTML = `<p></p>`;
+    incomingChatDiv.querySelector(".chat-details").appendChild(responseDiv);
+    chatContainer.appendChild(incomingChatDiv);
+    chatContainer.scrollTo(0, chatContainer.scrollHeight);
+
+    // Simulate loading response from the server
+    makeAjaxRequest('../script/chatreply.php', 'POST', { msg: userInput })
+        .then(data => {
+            const responseText = data || "Default response from the server";
+
+            let i = 0;
+            const interval = setInterval(() => {
+                if (i <= responseText.length) {
+                    responseDiv.querySelector("p").innerHTML = responseText.slice(0, i);
+                    i++;
+                } else {
+                    clearInterval(interval);
+                }
+                chatContainer.scrollTo(0, chatContainer.scrollHeight);
+            }, 50);
+        })
+        .catch(error => {
+            console.error('Error fetching response:', error);
+        });
+};
+
+// Function to make AJAX request (using Fetch API for illustration)
+const makeAjaxRequest = (url, method, data) => {
+    return fetch(url, {
+        method,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: Object.keys(data).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key])).join('&'),
+    })
+        .then(response => response.text())
+        .catch(error => Promise.reject(error));
+};
+
+// end response code 
 
 // link to 
 const displayContactCardLink = () => {
     const incomingChatDiv = createChatElement(`<div class="chat-content">
         <div class="chat-details">
         <img src="../images/background/chat.png" alt="chatbot-img">
-            <div class="typing-animation">
-                <div class="typing-dot" style="--delay: 0.2s"></div>
-                <div class="typing-dot" style="--delay: 0.3s"></div>
-                <div class="typing-dot" style="--delay: 0.4s"></div>
-            </div>
         </div>
     </div>`, "incoming");
 
     chatContainer.appendChild(incomingChatDiv);
     chatContainer.scrollTo(0, chatContainer.scrollHeight);
 
-    setTimeout(() => {
-        incomingChatDiv.querySelector(".typing-animation")?.remove();
-        const responseDiv = document.createElement("div");
-        responseDiv.innerHTML = `<p>Click <a href="https://t.me/+tTPCTj-wM5hmNDI1" target="_blank">here</a> to contact us on Telegram.</p>`;
-        incomingChatDiv.querySelector(".chat-details").appendChild(responseDiv);
+    // Simulate typing effect
+    const responseDiv = document.createElement("div");
+    responseDiv.innerHTML = `<p></p>`;
+    incomingChatDiv.querySelector(".chat-details").appendChild(responseDiv);
+    chatContainer.scrollTo(0, chatContainer.scrollHeight);
+
+    const responseText = "Click <a href='https://t.me/+VBs6umCCQvAyNjBl' target='_blank'>here</a> to contact us on Telegram.";
+    let i = 0;
+
+    const interval = setInterval(() => {
+        if (i <= responseText.length) {
+            responseDiv.querySelector("p").innerHTML = responseText.slice(0, i);
+            i++;
+        } else {
+            clearInterval(interval);
+            incomingChatDiv.querySelector(".typing-animation")?.remove();
+        }
         chatContainer.scrollTo(0, chatContainer.scrollHeight);
-    }, 1000); // Adjust the duration as needed
+    }, 20); // Adjust the duration as needed
 };
 
 // link to C
 const displayContactDigitalLink = () => {
     const incomingChatDiv = createChatElement(`<div class="chat-content">
         <div class="chat-details">
-        <img src="../images/background/chat.png" alt="chatbot-img">
-            <div class="typing-animation">
-                <div class="typing-dot" style="--delay: 0.2s"></div>
-                <div class="typing-dot" style="--delay: 0.3s"></div>
-                <div class="typing-dot" style="--delay: 0.4s"></div>
-            </div>
+            <img src="../images/background/chat.png" alt="chatbot-img">
         </div>
     </div>`, "incoming");
 
     chatContainer.appendChild(incomingChatDiv);
     chatContainer.scrollTo(0, chatContainer.scrollHeight);
 
-    setTimeout(() => {
-        incomingChatDiv.querySelector(".typing-animation")?.remove();
-        const responseDiv = document.createElement("div");
-        responseDiv.innerHTML = `<p>Click <a href="https://t.me/+tTPCTj-wM5hmNDI1" target="_blank">here</a> to contact us on Telegram.</p>`;
-        incomingChatDiv.querySelector(".chat-details").appendChild(responseDiv);
+    // Simulate typing effect
+    const responseDiv = document.createElement("div");
+    responseDiv.innerHTML = `<p></p>`;
+    incomingChatDiv.querySelector(".chat-details").appendChild(responseDiv);
+    chatContainer.scrollTo(0, chatContainer.scrollHeight);
+
+    const responseText = "Click <a href='https://t.me/+VBs6umCCQvAyNjBl' target='_blank'>here</a> to contact us on Telegram.";
+    let i = 0;
+
+    const interval = setInterval(() => {
+        if (i <= responseText.length) {
+            responseDiv.querySelector("p").innerHTML = responseText.slice(0, i);
+            i++;
+        } else {
+            clearInterval(interval);
+            incomingChatDiv.querySelector(".typing-animation")?.remove();
+        }
         chatContainer.scrollTo(0, chatContainer.scrollHeight);
-    }, 1000); // Adjust the duration as needed
+    }, 20);
 };
 // link to 
 const displayContactATMLink = () => {
     const incomingChatDiv = createChatElement(`<div class="chat-content">
         <div class="chat-details">
-        <img src="../images/background/chat.png" alt="chatbot-img">
-            <div class="typing-animation">
-                <div class="typing-dot" style="--delay: 0.2s"></div>
-                <div class="typing-dot" style="--delay: 0.3s"></div>
-                <div class="typing-dot" style="--delay: 0.4s"></div>
-            </div>
+            <img src="../images/background/chat.png" alt="chatbot-img">
         </div>
     </div>`, "incoming");
 
     chatContainer.appendChild(incomingChatDiv);
     chatContainer.scrollTo(0, chatContainer.scrollHeight);
 
-    setTimeout(() => {
-        incomingChatDiv.querySelector(".typing-animation")?.remove();
-        const responseDiv = document.createElement("div");
-        responseDiv.innerHTML = `<p>Click <a href="https://t.me/+tTPCTj-wM5hmNDI1" target="_blank">here</a> to contact us on Telegram.</p>`;
-        incomingChatDiv.querySelector(".chat-details").appendChild(responseDiv);
+    // Simulate typing effect
+    const responseDiv = document.createElement("div");
+    responseDiv.innerHTML = `<p></p>`;
+    incomingChatDiv.querySelector(".chat-details").appendChild(responseDiv);
+    chatContainer.scrollTo(0, chatContainer.scrollHeight);
+
+    const responseText = "Click <a href='https://t.me/+VBs6umCCQvAyNjBl' target='_blank'>here</a> to contact us on Telegram.";
+    let i = 0;
+
+    const interval = setInterval(() => {
+        if (i <= responseText.length) {
+            responseDiv.querySelector("p").innerHTML = responseText.slice(0, i);
+            i++;
+        } else {
+            clearInterval(interval);
+            incomingChatDiv.querySelector(".typing-animation")?.remove();
+        }
         chatContainer.scrollTo(0, chatContainer.scrollHeight);
-    }, 1000); // Adjust the duration as needed
+    }, 20);
 };
 // link to 
 const displayContactTerminalLink = () => {
     const incomingChatDiv = createChatElement(`<div class="chat-content">
         <div class="chat-details">
-        <img src="../images/background/chat.png" alt="chatbot-img">
-            <div class="typing-animation">
-                <div class="typing-dot" style="--delay: 0.2s"></div>
-                <div class="typing-dot" style="--delay: 0.3s"></div>
-                <div class="typing-dot" style="--delay: 0.4s"></div>
-            </div>
+            <img src="../images/background/chat.png" alt="chatbot-img">
         </div>
     </div>`, "incoming");
 
     chatContainer.appendChild(incomingChatDiv);
     chatContainer.scrollTo(0, chatContainer.scrollHeight);
 
-    setTimeout(() => {
-        incomingChatDiv.querySelector(".typing-animation")?.remove();
-        const responseDiv = document.createElement("div");
-        responseDiv.innerHTML = `<p>Click <a href="https://t.me/+tTPCTj-wM5hmNDI1" target="_blank">here</a> to contact us on Telegram.</p>`;
-        incomingChatDiv.querySelector(".chat-details").appendChild(responseDiv);
+    // Simulate typing effect
+    const responseDiv = document.createElement("div");
+    responseDiv.innerHTML = `<p></p>`;
+    incomingChatDiv.querySelector(".chat-details").appendChild(responseDiv);
+    chatContainer.scrollTo(0, chatContainer.scrollHeight);
+
+    const responseText = "Click <a href='https://t.me/+VBs6umCCQvAyNjBl' target='_blank'>here</a> to contact us on Telegram.";
+    let i = 0;
+
+    const interval = setInterval(() => {
+        if (i <= responseText.length) {
+            responseDiv.querySelector("p").innerHTML = responseText.slice(0, i);
+            i++;
+        } else {
+            clearInterval(interval);
+            incomingChatDiv.querySelector(".typing-animation")?.remove();
+        }
         chatContainer.scrollTo(0, chatContainer.scrollHeight);
-    }, 1000); // Adjust the duration as needed
+    }, 20);
 };
 
 
@@ -351,7 +501,6 @@ const handleCVV2Error = () => {
 const handleErrorConnection = () => {
     displayBotResponse("error conection because network error");
 };
-
 
 const handleErrorATM1 = () => {
     displayBotResponse("Answer ATM1");
@@ -394,7 +543,7 @@ const handleInfoCard4 = () => {
     displayBotResponse("Feature\n1. Card can be requested immediately in FTB Mobile App\n2. Storage amount is up to USD300.00\n3. 2 years of card validity\n4. USD currency only\n5. Able to register with FTB Mobile App\n6. Secure payment with ACS 3Ds\n7. Peace of mind with smart chip security\n8. Be able to top up from Debit Account or CashCard in FTB Mobile App\n9. No annual fee\n\nRequirement\n1. Must be a Mobile App User   \n\nHOW TO CREATE VIRTUAL VISA CASHCARD\n1. Log into FTB Mobile App\n2. Tap on MENU button and tap CARDS button\n3. Select virtual card and then tap on add(+) button\n4. Select Continue button and enter your Transaction PIN\n5. Your new VISA Virtual Card is Ready, please topup card balance and enjoy your payment");
 };
 const handleInfoCard5 = () => {
-    displayBotResponse("Feature\n1. Linked to FTB Bank account\n2. 5 years of card validity\n3. USD and KHR currencies\n4. Able to register with FTB Mobile App\n5. Peace of mind with smart chip security\n6. No plastic card fee\n7. No annual fee\n\nBenefits\n1. Making withdrawals with FTB ATM and other bank’s ATM where Visa is accepted.\n2. Paying for goods and services safely and conveniently through the FTB POS terminal.\n3. Making funds transfers to own accounts, other accounts within FTB Bank and FTB Visa CashCard.\n4. Peace of mind with smart chip security\n5. Saving cost and time.\\nRequirement\n1. Having an account with FTB;\n2. Have identity card, passport, family book, or any valid documents;\n3. Have a permanent address in CambodiaHave a mobile number and e - mail\n4. Have a proper work, salary or any sufficient income, and a good reputation");
+    displayBotResponse("Feature\n1. Linked to FTB Bank account\n2. 5 years of card validity\n3. USD and KHR currencies\n4. Able to register with FTB Mobile App\n5. Peace of mind with smart chip security\n6. No plastic card fee\n7. No annual fee\n\nBenefits\n1. Making withdrawals with FTB ATM and other bank’s ATM where Visa is accepted.\n2. Paying for goods and services safely and conveniently through the FTB POS terminal.\n3. Making funds transfers to own accounts, other accounts within FTB Bank and FTB Visa CashCard.\n4. Peace of mind with smart chip security\n5. Saving cost and time.\n\nRequirement\n1. Having an account with FTB;\n2. Have identity card, passport, family book, or any valid documents;\n3. Have a permanent address in CambodiaHave a mobile number and e - mail\n4. Have a proper work, salary or any sufficient income, and a good reputation");
 };
 
 const handleInfoCard6 = () => {
@@ -422,13 +571,14 @@ const displayButtons = (buttonLabels) => {
     chatContainer.appendChild(questionContainer);
 };
 
+
+// response writing bot
 let botResponseCounter = 0;
 
 const displayBotResponse = (responseText) => {
     const incomingChatDiv = createChatElement(`<div class="chat-content">
         <div class="chat-details">
         <img src="../images/background/chat.png" alt="chatbot-img">
-          
         </div>
     </div>`, "incoming");
 
@@ -450,6 +600,7 @@ const displayBotResponse = (responseText) => {
             responseDiv.querySelector("p").style.opacity = opacity.toFixed(1);
             responseDiv.querySelector("p").innerHTML += responseText.charAt(i);
             i++;
+            chatContainer.scrollTo(0, chatContainer.scrollHeight);
         } else {
             clearInterval(interval);
             incomingChatDiv.querySelector(".typing-animation")?.remove();
@@ -462,6 +613,7 @@ const displayBotResponse = (responseText) => {
     }, 20);
 };
 
+// end response writing bot 
 
 sendButton.addEventListener("click", () => {
     userText = chatInput.value;

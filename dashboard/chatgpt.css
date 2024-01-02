@@ -80,7 +80,32 @@ body .background {
     transform: scale(0);
   }
 }
-/* hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh */
+/* WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW */
+.input_text {
+  border: 1px solid none;
+  width: 300px;
+  padding: 6px;
+  margin-right: 20px;
+  font-size: 14px;
+}
+
+.submit {
+  width: 150px;
+  background-color: rgb(196, 160, 6);
+  color: white;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.submit:hover {
+  background-color: rgb(196, 160, 6);
+}
+
+/* WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW */
+
 .question-container {
   display: flex;
   flex-direction: column;
