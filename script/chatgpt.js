@@ -291,7 +291,7 @@ const displayContactDigitalLink = () => {
         responseDiv.innerHTML = `<p>Click <a href="https://t.me/+tTPCTj-wM5hmNDI1" target="_blank">here</a> to contact us on Telegram.</p>`;
         incomingChatDiv.querySelector(".chat-details").appendChild(responseDiv);
         chatContainer.scrollTo(0, chatContainer.scrollHeight);
-    }, 1000);
+    }, 1000); // Adjust the duration as needed
 };
 // link to 
 const displayContactATMLink = () => {
@@ -422,28 +422,46 @@ const displayButtons = (buttonLabels) => {
     chatContainer.appendChild(questionContainer);
 };
 
+let botResponseCounter = 0;
+
 const displayBotResponse = (responseText) => {
     const incomingChatDiv = createChatElement(`<div class="chat-content">
         <div class="chat-details">
         <img src="../images/background/chat.png" alt="chatbot-img">
-            <div class="typing-animation">
-                <div class="typing-dot" style="--delay: 0.2s"></div>
-                <div class="typing-dot" style="--delay: 0.3s"></div>
-                <div class="typing-dot" style="--delay: 0.4s"></div>
-            </div>
+          
         </div>
     </div>`, "incoming");
+
     chatContainer.appendChild(incomingChatDiv);
     chatContainer.scrollTo(0, chatContainer.scrollHeight);
 
-    setTimeout(() => {
-        incomingChatDiv.querySelector(".typing-animation")?.remove();
-        const responseDiv = document.createElement("div");
-        responseDiv.innerHTML = `<p>${responseText}</p>`;
-        incomingChatDiv.querySelector(".chat-details").appendChild(responseDiv);
-        chatContainer.scrollTo(0, chatContainer.scrollHeight);
-    }, 1000); // Adjust the duration as needed
+    // Simulate typing effect
+    const responseDiv = document.createElement("div");
+    responseDiv.innerHTML = `<p style="opacity: 0;"></p>`;
+    incomingChatDiv.querySelector(".chat-details").appendChild(responseDiv);
+    chatContainer.scrollTo(0, chatContainer.scrollHeight);
+
+    let opacity = 0;
+    let i = 0;
+
+    const interval = setInterval(() => {
+        if (i < responseText.length) {
+            opacity += 0.1;
+            responseDiv.querySelector("p").style.opacity = opacity.toFixed(1);
+            responseDiv.querySelector("p").innerHTML += responseText.charAt(i);
+            i++;
+        } else {
+            clearInterval(interval);
+            incomingChatDiv.querySelector(".typing-animation")?.remove();
+            chatContainer.scrollTo(0, chatContainer.scrollHeight);
+
+            // Increment and display the bot response counter
+            botResponseCounter++;
+            console.log(`Bot Response ${String.fromCharCode(65 + botResponseCounter - 1)}:`);
+        }
+    }, 20);
 };
+
 
 sendButton.addEventListener("click", () => {
     userText = chatInput.value;
