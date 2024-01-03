@@ -273,10 +273,6 @@ li {
   color: var(--color-primary);
 }
 
-.container2 a:hover {
-  text-decoration: underline;
-}
-
 .container2 label[for="searchTerm"] {
   font-family: cursive, sans-serif;
   font-weight: bold;
@@ -351,10 +347,6 @@ td {
 a {
   text-decoration: none;
   color: var(--color-primary);
-}
-
-a:hover {
-  text-decoration: underline;
 }
 
 .container2 a:hover {

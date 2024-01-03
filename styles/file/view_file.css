@@ -218,9 +218,6 @@ aside .sidebar a:hover {
 aside .sidebar a:hover span {
   margin-left: 0.6rem;
 }
-/* a:hover {
-  text-decoration: underline;
-} */
 
 .box {
   background-color: var(--color-white);
@@ -305,10 +302,6 @@ main {
   color: var(--color-primary);
 }
 
-.container2 a:hover {
-  text-decoration: underline;
-}
-
 .container2 label[for="searchTerm"] {
   font-weight: bold;
   display: block;
@@ -381,10 +374,6 @@ td {
 a {
   text-decoration: none;
   color: var(--color-primary);
-}
-
-a:hover {
-  text-decoration: underline;
 }
 
 .container2 a:hover {
