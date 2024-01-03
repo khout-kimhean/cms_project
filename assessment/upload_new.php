@@ -15,10 +15,12 @@ function extractDataFromPdfText($text) {
         preg_match("/Name: (.*)/", $section, $nameMatch);
         preg_match("/Branch\s*\/\s*Department\s*:\s*(.*)\s*-/", $section, $branchMatch); // Modified this line
         preg_match("/Department: (.*)/", $section, $departmentMatch);
-        preg_match("/Job title: (.*)/", $section, $positionMatch);
+        // preg_match("/Job title: (.*)/", $section, $positionMatch);
+        preg_match("/Job title\s*\/\s*Department\s*:\s*(.*)\s*-/", $section, $positionMatch);
         preg_match("/Function Name: (.*)/", $section, $functionMatch);
         preg_match("/Role:\s*(.*)\s*\(/", $section, $roleMatch); // Modified this line
         preg_match("/Requester: (.*)/", $section, $requesterMatch);
+        preg_match("/Review By Name: (.*)/", 	$section,$reviewer1Match); 
         preg_match("/Duration: (.*)/", $section, $durationMatch);
         preg_match("/Comment: (.*)/", $section, $commentMatch);
         preg_match("/Date: (.*)/", $section, $requester_dateMatch);
@@ -26,11 +28,11 @@ function extractDataFromPdfText($text) {
         $extractedData[] = [
             'request_no' => $requestNoMatch[1] ?? '',
             'name' => $nameMatch[1] ?? '',
-            'branch' => $branchMatch[1] ?? 'Head Office', // Added default value
+            'branch' => $branchMatch[1] ?? '',
             'department' => $departmentMatch[1] ?? '',
             'position' => $positionMatch[1] ?? '',
             'function' => $functionMatch[1] ?? '',
-            'role' => $roleMatch[1] ?? 'Supervisor Role (Checker)', // Added default value
+            'role' => $roleMatch[1] ?? 'Supervisor Role (Checker)',
             'requester' => $requesterMatch[1] ?? '',
             'checker' => $durationMatch[1] ?? '',
             'reviewer1' => $roleMatch[1] ?? '',
@@ -42,6 +44,7 @@ function extractDataFromPdfText($text) {
     }
     return $extractedData;
 }
+
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
