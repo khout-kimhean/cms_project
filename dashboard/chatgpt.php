@@ -34,11 +34,11 @@ include '../connect/role_access.php';
             </div>
 
             <div class="typing-controls">
-                <span id="back-btn" class="material-symbols-rounded">
-                    <a href="../dashboard/dashboard.php">
+                <a href="../dashboard/dashboard.php">
+                    <span id="back-btn" class="material-symbols-rounded">
                         <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
-                    </a>
-                </span>
+                    </span>
+                </a>
                 <span id="theme-btn" class="material-symbols-rounded">light_mode</span>
                 <span id="delete-btn" class="material-symbols-rounded">delete</span>
 

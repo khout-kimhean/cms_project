@@ -351,18 +351,18 @@ const generateResponseText = (userInput) => {
         });
 };
 
-// Function to make AJAX request (using Fetch API for illustration)
-const makeAjaxRequest = (url, method, data) => {
-    return fetch(url, {
-        method,
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: Object.keys(data).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key])).join('&'),
-    })
-        .then(response => response.text())
-        .catch(error => Promise.reject(error));
-};
+// // Function to make AJAX request (using Fetch API for illustration)
+// const makeAjaxRequest = (url, method, data) => {
+//     return fetch(url, {
+//         method,
+//         headers: {
+//             'Content-Type': 'application/x-www-form-urlencoded',
+//         },
+//         body: Object.keys(data).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key])).join('&'),
+//     })
+//         .then(response => response.text())
+//         .catch(error => Promise.reject(error));
+// };
 
 // end response code 
 

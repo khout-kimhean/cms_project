@@ -205,15 +205,12 @@ $result = $conn->query($sql);
                         <tbody>
                             <?php
                             $userCount = 0; // Initialize a counter variable
-                            
                             if ($result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) {
                                     $title = htmlspecialchars($row['title']);
                                     $shortenedTitle = strlen($title) > 18 ? substr($title, 0, 10) . '...' : $title;
-
                                     $description = htmlspecialchars($row['description']);
                                     $shortenedDescription = strlen($description) > 18 ? substr($description, 0, 10) . '...' : $description;
-
                                     echo '<tr>
                                         <td>' . ($userCount + 1) . '</td>
                                         <td>' . $row['filename'] . '</td>

@@ -126,7 +126,7 @@ $result = $conn->query($sql);
                     </a>
                 </div> -->
                 <form method="post" enctype="multipart/form-data" id="uploadForm" onsubmit="changeBackground()">
-                    <label for="file">Select file Excel to Upload:</label>
+                    <label for="file">Select file to Upload:</label>
                     <input class="upload" type="file" name="file" id="file">
                     <input class="submit" type="submit" name="submit" value="Upload File" id="uploadButton">
                 </form>

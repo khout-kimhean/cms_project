@@ -312,7 +312,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
                     </a>
                 </div> -->
                 <form action="upload_move.php" method="post" enctype="multipart/form-data">
-                    <label for="file">Select file Excel to Upload:</label>
+                    <label for="file">Select file to Upload:</label>
                     <input class="upload" type="file" name="file" id="file">
                     <input class="submit" type="submit" name="submit" value="Upload File" id="uploadButton">
                 </form>

@@ -5,22 +5,26 @@ include '../connect/role_access.php';
 
 $alertType = "";
 $alertMessage = "";
-
-function extractDataFromPdfText($text) {
+// preg_match("\s*(.*?)\s*(?:\\n\s*Office|$)/", $section, $branchMatch);
+// preg_match("/Department: (.*)/", $section, $departmentMatch);
+function extractDataFromPdfText($text)
+{
     $extractedData = [];
-    $sections = explode("SECTION_SEPARATOR", $text);
-
+    $sections = explode("\n\n", $text);
     foreach ($sections as $section) {
         preg_match("/Request No: (.*)/", $section, $requestNoMatch);
         preg_match("/Name: (.*)/", $section, $nameMatch);
-        preg_match("/Branch\s*\/\s*Department\s*:\s*(.*)\s*-/", $section, $branchMatch); // Modified this line
-        preg_match("/Department: (.*)/", $section, $departmentMatch);
-        // preg_match("/Job title: (.*)/", $section, $positionMatch);
-        preg_match("/Job title\s*\/\s*Department\s*:\s*(.*)\s*-/", $section, $positionMatch);
+        preg_match("/Branch\s*\/\s*Department\s*:\s*(.*)\s*-/", $section, $branchMatch);
+
+        // Corrected this line to match the department correctly
+        // preg_match("/Department:\s*(.*?)\s*(?:Request|Branch|$)/", $section, $departmentMatch); 
+        preg_match("/Branch \/ Department\s*:\s*(.*)/", $text, $departmentMatch);
+
+        preg_match("/Job title: (.*)/", $section, $positionMatch);
         preg_match("/Function Name: (.*)/", $section, $functionMatch);
-        preg_match("/Role:\s*(.*)\s*\(/", $section, $roleMatch); // Modified this line
+        preg_match("/Role:\s*(.*)\s*\(/", $section, $roleMatch);
         preg_match("/Requester: (.*)/", $section, $requesterMatch);
-        preg_match("/Review By Name: (.*)/", 	$section,$reviewer1Match); 
+        preg_match("/Review By Name: (.*)/", $section, $reviewer1Match);
         preg_match("/Duration: (.*)/", $section, $durationMatch);
         preg_match("/Comment: (.*)/", $section, $commentMatch);
         preg_match("/Date: (.*)/", $section, $requester_dateMatch);
@@ -28,22 +32,24 @@ function extractDataFromPdfText($text) {
         $extractedData[] = [
             'request_no' => $requestNoMatch[1] ?? '',
             'name' => $nameMatch[1] ?? '',
-            'branch' => $branchMatch[1] ?? '',
+            'branch' => $branchMatch[0] ?? '',
             'department' => $departmentMatch[1] ?? '',
             'position' => $positionMatch[1] ?? '',
             'function' => $functionMatch[1] ?? '',
             'role' => $roleMatch[1] ?? 'Supervisor Role (Checker)',
             'requester' => $requesterMatch[1] ?? '',
             'checker' => $durationMatch[1] ?? '',
-            'reviewer1' => $roleMatch[1] ?? '',
+            'reviewer1' => $reviewer1Match[1] ?? '',
             'reviewer2' => $requesterMatch[1] ?? '',
             'approver' => $durationMatch[1] ?? '',
             'comment' => $commentMatch[1] ?? '',
             'request_date' => $requester_dateMatch[1] ?? '',
         ];
+
     }
     return $extractedData;
 }
+
 
 
 
@@ -57,12 +63,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
         $pdf = $parser->parseFile($fileTmpPath);
         $text = $pdf->getText();
 
-        $data = extractDataFromPdfText($text);  
+        $data = extractDataFromPdfText($text);
         $sql = "INSERT INTO user_create (request_no, name, branch, department, position, function, role, requester, checker, reviewer1, reviewer2, approver, comment, request_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
 
         if (!$stmt) {
-            echo "Error preparing SQL statement: " . $conn->error; 
+            echo "Error preparing SQL statement: " . $conn->error;
             exit;
         }
 
@@ -207,7 +213,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
                     </a>
                 </div> -->
                 <form method="post" enctype="multipart/form-data" id="uploadForm" onsubmit="changeBackground()">
-                    <label for="file">Select Excel File to Upload:</label>
+                    <label for="file">Select File to Upload:</label>
                     <input class="upload" type="file" name="file" id="file" accept=".xls, .xlsx">
                     <input class="submit" type="submit" name="submit" value="Upload File" id="uploadButton">
                 </form>

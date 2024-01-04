@@ -373,27 +373,22 @@ if (isset($_POST['edit']) && is_numeric($_POST['edit_id'])) {
                                 <tbody>
                                     <?php if (!empty($searchResults)): ?>
                                     <?php
-                                        $i = 1; // Initialize the ID counter to 1
-                                        foreach ($searchResults as $row):
-                                            ?>
+                                        $i = 1; 
+                                        foreach ($searchResults as $row):?>
                                     <tr>
-                                        <td>
-                                            <?php echo $i; // Display the ID starting from 1 ?>
-                                        </td>
-                                        <td>
-                                            <?php echo htmlspecialchars($row['filename']); ?>
-                                        </td>
+                                        <td><?php echo $i; ?></td>
+                                        <td><?php echo htmlspecialchars($row['filename']); ?></td>
                                         <td title="<?php echo htmlspecialchars($row['title']); ?>">
                                             <?php
-                                                    $title = htmlspecialchars($row['title']);
-                                                    echo strlen($title) > 18 ? substr($title, 0, 40) . '...' : $title;
-                                                    ?>
+                                            $title = htmlspecialchars($row['title']);
+                                            echo strlen($title) > 18 ? substr($title, 0, 40) . '...' : $title;
+                                            ?>
                                         </td>
                                         <td title="<?php echo htmlspecialchars($row['description']); ?>">
                                             <?php
-                                                    $description = htmlspecialchars($row['description']);
-                                                    echo strlen($description) > 20 ? substr($description, 0, 20) . '...' : $description;
-                                                    ?>
+                                            $description = htmlspecialchars($row['description']);
+                                            echo strlen($description) > 20 ? substr($description, 0, 20) . '...' : $description;
+                                            ?>
                                         </td>
                                         <td>
                                             <?php echo htmlspecialchars($row['user_type']); ?>

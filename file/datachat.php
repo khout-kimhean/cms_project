@@ -34,9 +34,10 @@ if (isset($_POST['submit'])) {
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
         $title = $_POST["title"];
-        $short_description = trim(strip_tags($_POST['short_description'])); // Remove HTML tags
-        $description = trim(strip_tags($_POST['description'])); // Remove HTML tags
-
+        $short_description = trim(strip_tags($_POST['short_description']));
+        $description = $_POST['description'];
+        // $description = trim(strip_tags($_POST['description']));
+        // $description = mysqli_real_escape_string($conn, $_POST['description']);
         $sql = "INSERT INTO chat_data (title, short_description, description) VALUES (?, ?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("sss", $title, $short_description, $description);
@@ -55,7 +56,7 @@ if (isset($_POST['submit'])) {
         $alertType = 'danger';
         $alertMessage = 'Content is empty. Please enter content before uploading.';
     }
-
+    // $conn->set_charset("utf8mb4");
     $conn->close();
 }
 
@@ -253,11 +254,6 @@ if (isset($_POST['submit'])) {
                         </a>
                         <h1>Input Data for Chatbot</h1>
                     </div>
-                    <!-- <div class="back_button">
-                        <a href="../Admin Dashboard/admin.php" class="back-button">
-                            <i class="fa fa-chevron-circle-left" style="font-size: 30px">Back</i>
-                        </a>
-                    </div> -->
                     <form method="post" enctype="multipart/form-data">
                         <!-- Replace with your PHP file name -->
                         <div class="form-group">

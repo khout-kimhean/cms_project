@@ -105,7 +105,10 @@ if (isset($_POST['submit'])) {
 
         // Insert the uploaded file details into the database
         $date_upload = date('Y-m-d H:i:s');
-        $description = strip_tags($_POST['description']);
+        
+        // $description = mysqli_real_escape_string($conn, $_POST['description']);
+        // $description = strip_tags($_POST['description']);
+        $description = $_POST['description'];
         $title = $_POST['title'];
         // $team = $_POST['drop_file']; 
 
@@ -346,12 +349,10 @@ if (isset($_POST['submit'])) {
             </div>
         </aside>
         <main>
-
             <div class="container2">
                 <div class="row">
                     <div class="col-md-8 offset-md-2">
                         <div class="card">
-
                             <div class="card-body">
                                 <form action="upload_file.php" method="post" enctype="multipart/form-data">
                                     <div class="back_button">
@@ -369,24 +370,12 @@ if (isset($_POST['submit'])) {
                                         <label for="title">Title:</label>
                                         <input type="text" name="title" class="form-control" id="title">
                                     </div>
-                                    <!-- <div class="form-list">
-                                        <label for="drop_file">Select:</label>
-                                        <select name="drop_file" class="form-control" id="drop_file">
-                                            <option value="card payment team">Card Payment Team</option>
-                                            <option value="digital branch team">Digital Branch Team</option>
-                                            <option value="atm team">ATM Team</option>
-                                            <option value="terminal team">Terminal Team</option>
-                                        </select>
-                                    </div> -->
                                     <label for="description">Description:</label>
                                     <textarea id="myTextarea" name="description"></textarea>
                                     <div class="form-group">
                                         <input type="submit" name="submit" value="Save" class="btn btn-info">
                                     </div>
-
                                 </form>
-
-
                             </div>
                         </div>
                     </div>
@@ -397,31 +386,14 @@ if (isset($_POST['submit'])) {
                 <?php echo isset($_GET['msg']) ? htmlspecialchars($_GET['msg']) : 'An error occurred.'; ?>
             </div>
             <?php } ?>
-
-
             <script>
             let selectedFiles = [];
 
             function displaySelectedFiles() {
                 const fileInput = document.getElementById('file1');
                 const selectedFilesContainer = document.getElementById('selected-files-container');
-
-                // Clear previous selections
                 selectedFilesContainer.innerHTML = '';
                 selectedFiles = [];
-
-                // Display selected files
-                // for (let i = 0; i < fileInput.files.length; i++) {
-                //     const fileName = fileInput.files[i].name;
-
-                //     selectedFiles.push(fileInput.files[i]);
-
-                //     const fileItem = document.createElement('div');
-                //     fileItem.innerHTML =
-                //         `<span>${fileName}</span> <button type="button" onclick="removeFile(${i})">Remove</button>`;
-
-                //     selectedFilesContainer.appendChild(fileItem);
-                // }
             }
 
             function removeFile(index) {
