@@ -19,15 +19,9 @@ include '../connect/role_access.php';
 
 
 <body <?php echo $_SESSION['user_name']; ?>>
-
-
     <div class="chat-container"></div>
-
-
     <div class="typing-container">
-
         <div class="typing-content">
-
             <div class="typing-textarea">
                 <textarea id="chat-input" spellcheck="false" placeholder="Message ChatBot . . ." required></textarea>
                 <span id="send-btn" class="material-symbols-rounded">send</span>
@@ -41,9 +35,7 @@ include '../connect/role_access.php';
                 </a>
                 <span id="theme-btn" class="material-symbols-rounded">light_mode</span>
                 <span id="delete-btn" class="material-symbols-rounded">delete</span>
-
             </div>
-
         </div>
         <script src="../script/role_check.js"></script>
 </body>

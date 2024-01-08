@@ -3,107 +3,45 @@ require '../vendor/autoload.php';
 include '../connect/conectdb.php';
 include '../connect/role_access.php';
 
-$alertType = "";
-$alertMessage = "";
-// preg_match("\s*(.*?)\s*(?:\\n\s*Office|$)/", $section, $branchMatch);
-// preg_match("/Department: (.*)/", $section, $departmentMatch);
-function extractDataFromPdfText($text)
-{
-    $extractedData = [];
-    $sections = explode("\n\n", $text);
-    foreach ($sections as $section) {
-        preg_match("/Request No: (.*)/", $section, $requestNoMatch);
-        preg_match("/Name: (.*)/", $section, $nameMatch);
-        preg_match("/Branch\s*\/\s*Department\s*:\s*(.*)\s*-/", $section, $branchMatch);
+require '../vendor/autoload.php';
+use Smalot\PdfParser\Parser;
 
-        // Corrected this line to match the department correctly
-        // preg_match("/Department:\s*(.*?)\s*(?:Request|Branch|$)/", $section, $departmentMatch); 
-        preg_match("/Branch \/ Department\s*:\s*(.*)/", $text, $departmentMatch);
+if (isset($_POST['submit'])) {
+    $file_name = $_FILES['file']['name'];
+    $file_size = $_FILES['file']['size'];
+    $file_tmp = $_FILES['file']['tmp_name'];
+    $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
 
-        preg_match("/Job title: (.*)/", $section, $positionMatch);
-        preg_match("/Function Name: (.*)/", $section, $functionMatch);
-        preg_match("/Role:\s*(.*)\s*\(/", $section, $roleMatch);
-        preg_match("/Requester: (.*)/", $section, $requesterMatch);
-        preg_match("/Review By Name: (.*)/", $section, $reviewer1Match);
-        preg_match("/Duration: (.*)/", $section, $durationMatch);
-        preg_match("/Comment: (.*)/", $section, $commentMatch);
-        preg_match("/Date: (.*)/", $section, $requester_dateMatch);
+    $extensions = array("pdf");
 
-        $extractedData[] = [
-            'request_no' => $requestNoMatch[1] ?? '',
-            'name' => $nameMatch[1] ?? '',
-            'branch' => $branchMatch[0] ?? '',
-            'department' => $departmentMatch[1] ?? '',
-            'position' => $positionMatch[1] ?? '',
-            'function' => $functionMatch[1] ?? '',
-            'role' => $roleMatch[1] ?? 'Supervisor Role (Checker)',
-            'requester' => $requesterMatch[1] ?? '',
-            'checker' => $durationMatch[1] ?? '',
-            'reviewer1' => $reviewer1Match[1] ?? '',
-            'reviewer2' => $requesterMatch[1] ?? '',
-            'approver' => $durationMatch[1] ?? '',
-            'comment' => $commentMatch[1] ?? '',
-            'request_date' => $requester_dateMatch[1] ?? '',
-        ];
-
+    if (!in_array($file_ext, $extensions)) {
+        echo "Extension not allowed, please choose a PDF file.";
+        exit;
     }
-    return $extractedData;
-}
 
+    if ($file_size > 2097152) {
+        echo 'File size must be less than 2 MB';
+        exit;
+    }
 
+    move_uploaded_file($file_tmp, "uploads/" . $file_name);
 
+    if ($file_ext == "pdf") {
+        $parser = new Parser();
+        $pdf = $parser->parseFile("uploads/" . $file_name);
+        $pages = $pdf->getPages();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
-    $fileName = $_FILES['file']['name'];
-    $fileTmpPath = $_FILES['file']['tmp_name'];
-    $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-
-    if (!empty($fileName) && $fileExtension === 'pdf') {
-        $parser = new \Smalot\PdfParser\Parser();
-        $pdf = $parser->parseFile($fileTmpPath);
-        $text = $pdf->getText();
-
-        $data = extractDataFromPdfText($text);
-        $sql = "INSERT INTO user_create (request_no, name, branch, department, position, function, role, requester, checker, reviewer1, reviewer2, approver, comment, request_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $stmt = $conn->prepare($sql);
-
-        if (!$stmt) {
-            echo "Error preparing SQL statement: " . $conn->error;
-            exit;
+        foreach ($pages as $page) {
+            $text = $page->getText();
+            echo nl2br(trim($text));
         }
 
-        foreach ($data as $row) {
-            $request_no = $row['request_no'];
-            $name = $row['name'];
-            $branch = $row['branch'];
-            $department = $row['department'];
-            $position = $row['position'];
-            $function = $row['function'];
-            $role = $row['role'];
-            $requester = $row['requester'];
-            $checker = $row['checker'];
-            $reviewer1 = $row['reviewer1'];
-            $reviewer2 = $row['reviewer2'];
-            $approver = $row['approver'];
-            $comment = $row['comment'];
-            $request_date = $row['request_date'];
-
-            $stmt->bind_param("ssssssssssssss", $request_no, $name, $branch, $department, $position, $function, $role, $requester, $checker, $reviewer1, $reviewer2, $approver, $comment, $request_date);
-
-            if (!$stmt->execute()) {
-                echo "Error inserting data: " . $stmt->error;
-                break;
-            }
-        }
-
-        $stmt->close();
-        $conn->close();
     } else {
-        echo "Error: Only PDF files are allowed.";
+        echo "This is not a PDF file.";
+
     }
 }
 ?>
-
 
 
 <!DOCTYPE html>

@@ -10,8 +10,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Check if 'msg' is set in the POST data
-$userMessage = isset($_POST['msg']) ? $conn->real_escape_string($_POST['msg']) : '';
+$userMessage = $conn->real_escape_string($_POST['msg']);
 
 // $sql = "SELECT answer_bot FROM tb_chat WHERE question_bot = ? OR error = ?"; 
 $sql = "SELECT description FROM chat_data WHERE title = ? OR short_description = ?";
@@ -31,7 +30,7 @@ while ($row = $result->fetch_assoc()) {
 }
 
 if (empty($messages)) {
-    $messages[] = "Thank you for using our service, but we don't have a solution for that issue. Sorry.";
+    $messages[] = "Thank you for use our service but We don't have Solution for that issue sorry.";
 }
 
 $stmt->close();

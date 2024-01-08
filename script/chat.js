@@ -4,7 +4,6 @@ const chatContainer = document.querySelector(".chat-container");
 const themeButton = document.querySelector("#theme-btn");
 const deleteButton = document.querySelector("#delete-btn");
 
-
 const loadDataFromLocalstorage = () => {
     const themeColor = localStorage.getItem("themeColor");
     document.body.classList.toggle("light-mode", themeColor === "light_mode");
@@ -52,7 +51,6 @@ const loadDataFromLocalstorage = () => {
         displayQuestions();
     }
 };
-
 
 const displayQuestions = (buttonNumber) => {
     const questionContainer = document.createElement("div");
@@ -245,7 +243,6 @@ const displayCardInfoButtons = () => {
 
 
 
-
 // response code 
 const displayCardResponseButtons = () => {
     const incomingChatDiv = createChatElement(`<div class="chat-content">
@@ -261,22 +258,11 @@ const displayCardResponseButtons = () => {
     const inputDiv = document.createElement("div");
     inputDiv.innerHTML = `
         <input class="input_text" type="number" id="userInput" placeholder="Enter a number">
-        <button class="submit" onclick="submitUserInput()">Send</button>
+        <button class="submit" onclick="submitUserInput()">Submit</button>
     `;
-    const userInputInput = inputDiv.querySelector("#userInput");
-
-    // Add event listener for 'keydown' on the input field
-    userInputInput.addEventListener("keydown", (event) => {
-        if (event.key === 'Enter' && !event.shiftKey) {
-            event.preventDefault();
-            submitUserInput();
-        }
-    });
-
     incomingChatDiv.querySelector(".chat-details").appendChild(inputDiv);
     chatContainer.scrollTo(0, chatContainer.scrollHeight);
 };
-
 
 // Function to handle user input submission
 const submitUserInput = () => {
@@ -729,8 +715,6 @@ const displayButtons = (buttonLabels) => {
 // response writing bot
 
 
-
-
 let botResponseCounter = 0;
 
 const displayBotResponse = (responseText) => {
@@ -798,6 +782,42 @@ deleteButton.addEventListener("click", () => {
     localStorage.removeItem("all-chats");
     displayDefaultMessage();
 });
+
+const displayDefaultMessage = () => {
+    const defaultText = `<div class="default-text">
+    <img src="../images/background/chat.png" alt="chatbot-img">
+        <h1>Chatbot</h1>
+        <p>Hello how can I help you today?</p>
+        <p>If you have any questions or issues, let me know! You can start a chat, or you can click the button below!</p>
+        <div class="button">
+            <div class="button1">
+                <button type="button" onclick="handleButtonClick(1)">
+                    <div class="text">
+                        Issue in Card Payment Support Unit
+                    </div>
+                </button>
+                <button type="button" onclick="handleButtonClick(2)">
+                    <div class="text">
+                        Issue in ATM Network Support Unit
+                    </div>
+                </button>
+            </div>
+            <div class="button2">
+                <button type="button" onclick="handleButtonClick(3)">
+                    <div class="text">
+                        Issue in Digital Branch Support Unit
+                    </div>
+                </button>
+                <button type="button" onclick="handleButtonClick(4)">
+                    <div class="text">
+                        Issue in Digital Terminal Management Unit
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>`;
+    chatContainer.innerHTML = defaultText;
+};
 
 
 const createChatElement = (content, className) => {
@@ -875,12 +895,65 @@ deleteButton.addEventListener("click", () => {
 
 
 
-const getBotResponse = (userInput) => {
+chatInput.addEventListener("input", () => {
+    // Adjust the height of the input field dynamically based on its content
+    chatInput.style.height = `${initialInputHeight}px`;
+    chatInput.style.height = `${chatInput.scrollHeight}px`;
+});
+
+chatInput.addEventListener("keydown", (e) => {
+    // If the Enter key is pressed without Shift and the window width is larger 
+    // than 800 pixels, handle the outgoing chat
+    if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
+        e.preventDefault();
+        handleOutgoingChat();
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const getChatResponse = async (incomingChatDiv, userInput) => {
+//     try {
+//         const responseText = await makeAjaxRequest('../script/chat.php', 'POST', { msg: userInput });
+//         console.log("Response from PHP:", responseText);
+//         const pElement = document.createElement("p");
+
+//         let i = 0;
+//         const interval = setInterval(() => {
+//             if (i <= responseText.length) {
+//                 pElement.innerHTML = responseText.slice(0, i);
+//                 i++;
+//                 chatContainer.scrollTo(0, chatContainer.scrollHeight);
+//             } else {
+//                 clearInterval(interval);
+//             }
+//         }, 10);
+
+//         incomingChatDiv.querySelector(".chat-details").appendChild(pElement);
+//     } catch (error) {
+//         console.error('Error fetching response:', error);
+//     }
+// };
+const getChatResponse = (userInput) => {
     const incomingChatDiv = createChatElement(`<div class="chat-content">
-            <div class="chat-details">
-                <img src="../images/background/chat.png" alt="chatbot-img">
-            </div>
-        </div>`, "incoming");
+    <div class="chat-details">
+        <img src="../images/background/chat.png" alt="chatbot-img">
+    </div>
+</div>`, "incoming");
 
     const responseDiv = document.createElement("div");
     responseDiv.innerHTML = `<p></p>`;
@@ -901,12 +974,6 @@ const getBotResponse = (userInput) => {
                     chatContainer.scrollTo(0, chatContainer.scrollHeight);
                 } else {
                     clearInterval(interval);
-
-                    // Add a newline and the additional message
-                    responseDiv.querySelector("p").innerHTML += "<br>Please contact us if you have any issue that need team to support <<a href='https://join.skype.com/tnP3accFexk3' target='_blank'>Link Shy</a>>";
-
-                    // Scroll after adding the additional message
-                    chatContainer.scrollTo(0, chatContainer.scrollHeight);
                 }
             }, 10);
         })
@@ -914,63 +981,26 @@ const getBotResponse = (userInput) => {
             console.error('Error fetching response:', error);
         });
 };
+
 const showTypingAnimation = async (userInput) => {
+    const html = `<div class="chat-content">
+                    <div class="chat-details">
+                        <img src="../images/background/chat.png" alt="chatbot-img">
+                    </div>
+                    <span onclick="copyResponse(this)" class="material-symbols-rounded">content_copy</span>
+                </div>`;
+    const incomingChatDiv = createChatElement(html, "incoming");
+    chatContainer.appendChild(incomingChatDiv);
+    chatContainer.scrollTo(0, chatContainer.scrollHeight);
+
     try {
-        const incomingChatDiv = createChatElement(`<div class="chat-content">
-            <div class="chat-details">
-                <img src="../images/background/chat.png" alt="chatbot-img">
-            </div>
-        </div>`, "incoming");
-
-        const responseDiv = document.createElement("div");
-        responseDiv.innerHTML = `<p></p>`;
-        incomingChatDiv.querySelector(".chat-details").appendChild(responseDiv);
-        chatContainer.appendChild(incomingChatDiv);
-        chatContainer.scrollTo(0, chatContainer.scrollHeight);
-
-        // Simulate loading response from the server
-        makeAjaxRequest('../script/chatreply.php', 'POST', { msg: userInput })
-            .then(data => {
-                const responseText = data || "Default response from the server";
-
-                let i = 0;
-                const interval = setInterval(() => {
-                    if (i <= responseText.length) {
-                        responseDiv.querySelector("p").innerHTML = responseText.slice(0, i);
-                        i++;
-                        chatContainer.scrollTo(0, chatContainer.scrollHeight);
-                    } else {
-                        clearInterval(interval);
-
-                        // Add a newline and the additional message
-                        responseDiv.querySelector("p").innerHTML += "<br>Please contact us if you have any issue that need team to support <<a href='https://join.skype.com/tnP3accFexk3' target='_blank'>Link Shy</a>>";
-
-                        // Scroll after adding the additional message
-                        chatContainer.scrollTo(0, chatContainer.scrollHeight);
-                    }
-                }, 10);
-            })
-            .catch(error => {
-                console.error('Error fetching response:', error);
-            });
+        console.log("User Input:", userInput);
+        await getChatResponse(incomingChatDiv, userInput);
     } catch (error) {
         console.error('Error in showTypingAnimation:', error);
     }
 };
 
-
-
-chatInput.addEventListener("input", () => {
-    chatInput.style.height = `${initialInputHeight}px`;
-    chatInput.style.height = `${chatInput.scrollHeight}px`;
-
-});
-chatInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
-        e.preventDefault();
-        handleOutgoingChat();
-    }
-});
 
 loadDataFromLocalstorage();
 sendButton.addEventListener("click", handleOutgoingChat);

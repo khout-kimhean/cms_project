@@ -210,9 +210,9 @@ $result = $conn->query($sql);
             <div class="new-users">
                 <h2>Option</h2>
                 <div class="user-list">
-
                     <div class="user">
-                        <a href="../chatbot/chat.php" <?php echo isLinkDisabled('chat.php'); ?>>
+                        <a href="../dashboard/chatgpt.php" <?php echo isLinkDisabled('chat.php'); ?>>
+                            <!-- <a href="../chatbot/chat.php" <?php echo isLinkDisabled('chat.php'); ?>> -->
                             <img src="../images/background/chat.png" alt="ChatBot">
                             <h2>ChatBot</h2>
                             <p>User ChatBot Here</p>
