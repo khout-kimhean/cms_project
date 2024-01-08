@@ -331,7 +331,7 @@ const generateResponseText = (userInput) => {
                     clearInterval(interval);
 
                     // Add a newline and the additional message
-                    responseDiv.querySelector("p").innerHTML += "<br>Please contact us if you have any issue that need team to support <<a href='https://join.skype.com/tnP3accFexk3' target='_blank'>Link Shy</a>>";
+                    // responseDiv.querySelector("p").innerHTML += "<br>Please contact us if you have any issue that need team to support <<a href='https://join.skype.com/tnP3accFexk3' target='_blank'>Link Shy</a>>";
 
                     // Scroll after adding the additional message
                     chatContainer.scrollTo(0, chatContainer.scrollHeight);
@@ -911,7 +911,7 @@ const getBotResponse = (userInput) => {
                     clearInterval(interval);
 
                     // Add a newline and the additional message
-                    responseDiv.querySelector("p").innerHTML += "<br>Please contact us if you have any issue that need team to support <<a href='https://join.skype.com/tnP3accFexk3' target='_blank'>Link Shy</a>>";
+                    // responseDiv.querySelector("p").innerHTML += "<br>Please contact us if you have any issue that need team to support <<a href='https://join.skype.com/tnP3accFexk3' target='_blank'>Link Shy</a>>";
 
                     // Scroll after adding the additional message
                     chatContainer.scrollTo(0, chatContainer.scrollHeight);
