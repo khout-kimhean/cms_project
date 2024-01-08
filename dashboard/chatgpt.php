@@ -2,8 +2,8 @@
 include '../connect/conectdb.php';
 include '../connect/role_access.php';
 ?>
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
@@ -15,10 +15,10 @@ include '../connect/role_access.php';
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="../script/chatgpt.js" defer></script>
+    <script src="../script/role_check.js" defer></script> <!-- Include role_check.js here -->
 </head>
 
-
-<body <?php echo $_SESSION['user_name']; ?>>
+<body>
     <div class="chat-container"></div>
     <div class="typing-container">
         <div class="typing-content">
@@ -37,7 +37,7 @@ include '../connect/role_access.php';
                 <span id="delete-btn" class="material-symbols-rounded">delete</span>
             </div>
         </div>
-        <script src="../script/role_check.js"></script>
+    </div>
 </body>
 
 </html>

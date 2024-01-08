@@ -271,6 +271,7 @@ const displayCardResponseButtons = () => {
             event.preventDefault();
             submitUserInput();
         }
+
     });
 
     incomingChatDiv.querySelector(".chat-details").appendChild(inputDiv);
@@ -774,7 +775,6 @@ const displayBotResponse = (responseText) => {
 
 
 // end response writing bot 
-
 sendButton.addEventListener("click", () => {
     userText = chatInput.value;
     if (userText.trim() !== "") {
@@ -790,6 +790,27 @@ sendButton.addEventListener("click", () => {
 
         chatInput.value = "";
         getBotResponse(userText);
+    }
+});
+
+chatInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        userText = chatInput.value;
+        if (userText.trim() !== "") {
+            const outgoingChatDiv = createChatElement(`<div class="chat-content">
+                <div class="chat-details">
+                <img src="../images/logo/user.png" alt="user-img">
+                    <p>${userText}</p>
+                </div>
+            </div>`, "outgoing");
+            chatContainer.querySelector(".default-text")?.remove();
+            chatContainer.appendChild(outgoingChatDiv);
+            chatContainer.scrollTo(0, chatContainer.scrollHeight);
+
+            chatInput.value = "";
+            getBotResponse(userText);
+        }
+        event.preventDefault(); // Prevents the default behavior of the Enter key in a textarea
     }
 });
 
@@ -836,7 +857,7 @@ const handleOutgoingChat = () => {
     chatContainer.querySelector(".default-text")?.remove();
     chatContainer.appendChild(outgoingChatDiv);
     chatContainer.scrollTo(0, chatContainer.scrollHeight);
-    setTimeout(showTypingAnimation, 500);
+    setTimeout(getBotResponse, 500);
 };
 
 themeButton.addEventListener("click", () => {
@@ -848,20 +869,7 @@ themeButton.addEventListener("click", () => {
 
 const initialInputHeight = chatInput.scrollHeight;
 
-chatInput.addEventListener("input", () => {
-    // Adjust the height of the input field dynamically based on its content
-    chatInput.style.height = `${initialInputHeight}px`;
-    chatInput.style.height = `${chatInput.scrollHeight}px`;
-});
 
-chatInput.addEventListener("keydown", (e) => {
-    // If the Enter key is pressed without Shift and the window width is larger
-    // than 800 pixels, handle the outgoing chat
-    if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
-        e.preventDefault();
-        handleOutgoingChat();
-    }
-});
 
 loadDataFromLocalstorage();
 sendButton.addEventListener("click", handleOutgoingChat);
@@ -914,57 +922,37 @@ const getBotResponse = (userInput) => {
             console.error('Error fetching response:', error);
         });
 };
-const showTypingAnimation = async (userInput) => {
-    try {
-        const incomingChatDiv = createChatElement(`<div class="chat-content">
-            <div class="chat-details">
-                <img src="../images/background/chat.png" alt="chatbot-img">
-            </div>
-        </div>`, "incoming");
 
-        const responseDiv = document.createElement("div");
-        responseDiv.innerHTML = `<p></p>`;
-        incomingChatDiv.querySelector(".chat-details").appendChild(responseDiv);
-        chatContainer.appendChild(incomingChatDiv);
+const UserInput = () => {
+    const userInputValue = document.getElementById("userInput").value;
+    const responseText = generateResponseText(userInputValue);
+
+    const responseDiv = document.createElement("div");
+    responseDiv.innerHTML = `<p></p>`;
+    chatContainer.appendChild(responseDiv);
+    chatContainer.scrollTo(0, chatContainer.scrollHeight);
+
+    let i = 0;
+
+    const interval = setInterval(() => {
+        if (i <= responseText.length) {
+            responseDiv.querySelector("p").innerHTML = responseText.slice(0, i);
+            i++;
+        } else {
+            clearInterval(interval);
+            // Optionally, you can remove the typing-animation or input elements here
+        }
         chatContainer.scrollTo(0, chatContainer.scrollHeight);
-
-        // Simulate loading response from the server
-        makeAjaxRequest('../script/chatreply.php', 'POST', { msg: userInput })
-            .then(data => {
-                const responseText = data || "Default response from the server";
-
-                let i = 0;
-                const interval = setInterval(() => {
-                    if (i <= responseText.length) {
-                        responseDiv.querySelector("p").innerHTML = responseText.slice(0, i);
-                        i++;
-                        chatContainer.scrollTo(0, chatContainer.scrollHeight);
-                    } else {
-                        clearInterval(interval);
-
-                        // Add a newline and the additional message
-                        responseDiv.querySelector("p").innerHTML += "<br>Please contact us if you have any issue that need team to support <<a href='https://join.skype.com/tnP3accFexk3' target='_blank'>Link Shy</a>>";
-
-                        // Scroll after adding the additional message
-                        chatContainer.scrollTo(0, chatContainer.scrollHeight);
-                    }
-                }, 10);
-            })
-            .catch(error => {
-                console.error('Error fetching response:', error);
-            });
-    } catch (error) {
-        console.error('Error in showTypingAnimation:', error);
-    }
+    }, 10);
 };
 
 
-
 chatInput.addEventListener("input", () => {
+    // Adjust the height of the input field dynamically based on its content
     chatInput.style.height = `${initialInputHeight}px`;
     chatInput.style.height = `${chatInput.scrollHeight}px`;
-
 });
+
 chatInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
         e.preventDefault();
