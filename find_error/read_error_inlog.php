@@ -125,7 +125,7 @@ $result = $conn->query($sql);
                 <div class="item">
                     <input class="file" type="file" id="fileInput" />
                     <input class="search" type="text" id="searchKeyNumberInput"
-                        placeholder="Enter REF-No Here . . . . . . . " />
+                        placeholder="enter reference number here" />
                     <button onclick="processFile()">Show </button>
                     <button onclick="searchKeyword()">Show Detail</button>
                     <br />

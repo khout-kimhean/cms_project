@@ -76,6 +76,7 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Form</title>
     <link rel="stylesheet" type="text/css" href="../styles/user_mgt/login_form.css">
+
 </head>
 
 <body>
