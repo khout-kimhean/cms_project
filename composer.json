@@ -3,6 +3,8 @@
         "phpoffice/phpspreadsheet": "^1.25",
         "phpoffice/phpword": "^1.1",
         "smalot/pdfparser": "^2.7",
-        "setasign/fpdi": "^2.6"
+        "setasign/fpdi": "^2.6",
+        "setasign/fpdf": "^1.8",
+        "thiagoalessio/tesseract_ocr": "^2.13"
     }
 }

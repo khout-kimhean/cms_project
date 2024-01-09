@@ -1,49 +1,3 @@
-<?php
-require '../vendor/autoload.php';
-include '../connect/conectdb.php';
-include '../connect/role_access.php';
-
-require '../vendor/autoload.php';
-use Smalot\PdfParser\Parser;
-
-if (isset($_POST['submit'])) {
-    $file_name = $_FILES['file']['name'];
-    $file_size = $_FILES['file']['size'];
-    $file_tmp = $_FILES['file']['tmp_name'];
-    $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
-
-    $extensions = array("pdf");
-
-    if (!in_array($file_ext, $extensions)) {
-        echo "Extension not allowed, please choose a PDF file.";
-        exit;
-    }
-
-    if ($file_size > 2097152) {
-        echo 'File size must be less than 2 MB';
-        exit;
-    }
-
-    move_uploaded_file($file_tmp, "uploads/" . $file_name);
-
-    if ($file_ext == "pdf") {
-        $parser = new Parser();
-        $pdf = $parser->parseFile("uploads/" . $file_name);
-        $pages = $pdf->getPages();
-
-        foreach ($pages as $page) {
-            $text = $page->getText();
-            echo nl2br(trim($text));
-        }
-
-    } else {
-        echo "This is not a PDF file.";
-
-    }
-}
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -144,17 +98,14 @@ if (isset($_POST['submit'])) {
                     <i class="fa fa-chevron-circle-left" style="font-size: 28px;">Back</i>
                 </a>
                 <h2>Upload New User</h2>
-                <!-- <div class="content">
-                    <h2>Upload New User Or</h2>
-                    <a href="../assessment/asscess_new_user.php">
-                        <button class="input">Input Manual</button>
-                    </a>
-                </div> -->
                 <form method="post" enctype="multipart/form-data" id="uploadForm" onsubmit="changeBackground()">
                     <label for="file">Select File to Upload:</label>
-                    <input class="upload" type="file" name="file" id="file" accept=".xls, .xlsx">
+                    <input class="upload" type="file" name="file" id="file">
                     <input class="submit" type="submit" name="submit" value="Upload File" id="uploadButton">
                 </form>
+                <?php
+                echo '<div id="output">' . $outputText . '</div>';
+                ?>
             </div>
         </main>
         <div class="right-section">

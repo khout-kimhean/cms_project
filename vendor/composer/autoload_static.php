@@ -12,6 +12,10 @@ class ComposerStaticInit790f065cbc52e2a75908fe14e3192819
     );
 
     public static $prefixLengthsPsr4 = array (
+        't' => 
+        array (
+            'thiagoalessio\\TesseractOCR\\' => 27,
+        ),
         's' => 
         array (
             'setasign\\Fpdi\\' => 14,
@@ -48,6 +52,10 @@ class ComposerStaticInit790f065cbc52e2a75908fe14e3192819
     );
 
     public static $prefixDirsPsr4 = array (
+        'thiagoalessio\\TesseractOCR\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/thiagoalessio/tesseract_ocr/src',
+        ),
         'setasign\\Fpdi\\' => 
         array (
             0 => __DIR__ . '/..' . '/setasign/fpdi/src',
@@ -118,6 +126,7 @@ class ComposerStaticInit790f065cbc52e2a75908fe14e3192819
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'FPDF' => __DIR__ . '/..' . '/setasign/fpdf/fpdf.php',
         'Stringable' => __DIR__ . '/..' . '/myclabs/php-enum/stubs/Stringable.php',
     );
 

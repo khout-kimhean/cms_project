@@ -19,11 +19,9 @@ $error = array(); // Initialize an error array
 $success_message = '';
 
 if (isset($_POST['submit'])) {
-
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $new_password = $_POST['new_password'];
     $confirm_password = $_POST['confirm_password'];
-
     if (strlen($new_password) < 8) {
         $error[] = 'Password must be at least 8 characters long.';
     } elseif (!preg_match('/[0-9]/', $new_password)) {
@@ -35,30 +33,23 @@ if (isset($_POST['submit'])) {
     } elseif ($new_password != $confirm_password) {
         $error[] = 'Passwords do not match.';
     } else {
-        // Use password_hash for secure password hashing
         $new_password_hash = password_hash($new_password, PASSWORD_DEFAULT);
-
-        // Use prepared statement to prevent SQL injection
         $update = $conn->prepare("UPDATE login_register SET password = ? WHERE email = ?");
         $update->bind_param("ss", $new_password_hash, $email);
-
         if ($update->execute()) {
             $success_message = "Your password has been successfully reset.";
         } else {
             $error[] = "Error updating password: " . $conn->error;
         }
-
         $update->close();
     }
 }
-
 // Check if the user exists after the password change
 $selectUser = $conn->prepare("SELECT * FROM login_register WHERE email = ?");
 $selectUser->bind_param("s", $email);
 $selectUser->execute();
 $result = $selectUser->get_result();
 $user = $result->fetch_assoc();
-
 $selectUser->close();
 $conn->close();
 ?>

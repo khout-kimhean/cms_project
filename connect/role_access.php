@@ -7,12 +7,12 @@ function isLinkDisabled($link)
         'dashboard.php' => ['admin', 'card payment team', 'digital branch team', 'atm team', 'terminal team', 'user'],
         'file_mgt.php' => ['admin', 'card payment team', 'digital branch team', 'atm team', 'terminal team'],
         'chat.php' => ['admin', 'card payment team', 'digital branch team', 'atm team', 'terminal team', 'user'],
+        'chatgpt.php' => ['admin', 'card payment team', 'digital branch team', 'atm team', 'terminal team', 'user'],
         'datachat.php' => ['admin', 'card payment team', 'digital branch team', 'atm team', 'terminal team'],
         'read_file.php' => ['admin', 'card payment team', 'digital branch team', 'user'],
         'notification.php' => ['admin', 'card payment team'],
         'assessment.php' => ['admin', 'card payment team'],
         'showuser.php' => ['admin'],
-        'chatgpt.php' => ['admin'],
         'testchat.php' => ['admin'],
         'user_management.php' => ['admin'],
 
