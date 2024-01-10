@@ -382,7 +382,7 @@ const displayContactCardLink = () => {
     incomingChatDiv.querySelector(".chat-details").appendChild(responseDiv);
     chatContainer.scrollTo(0, chatContainer.scrollHeight);
 
-    const responseText = "Click <a href='" + Link + "' target='_blank'>here</a> to contact Team Support.";
+    const responseText = "Click <a href='" + Link + "' target='_blank' class='contact-link'>here</a> to contact Team Support.";
     let i = 0;
 
     const interval = setInterval(() => {
@@ -414,7 +414,7 @@ const displayContactDigitalLink = () => {
     incomingChatDiv.querySelector(".chat-details").appendChild(responseDiv);
     chatContainer.scrollTo(0, chatContainer.scrollHeight);
 
-    const responseText = "Click <a href='" + LinkA + "' target='_blank'>here</a> to contact Team Support.";
+    const responseText = "Click <a href='" + LinkA + "'  target='_blank' class='contact-link'>here</a> to contact Team Support.";
     let i = 0;
 
     const interval = setInterval(() => {
@@ -445,7 +445,7 @@ const displayContactATMLink = () => {
     incomingChatDiv.querySelector(".chat-details").appendChild(responseDiv);
     chatContainer.scrollTo(0, chatContainer.scrollHeight);
 
-    const responseText = "Click <a href='" + LinkB + "' target='_blank'>here</a> to contact Team Support.";
+    const responseText = "Click <a href='" + LinkB + "' target='_blank' class='contact-link'>here</a> to contact Team Support.";
     let i = 0;
 
     const interval = setInterval(() => {
@@ -476,7 +476,7 @@ const displayContactTerminalLink = () => {
     incomingChatDiv.querySelector(".chat-details").appendChild(responseDiv);
     chatContainer.scrollTo(0, chatContainer.scrollHeight);
 
-    const responseText = "Click <a href='" + LinkC + "' target='_blank'>here</a> to contact Team Support.";
+    const responseText = "Click <a href='" + LinkC + "' target='_blank' class='contact-link'>here</a> to contact Team Support.";
     let i = 0;
 
     const interval = setInterval(() => {
@@ -528,7 +528,8 @@ const displayDefaultResponse = () => {
 
 // handle card info
 const handleInfoCard1 = () => {
-    displayBotResponse(`Visa CashCard Gold
+    displayBotResponse(
+        `Visa CashCard Gold
     --> Bin 
     436496
     00000 00000 -> 99999 99999
@@ -742,7 +743,7 @@ let botResponseCounter = 0;
 
 const displayBotResponse = (responseText) => {
     const incomingChatDiv = createChatElement(`<div class="chat-content">
-        <div class="chat-details">
+        <div class="chat-detail">
         <img src="../images/background/chat.png" alt="chatbot-img">
         </div>
     </div>`, "incoming");
@@ -753,7 +754,7 @@ const displayBotResponse = (responseText) => {
     // Simulate typing effect
     const responseDiv = document.createElement("div");
     responseDiv.innerHTML = `<p style="opacity: 0;"></p>`;
-    incomingChatDiv.querySelector(".chat-details").appendChild(responseDiv);
+    incomingChatDiv.querySelector(".chat-detail").appendChild(responseDiv);
     chatContainer.scrollTo(0, chatContainer.scrollHeight);
 
     let opacity = 0;
