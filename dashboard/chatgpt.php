@@ -18,16 +18,18 @@ include '../connect/role_access.php';
     <script src="../script/role_check.js" defer></script> <!-- Include role_check.js here -->
 </head>
 
-<body>
+<body <?php echo $_SESSION['user_name']; ?>>
     <div class="chat-container"></div>
     <div class="typing-container">
         <div class="typing-content">
+            <!-- <?php echo $_SESSION['user_name']; ?> -->
             <div class="typing-textarea">
                 <textarea id="chat-input" spellcheck="false" placeholder="Message ChatBot . . ." required></textarea>
                 <span id="send-btn" class="material-symbols-rounded">send</span>
             </div>
 
             <div class="typing-controls">
+
                 <a href="../dashboard/dashboard.php">
                     <span id="back-btn" class="material-symbols-rounded">
                         <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>

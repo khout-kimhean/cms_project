@@ -4,6 +4,12 @@ const chatContainer = document.querySelector(".chat-container");
 const themeButton = document.querySelector("#theme-btn");
 const deleteButton = document.querySelector("#delete-btn");
 
+// link skype
+const Link = 'https://join.skype.com/shWclka7rGQk';     // Contact Team Card
+const LinkA = 'https://join.skype.com/shWclka7rGQk';    // Contact Team Digital
+const LinkB = 'https://join.skype.com/shWclka7rGQk';    // Contact Team ATM
+const LinkC = 'https://join.skype.com/shWclka7rGQk';    // Contact Team Terminal
+
 
 const loadDataFromLocalstorage = () => {
     const themeColor = localStorage.getItem("themeColor");
@@ -376,7 +382,7 @@ const displayContactCardLink = () => {
     incomingChatDiv.querySelector(".chat-details").appendChild(responseDiv);
     chatContainer.scrollTo(0, chatContainer.scrollHeight);
 
-    const responseText = "Click <a href='https://join.skype.com/tnP3accFexk3' target='_blank'>here</a> to contact us on Telegram.";
+    const responseText = "Click <a href='" + Link + "' target='_blank'>here</a> to contact Team Support.";
     let i = 0;
 
     const interval = setInterval(() => {
@@ -408,7 +414,7 @@ const displayContactDigitalLink = () => {
     incomingChatDiv.querySelector(".chat-details").appendChild(responseDiv);
     chatContainer.scrollTo(0, chatContainer.scrollHeight);
 
-    const responseText = "Click <a href='https://t.me/+VBs6umCCQvAyNjBl' target='_blank'>here</a> to contact us on Telegram.";
+    const responseText = "Click <a href='" + LinkA + "' target='_blank'>here</a> to contact Team Support.";
     let i = 0;
 
     const interval = setInterval(() => {
@@ -439,7 +445,7 @@ const displayContactATMLink = () => {
     incomingChatDiv.querySelector(".chat-details").appendChild(responseDiv);
     chatContainer.scrollTo(0, chatContainer.scrollHeight);
 
-    const responseText = "Click <a href='https://t.me/+VBs6umCCQvAyNjBl' target='_blank'>here</a> to contact us on Telegram.";
+    const responseText = "Click <a href='" + LinkB + "' target='_blank'>here</a> to contact Team Support.";
     let i = 0;
 
     const interval = setInterval(() => {
@@ -470,7 +476,7 @@ const displayContactTerminalLink = () => {
     incomingChatDiv.querySelector(".chat-details").appendChild(responseDiv);
     chatContainer.scrollTo(0, chatContainer.scrollHeight);
 
-    const responseText = "Click <a href='https://t.me/+VBs6umCCQvAyNjBl' target='_blank'>here</a> to contact us on Telegram.";
+    const responseText = "Click <a href='" + LinkC + "' target='_blank'>here</a> to contact Team Support.";
     let i = 0;
 
     const interval = setInterval(() => {
@@ -910,10 +916,6 @@ const getBotResponse = (userInput) => {
                 } else {
                     clearInterval(interval);
 
-                    // Add a newline and the additional message
-                    // responseDiv.querySelector("p").innerHTML += "<br>Please contact us if you have any issue that need team to support <<a href='https://join.skype.com/tnP3accFexk3' target='_blank'>Link Shy</a>>";
-
-                    // Scroll after adding the additional message
                     chatContainer.scrollTo(0, chatContainer.scrollHeight);
                 }
             }, 10);

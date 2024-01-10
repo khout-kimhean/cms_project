@@ -30,11 +30,11 @@
 body {
   /* background-image: url(../images/background.png); */
   /* background-image: url(../images/background1.jpg); */
-  background-image: url(../images/pic1.jpg);
+  /* background-image: url(../images/pic1.jpg); */
   /* background-image: url(../styles/chatbot/background1.jpg); */
   /* background-image: url(../images/background/pic.jpg); */
 
-  /* background: var(--outgoing-chat-bg); */
+  background: var(--outgoing-chat-bg);
   content: "";
   position: absolute;
   top: 0;
@@ -111,18 +111,18 @@ body .background {
 
 .question-container button {
   border: 1px solid var(--incoming-chat-bg) !important;
-  border-color: rgba(86, 88, 105, var(--tw-border-opacity));
-  background-color: rgba(52, 53, 65, var(--tw-bg-opacity));
-  /* background-color: rgb(196, 160, 6); */
+  /* border-color: rgba(86, 88, 105, var(--tw-border-opacity)); */
+  /* background-color: rgba(52, 53, 65, var(--tw-bg-opacity)); */
+  background-color: rgb(196, 160, 6);
   color: var(--text-color);
-  padding: 10px 20px;
+  padding: 8px 100px;
   margin: 10px;
   border: none;
-  border-radius: 5px;
+  border-radius: 20px;
   cursor: pointer;
   font-size: 16px;
   user-select: none;
-  width: 500px;
+  /* width: 300px; */
 }
 
 .question-container button:hover {
@@ -269,7 +269,7 @@ span.material-symbols-rounded {
 .chat .chat-details p {
   white-space: pre-wrap;
   font-size: 1rem;
-  padding: 0 50px 0 25px;
+  padding: 0 0px 0 0px;
   color: var(--text-color);
   word-break: break-word;
 }
@@ -398,7 +398,7 @@ span.material-symbols-rounded {
     width: 32px;
   }
   .chat-container .chat p {
-    padding: 0 20px;
+    padding: 0 0px;
   }
   .chat .chat-content:not(:has(.typing-animation), :has(.error)) span {
     visibility: visible;
