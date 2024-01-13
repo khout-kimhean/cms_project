@@ -59,13 +59,11 @@ $result = $conn->query($sql);
                     </span>
                     <h3>Dashboard</h3>
                 </a>
-
                 <a href="../file/file_mgt.php" <?php echo isLinkDisabled('file_mgt.php'); ?>>
                     <span class="fa fa-upload">
                     </span>
                     <h3>Store File</h3>
                 </a>
-
                 <a href="../assessment/assessment.php" <?php echo isLinkDisabled('assessment.php'); ?>>
                     <span class="fa fa-address-book">
                         <!-- fab fa-app-store-ios -->
@@ -78,7 +76,6 @@ $result = $conn->query($sql);
                     </span>
                     <h3>User Mgt</h3>
                 </a>
-
                 <a href="../user_mgt/logout.php">
                     <span class="material-icons-sharp">
                         logout
@@ -98,7 +95,7 @@ $result = $conn->query($sql);
                 <div class="item">
                     <input class="file" type="file" id="fileInput" />
                     <input class="search" type="text" id="searchKeyNumberInput"
-                        placeholder="Search REF_No/TRXENG_No/Card Number" />
+                        placeholder="enter reference number here" />
                     <button onclick="processFile()">Show</button>
                     <!-- <button onclick="searchKeyword()">Show Detail</button> -->
                     <br />
@@ -387,7 +384,6 @@ $result = $conn->query($sql);
                         }
                     }
                 </script>
-
             </div>
         </main>
         <div class="right-section">
@@ -419,9 +415,6 @@ $result = $conn->query($sql);
                 </div>
 
             </div>
-
-
-
         </div>
     </div>
     <script src="../script/role_check.js"></script>

@@ -94,17 +94,6 @@ $result = $conn->query($sql);
                     </span>
                     <h3>User Mgt</h3>
                 </a>
-                <!-- <a href="../to_do_list/todo_management.php">
-                    <span class="fa fa-list-alt">
-                    </span>
-                    <h3>To-do List</h3>
-                </a> -->
-                <!-- <a href="../data_store/data_mgt.php">
-                    <span class="fa fa-briefcase">
-                    </span>
-                    <h3>Stock Mgt</h3>
-                </a> -->
-
 
                 <a href="../user_mgt/logout.php">
                     <span class="material-icons-sharp">

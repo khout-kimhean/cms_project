@@ -137,7 +137,7 @@ $result = $conn->query($sql);
                             </div>
                         </a>
                     </div>
-                    <div class="visits <?php echo isLinkDisabled('../find_error/read_by_keyword.php'); ?>"
+                    <!-- <div class="visits <?php echo isLinkDisabled('../find_error/read_by_keyword.php'); ?>"
                         onclick="window.location.href='../find_error/read_by_keyword.php';" style="cursor: pointer;">
                         <a href="../find_error/read_by_keyword.php"
                             <?php echo isLinkDisabled('read_by_keyword.php'); ?>>
@@ -150,22 +150,12 @@ $result = $conn->query($sql);
                                 </div>
                             </div>
                         </a>
-                    </div>
-                    <!-- <div class="searches" onclick="window.location.href='../find_error/v1.php';"
+                    </div> -->
+                    <!-- <div class="searches" onclick="window.location.href='../find_error/read_trxno.php';"
                         style="cursor: pointer;">
                         <div class="status">
                             <div class="info">
-                                <h1>Test V1</h1>
-                            </div>
-                            <div>
-                                <img src="../images/file/file2.png">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="sales" onclick="window.location.href='../find_error/v2.php';" style="cursor: pointer;">
-                        <div class="status">
-                            <div class="info">
-                                <h1>Test V2</h1>
+                                <h1>Read log by trx</h1>
                             </div>
                             <div>
                                 <img src="../images/file/file2.png">
@@ -206,70 +196,7 @@ $result = $conn->query($sql);
 
             </div>
 
-            <!-- <div class="user-profile">
-                <div class="logo">
-                    <img src="../images/logo/logo.jpg">
-                    <h2>FTB Bank</h2>
-                    <p>Welcome to FTB Bank</p>
-                </div>
-            </div>
 
-            <div class="reminders">
-                <div class="header">
-                    <h2>Reminders</h2>
-                    <span class="material-icons-sharp">
-                        notifications_none
-                    </span>
-                </div>
-
-                <div class="notification">
-                    <div class="icon">
-                        <span class="material-icons-sharp">
-                            volume_up
-                        </span>
-                    </div>
-                    <div class="content">
-                        <div class="info">
-                            <h3>Support Time</h3>
-                            <small class="text_muted">
-                                08:00 AM - 5:00 PM
-                            </small>
-                        </div>
-                        <span class="material-icons-sharp">
-                            more_vert
-                        </span>
-                    </div>
-                </div>
-
-                <div class="notification deactive">
-                    <div class="icon">
-                        <span class="material-icons-sharp">
-                            edit
-                        </span>
-                    </div>
-                    <div class="content">
-                        <div class="info">
-                            <h3>Open Time</h3>
-                            <small class="text_muted">
-                                08:00 AM - 5:00 PM
-                            </small>
-                        </div>
-                        <span class="material-icons-sharp">
-                            more_vert
-                        </span>
-                    </div>
-                </div>
-
-                <div class="notification add-reminder">
-                    <div>
-                        <span class="material-icons-sharp">
-                            add
-                        </span>
-                        <h3>Add Reminder</h3>
-                    </div>
-                </div>
-
-            </div> -->
 
         </div>
     </div>

@@ -346,7 +346,7 @@ if (isset($_POST['edit']) && is_numeric($_POST['edit_id'])) {
                         <form action="view_file.php" method="post">
                             <div class="form-group">
                                 <label for="searchTerm">Type here for search : </label>
-                                <input type="text" name="searchTerm" class="form-control" id="searchTerm">
+                                <input type="text" name="searchTerm" class="form-control" id="searchTerm" required>
                             </div>
                             <div class="form-group">
                                 <input type="submit" name="search" value="Search" class="btn btn-info">

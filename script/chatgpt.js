@@ -807,7 +807,7 @@ chatInput.addEventListener("keydown", (event) => {
             const outgoingChatDiv = createChatElement(`<div class="chat-content">
                 <div class="chat-details">
                 <img src="../images/logo/user.png" alt="user-img">
-                    <p>${userText}</p>
+                        <p>${userText}</p>
                 </div>
             </div>`, "outgoing");
             chatContainer.querySelector(".default-text")?.remove();

@@ -162,7 +162,8 @@ if (isset($_POST['search'])) {
                                 <form action="user.php" method="post">
                                     <div class="form-group">
                                         <label for="searchTerm">Type here for search : </label>
-                                        <input type="text" name="searchTerm" class="form-control" id="searchTerm">
+                                        <input type="text" name="searchTerm" class="form-control" id="searchTerm"
+                                            required placeholder="Search by name...">
                                     </div>
                                     <div class="form-group">
                                         <input type="submit" name="search" value="Search" class="btn btn-info">
@@ -176,7 +177,7 @@ if (isset($_POST['search'])) {
                                                 <th>User Name</th>
                                                 <th>Email</th>
                                                 <th>Type User</th>
-                                                <th>Permission</th>
+                                                <!-- <th>Permission</th> -->
                                                 <th>Option</th>
                                             </tr>
                                         </thead>
@@ -185,40 +186,56 @@ if (isset($_POST['search'])) {
                                             if (!empty($searchResults)) {
                                                 $i = 1;
                                                 foreach ($searchResults as $row) {
-                                            ?>
+                                                    ?>
                                             <tr>
-                                                <td><?php echo $i++; ?></td>
-                                                <td><?php echo htmlspecialchars($row['name']); ?></td>
-                                                <td><?php echo htmlspecialchars($row['email']); ?></td>
-                                                <td><?php echo htmlspecialchars($row['user_type']); ?></td>
-                                                <td><a class="click"
-                                                        href="../user_mgt/assign_function.php?id=<?php echo $row['id']; ?>">Permission</a>
+                                                <td>
+                                                    <?php echo $i++; ?>
                                                 </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row['name']); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row['email']); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row['user_type']); ?>
+                                                </td>
+                                                <!-- <td><a class="click"
+                                                                href="../user_mgt/assign_function.php?id=<?php echo $row['id']; ?>">Permission</a>
+                                                        </td> -->
                                                 <td><a class="click1"
                                                         href="edit_user.php?id=<?php echo $row['id']; ?>">Edit</a></td>
                                             </tr>
                                             <?php
-                                            }
-                                                } elseif ($result->num_rows > 0) {
+                                                }
+                                            } elseif ($result->num_rows > 0) {
                                                 $i = 1;
                                                 while ($row = $result->fetch_assoc()) {
-                                            ?>
+                                                    ?>
                                             <tr>
-                                                <td><?php echo $i++; ?></td>
-                                                <td><?php echo htmlspecialchars($row['name']); ?></td>
-                                                <td><?php echo htmlspecialchars($row['email']); ?></td>
-                                                <td><?php echo htmlspecialchars($row['user_type']); ?></td>
-                                                <td><a class="click"
-                                                        href="../user_mgt/assign_function.php?id=<?php echo $row['id']; ?>">Permission</a>
+                                                <td>
+                                                    <?php echo $i++; ?>
                                                 </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row['name']); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row['email']); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row['user_type']); ?>
+                                                </td>
+                                                <!-- <td><a class="click"
+                                                                href="../user_mgt/assign_function.php?id=<?php echo $row['id']; ?>">Permission</a>
+                                                        </td> -->
                                                 <td><a class="click1"
                                                         href="edit_user.php?id=<?php echo $row['id']; ?>">Edit</a></td>
                                             </tr>
                                             <?php
-                                            }
-                                                } else {
-                                                echo "<tr><td colspan='6'>No matching users found.</td></tr>";
                                                 }
+                                            } else {
+                                                echo "<tr><td colspan='6'>No matching users found.</td></tr>";
+                                            }
                                             ?>
                                         </tbody>
                                     </table>

@@ -288,11 +288,10 @@ aside .sidebar .message-count {
 
 .right-section .dark-mode {
   background-color: var(--color-light);
-  /* background-color: var(--color-white); */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 1.6rem;
+  height: 1.77rem;
   width: 4.2rem;
   cursor: pointer;
   border-radius: var(--border-radius-1);

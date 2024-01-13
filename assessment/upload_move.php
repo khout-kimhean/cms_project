@@ -316,6 +316,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
                     <input class="upload" type="file" name="file" id="file">
                     <input class="submit" type="submit" name="submit" value="Upload File" id="uploadButton">
                 </form>
+                <div class="input_content">
+                    <input type="text" name="blank" required placeholder="hello from me ">
+                    <input type="text" name="blank" required placeholder="hello">
+                </div>
                 <?php if ($alertMessage !== ""): ?>
                     <div class="alert alert-<?php echo $alertType; ?>" role="alert">
                         <?php echo $alertMessage; ?>

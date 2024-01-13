@@ -21,7 +21,8 @@
 }
 .light-mode {
   --color-dark: #edeffd;
-  --text-color: #343541;
+  /* --text-color: #000000; */
+  --text-color: #ffffff;
   --icon-color: #a9a9bc;
   --icon-hover-bg: #f1f1f3;
   --placeholder-color: #6c6c6c;
@@ -31,13 +32,13 @@
   --incoming-chat-border: #d9d9e3;
 }
 body {
-  /* background-image: url(../images/background.png); */
-  /* background-image: url(../images/background1.jpg); */
   /* background-image: url(../images/pic1.jpg); */
-  /* background-image: url(../styles/chatbot/background1.jpg); */
-  /* background-image: url(../images/background/pic.jpg); */
+  /* background-image: url(../images/pic2.jpg); */
+  /* background-image: url(../images/pic3.jpg); */
+  background-image: url(../images/pic4.jpg);
+  /* background-image: url(../images/background1.jpg); */
 
-  background: var(--outgoing-chat-bg);
+  /* background: var(--outgoing-chat-bg); */
   content: "";
   position: absolute;
   top: 0;
@@ -46,7 +47,13 @@ body {
   bottom: 0;
   z-index: -1;
   background-size: cover;
+  /* filter: blur(1px); */
 }
+body {
+  position: relative;
+  overflow: hidden;
+}
+
 body .background {
   position: relative;
   z-index: 0;
@@ -142,7 +149,7 @@ body .background {
 }
 
 .question-container button:hover {
-  color: var(--color-background);
+  color: var(--text-color);
   background-color: var(--color-light);
   cursor: pointer;
 }
@@ -188,12 +195,12 @@ body .background {
   color: var(--text-color);
 }
 .default-text h1 {
-  color: var(--color-background);
+  color: var(--text-color);
   font-family: cursive;
   font-size: 2rem;
 }
 .default-text p {
-  color: var(--color-background);
+  color: var(--text-color);
   margin-top: 10px;
   font-size: 1.1rem;
 }
@@ -220,8 +227,8 @@ body .background {
 }
 .text {
   font-size: 14px;
-  /* color: var(--text-color); */
-  color: var(--color-background);
+  color: var(--text-color);
+  /* color: var(--color-background); */
 }
 .default-text button:hover {
   color: var(--text-color);
@@ -290,7 +297,7 @@ span.material-symbols-rounded {
   border-radius: 10px;
   /* background-color: var(--color-dark); */
   /* white-space: pre-wrap; */
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   padding: 5px 5px 10px 5px;
   color: var(--text-color);
   word-break: break-word;
@@ -378,7 +385,7 @@ span.material-symbols-rounded {
   height: 55px;
   width: 100%;
   border: none;
-  padding: 15px 15px 0px 25px;
+  padding: 15px 15px 0px 15px;
   /* color: var(--color-background); */
   color: var(--placeholder-color);
   /* background-color: var(--color-light); */

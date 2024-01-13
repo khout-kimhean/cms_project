@@ -33,6 +33,8 @@ while ($row = $result->fetch_assoc()) {
 
 if (empty($messages)) {
     $messages[] = "Thank you for using our service, but we don't have a solution for that issue.Please contact to team support for take about that issue click <a href='https://join.skype.com/tnP3accFexk3' target='_blank' class='contact-link'>Contact.</a>";
+    $messages[] = "You can go to view file it maybe have the answer that you need <a href='../file/view_file.php'  class='contact-link'>View File.</a>";
+
 }
 
 $stmt->close();

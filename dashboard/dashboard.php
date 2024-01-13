@@ -148,10 +148,18 @@ $result = $conn->query($sql);
             </div>
         </aside>
         <main>
-            <h1>Analytics</h1>
+            <div class="top_bar">
+                <h1>Analytics</h1>
+                <a href="../dashboard/notification.php" class="notification"
+                    <?php echo isLinkDisabled('notification.php'); ?>>
+                    <i><img src="../images/logo/reminder2.png"></i>
+                    <span class="count">1</span>
+                </a>
+            </div>
+
             <!-- Analyses -->
             <div class="analyse">
-                <div class="sales" onclick="window.location.href='#';" style="cursor: pointer;">
+                <div class="sales" onclick="window.location.href='../user_mgt/showuser.php';" style="cursor: pointer;">
                     <div class="status">
                         <div class="info">
                             <h3>Total User </h3>
@@ -169,7 +177,7 @@ $result = $conn->query($sql);
                         </div>
                     </div>
                 </div>
-                <div class="visits" onclick="window.location.href='#';" style="cursor: pointer;">
+                <div class="visits" onclick="window.location.href='../file/view_file.php';" style="cursor: pointer;">
                     <div class="status">
                         <div class="info">
                             <h3>Total File Upload</h3>
@@ -187,7 +195,7 @@ $result = $conn->query($sql);
                         </div>
                     </div>
                 </div>
-                <div class="searches" onclick="window.location.href='#';" style="cursor: pointer;">
+                <div class="searches" onclick="window.location.href='../file/report.php';" style="cursor: pointer;">
                     <div class="status">
                         <div class="info">
                             <h3>Total File Deleted</h3>
@@ -308,11 +316,7 @@ $result = $conn->query($sql);
                         menu
                     </span>
                 </button>
-                <a href="../dashboard/notification.php" class="notification"
-                    <?php echo isLinkDisabled('notification.php'); ?>>
-                    <i><img src="../images/logo/reminder2.png"></i>
-                    <span class="count">1</span>
-                </a>
+
                 <div class="dark-mode">
                     <span class="material-icons-sharp active">
                         light_mode
@@ -339,13 +343,14 @@ $result = $conn->query($sql);
             </div>
             <!-- End of Nav -->
 
-            <div class="user-profile" onclick="window.location.href='../dashboard/chatgpt.php'">
+            <div class="user-profile" onclick="window.open('https://ftb.com.kh/en/', '_blank')">
                 <div class="logo">
                     <img src="../images/logo/logo.jpg" alt="FTB Bank Logo">
                     <h2>FTB Bank</h2>
                     <p>Welcome to FTB Bank</p>
                 </div>
             </div>
+
 
             <div class="reminders">
                 <div class="header">
@@ -393,14 +398,12 @@ $result = $conn->query($sql);
                     </div>
                 </div>
                 <div class="notification add-reminder">
-                    <a href="../dashboard/testchat.php" <?php echo isLinkDisabled('testchat.php'); ?>>
-                        <div>
-                            <span class="material-icons-sharp">
-                                add
-                            </span>
-                            <h3>Add Reminder</h3>
-                        </div>
-                    </a>
+                    <div>
+                        <span class="material-icons-sharp">
+                            add
+                        </span>
+                        <h3>Add Reminder</h3>
+                    </div>
                 </div>
             </div>
 

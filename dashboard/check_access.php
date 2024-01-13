@@ -63,7 +63,7 @@ $allowed_roles = [
     // <!-- find error -->
     'read_error_inlog.php' => ['admin', 'card payment team', 'digital branch team', 'user'],
     'read_by_keyword.php' => ['admin', 'card payment team', 'digital branch team', 'user'],
-
+    'read_trxno.php' => ['admin'],
 ];
 
 if (!hasPermission($userRole, $allowed_roles[$currentPage])) {
