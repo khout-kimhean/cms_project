@@ -39,17 +39,6 @@ include '../connect/role_access.php';
                     </span>
                     <h3>Dashboard</h3>
                 </a>
-
-                <!-- <a href="../data_store/search.php">
-                    <span class="fa fa-search">
-                    </span>
-                    <h3>Search</h3>
-                </a> -->
-                <!-- <a href="../contact/contact.php">
-                    <span class="fa fa-address-card">
-                    </span>
-                    <h3>Contact</h3>
-                </a> -->
                 <a href="../file/file_mgt.php" <?php echo isLinkDisabled('file_mgt.php'); ?>>
                     <span class="fa fa-upload">
                     </span>

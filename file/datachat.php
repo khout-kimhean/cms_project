@@ -18,7 +18,7 @@ $alertType = ''; // Initialize alert type
 $sql = "SELECT * FROM login_register";
 $result = $conn->query($sql);
 
-if (isset($_POST['submit'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     // Include your database connection code here
     $servername = "localhost";
     $username = "root";
@@ -36,8 +36,6 @@ if (isset($_POST['submit'])) {
         $title = $_POST["title"];
         $short_description = trim(strip_tags($_POST['short_description']));
         $description = $_POST['description'];
-        // $description = trim(strip_tags($_POST['description']));
-        // $description = mysqli_real_escape_string($conn, $_POST['description']);
         $sql = "INSERT INTO chat_data (title, short_description, description) VALUES (?, ?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("sss", $title, $short_description, $description);
@@ -267,8 +265,8 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="form-group">
                             <label for="description">Description:</label>
+                            <textarea id="myTextarea" name="description"></textarea>
                         </div>
-                        <textarea id="myTextarea" name="description" required></textarea>
                         <div class="form-group">
                             <input type="submit" name="submit" value="Upload" class="btn btn-primary">
                         </div>

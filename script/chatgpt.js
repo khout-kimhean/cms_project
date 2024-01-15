@@ -778,8 +778,6 @@ const displayBotResponse = (responseText) => {
     }, 10);
 };
 
-
-
 // end response writing bot 
 sendButton.addEventListener("click", () => {
     userText = chatInput.value;

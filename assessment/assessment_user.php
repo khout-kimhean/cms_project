@@ -31,34 +31,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     INSERT IGNORE INTO assessment_user (
         request_no, request_for, branch, department, position, 
         `function`, role, m_branch, m_department, m_position, 
-        m_function, m_role, application, duration, requester, 
-        request_date, approver, process_by, technical_process, 
-        status, comment
+        m_function, m_role, duration, requester, request_date, 
+        approver, comment, application
     )
     SELECT 
-        request_no, 
-        fullname AS request_for, 
-        branch, 
-        department, 
-        position, 
-        `function`, 
-        role, 
-        m_branch, 
-        m_department, 
-        m_position, 
-        m_function, 
-        m_role, 
-        application, 
-        duration, 
-        requester, 
-        request_date, 
+        um.request_no, 
+        um.display_name AS request_for, 
+        um.branch, 
+        um.department, 
+        um.position, 
+        um.function, 
+        um.role, 
+        um.m_branch, 
+        um.m_department, 
+        um.m_position, 
+        um.m_function, 
+        um.m_role, 
+        um.duration, 
+        um.requester, 
+        um.request_date, 
         '' AS approver, 
-        '' AS process_by, 
-        '' AS technical_process, 
-        '' AS status, 
-        comment
+        um.comment,
+        um.application
     FROM 
-        user_move";
+        user_move um";
+
 
     // Use prepared statements to prevent SQL injection
 
@@ -84,9 +81,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $sheet->setCellValue('O1', 'Request By');
         $sheet->setCellValue('P1', 'Request Date');
         $sheet->setCellValue('Q1', 'Approve By');
-        $sheet->setCellValue('R1', 'Process By');
-        $sheet->setCellValue('S1', 'Technical Process');
-        $sheet->setCellValue('T1', 'Status');
+        // $sheet->setCellValue('R1', 'Process By');
+        // $sheet->setCellValue('S1', 'Technical Process');
+        // $sheet->setCellValue('T1', 'Status');
         $sheet->setCellValue('U1', 'Not');
 
         $sql = "SELECT * FROM assessment_user ORDER BY id ASC";
@@ -113,9 +110,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $sheet->setCellValue('O' . $rowNum, $row['requester']);
                 $sheet->setCellValue('P' . $rowNum, $row['request_date']);
                 $sheet->setCellValue('Q' . $rowNum, $row['approver']);
-                $sheet->setCellValue('R' . $rowNum, $row['process_by']);
-                $sheet->setCellValue('S' . $rowNum, $row['technical_process']);
-                $sheet->setCellValue('T' . $rowNum, $row['status']);
+                // $sheet->setCellValue('R' . $rowNum, $row['process_by']);
+                // $sheet->setCellValue('S' . $rowNum, $row['technical_process']);
+                // $sheet->setCellValue('T' . $rowNum, $row['status']);
                 $sheet->setCellValue('U' . $rowNum, $row['comment']);
                 $rowNum++;
                 $id++;
@@ -411,11 +408,10 @@ mysqli_close($con);
                                             <td>
                                                 <?php echo htmlspecialchars($row['status']); ?>
                                             </td>
-                                            <td <?php echo htmlspecialchars($row['comment']); ?>>
-                                                <?php
-                                                $comment = htmlspecialchars($row['comment']);
-                                                echo strlen($comment) > 20 ? substr($comment, 0, 20) . '...' : $comment;
-                                                ?>
+                                            <td <?php echo htmlspecialchars($row['comment']); ?>> <?php
+                                               $comment = htmlspecialchars($row['comment']);
+                                               echo strlen($comment) > 20 ? substr($comment, 0, 20) . '...' : $comment;
+                                               ?>
                                             </td>
                                             <td>
 
@@ -438,40 +434,40 @@ mysqli_close($con);
 
 
         </main>
-        <div class="right-section">
-            <div class="nav">
-                <button id="menu-btn">
-                    <span class="material-icons-sharp">
-                        menu
-                    </span>
-                </button>
-                <div class="dark-mode">
-                    <span class="material-icons-sharp active">
-                        light_mode
-                    </span>
-                    <span class="material-icons-sharp">
-                        dark_mode
-                    </span>
+        <div class=" right-section">
+                                            <div class="nav">
+                                                <button id="menu-btn">
+                                                    <span class="material-icons-sharp">
+                                                        menu
+                                                    </span>
+                                                </button>
+                                                <div class="dark-mode">
+                                                    <span class="material-icons-sharp active">
+                                                        light_mode
+                                                    </span>
+                                                    <span class="material-icons-sharp">
+                                                        dark_mode
+                                                    </span>
+                                                </div>
+
+                                                <div class="profile">
+                                                    <div class="info">
+                                                        <p>Welcome</p>
+                                                        <small class="text-muted">
+                                                            <?php echo $_SESSION['user_name']; ?>
+                                                        </small>
+                                                    </div>
+                                                    <div class="profile-photo">
+                                                        <img src="../images/logo/user.png">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                    </div>
                 </div>
 
-                <div class="profile">
-                    <div class="info">
-                        <p>Welcome</p>
-                        <small class="text-muted">
-                            <?php echo $_SESSION['user_name']; ?>
-                        </small>
-                    </div>
-                    <div class="profile-photo">
-                        <img src="../images/logo/user.png">
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <script src="../script/role_check.js"></script>
-    <script src="../script/index.js"></script>
+                <script src="../script/role_check.js"></script>
+                <script src="../script/index.js"></script>
 </body>
 
 </html>

@@ -1,10 +1,11 @@
 <?php
 // session_start();
+require '../vendor/autoload.php';
 
 // Include the file with the access check
 include '../dashboard/check_access.php';
 include '../connect/role_access.php';
-// Database configuration
+
 $db_host = 'localhost';
 $db_username = 'root';
 $db_password = '';
@@ -16,10 +17,112 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+
+$alertType = "";
+$alertMessage = "";
+function extractDataFromPdfText($text)
+{
+    $extractedData = [];
+    $sections = explode("PHP_EOL", $text);
+    // echo $sections[0];
+    foreach ($sections as $section) {
+        // ... your existing preg_match calls ... 
+        preg_match("/Request No: (.*)/", $section, $requestNoMatch);
+        preg_match("/Name: (.*)/", $section, $nameMatch);
+        preg_match("/Branch: (.*?)(?=(?:\w+ :|$))/s", $section, $branchMatch);
+        preg_match("/Branch \/ Department\s*:\s*(.*?)(?=\s*Branch:)/s", $text, $departmentMatch);
+        preg_match("/Job title: \s*(.*?)\s*Phone No:/s", $text, $positionMatch);
+        preg_match("/Switching (.*)/", $section, $applicationMatch);
+        preg_match("/Application\s+(.*?)\s+:/", $section, $roleMatch);
+        preg_match("/Switching (.*)/", $section, $functionMatch);
+        preg_match("/Request By\s*(.*?)\s*Check By/s", $text, $requester_dateMatch);
+
+
+        $extractedData[] = [
+            'request_no' => $requestNoMatch[1] ?? '',
+            'display_name' => $nameMatch[1] ?? '',
+            'branch' => substr($branchMatch[1], 0, 12) ?? '',
+            'department' => $departmentMatch[1] ?? '',
+            'position' => $positionMatch[1] ?? '',
+            'application' => substr($applicationMatch[0], 0, 23) ?? '',
+            'function' => substr($functionMatch[1], 37, 19) ?? '',
+            'role' => $roleMatch[1] ?? '',
+            'request_date' => $requester_dateMatch[1] ?? '',
+
+        ];
+    }
+    return $extractedData;
+}
+
+if (isset($_POST['submit'])) {
+    $fileTmpPath = $_FILES['file']['tmp_name'];
+    $fileName = $_FILES['file']['name'];
+    $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+    if (!empty($fileName) && $fileExtension === 'pdf') {
+        $parser = new \Smalot\PdfParser\Parser();
+        $pdf = $parser->parseFile($fileTmpPath);
+        $text = $pdf->getText();
+
+        $data = extractDataFromPdfText($text);
+        $sql = "INSERT INTO user_new ( request_no, display_name, branch, department, position, application, function, role, requester, approver, request_date) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+
+        if ($stmt) {
+            foreach ($data as $row) {
+                $request_no = $row['request_no'];
+                $display_name = $row['display_name'];
+                $branch = $row['branch'];
+                $department = $row['department'];
+                $position = $row['position'];
+                $application = $row['application'];
+                $function = $row['function'];
+                $role = $row['role'];
+                $requester = $_POST['requester'];
+                $approver = $_POST['approver'];
+                $request_date = $row['request_date'];
+
+                $stmt->bind_param("sssssssssss", $request_no, $display_name, $branch, $department, $position, $application, $function, $role, $requester, $approver, $request_date);
+                if (!$stmt->execute()) {
+                    echo "Error inserting data: " . $stmt->error;
+                    break;
+                }
+            }
+
+            $stmt->close();
+
+            // Redirect to another page to avoid form resubmission
+            header("Location: upload_new.php");
+            exit;
+        } else {
+            echo "Error preparing SQL statement: " . $conn->error;
+        }
+    }
+}
+
+if (isset($_POST['edit']) && is_numeric($_POST['edit'])) {
+    $requester = $_POST['requester'];
+    $approver = $_POST['approver'];
+
+    $editSql = "UPDATE tbl_data_store SET requester = ?, approver = ? WHERE filename = ?";
+    $stmt = $conn->prepare($editSql);
+    $stmt->bind_param("ss", $requester, $approver);
+
+    if ($stmt->execute()) {
+        header("Location: upload_new.php?st=edit-success");
+        exit;
+    } else {
+        header("Location: upload_new.php?st=edit-error");
+        exit;
+    }
+}
+
+$conn->close();
+
 $error = array();
 
 $sql = "SELECT * FROM login_register";
-$result = $conn->query($sql);
+// $result = $conn->query($sql);
 
 ?>
 <!DOCTYPE html>
@@ -59,28 +162,12 @@ $result = $conn->query($sql);
                     <h3>Dashboard</h3>
                 </a>
 
-                <!-- <a href="../data_store/search.php">
-                    <span class="fa fa-search">
-                    </span>
-                    <h3>Search</h3>
-                </a> -->
-                <!-- <a href="../contact/contact.php">
-                    <span class="fa fa-address-card">
-                    </span>
-                    <h3>Contact</h3>
-                </a> -->
                 <a href="../file/file_mgt.php" <?php echo isLinkDisabled('file_mgt.php'); ?>>
                     <span class="fa fa-upload">
                     </span>
                     <h3>Store File</h3>
                 </a>
 
-                <!-- <a href="../data_store/list_upload.php">
-                    <span class="material-icons-sharp">
-                        inventory
-                    </span>
-                    <h3>View File</h3>
-                </a> -->
                 <a href="../assessment/assessment.php" <?php echo isLinkDisabled('assessment.php'); ?> class="active">
                     <span class="fa fa-address-book">
                         <!-- fab fa-app-store-ios -->
@@ -93,17 +180,6 @@ $result = $conn->query($sql);
                     </span>
                     <h3>User Mgt</h3>
                 </a>
-                <!-- <a href="../to_do_list/todo_management.php">
-                    <span class="fa fa-list-alt">
-                    </span>
-                    <h3>To-do List</h3>
-                </a> -->
-                <!-- <a href="../data_store/data_mgt.php">
-                    <span class="fa fa-briefcase">
-                    </span>
-                    <h3>Stock Mgt</h3>
-                </a> -->
-
 
                 <a href="../user_mgt/logout.php">
                     <span class="material-icons-sharp">
@@ -125,12 +201,12 @@ $result = $conn->query($sql);
                 <form method="post" enctype="multipart/form-data" id="uploadForm" onsubmit="changeBackground()">
                     <label for="file">Select File to Upload:</label>
                     <input class="upload" type="file" name="file" id="file">
+                    <div class="input_content">
+                        <input type="text" name="requester" required placeholder="Enter requester ">
+                        <input type="text" name="approver" required placeholder="Enter Approver ">
+                    </div>
                     <input class="submit" type="submit" name="submit" value="Upload File" id="uploadButton">
                 </form>
-                <div class="input_content">
-                    <input type="text" name="blank" required placeholder="hello from me ">
-                    <input type="text" name="blank" required placeholder="hello">
-                </div>
             </div>
         </main>
         <div class="right-section">

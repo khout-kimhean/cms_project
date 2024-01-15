@@ -27,12 +27,10 @@ include '../connect/role_access.php';
                 <textarea id="chat-input" spellcheck="false" placeholder="Message ChatBot . . ." required></textarea>
                 <span id="send-btn" class="material-symbols-rounded">send</span>
             </div>
-
             <div class="typing-controls">
-
                 <a href="../dashboard/dashboard.php">
                     <span id="back-btn" class="material-symbols-rounded">
-                        <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+                        <i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
                     </span>
                 </a>
                 <span id="theme-btn" class="material-symbols-rounded">light_mode</span>

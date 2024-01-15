@@ -437,6 +437,82 @@ main .recent-orders a {
   align-items: center;
   justify-content: center;
 }
+/* notification for alert  */
+
+.remind-container .id {
+  color: #ff0060;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+.notifications-fade-out {
+  animation: fadeOut 1s ease-in-out forwards;
+}
+
+.notifications {
+  border: 0.7px solid var(--color-dark);
+  background-color: var(--color-background);
+  color: var(--color-dark);
+  font-weight: 500;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 10px;
+  position: fixed;
+  top: 5px;
+  animation: fadeIn 1s ease-in-out forwards;
+  left: 430px;
+  z-index: 999;
+  display: flex;
+}
+
+.notifications-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.notifications a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+}
+.close-button {
+  margin-left: 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: #ff0000;
+  align-self: self-start;
+  margin-right: 5px;
+  margin-top: -2px;
+}
+
+.close-button:hover {
+  color: #ff0000;
+}
 
 /* end  */
 .text-muted {

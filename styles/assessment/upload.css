@@ -279,6 +279,7 @@ main {
   padding: 20px;
 }
 .container2 .submit {
+  margin-top: 20px;
   cursor: pointer;
   width: 150px;
   margin-left: 20px;

@@ -106,7 +106,6 @@ $result = $conn->query($sql);
                 <!-- <button onclick="processFile()">Show </button> -->
                 <div id="output"></div>
 
-
                 <script>
                     function processFile() {
                         const searchKeyNumberInput = document.getElementById('searchKeyNumberInput');

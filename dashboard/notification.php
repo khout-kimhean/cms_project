@@ -1,8 +1,44 @@
 <?php
 include '../connect/conectdb.php';
 include '../connect/role_access.php';
-?>
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "demo";
 
+// Create connection
+$con = new mysqli($servername, $username, $password, $dbname);
+
+// Check the connection
+if ($con->connect_error) {
+    die("Connection failed: " . $con->connect_error);
+}
+
+// Check if the delete parameter is set
+if (isset($_GET['delete'])) {
+    $idToDelete = intval($_GET['delete']); // Convert to integer to prevent SQL Injection
+
+    // Prepare the DELETE statement
+    $deleteSql = "DELETE FROM user_move WHERE id = ?";
+    $stmt = $con->prepare($deleteSql);
+
+    if ($stmt === false) {
+        die("Error preparing statement: " . $con->error);
+    }
+
+    $stmt->bind_param("i", $idToDelete);
+
+    if ($stmt->execute()) {
+        // Redirect on successful deletion
+        header("Location: notification.php?delete-success");
+        exit;
+    } else {
+        // Error handling
+        echo "Error deleting record: " . $con->error;
+    }
+    $stmt->close();
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,28 +78,12 @@ include '../connect/role_access.php';
                     <h3>Dashboard</h3>
                 </a>
 
-                <!-- <a href="../data_store/search.php">
-                    <span class="fa fa-search">
-                    </span>
-                    <h3>Search</h3>
-                </a> -->
-                <!-- <a href="../contact/contact.php">
-                    <span class="fa fa-address-card">
-                    </span>
-                    <h3>Contact</h3>
-                </a> -->
                 <a href="../file/file_mgt.php" <?php echo isLinkDisabled('file_mgt.php'); ?>>
                     <span class="fa fa-upload">
                     </span>
                     <h3>Store File</h3>
                 </a>
 
-                <!-- <a href="../data_store/list_upload.php">
-                    <span class="material-icons-sharp">
-                        inventory
-                    </span>
-                    <h3>View File</h3>
-                </a> -->
                 <a href="../assessment/assessment.php" <?php echo isLinkDisabled('assessment.php'); ?>>
                     <span class="fa fa-address-book">
                         <!-- fab fa-app-store-ios -->
@@ -76,17 +96,6 @@ include '../connect/role_access.php';
                     </span>
                     <h3>User Mgt</h3>
                 </a>
-                <!-- <a href="../to_do_list/todo_management.php">
-                    <span class="fa fa-list-alt">
-                    </span>
-                    <h3>To-do List</h3>
-                </a> -->
-                <!-- <a href="../data_store/data_mgt.php">
-                    <span class="fa fa-briefcase">
-                    </span>
-                    <h3>Stock Mgt</h3>
-                </a> -->
-
 
                 <a href="../user_mgt/logout.php">
                     <span class="material-icons-sharp">
@@ -102,9 +111,103 @@ include '../connect/role_access.php';
                     <a href="../dashboard/dashboard.php" class="back-button">
                         <i class="fa fa-chevron-circle-left" style="font-size: 25px">Back</i>
                     </a>
-                    <h1>Reminder</h1>
                 </div>
+                <div class="notification-container">
+                    <?php
 
+                    // $sql = "UPDATE move_back SET number =1 WHERE number =0";
+                    $result = mysqli_query($con, $sql);
+
+                    $currentDate = date("Y-m-d");
+
+                    $sql = "SELECT * FROM user_move WHERE end_date <= '$currentDate' AND end_date IS NOT NULL ORDER BY end_date DESC";
+                    $result = mysqli_query($con, $sql);
+
+                    if ($result && mysqli_num_rows($result) > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            if (!empty($row['request_date']) && !empty($row['end_date'])) {
+                                ?>
+                    <div class="notify-alert-box">
+                        <img src="../images/logo/logo.jpg">
+                        <div class="notification-item">
+                            <p>
+                                <strong>
+                                    <?php echo htmlspecialchars($row['display_name']); ?>
+                                </strong><br><br>
+                                <span>
+                                    <?php echo htmlspecialchars($row['branch']); ?>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="detail-item">
+                            <div class="move-back">
+                                <a href="../dashboard/notification.php?delete=<?php echo $row['id']; ?>"><i
+                                        class="fa fa-arrow-circle-right" aria-hidden="true"></i> Move Back</a>
+                            </div>
+                            <?php echo htmlspecialchars($row['end_date']); ?>
+                        </div>
+                    </div>
+                    <?php
+                            }
+                        }
+                    } else {
+                        echo "<p>No user found for the current date.</p>";
+                    }
+
+                    $sql = "UPDATE user_move SET number =1 WHERE number =0";
+                    $result = mysqli_query($con, $sql);
+
+                    $sql = "SELECT * FROM user_move ORDER BY id DESC";
+                    $result = mysqli_query($con, $sql);
+                    if ($result && mysqli_num_rows($result) > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            if (!empty($row['request_date']) && !empty($row['end_date'])) {
+                                ?>
+                    <div class="notify-alert-box">
+                        <img src="../images/logo/logo.jpg">
+                        <div class="notification-item">
+                            <p>
+                                <strong>
+                                    <?php echo ($row['display_name']); ?>
+                                </strong><br><br>
+                                <span>
+                                    <?php echo htmlspecialchars($row['branch']); ?>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="date">
+                            <?php echo htmlspecialchars($row['request_date']); ?>
+                        </div>
+                    </div>
+                    <?php }
+                        }
+                    }
+                    $sql = "SELECT * FROM user_new ORDER BY id DESC";
+                    $result = mysqli_query($con, $sql);
+                    if ($result && mysqli_num_rows($result) > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            ?>
+                    <div class="notify-alert-box">
+                        <img src="../images/logo/logo.jpg">
+                        <div class="notification-item">
+                            <p>
+                                <strong>
+                                    <?php echo ($row['display_name']); ?>
+                                </strong><br><br>
+                                <span>
+                                    <?php echo htmlspecialchars($row['branch']); ?>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="date">
+                            <?php echo htmlspecialchars($row['request_date']); ?>
+                        </div>
+                    </div>
+                    <?php }
+                    }
+
+                    ?>
+                </div>
             </div>
         </main>
         <div class="right-section">

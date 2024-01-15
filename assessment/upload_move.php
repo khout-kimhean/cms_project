@@ -1,211 +1,121 @@
 <?php
-// session_start();
-
-// Include the file with the access check
-include '../dashboard/check_access.php';
-include '../connect/role_access.php';
-// Database configuration
-$db_host = 'localhost';
-$db_username = 'root';
-$db_password = '';
-$db_name = 'demo';
-
-$conn = new mysqli($db_host, $db_username, $db_password, $db_name);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-$error = array();
-
-$sql = "SELECT * FROM login_register";
-$result = $conn->query($sql);
-?>
-
-
-
-<?php
-
 require '../vendor/autoload.php';
-
-
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
-
-// Database configuration
-$db_host = 'localhost';
-$db_username = 'root';
-$db_password = '';
-$db_name = 'demo';
+include '../connect/conectdb.php';
+// Include the file with the access check
+// include '../dashboard/check_access.php';
+include '../connect/role_access.php';
 
 $alertType = "";
 $alertMessage = "";
-// Create a database connection
-$conn = new mysqli($db_host, $db_username, $db_password, $db_name);
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+
+function extractDataFromPdfText($text)
+{
+    $extractedData = [];
+    $sections = explode("FILE_IGNORE_NEW_LINES", $text);
+    // echo nl2br($sections[0]);
+
+    foreach ($sections as $section) {
+        // ... your existing preg_match calls ... 
+        preg_match("/Request No: (.*)/", $section, $requestNoMatch);
+        preg_match("/Name:\s*(.*)/", $section, $nameMatch);
+        preg_match("/Branch:\s*(.*?)\s*Department:/s", $section, $branchMatch);
+        preg_match("/Department:\s*(.*?(?:\s*Department\s*|$))/s", $section, $departmentMatch);
+        preg_match("/Position:\s*(.*?)(?=\s*Application)/s", $section, $positionMatch);
+        preg_match("/Switching\s*(.*?)\s*Application/", $section, $applicationMatch);
+        preg_match("/Application\s+(.*?)\s+:/", $section, $roleMatch);
+        preg_match("/Switching\s*(.*)/s", $section, $functionMatch);
+        preg_match("/Move\s*To.*?Branch:\s*(.*?)(?:\s*Department:|$)/s", $section, $m_branchMatch);
+        preg_match("/Move\s*To\s*Branch:\s*(.*?)(?:\s*Department:\s*(.*?)(?:\s*Department|$)|$)/s", $section, $m_departmentMatch);
+        preg_match("/Move\s*To.*?Position:\s*(.*?)(?:\s*Application|$)/s", $section, $m_positionMatch);
+
+        preg_match("/Move\s*To.*?Switching\s*Application\s*(.*)/s", $section, $m_functionMatch);
+        preg_match("/Move\s*To.*?Switching\s*Application\s*(.*?)(?=\s*:|$)/s", $section, $m_roleMatch);
+        // preg_match("/Request By (.*)/", $section, $requesterMatch);
+        // preg_match("/approver: (.*)/", $section, $approverMatch);
+        preg_match("/From\s*Date:\s*(.*?)\s*To\s*date/s", $section, $requester_dateMatch);
+        preg_match("/To\s*date:\s*(.*?)\s*Move\s*/s", $section, $end_dateMatch);
+        preg_match("/Duration\s*Move\s*:(.*)/", $section, $durationMatch);
+
+        //   print_r($m_roleMatch);
+        // echo $durationMatch[1];
+
+        $extractedData[] = [
+            'request_no' => $requestNoMatch[1] ?? '',
+            'display_name' => $nameMatch[1] ?? '',
+            'branch' => $branchMatch[1] ?? '',
+            'department' => $departmentMatch[1] ?? '',
+            'position' => $positionMatch[1] ?? '',
+            'application' => substr($applicationMatch[0], 0, 23) ?? '',
+            'function' => substr($functionMatch[1], 36, 14) ?? '',
+            'role' => $roleMatch[1] ?? '',
+            'm_branch' => $m_branchMatch[1] ?? '',
+            'm_department' => $m_departmentMatch[2] . ' Department' ?? '',
+            'm_position' => $m_positionMatch[1] ?? '',
+            'm_function' => substr($m_functionMatch[1], 24, 9) ?? '',
+            'm_role' => $m_roleMatch[1] ?? '',
+            // 'requester' => $requesterMatch[1] ?? '',
+            // 'approver' => $approverMatch[1] ?? '',
+            'request_date' => $requester_dateMatch[1] ?? '',
+            'end_date' => $end_dateMatch[1] ?? '',
+            'duration' => substr($durationMatch[1], 0, 12) ?? '',
+        ];
+    }
+    return $extractedData;
 }
-
-
-
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
     $fileTmpPath = $_FILES['file']['tmp_name'];
     $fileName = $_FILES['file']['name'];
     $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
-    if (!empty($fileName) && in_array($fileExtension, ['xlsx', 'xls'])) {
-        // Load the Excel file
-        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($fileTmpPath);
-        $worksheet = $spreadsheet->getActiveSheet();
+    if (!empty($fileName) and $fileExtension === 'pdf') {
+        $parser = new \Smalot\PdfParser\Parser();
+        $pdf = $parser->parseFile($fileTmpPath);
+        $text = $pdf->getText();
+        // echo nl2br($text);
 
-        // Prepare the SQL statement outside the loop
-        $sql = "INSERT INTO user_move (request_no, fullname, branch, department, position, application, function, role, m_branch, m_department, m_position, m_function, m_role,  requester,duration, comment , request_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $data = extractDataFromPdfText($text);
+        $sql = "INSERT INTO user_move (request_no, display_name, branch, department, position, application, function, role, m_branch, m_department, m_position, m_function, m_role, requester, duration, approver, request_date, end_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-
         if (!$stmt) {
             echo "Error preparing SQL statement: " . $conn->error;
             exit;
         }
+        foreach ($data as $row) {
+            $request_no = $row['request_no'];
+            $fullname = $row['display_name'];
+            $branch = $row['branch'];
+            $department = $row['department'];
+            $position = $row['position'];
+            $application = $row['application'];
+            $function = $row['function'];
+            $role = $row['role'];
+            $m_branch = $row['m_branch'];
+            $m_department = $row['m_department'];
+            $m_position = $row['m_position'];
+            $m_function = $row['m_function'];
+            $m_role = $row['m_role'];
+            $requester = $_POST['requester'];
+            $duration = $row['duration'];
+            $approver = $_POST['approver'];
+            $request_date = $row['request_date'];
+            $end_date = $row['end_date'];
 
-        // Bind parameters outside the loop
-        $stmt->bind_param("sssssssssssssssss", $request_no, $fullname, $branch, $department, $position, $application, $function, $role, $m_branch, $m_department, $m_position, $m_function, $m_role, $requester, $duration, $comment, $request_date);
-
-        // Iterate through rows starting from the 7th row (adjust based on your data)
-        for ($rowIndex = 7; $rowIndex <= 10; $rowIndex++) {
-            // Extracting values based on the structure of your data
-            $request_no_cell = $worksheet->getCell('B' . ($rowIndex - 4));
-            $request_no_value = $request_no_cell->getValue();
-            $matches = [];
-            preg_match('/Request No: (\d+)/', $request_no_value, $matches);
-            $request_no = isset($matches[1]) ? $matches[1] : '';
-
-
-            $fullname = $worksheet->getCell('C' . ($rowIndex + 12))->getValue();
-
-            // Remove unnecessary text from the fullname
-            $fullname = str_replace('Name: ', '', $fullname);
-            if ($rowIndex % 7 !== 0) {
-                continue;
-            }
-
-            $branch = $worksheet->getCell('C' . $rowIndex)->getValue();
-
-            $branch = str_replace('Branch: ', '', $branch);
-            if ($rowIndex % 7 !== 0) {
-                continue;
-            }
-
-            // m_branch
-            $m_branch = $worksheet->getCell('C' . $rowIndex)->getValue();
-
-            $m_branch = str_replace('Branch: ', '', $m_branch);
-            if ($rowIndex % 7 !== 0) {
-                continue;
-            }
-
-
-
-            $department = $worksheet->getCell('D' . $rowIndex)->getValue();
-
-            $department = str_replace('Department: ', '', $department);
-            if ($rowIndex % 7 !== 0) {
-                continue;
-            }
-
-
-            // m_department
-            $m_department = $worksheet->getCell('D' . ($rowIndex + 6))->getValue();
-
-            $m_department = str_replace('Department: ', '', $m_department);
-            if ($rowIndex % 7 !== 0) {
-                continue;
-            }
-
-
-
-            $position = $worksheet->getCell('F' . $rowIndex)->getValue();
-
-            $position = str_replace('Position: ', '', $position);
-            if ($rowIndex % 7 !== 0) {
-                continue;
-            }
-            // m_position
-            $m_position = $worksheet->getCell('F' . ($rowIndex + 6))->getValue();
-
-            $m_position = str_replace('Position: ', '', $m_position);
-            if ($rowIndex % 7 !== 0) {
-                continue;
-            }
-
-
-            $application = $worksheet->getCell('C' . ($rowIndex + 4))->getValue();
-            $function = $worksheet->getCell('F' . ($rowIndex + 4))->getValue();
-            $function = str_replace(': ', '', $function);
-            if ($rowIndex % 7 !== 0) {
-                continue;
-            }
-            // m_function
-            $m_function = $worksheet->getCell('F' . ($rowIndex + 10))->getValue();
-            $m_function = str_replace(': ', '', $m_function);
-            if ($rowIndex % 7 !== 0) {
-                continue;
-            }
-            $m_role = $worksheet->getCell('D' . ($rowIndex + 10))->getValue();
-
-            $role = $worksheet->getCell('D' . ($rowIndex + 4))->getValue();
-
-            $requester = $worksheet->getCell('B' . ($rowIndex + 15))->getValue();
-
-            $requester = preg_replace('/(?:Name:|Date: \d{1,2}\/[a-zA-Z]+\/\d{4})/', '', $requester);
-            if ($rowIndex % 7 !== 0) {
-                continue;
-            }
-
-            $duration = $worksheet->getCell('C' . ($rowIndex - 1))->getValue();
-
-            $duration = str_replace(': ', '', $duration);
-            if ($rowIndex % 7 !== 0) {
-                continue;
-            }
-
-            $comment = $worksheet->getCell('C' . ($rowIndex + 14))->getValue();
-
-            $comment = str_replace('Description: ', '', $comment);
-            if ($rowIndex % 7 !== 0) {
-                continue;
-            }
-            $request_date_cell = $worksheet->getCell('B' . ($rowIndex + 15));
-            $request_date_value = $request_date_cell->getValue();
-            $matches = [];
-            preg_match('/Date: (\S+)/', $request_date_value, $matches);
-            $request_date = isset($matches[1]) ? $matches[1] : '';
-            $alertType = "success";
-            $alertMessage = "File uploaded successfully.";
+            $stmt->bind_param("ssssssssssssssssss", $request_no, $fullname, $branch, $department, $position, $application, $function, $role, $m_branch, $m_department, $m_position, $m_function, $m_role, $requester, $duration, $approver, $request_date, $end_date);
             if (!$stmt->execute()) {
-                $alertType = "danger";
-                $alertMessage = "Error inserting data: " . $stmt->error;
-                $stmt->close();
-                $conn->close();
-                break;  // Exit the loop if there's an error
+                echo "Error inserting data: " . $stmt->error;
+                break;
             }
-
-            $alertType = "success";
-            $alertMessage = "File uploaded successfully.";
         }
-
         $stmt->close();
-        $conn->close();
-
     } else {
-        $alertType = "danger";
-        $alertMessage = "Invalid file format. Please upload an Excel file.";
+        echo "Upload pdf file only...";
     }
 }
 
 
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -305,21 +215,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
                     <i class="fa fa-chevron-circle-left" style="font-size:28px">Back</i>
                 </a>
                 <h2>Upload Move user </h2>
-                <!-- <div class="content">
-                    <h2>Upload Move user Or</h2>
-                    <a href="#">
-                        <button class="input">Input Manual</button>
-                    </a>
-                </div> -->
+
                 <form action="upload_move.php" method="post" enctype="multipart/form-data">
                     <label for="file">Select file to Upload:</label>
                     <input class="upload" type="file" name="file" id="file">
+                    <div class="input_content">
+                        <input type="text" name="requester" required placeholder="Enter Requester">
+                        <input type="text" name="approver" required placeholder="Enter Approver">
+                    </div>
+                    <div></div>
                     <input class="submit" type="submit" name="submit" value="Upload File" id="uploadButton">
                 </form>
-                <div class="input_content">
-                    <input type="text" name="blank" required placeholder="hello from me ">
-                    <input type="text" name="blank" required placeholder="hello">
-                </div>
+
                 <?php if ($alertMessage !== ""): ?>
                     <div class="alert alert-<?php echo $alertType; ?>" role="alert">
                         <?php echo $alertMessage; ?>

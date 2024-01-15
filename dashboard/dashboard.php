@@ -1,5 +1,5 @@
 <?php
-
+include '../connect/notification.php';
 // Include the file with the access check
 include '../dashboard/check_access.php';
 include '../connect/role_access.php';
@@ -65,6 +65,29 @@ $result = $conn->query($sql);
     <link rel="stylesheet" type="text/css" href="dashboard.css">
     <title>Admin Dashboard</title>
 
+    <script type="text/javascript">
+    function myFunction() {
+        $.ajax({
+            url: "data.php",
+            type: "POST",
+            processData: false,
+            success: function(data) {
+                $("#notification-count").html("<?php echo $count; ?>");
+                $("#notification-latest").show();
+                $("#notification-latest").html(data);
+            },
+            error: function() {}
+        });
+    }
+
+    $(document).ready(function() {
+        $('body').click(function(e) {
+            if (e.target.id != 'notification-icon') {
+                $("#notification-latest").hide();
+            }
+        });
+    });
+    </script>
 </head>
 
 <body>
@@ -153,9 +176,10 @@ $result = $conn->query($sql);
                 <a href="../dashboard/notification.php" class="notification"
                     <?php echo isLinkDisabled('notification.php'); ?>>
                     <i><img src="../images/logo/reminder2.png"></i>
-                    <span class="count">1</span>
+                    <span class="count"><?php echo $count; ?></span>
                 </a>
             </div>
+
 
             <!-- Analyses -->
             <div class="analyse">
@@ -409,6 +433,47 @@ $result = $conn->query($sql);
 
         </div>
     </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var reminders = <?php echo json_encode($reminders); ?>;
+        reminders.forEach(function(reminder, index) {
+            if (reminder.request_date && reminder.end_date) {
+                var notification = document.createElement('div');
+                notification.className = 'notifications';
+                notification.id = 'notifications-' + index;
+
+                var link = document.createElement('a');
+                link.href = '../Dashboard/notification.php';
+                link.innerHTML =
+                    '<img src="../images/logo/logo.jpg" class="notifications-img"> ' +
+                    reminder.display_name + ' should move back today (' + reminder.end_date + ').';
+
+                notification.appendChild(link);
+
+                // Create a close button
+                var closeButton = document.createElement('button');
+                closeButton.innerHTML = '×';
+                closeButton.className = 'close-button';
+                closeButton.onclick = function() {
+                    var element = document.getElementById('notifications-' + index);
+                    if (element) {
+                        element.parentNode.removeChild(element);
+                    }
+                };
+                notification.appendChild(closeButton);
+
+                document.body.appendChild(notification);
+                // Set timeout for auto-hiding the notification
+                setTimeout(function() {
+                    var element = document.getElementById('notifications-' + index);
+                    if (element) {
+                        element.parentNode.removeChild(element);
+                    }
+                }, 4000); // 4000 milliseconds = 4 seconds
+            }
+        });
+    });
+    </script>
     <script src="../script/role_check.js"></script>
     <script src="../script/index.js"></script>
 </body>
