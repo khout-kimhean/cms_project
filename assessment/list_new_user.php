@@ -224,28 +224,12 @@ mysqli_close($con);
                     <h3>Dashboard</h3>
                 </a>
 
-                <!-- <a href="../data_store/search.php">
-                    <span class="fa fa-search">
-                    </span>
-                    <h3>Search</h3>
-                </a> -->
-                <!-- <a href="../contact/contact.php">
-                    <span class="fa fa-address-card">
-                    </span>
-                    <h3>Contact</h3>
-                </a> -->
                 <a href="../file/file_mgt.php" <?php echo isLinkDisabled('file_mgt.php'); ?>>
                     <span class="fa fa-upload">
                     </span>
                     <h3>Store File</h3>
                 </a>
 
-                <!-- <a href="../data_store/list_upload.php">
-                    <span class="material-icons-sharp">
-                        inventory
-                    </span>
-                    <h3>View File</h3>
-                </a> -->
                 <a href="../assessment/assessment.php" <?php echo isLinkDisabled('assessment.php'); ?> class="active">
                     <span class="fa fa-address-book">
                         <!-- fab fa-app-store-ios -->
@@ -258,17 +242,6 @@ mysqli_close($con);
                     </span>
                     <h3>User Mgt</h3>
                 </a>
-                <!-- <a href="../to_do_list/todo_management.php">
-                    <span class="fa fa-list-alt">
-                    </span>
-                    <h3>To-do List</h3>
-                </a> -->
-                <!-- <a href="../data_store/data_mgt.php">
-                    <span class="fa fa-briefcase">
-                    </span>
-                    <h3>Stock Mgt</h3>
-                </a> -->
-
 
                 <a href="../user_mgt/logout.php">
                     <span class="material-icons-sharp">
@@ -280,7 +253,7 @@ mysqli_close($con);
         </aside>
 
         <main>
-            <h2>List User Assessment</h2>
+            <h2>List New User</h2>
             <div class="container2">
                 <div class="buttonx">
                     <form method="post" action="assessment_user.php">

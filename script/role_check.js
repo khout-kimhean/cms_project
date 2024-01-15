@@ -50,6 +50,8 @@ document.addEventListener("DOMContentLoaded", function () {
         'read_error_inlog.php': ['admin', 'card payment team', 'digital branch team', 'user'],
         'read_by_keyword.php': ['admin', 'card payment team', 'digital branch team', 'user'],
         'read_trxno.php': ['admin'],
+        'list_new_user.php': ['admin'],
+
 
         // Add other options and roles as needed
     };

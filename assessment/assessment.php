@@ -148,23 +148,12 @@ $result = $conn->query($sql);
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="visits" onclick="window.location.href='../assessment/upload_resign.php';"
-                        style="cursor: pointer;">
-                        <div class="status">
-                            <div class="info">
-                                <h1>Resign User</h1>
-                                <p>Upload User</p>
-                            </div>
-                            <div>
-                                <img src="../images/usermgt/move.png">
-                            </div>
-                        </div>
-                    </div> -->
+
                     <div class="visits" onclick="window.location.href='../assessment/assessment_user.php';"
                         style="cursor: pointer;">
                         <div class="status">
                             <div class="info">
-                                <h1>List New</h1>
+                                <h1>List Move</h1>
                                 <p>User assessment</p>
                             </div>
                             <div>
@@ -172,7 +161,7 @@ $result = $conn->query($sql);
                             </div>
                         </div>
                     </div>
-                    <div class="visits" onclick="window.location.href='../assessment/assessment_user.php';"
+                    <div class="visits" onclick="window.location.href='../assessment/list_new_user.php';"
                         style="cursor: pointer;">
                         <div class="status">
                             <div class="info">

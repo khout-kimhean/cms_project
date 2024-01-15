@@ -280,7 +280,7 @@ mysqli_close($con);
         </aside>
 
         <main>
-            <h2>List User Assessment</h2>
+            <h2>List User Move</h2>
             <div class="container2">
                 <div class="buttonx">
                     <form method="post" action="assessment_user.php">
@@ -408,10 +408,11 @@ mysqli_close($con);
                                             <td>
                                                 <?php echo htmlspecialchars($row['status']); ?>
                                             </td>
-                                            <td <?php echo htmlspecialchars($row['comment']); ?>> <?php
-                                               $comment = htmlspecialchars($row['comment']);
-                                               echo strlen($comment) > 20 ? substr($comment, 0, 20) . '...' : $comment;
-                                               ?>
+                                            <td <?php echo htmlspecialchars($row['comment']); ?>>
+                                                <?php
+                                                $comment = htmlspecialchars($row['comment']);
+                                                echo strlen($comment) > 20 ? substr($comment, 0, 20) . '...' : $comment;
+                                                ?>
                                             </td>
                                             <td>
 
@@ -435,39 +436,39 @@ mysqli_close($con);
 
         </main>
         <div class=" right-section">
-                                            <div class="nav">
-                                                <button id="menu-btn">
-                                                    <span class="material-icons-sharp">
-                                                        menu
-                                                    </span>
-                                                </button>
-                                                <div class="dark-mode">
-                                                    <span class="material-icons-sharp active">
-                                                        light_mode
-                                                    </span>
-                                                    <span class="material-icons-sharp">
-                                                        dark_mode
-                                                    </span>
-                                                </div>
+            <div class="nav">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">
+                        menu
+                    </span>
+                </button>
+                <div class="dark-mode">
+                    <span class="material-icons-sharp active">
+                        light_mode
+                    </span>
+                    <span class="material-icons-sharp">
+                        dark_mode
+                    </span>
+                </div>
 
-                                                <div class="profile">
-                                                    <div class="info">
-                                                        <p>Welcome</p>
-                                                        <small class="text-muted">
-                                                            <?php echo $_SESSION['user_name']; ?>
-                                                        </small>
-                                                    </div>
-                                                    <div class="profile-photo">
-                                                        <img src="../images/logo/user.png">
-                                                    </div>
-                                                </div>
-
-                                            </div>
+                <div class="profile">
+                    <div class="info">
+                        <p>Welcome</p>
+                        <small class="text-muted">
+                            <?php echo $_SESSION['user_name']; ?>
+                        </small>
+                    </div>
+                    <div class="profile-photo">
+                        <img src="../images/logo/user.png">
                     </div>
                 </div>
 
-                <script src="../script/role_check.js"></script>
-                <script src="../script/index.js"></script>
+            </div>
+        </div>
+    </div>
+
+    <script src="../script/role_check.js"></script>
+    <script src="../script/index.js"></script>
 </body>
 
 </html>

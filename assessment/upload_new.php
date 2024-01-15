@@ -36,6 +36,7 @@ function extractDataFromPdfText($text)
         preg_match("/Application\s+(.*?)\s+:/", $section, $roleMatch);
         preg_match("/Switching (.*)/", $section, $functionMatch);
         preg_match("/Request By\s*(.*?)\s*Check By/s", $text, $requester_dateMatch);
+        preg_match("/Description: \s*(.*?)\s*Request By/s", $section, $commentMatch);
 
 
         $extractedData[] = [
@@ -48,6 +49,7 @@ function extractDataFromPdfText($text)
             'function' => substr($functionMatch[1], 37, 19) ?? '',
             'role' => $roleMatch[1] ?? '',
             'request_date' => $requester_dateMatch[1] ?? '',
+            'comment' => $commentMatch[1] ?? '',
 
         ];
     }
@@ -65,7 +67,7 @@ if (isset($_POST['submit'])) {
         $text = $pdf->getText();
 
         $data = extractDataFromPdfText($text);
-        $sql = "INSERT INTO user_new ( request_no, display_name, branch, department, position, application, function, role, requester, approver, request_date) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO user_new ( request_no, display_name, branch, department, position, application, function, role, requester, approver, request_date , comment) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
 
         if ($stmt) {
@@ -81,8 +83,9 @@ if (isset($_POST['submit'])) {
                 $requester = $_POST['requester'];
                 $approver = $_POST['approver'];
                 $request_date = $row['request_date'];
+                $comment = $row['comment'];
 
-                $stmt->bind_param("sssssssssss", $request_no, $display_name, $branch, $department, $position, $application, $function, $role, $requester, $approver, $request_date);
+                $stmt->bind_param("ssssssssssss", $request_no, $display_name, $branch, $department, $position, $application, $function, $role, $requester, $approver, $request_date, $comment);
                 if (!$stmt->execute()) {
                     echo "Error inserting data: " . $stmt->error;
                     break;

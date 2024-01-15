@@ -44,7 +44,14 @@ if ($totalDeleteResult) {
 } else {
     echo "Error: " . $conn->error;
 }
+$count = 0;
 
+$query_1 = "UPDATE user_move SET number =1 WHERE number =0";
+$result = mysqli_query($conn, $sql);
+
+$query_1 = "SELECT * FROM user_move WHERE number =0";
+$result = mysqli_query($conn, $query_1);
+$count = mysqli_num_rows($result);
 $error = array();
 
 $sql = "SELECT * FROM login_register";

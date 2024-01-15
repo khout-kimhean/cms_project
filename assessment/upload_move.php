@@ -36,6 +36,7 @@ function extractDataFromPdfText($text)
         preg_match("/From\s*Date:\s*(.*?)\s*To\s*date/s", $section, $requester_dateMatch);
         preg_match("/To\s*date:\s*(.*?)\s*Move\s*/s", $section, $end_dateMatch);
         preg_match("/Duration\s*Move\s*:(.*)/", $section, $durationMatch);
+        preg_match("/Description: \s*(.*?)\s*Request By/s", $section, $commentMatch);
 
         //   print_r($m_roleMatch);
         // echo $durationMatch[1];
@@ -59,6 +60,7 @@ function extractDataFromPdfText($text)
             'request_date' => $requester_dateMatch[1] ?? '',
             'end_date' => $end_dateMatch[1] ?? '',
             'duration' => substr($durationMatch[1], 0, 12) ?? '',
+            'comment' => $commentMatch[1] ?? '',
         ];
     }
     return $extractedData;
@@ -76,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
         // echo nl2br($text);
 
         $data = extractDataFromPdfText($text);
-        $sql = "INSERT INTO user_move (request_no, display_name, branch, department, position, application, function, role, m_branch, m_department, m_position, m_function, m_role, requester, duration, approver, request_date, end_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO user_move (request_no, display_name, branch, department, position, application, function, role, m_branch, m_department, m_position, m_function, m_role, requester, duration, approver, request_date, end_date, comment) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
         if (!$stmt) {
             echo "Error preparing SQL statement: " . $conn->error;
@@ -101,8 +103,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
             $approver = $_POST['approver'];
             $request_date = $row['request_date'];
             $end_date = $row['end_date'];
+            $comment = $row['comment'];
 
-            $stmt->bind_param("ssssssssssssssssss", $request_no, $fullname, $branch, $department, $position, $application, $function, $role, $m_branch, $m_department, $m_position, $m_function, $m_role, $requester, $duration, $approver, $request_date, $end_date);
+            $stmt->bind_param("sssssssssssssssssss", $request_no, $fullname, $branch, $department, $position, $application, $function, $role, $m_branch, $m_department, $m_position, $m_function, $m_role, $requester, $duration, $approver, $request_date, $end_date, $comment);
             if (!$stmt->execute()) {
                 echo "Error inserting data: " . $stmt->error;
                 break;
@@ -228,9 +231,9 @@ $conn->close();
                 </form>
 
                 <?php if ($alertMessage !== ""): ?>
-                    <div class="alert alert-<?php echo $alertType; ?>" role="alert">
-                        <?php echo $alertMessage; ?>
-                    </div>
+                <div class="alert alert-<?php echo $alertType; ?>" role="alert">
+                    <?php echo $alertMessage; ?>
+                </div>
                 <?php endif; ?>
             </div>
         </main>
