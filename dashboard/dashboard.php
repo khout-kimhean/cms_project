@@ -470,6 +470,7 @@ $result = $conn->query($sql);
                 notification.appendChild(closeButton);
 
                 document.body.appendChild(notification);
+
                 // Set timeout for auto-hiding the notification
                 setTimeout(function() {
                     var element = document.getElementById('notifications-' + index);
@@ -481,6 +482,7 @@ $result = $conn->query($sql);
         });
     });
     </script>
+
     <script src="../script/role_check.js"></script>
     <script src="../script/index.js"></script>
 </body>

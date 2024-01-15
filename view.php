@@ -186,7 +186,7 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
                     die("Prepare failed: " . $conn->error);
                 }
 
-                $recoverStmt->bind_param("ssssss", $fileDetails['filename'], $fileDetails['title'], $fileDetails['team'], $fileDetails['description'] , $fileDetails['user_type'], $loggedInUser);
+                $recoverStmt->bind_param("ssssss", $fileDetails['filename'], $fileDetails['title'], $fileDetails['team'], $fileDetails['description'], $fileDetails['user_type'], $loggedInUser);
 
                 if (!$recoverStmt->execute()) {
                     die("Execute failed: " . $recoverStmt->error);
@@ -240,8 +240,30 @@ if (isset($_POST['edit']) && is_numeric($_POST['edit_id'])) {
         exit;
     }
 }
-
-
+// 3222222222222222222222222222222222222222222222WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+if ($result && mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        if (!empty($row['request_date']) && !empty($row['end_date'])) {
+            ?>
+            <div class="notify-alert-box">
+                <img src="../images/logo/logo.jpg">
+                <div class="notification-item">
+                    <p>
+                        <strong>
+                            <?php echo ($row['display_name']); ?>
+                        </strong><br><br>
+                        <span>Branch
+                            <?php echo htmlspecialchars($row['branch']); ?>
+                        </span>
+                    </p>
+                </div>
+                <div class="date">
+                    <?php echo htmlspecialchars($row['request_date']); ?>
+                </div>
+            </div>
+        <?php }
+    }
+}
 ?>
 
 
@@ -373,97 +395,97 @@ if (isset($_POST['edit']) && is_numeric($_POST['edit_id'])) {
                                 </thead>
                                 <tbody>
                                     <?php if (!empty($searchResults)): ?>
-                                    <?php
+                                        <?php
                                         $i = 1; // Initialize the ID counter to 1
                                         foreach ($searchResults as $row):
                                             ?>
-                                    <tr>
-                                        <td>
-                                            <?php echo $i; // Display the ID starting from 1 ?>
-                                        </td>
-                                        <td>
-                                            <?php echo htmlspecialchars($row['filename']); ?>
-                                        </td>
-                                        <td>
-                                            <?php echo htmlspecialchars($row['team']); ?>
-                                        </td>
-                                        <td title="<?php echo htmlspecialchars($row['title']); ?>">
-                                            <?php
+                                            <tr>
+                                                <td>
+                                                    <?php echo $i; // Display the ID starting from 1 ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row['filename']); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row['team']); ?>
+                                                </td>
+                                                <td title="<?php echo htmlspecialchars($row['title']); ?>">
+                                                    <?php
                                                     $title = htmlspecialchars($row['title']);
                                                     echo strlen($title) > 18 ? substr($title, 0, 40) . '...' : $title;
                                                     ?>
-                                        </td>
-                                        <td title="<?php echo htmlspecialchars($row['description']); ?>">
-                                            <?php
+                                                </td>
+                                                <td title="<?php echo htmlspecialchars($row['description']); ?>">
+                                                    <?php
                                                     $description = htmlspecialchars($row['description']);
                                                     echo strlen($description) > 20 ? substr($description, 0, 20) . '...' : $description;
                                                     ?>
-                                        </td>
-                                        <td>
-                                            <?php echo htmlspecialchars($row['user_type']); ?>
-                                        </td>
-                                        <td><a href="../file/view.php?file=<?php echo $row['filename']; ?>"
-                                                target="_blank">View File</a></td>
-                                        <td><a href="../file/view_data.php?id=<?php echo $row['id']; ?>">View Data</a>
-                                        </td>
-                                        <td><a href="../file/edit_data.php?id=<?php echo $row['id']; ?>">Edit</a>
-                                        </td>
-                                        <td><a href="../file/view_file.php?delete=<?php echo $row['id']; ?>">Delete</a>
-                                        </td>
-                                    </tr>
-                                    <?php
+                                                </td>
+                                                <td>
+                                                    <?php echo htmlspecialchars($row['user_type']); ?>
+                                                </td>
+                                                <td><a href="../file/view.php?file=<?php echo $row['filename']; ?>"
+                                                        target="_blank">View File</a></td>
+                                                <td><a href="../file/view_data.php?id=<?php echo $row['id']; ?>">View Data</a>
+                                                </td>
+                                                <td><a href="../file/edit_data.php?id=<?php echo $row['id']; ?>">Edit</a>
+                                                </td>
+                                                <td><a href="../file/view_file.php?delete=<?php echo $row['id']; ?>">Delete</a>
+                                                </td>
+                                            </tr>
+                                            <?php
                                             $i++; // Increment the ID counter for the next row
                                         endforeach;
                                         ?>
                                     <?php else: ?>
-                                    <?php if ($result->num_rows > 0): ?>
-                                    <?php
+                                        <?php if ($result->num_rows > 0): ?>
+                                            <?php
                                             $i = 1; // Initialize the ID counter to 1
                                             while ($row = $result->fetch_assoc()):
                                                 ?>
-                                    <tr>
-                                        <td>
-                                            <?php echo $i; // Display the ID starting from 1 ?>
-                                        </td>
-                                        <td>
-                                            <?php echo htmlspecialchars($row['filename']); ?>
-                                        </td>
-                                        <td>
-                                            <?php echo htmlspecialchars($row['team']); ?>
-                                        </td>
-                                        <td title="<?php echo htmlspecialchars($row['title']); ?>">
-                                            <?php
+                                                <tr>
+                                                    <td>
+                                                        <?php echo $i; // Display the ID starting from 1 ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo htmlspecialchars($row['filename']); ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo htmlspecialchars($row['team']); ?>
+                                                    </td>
+                                                    <td title="<?php echo htmlspecialchars($row['title']); ?>">
+                                                        <?php
                                                         $title = htmlspecialchars($row['title']);
                                                         echo strlen($title) > 18 ? substr($title, 0, 40) . '...' : $title;
                                                         ?>
-                                        </td>
-                                        <td title="<?php echo htmlspecialchars($row['description']); ?>">
-                                            <?php
+                                                    </td>
+                                                    <td title="<?php echo htmlspecialchars($row['description']); ?>">
+                                                        <?php
                                                         $description = htmlspecialchars($row['description']);
                                                         echo strlen($description) > 20 ? substr($description, 0, 20) . '...' : $description;
                                                         ?>
-                                        </td>
-                                        <td>
-                                            <?php echo htmlspecialchars($row['user_type']); ?>
-                                        </td>
-                                        <td><a href="../file/view.php?file=<?php echo $row['filename']; ?>"
-                                                target="_blank">View File</a></td>
-                                        <td><a href="../file/view_data.php?id=<?php echo $row['id']; ?>">View Data</a>
-                                        </td>
-                                        <td><a href="../file/edit_data.php?id=<?php echo $row['id']; ?>">Edit</a>
-                                        </td>
-                                        <td><a href="../file/view_file.php?delete=<?php echo $row['id']; ?>">Delete</a>
-                                        </td>
-                                    </tr>
-                                    <?php
+                                                    </td>
+                                                    <td>
+                                                        <?php echo htmlspecialchars($row['user_type']); ?>
+                                                    </td>
+                                                    <td><a href="../file/view.php?file=<?php echo $row['filename']; ?>"
+                                                            target="_blank">View File</a></td>
+                                                    <td><a href="../file/view_data.php?id=<?php echo $row['id']; ?>">View Data</a>
+                                                    </td>
+                                                    <td><a href="../file/edit_data.php?id=<?php echo $row['id']; ?>">Edit</a>
+                                                    </td>
+                                                    <td><a href="../file/view_file.php?delete=<?php echo $row['id']; ?>">Delete</a>
+                                                    </td>
+                                                </tr>
+                                                <?php
                                                 $i++; // Increment the ID counter for the next row
                                             endwhile;
                                             ?>
-                                    <?php else: ?>
-                                    <tr>
-                                        <td colspan='7'>No files found.</td>
-                                    </tr>
-                                    <?php endif; ?>
+                                        <?php else: ?>
+                                            <tr>
+                                                <td colspan='7'>No files found.</td>
+                                            </tr>
+                                        <?php endif; ?>
                                     <?php endif; ?>
                                 </tbody>
 

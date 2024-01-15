@@ -226,6 +226,13 @@ aside .sidebar .message-count {
   border-radius: var(--border-radius-1);
 }
 /* container2 */
+.notify-alert-box .date .delete {
+  color: red;
+  margin-bottom: 38px;
+  font-weight: 200;
+  font-size: 16px;
+  text-align: end;
+}
 .container2 {
   width: 138%;
   font-family: cursive, sans-serif;
@@ -272,10 +279,11 @@ aside .sidebar .message-count {
 }
 
 .notify-alert-box .date {
+  font-weight: 500;
   text-align: right;
   font-size: 12px;
   color: var(--color-dark);
-  margin-top: 50px;
+  margin-top: 20px;
   width: 120px;
 }
 
@@ -294,7 +302,7 @@ aside .sidebar .message-count {
 
 .notification-item span {
   color: var(--color-dark);
-  font-size: 17px;
+  font-size: 16px;
   width: 100px;
   max-width: 200px;
 }
@@ -311,10 +319,6 @@ aside .sidebar .message-count {
   align-items: center;
   color: #0c4da2;
   font-size: 16px;
-}
-
-.back-button:hover {
-  color: #c4a006;
 }
 
 .detail-item {
@@ -557,6 +561,19 @@ aside .sidebar .message-count {
   main table tbody tr td:first-child {
     display: none;
   }
+  .notify-alert-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin: 20px;
+    max-width: 500px;
+    width: 100%;
+    height: 100px;
+    margin-left: 100px;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -671,5 +688,18 @@ aside .sidebar .message-count {
 
   .right-section .nav button span {
     font-size: 2rem;
+  }
+  .notify-alert-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin: 20px;
+    max-width: 500px;
+    width: 100%;
+    height: 100px;
+    margin-left: 100px;
   }
 }

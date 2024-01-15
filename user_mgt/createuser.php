@@ -180,19 +180,25 @@ $conn->close();
                         }
                     }
                     ?>
-                    <div class="input">
-                        <input type="text" name="name" required placeholder="Enter your name">
-                        <input type="email" name="email" required placeholder="Enter your email">
-                        <input type="password" name="password" id="password" required placeholder="Enter your password">
-                        <!-- Add an id to the password input element -->
-                        <input type="password" name="cpassword" required placeholder="Confirm your password">
-
-                        <!-- Password and confirm password validation error message -->
+                    <div class="user">
+                        <label class="label_input" for="role">User Name</label>
+                        <input type="text" name="name" required placeholder="Enter UserName">
+                        <label class="label_input" for="role">User Email</label>
+                        <input type="email" name="email" required placeholder="Enter Email">
+                    </div>
+                    <div class="user">
+                        <label class="label_input" for="role">Password</label>
+                        <input type="password" name="password" id="password" required placeholder="Enter Password">
+                        <label class="label_input" for="role">C password</label>
+                        <input type="password" name="cpassword" required placeholder="Confirm Password">
                         <?php
-                    if (isset($error) && in_array('Passwords do not match!', $error)) {
-                        echo '<span class="error-msg">Passwords do not match!</span>';
-                    }
-                    ?>
+                        if (isset($error) && in_array('Passwords do not match!', $error)) {
+                            echo '<span class="error-msg">Passwords do not match!</span>';
+                        }
+                        ?>
+
+                    </div>
+                    <div class="input">
                         <select name="user_type">
                             <option value="admin">Admin</option>
                             <option value="card payment team">Card Payment Team</option>
@@ -202,8 +208,8 @@ $conn->close();
                             <option value="user">User</option>
                         </select>
                     </div>
-
                     <input type="submit" name="submit" value="Create User" class="form-btn">
+
 
                 </form>
             </div>

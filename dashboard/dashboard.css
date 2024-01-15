@@ -136,8 +136,8 @@ aside .toggle .logo {
   gap: 0.5rem;
 }
 aside .toggle .logo img {
-  width: 2.3rem;
-  height: 2.3rem;
+  width: 2rem;
+  height: 2rem;
   /* border-radius: 50%; */
   object-fit: cover;
 }
@@ -498,15 +498,15 @@ main .recent-orders a {
   align-items: center;
 }
 .close-button {
-  margin-left: 10px;
+  margin-left: 20px;
   border: none;
   background: none;
   cursor: pointer;
   font-size: 24px;
   color: #ff0000;
   align-self: self-start;
-  margin-right: 5px;
-  margin-top: -2px;
+  margin-right: 6px;
+  margin-top: -1px;
 }
 
 .close-button:hover {

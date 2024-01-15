@@ -227,6 +227,7 @@ aside .sidebar .message-count {
 /* Apply the following styles to the form within the main element */
 
 main .form-container form {
+  /* background-image: url(./background1.jpg); */
   display: inline-block;
   background-color: var(--color-white);
   padding: var(--card-padding);
@@ -257,21 +258,69 @@ main .form-container form .error-msg {
   display: block;
   margin-top: 1rem;
 }
+.form-container .user {
+  margin-left: 7%;
+  display: flex;
+}
+.form-container .label_input {
+  margin-left: 20px;
+  margin-top: 20px;
+  width: 100px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  font-family: cursive, sans-serif;
+  background-color: var(--color-white);
+  padding: 10px;
+  color: var(--color-dark);
+  border-radius: 8px;
+}
+.form-container input {
+  margin-left: 5px;
+  margin-top: 20px;
+  width: 35%;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  font-family: cursive, sans-serif;
+  background-color: var(--color-white);
+  padding: 10px;
+  color: #202528;
+  border-radius: 8px;
+}
 
-main .form-container form input[type="text"],
-main .form-container form input[type="email"],
-main .form-container form input[type="password"],
-main .form-container form select {
+/* main .form-container form select {
+  background-color: var(--color-white);
   color: var(--color-dark);
   align-items: center;
-  width: 50%;
-  padding: 1rem;
-  margin-top: 5px;
+  width: 30%;
+  padding: 0.8rem;
+  margin-top: 20px;
   margin-bottom: 10px;
-  /* border: none */
-  border: 1px solid rgb(177, 170, 170);
-  border-radius: 5px;
+  border: 1px solid var(--color-dark);
+  border-radius: 8px;
   font-size: 13px;
+} */
+
+main .form-container form select {
+  background-color: var(--color-white);
+  color: var(--color-dark);
+  align-items: center;
+  width: 30%;
+  padding: 0.8rem;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border: 1px solid var(--color-dark);
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+/* Styling for the dropdown when it is focused or open */
+main .form-container form select:focus {
+  outline: none; /* Remove the default focus outline if you don't want it */
+  border-color: var(--color-primary); /* Change border color when focused */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow when focused */
+}
+main .form-container .input option {
+  border-radius: 20px;
 }
 /* Define CSS for the alert messages */
 .alert {
@@ -286,9 +335,11 @@ main .form-container form select {
 }
 
 .alert.alert-danger {
+  border-radius: 20px;
+  font-size: 13px;
   margin-bottom: 20px;
   background-color: #f2dede;
-  color: #a94442;
+  color: #ff0000;
   border-color: #ebccd1;
 }
 
