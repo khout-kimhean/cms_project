@@ -470,13 +470,13 @@ main .recent-orders a {
 }
 
 .notifications {
-  border: 0.7px solid var(--color-dark);
+  border: 0.7px solid var(--color-info-dark);
   background-color: var(--color-background);
   color: var(--color-dark);
   font-weight: 500;
-  padding: 5px;
+  padding: 3px;
   margin: 5px;
-  border-radius: 10px;
+  border-radius: 16px;
   position: fixed;
   top: 5px;
   animation: fadeIn 1s ease-in-out forwards;
