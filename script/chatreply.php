@@ -27,7 +27,7 @@ $messages = array();
 
 while ($row = $result->fetch_assoc()) {
     $messages[] = $row['description'];
-    $messages[] = "Please click here <a href='https://join.skype.com/tnP3accFexk3' target='_blank' class='contact-link'>Contact Us</a>  if you need to take to team support for solve that issue.";
+    $messages[] = "Please click here <a href='https://join.skype.com/tnP3accFexk3' target='_blank' class='contact-link'>Contact Us</a>  if you need to take to team support.";
 
 }
 

@@ -136,10 +136,9 @@ aside .toggle .logo {
   gap: 0.5rem;
 }
 aside .toggle .logo img {
-  width: 2rem;
-  height: 2rem;
-  /* Make the image circular */
-  border-radius: 50%; /* Make the image circular */
+  width: 2.3rem;
+  height: 2.3rem;
+  /* border-radius: 50%; */
   object-fit: cover;
 }
 
@@ -476,11 +475,11 @@ main .recent-orders a {
   font-weight: 500;
   padding: 3px;
   margin: 5px;
-  border-radius: 16px;
+  border-radius: 12px;
   position: fixed;
   top: 5px;
   animation: fadeIn 1s ease-in-out forwards;
-  left: 430px;
+  left: 31%;
   z-index: 999;
   display: flex;
 }

@@ -119,7 +119,7 @@ $result = $conn->query($sql);
         <!-- Main Content -->
         <main>
             <Div class="container2">
-                <h1 class="h1">Assessment</h1>
+                <h1 class="h1">User Assessment</h1>
                 <!-- Analyses -->
 
                 <!-- <h1>Assessment</h1> -->
@@ -148,7 +148,7 @@ $result = $conn->query($sql);
                             </div>
                         </div>
                     </div>
-                    <div class="visits" onclick="window.location.href='../assessment/upload_resign.php';"
+                    <!-- <div class="visits" onclick="window.location.href='../assessment/upload_resign.php';"
                         style="cursor: pointer;">
                         <div class="status">
                             <div class="info">
@@ -159,16 +159,28 @@ $result = $conn->query($sql);
                                 <img src="../images/usermgt/move.png">
                             </div>
                         </div>
+                    </div> -->
+                    <div class="visits" onclick="window.location.href='../assessment/assessment_user.php';"
+                        style="cursor: pointer;">
+                        <div class="status">
+                            <div class="info">
+                                <h1>List New</h1>
+                                <p>User assessment</p>
+                            </div>
+                            <div>
+                                <img src="../images/file/file.png">
+                            </div>
+                        </div>
                     </div>
                     <div class="visits" onclick="window.location.href='../assessment/assessment_user.php';"
                         style="cursor: pointer;">
                         <div class="status">
                             <div class="info">
-                                <h1>List User</h1>
-                                <p>Assessment</p>
+                                <h1>List New</h1>
+                                <p>User Move</p>
                             </div>
                             <div>
-                                <img src="../images/file/file.png">
+                                <img src="../images/file/file2.png">
                             </div>
                         </div>
                     </div>
@@ -256,71 +268,6 @@ $result = $conn->query($sql);
 
             </div>
             <!-- End of Nav -->
-
-            <!-- <div class="user-profile">
-                <div class="logo">
-                    <img src="../images/logo/logo.jpg">
-                    <h2>FTB Bank</h2>
-                    <p>Welcome to FTB Bank</p>
-                </div>
-            </div>
-
-            <div class="reminders">
-                <div class="header">
-                    <h2>Reminders</h2>
-                    <span class="material-icons-sharp">
-                        notifications_none
-                    </span>
-                </div>
-
-                <div class="notification">
-                    <div class="icon">
-                        <span class="material-icons-sharp">
-                            volume_up
-                        </span>
-                    </div>
-                    <div class="content">
-                        <div class="info">
-                            <h3>Support Time</h3>
-                            <small class="text_muted">
-                                08:00 AM - 5:00 PM
-                            </small>
-                        </div>
-                        <span class="material-icons-sharp">
-                            more_vert
-                        </span>
-                    </div>
-                </div>
-
-                <div class="notification deactive">
-                    <div class="icon">
-                        <span class="material-icons-sharp">
-                            edit
-                        </span>
-                    </div>
-                    <div class="content">
-                        <div class="info">
-                            <h3>Open Time</h3>
-                            <small class="text_muted">
-                                08:00 AM - 5:00 PM
-                            </small>
-                        </div>
-                        <span class="material-icons-sharp">
-                            more_vert
-                        </span>
-                    </div>
-                </div>
-
-                <div class="notification add-reminder">
-                    <div>
-                        <span class="material-icons-sharp">
-                            add
-                        </span>
-                        <h3>Add Reminder</h3>
-                    </div>
-                </div>
-
-            </div> -->
 
         </div>
     </div>
