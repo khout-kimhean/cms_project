@@ -308,7 +308,6 @@ const submitUserInput = () => {
         chatContainer.scrollTo(0, chatContainer.scrollHeight);
     }, 10);
 };
-
 const generateResponseText = (userInput) => {
     const incomingChatDiv = createChatElement(`<div class="chat-content">
         <div class="chat-details">
