@@ -54,6 +54,15 @@ $result = mysqli_query($conn, $query_1);
 $count = mysqli_num_rows($result);
 $error = array();
 
+
+$query_1 = "UPDATE user_new SET number =1 WHERE number =0";
+$result = mysqli_query($conn, $sql);
+
+$query_1 = "SELECT * FROM user_new WHERE number =0";
+$result = mysqli_query($conn, $query_1);
+$count = mysqli_num_rows($result);
+
+
 $sql = "SELECT * FROM login_register";
 $result = $conn->query($sql);
 

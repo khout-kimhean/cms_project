@@ -39,7 +39,8 @@ if (isset($_GET['delete'])) {
     $stmt->close();
 }
 
-
+$sql = "UPDATE user_new SET number =1 WHERE number =0";
+$result = mysqli_query($con, $sql);
 ?>
 
 <!DOCTYPE html>
@@ -129,27 +130,27 @@ if (isset($_GET['delete'])) {
                         while ($row = mysqli_fetch_assoc($result)) {
                             if (!empty($row['request_date']) && !empty($row['end_date'])) {
                                 ?>
-                                <div class="notify-alert-box">
-                                    <img src="../images/logo/logo.jpg">
-                                    <div class="notification-item">
-                                        <p>
-                                            <strong>
-                                                <?php echo htmlspecialchars($row['display_name']); ?>
-                                            </strong><br><br>
-                                            <span>
-                                                <?php echo htmlspecialchars($row['branch']); ?>
-                                            </span>
-                                        </p>
-                                    </div>
-                                    <div class="detail-item">
-                                        <div class="move-back">
-                                            <a href="../dashboard/notification.php?delete=<?php echo $row['id']; ?>"><i
-                                                    class="fa fa-arrow-circle-right" aria-hidden="true"></i> Move Back</a>
-                                        </div>
-                                        <?php echo htmlspecialchars($row['end_date']); ?>
-                                    </div>
-                                </div>
-                                <?php
+                    <div class="notify-alert-box">
+                        <img src="../images/logo/logo.jpg">
+                        <div class="notification-item">
+                            <p>
+                                <strong>
+                                    <?php echo htmlspecialchars($row['display_name']); ?>
+                                </strong><br><br>
+                                <span>
+                                    <?php echo htmlspecialchars($row['branch']); ?>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="detail-item">
+                            <div class="move-back">
+                                <a href="../dashboard/notification.php?delete=<?php echo $row['id']; ?>"><i
+                                        class="fa fa-arrow-circle-right" aria-hidden="true"></i> Move Back</a>
+                            </div>
+                            <?php echo htmlspecialchars($row['end_date']); ?>
+                        </div>
+                    </div>
+                    <?php
                             }
                         }
                     } else {
@@ -167,28 +168,28 @@ if (isset($_GET['delete'])) {
                     if ($result && mysqli_num_rows($result) > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
                             ?>
-                            <div class="notify-alert-box">
-                                <img src="../images/logo/logo.jpg">
-                                <div class="notification-item">
-                                    <p>
-                                        <strong>
-                                            <?php echo ($row['display_name']); ?>
-                                        </strong><br><br>
-                                        <span>
-                                            <?php echo htmlspecialchars($row['branch']); ?>
-                                        </span>
-                                    </p>
-                                </div>
+                    <div class="notify-alert-box">
+                        <img src="../images/logo/logo.jpg">
+                        <div class="notification-item">
+                            <p>
+                                <strong>
+                                    <?php echo ($row['display_name']); ?>
+                                </strong><br><br>
+                                <span>
+                                    <?php echo htmlspecialchars($row['branch']); ?>
+                                </span>
+                            </p>
+                        </div>
 
-                                <div class="date">
-                                    <div class="delete">
-
-                                    </div>
-                                    <?php echo htmlspecialchars($row['request_date']); ?>
-                                </div>
+                        <div class="date">
+                            <div class="delete">
 
                             </div>
-                        <?php }
+                            <?php echo htmlspecialchars($row['request_date']); ?>
+                        </div>
+
+                    </div>
+                    <?php }
                     }
 
                     ?>
