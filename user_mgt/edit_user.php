@@ -34,11 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $user_type = $_POST['user_type'];
 
-    // // Debugging statements
-    // echo "ID: $id<br>";
-    // echo "Name: $name<br>";
-    // echo "Email: $email<br>";
-    // echo "User Type: $user_type<br>";
 
     // Prepare and execute the SQL statement
     $sql = "UPDATE login_register SET name = ?, email = ?, user_type = ? WHERE id = ?";

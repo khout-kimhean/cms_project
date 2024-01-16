@@ -51,8 +51,10 @@ function isLinkDisabled($link)
         // <!-- find error -->
         'read_error_inlog.php' => ['admin', 'card payment team', 'digital branch team', 'user'],
         'read_by_keyword.php' => ['admin', 'card payment team', 'digital branch team', 'user'],
-        'read_trxno.php' => ['admin'],
-        'list_new_user.php' => ['admin'],
+        'read_trxno.php' => ['admin', 'card payment team', 'digital branch team', 'user'],
+        'list_new_user.php' => ['admin', 'card payment team'],
+        'edit_user_new.php' => ['admin', 'card payment team'],
+        'edit_user_move.php' => ['admin', 'card payment team'],
 
     ];
 

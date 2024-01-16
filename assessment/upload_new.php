@@ -78,7 +78,9 @@ if (isset($_POST['submit'])) {
                 $department = $row['department'];
                 $position = $row['position'];
                 $application = $row['application'];
-                $function = $row['function'];
+                $function = isset($row['function']) ? $row['function'] : '';
+                $function = str_replace([')', '(', ':'], '', $function);
+
                 $role = $row['role'];
                 $requester = $_POST['requester'];
                 $approver = $_POST['approver'];

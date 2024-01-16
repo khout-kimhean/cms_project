@@ -330,8 +330,6 @@ $result = $conn->query($sql);
                     </tbody>
                 </table>
 
-
-                <a href="../user_mgt/showuser.php" <?php echo isLinkDisabled('showuser.php'); ?>>Show All</a>
             </div>
             <!-- End of Recent Orders -->
 

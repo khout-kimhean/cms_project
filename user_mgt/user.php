@@ -55,7 +55,6 @@ if (isset($_POST['search'])) {
 </head>
 
 <body>
-
     <div class="container">
         <!-- Sidebar Section -->
         <aside>
@@ -79,28 +78,12 @@ if (isset($_POST['search'])) {
                     <h3>Dashboard</h3>
                 </a>
 
-                <!-- <a href="../data_store/search.php">
-                    <span class="fa fa-search">
-                    </span>
-                    <h3>Search</h3>
-                </a> -->
-                <!-- <a href="../contact/contact.php">
-                    <span class="fa fa-address-card">
-                    </span>
-                    <h3>Contact</h3>
-                </a> -->
                 <a href="../file/file_mgt.php" <?php echo isLinkDisabled('file_mgt.php'); ?>>
                     <span class="fa fa-upload">
                     </span>
                     <h3>Store File</h3>
                 </a>
 
-                <!-- <a href="../data_store/list_upload.php">
-                    <span class="material-icons-sharp">
-                        inventory
-                    </span>
-                    <h3>View File</h3>
-                </a> -->
                 <a href="../assessment/assessment.php" <?php echo isLinkDisabled('assessment.php'); ?>>
                     <span class="fa fa-address-book">
                         <!-- fab fa-app-store-ios -->
@@ -114,17 +97,6 @@ if (isset($_POST['search'])) {
                     </span>
                     <h3>User Mgt</h3>
                 </a>
-                <!-- <a href="../to_do_list/todo_management.php">
-                    <span class="fa fa-list-alt">
-                    </span>
-                    <h3>To-do List</h3>
-                </a> -->
-                <!-- <a href="../data_store/data_mgt.php">
-                    <span class="fa fa-briefcase">
-                    </span>
-                    <h3>Stock Mgt</h3>
-                </a> -->
-
 
                 <a href="../user_mgt/logout.php">
                     <span class="material-icons-sharp">
@@ -187,51 +159,51 @@ if (isset($_POST['search'])) {
                                                 $i = 1;
                                                 foreach ($searchResults as $row) {
                                                     ?>
-                                            <tr>
-                                                <td>
-                                                    <?php echo $i++; ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo htmlspecialchars($row['name']); ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo htmlspecialchars($row['email']); ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo htmlspecialchars($row['user_type']); ?>
-                                                </td>
-                                                <!-- <td><a class="click"
+                                                    <tr>
+                                                        <td>
+                                                            <?php echo $i++; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo htmlspecialchars($row['name']); ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo htmlspecialchars($row['email']); ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo htmlspecialchars($row['user_type']); ?>
+                                                        </td>
+                                                        <!-- <td><a class="click"
                                                                 href="../user_mgt/assign_function.php?id=<?php echo $row['id']; ?>">Permission</a>
                                                         </td> -->
-                                                <td><a class="click1"
-                                                        href="edit_user.php?id=<?php echo $row['id']; ?>">Edit</a></td>
-                                            </tr>
-                                            <?php
+                                                        <td><a class="click1"
+                                                                href="edit_user.php?id=<?php echo $row['id']; ?>">Edit</a></td>
+                                                    </tr>
+                                                    <?php
                                                 }
                                             } elseif ($result->num_rows > 0) {
                                                 $i = 1;
                                                 while ($row = $result->fetch_assoc()) {
                                                     ?>
-                                            <tr>
-                                                <td>
-                                                    <?php echo $i++; ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo htmlspecialchars($row['name']); ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo htmlspecialchars($row['email']); ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo htmlspecialchars($row['user_type']); ?>
-                                                </td>
-                                                <!-- <td><a class="click"
+                                                    <tr>
+                                                        <td>
+                                                            <?php echo $i++; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo htmlspecialchars($row['name']); ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo htmlspecialchars($row['email']); ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo htmlspecialchars($row['user_type']); ?>
+                                                        </td>
+                                                        <!-- <td><a class="click"
                                                                 href="../user_mgt/assign_function.php?id=<?php echo $row['id']; ?>">Permission</a>
                                                         </td> -->
-                                                <td><a class="click1"
-                                                        href="edit_user.php?id=<?php echo $row['id']; ?>">Edit</a></td>
-                                            </tr>
-                                            <?php
+                                                        <td><a class="click1"
+                                                                href="edit_user.php?id=<?php echo $row['id']; ?>">Edit</a></td>
+                                                    </tr>
+                                                    <?php
                                                 }
                                             } else {
                                                 echo "<tr><td colspan='6'>No matching users found.</td></tr>";

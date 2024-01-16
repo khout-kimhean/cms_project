@@ -78,7 +78,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
         // echo nl2br($text);
 
         $data = extractDataFromPdfText($text);
+
         $sql = "INSERT INTO user_move (request_no, display_name, branch, department, position, application, function, role, m_branch, m_department, m_position, m_function, m_role, requester, duration, approver, request_date, end_date, comment) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            echo "Error preparing SQL statement: " . $conn->error;
+            exit;
+        }
+        foreach ($data as $row) {
+            $request_no = $row['request_no'];
+            $fullname = $row['display_name'];
+            $branch = $row['branch'];
+            $department = $row['department'];
+            $position = $row['position'];
+            $application = $row['application'];
+            $function = str_replace([')', '(', ':'], '', $row['function']);
+            $role = $row['role'];
+            $m_branch = $row['m_branch'];
+            $m_department = $row['m_department'];
+            $m_position = $row['m_position'];
+            $m_function = str_replace([')', '(', ':'], '', $row['m_function']);
+            $m_role = $row['m_role'];
+            $requester = $_POST['requester'];
+            $duration = $row['duration'];
+            $approver = $_POST['approver'];
+            $request_date = $row['request_date'];
+            $end_date = $row['end_date'];
+            $comment = $row['comment'];
+
+            $stmt->bind_param("sssssssssssssssssss", $request_no, $fullname, $branch, $department, $position, $application, $function, $role, $m_branch, $m_department, $m_position, $m_function, $m_role, $requester, $duration, $approver, $request_date, $end_date, $comment);
+            if (!$stmt->execute()) {
+                echo "Error inserting data: " . $stmt->error;
+                break;
+            }
+        }
+        $stmt->close();
+    } else {
+        echo "Upload pdf file only...";
+    }
+}
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
+    $fileTmpPath = $_FILES['file']['tmp_name'];
+    $fileName = $_FILES['file']['name'];
+    $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+    if (!empty($fileName) and $fileExtension === 'pdf') {
+        $parser = new \Smalot\PdfParser\Parser();
+        $pdf = $parser->parseFile($fileTmpPath);
+        $text = $pdf->getText();
+        // echo nl2br($text);
+
+        $data = extractDataFromPdfText($text);
+
+        $sql = "INSERT INTO assessment_move (request_no, display_name, branch, department, position, application, function, role, m_branch, m_department, m_position, m_function, m_role, requester, duration, approver, request_date, end_date, comment) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
         if (!$stmt) {
             echo "Error preparing SQL statement: " . $conn->error;
@@ -116,7 +168,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
         echo "Upload pdf file only...";
     }
 }
-
 
 $conn->close();
 ?>
@@ -231,9 +282,9 @@ $conn->close();
                 </form>
 
                 <?php if ($alertMessage !== ""): ?>
-                <div class="alert alert-<?php echo $alertType; ?>" role="alert">
-                    <?php echo $alertMessage; ?>
-                </div>
+                    <div class="alert alert-<?php echo $alertType; ?>" role="alert">
+                        <?php echo $alertMessage; ?>
+                    </div>
                 <?php endif; ?>
             </div>
         </main>
