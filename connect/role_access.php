@@ -8,7 +8,7 @@ function isLinkDisabled($link)
         'file_mgt.php' => ['admin', 'card payment team', 'digital branch team', 'atm team', 'terminal team'],
         'chat.php' => ['admin', 'card payment team', 'digital branch team', 'atm team', 'terminal team', 'user'],
         'chatgpt.php' => ['admin', 'card payment team', 'digital branch team', 'atm team', 'terminal team', 'user'],
-        'datachat.php' => ['admin', 'card payment team', 'digital branch team', 'atm team', 'terminal team'],
+        'datachat.php' => ['admin'],
         'read_file.php' => ['admin', 'card payment team', 'digital branch team', 'user'],
         'notification.php' => ['admin', 'card payment team'],
         'assessment.php' => ['admin', 'card payment team'],
@@ -62,9 +62,8 @@ function isLinkDisabled($link)
 
     // Check if the link is in the allowed roles array and user role is not in the allowed roles
     if (isset($allowedRoles[$link]) && !in_array($userRole, $allowedRoles[$link])) {
-        return 'style="pointer-events: none; opacity: 0.5;" onclick="event.preventDefault(); alert(\'You do not have permission to access this option.\');"';
+        return 'style="pointer-events: none; opacity: 0.0;" onclick="event.preventDefault(); alert(\'You do not have permission to access this option.\');"';
     }
-
     return '';
 }
 

@@ -50,7 +50,7 @@ html {
 body {
   width: 100vw;
   height: 100vh;
-  font-family: "Poppins", sans-serif;
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
   font-size: 0.88rem;
   user-select: none;
   overflow-x: hidden;
@@ -69,7 +69,7 @@ img {
 }
 
 h1 {
-  font-weight: 800;
+  font-weight: 600;
   font-size: 1.8rem;
 }
 
@@ -80,7 +80,7 @@ h2 {
 
 h3 {
   font-weight: 500;
-  font-size: 0.87rem;
+  font-size: 0.98rem;
 }
 
 small {
@@ -88,7 +88,10 @@ small {
 }
 
 p {
-  color: var(--color-dark-variant);
+  font-size: 14px;
+  margin-top: 5px;
+  font-weight: 400;
+  color: var(--color-dark) !important;
 }
 
 b {
@@ -96,7 +99,9 @@ b {
 }
 
 .text-muted {
-  color: var(--color-info-dark);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-dark);
 }
 
 .primary {
@@ -136,15 +141,16 @@ aside .toggle {
   margin-top: 1.4rem;
 }
 
-aside .toggle .logo {
+/* aside .toggle .logo {
   display: flex;
   gap: 0.5rem;
-}
+} */
 aside .toggle .logo img {
-  width: 2rem;
-  height: 2rem;
-  /* Make the image circular */
-  border-radius: 50%; /* Make the image circular */
+  margin-left: 0px;
+  margin-top: -35px;
+  margin-bottom: -35px;
+  width: 7rem;
+  height: 7rem;
   object-fit: cover;
 }
 
@@ -230,7 +236,7 @@ aside .sidebar .message-count {
 /* main  */
 
 .container2 {
-  font-family: cursive, sans-serif;
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
   margin-top: 70px;
   display: inline-block;
   background-color: var(--color-white);
@@ -279,13 +285,13 @@ aside .sidebar .message-count {
 }
 
 .container2 .analyse h3 {
-  font-family: cursive, sans-serif;
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
   margin-left: 0.6rem;
   font-size: 1rem;
 }
 
 .container2 .analyse .progresss {
-  font-family: cursive, sans-serif;
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
   position: relative;
   width: 92px;
   height: 92px;
@@ -293,7 +299,7 @@ aside .sidebar .message-count {
 }
 
 .container2 .analyse .progresss .percentage {
-  font-family: cursive, sans-serif;
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
   position: absolute;
   top: -3px;
   left: -1px;

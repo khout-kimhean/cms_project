@@ -277,7 +277,7 @@ if (isset($_POST['submit'])) {
             <div class="toggle">
                 <div class="logo">
                     <img src="../images/logo/logo.jpg">
-                    <h2>FTB <span class="danger">Bank</span></h2>
+                    <!-- <h2>FTB <span class="danger">Bank</span></h2> -->
                 </div>
                 <div class="close" id="close-btn">
                     <span class="material-icons-sharp">
@@ -307,7 +307,7 @@ if (isset($_POST['submit'])) {
                 <a href="../file/file_mgt.php" <?php echo isLinkDisabled('file_mgt.php'); ?> class="active">
                     <span class="fa fa-upload">
                     </span>
-                    <h3>Store File</h3>
+                    <h3>Documents</h3>
                 </a>
 
                 <!-- <a href="../data_store/list_upload.php">
@@ -320,7 +320,7 @@ if (isset($_POST['submit'])) {
                     <span class="fa fa-address-book">
                         <!-- fab fa-app-store-ios -->
                     </span>
-                    <h3>Assessment</h3>
+                    <h3>IB User Assessment</h3>
                 </a>
 
                 <a href="../user_mgt/user_management.php" <?php echo isLinkDisabled('user_management.php'); ?>>
@@ -357,7 +357,9 @@ if (isset($_POST['submit'])) {
                                 <form action="upload_file.php" method="post" enctype="multipart/form-data">
                                     <div class="back_button">
                                         <a href="../file/file_mgt.php" class="back-button">
-                                            <i class="fa fa-chevron-circle-left" style="font-size: 24px">Back</i>
+                                            <i class="fa fa-chevron-circle-left" style="font-size: 24px">
+                                                <h1>Back</h1>
+                                            </i>
                                         </a>
                                     </div>
                                     <div class="form-group">

@@ -50,7 +50,7 @@ html {
 body {
   width: 100vw;
   height: 100vh;
-  font-family: "Poppins", sans-serif;
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
   font-size: 0.88rem;
   user-select: none;
   overflow-x: hidden;
@@ -80,7 +80,7 @@ h2 {
 
 h3 {
   font-weight: 500;
-  font-size: 0.87rem;
+  font-size: 0.98rem;
 }
 
 small {
@@ -88,7 +88,10 @@ small {
 }
 
 p {
-  color: var(--color-dark-variant);
+  font-size: 14px;
+  margin-top: 5px;
+  font-weight: 400;
+  color: var(--color-dark) !important;
 }
 
 b {
@@ -96,7 +99,9 @@ b {
 }
 
 .text-muted {
-  color: var(--color-info-dark);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-dark);
 }
 
 .primary {
@@ -140,10 +145,11 @@ aside .toggle .logo {
   gap: 0.5rem;
 }
 aside .toggle .logo img {
-  width: 2rem;
-  height: 2rem;
-  /* Make the image circular */
-  border-radius: 50%; /* Make the image circular */
+  margin-left: 0px;
+  margin-top: -35px;
+  margin-bottom: -35px;
+  width: 7rem;
+  height: 7rem;
   object-fit: cover;
 }
 
@@ -227,7 +233,11 @@ aside .sidebar .message-count {
 /* a:hover {
   text-decoration: underline;
 } */
-
+.back_button h1 {
+  display: inline-block;
+  font-weight: 500;
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
+}
 main {
   margin-top: 70px;
   /* margin-bottom: 30px; */
@@ -254,7 +264,7 @@ main {
 .wrapper h1 {
   text-align: center;
   margin-bottom: 10px;
-  font-family: cursive;
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
   font-size: 24px;
 }
 .tox-promotion {
@@ -288,7 +298,6 @@ main {
   padding: 10px;
 }
 /* .container2 h1 {
-  font-family: cursive, sans-serif;
   margin-bottom: 5px;
   color: var(--color-dark);
 } */
@@ -307,6 +316,8 @@ main {
 }
 
 .container2 .form-group p {
+  width: 30%;
+  font-size: 16px;
   border: 1px solid #ccc;
   border-radius: var(--border-radius-1);
   padding: 8px;
@@ -325,7 +336,6 @@ main {
   margin-bottom: 5px;
 }
 .container2 label {
-  /* font-family: cursive; */
   font-size: 16px;
   color: var(--color-dark);
 }

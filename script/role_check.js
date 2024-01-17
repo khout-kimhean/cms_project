@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
         'file_mgt.php': ['admin', 'card payment team', 'digital branch team', 'atm team', 'terminal team'],
         'chat.php': ['admin', 'card payment team', 'digital branch team', 'atm team', 'terminal team', 'user'],
         'chatgpt.php': ['admin', 'card payment team', 'digital branch team', 'atm team', 'terminal team', 'user'],
-        'datachat.php': ['admin', 'card payment team', 'digital branch team', 'atm team', 'terminal team'],
+        'datachat.php': ['admin'],
         'read_file.php': ['admin', 'card payment team', 'digital branch team', 'user'],
         'notification.php': ['admin', 'card payment team'],
         'assessment.php': ['admin', 'card payment team'],
@@ -73,31 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     }
-    // function disableForRestricted(role, option) {
-    //     var allowed = allowedRoles[option] && allowedRoles[option].includes(role);
-    //     if (!allowed) {
-    //         var elements = document.getElementsByClassName("disable-for-restricted");
-    //         for (var i = 0; i < elements.length; i++) {
-    //             elements[i].addEventListener("click", function (event) {
-    //                 event.preventDefault();
-    //                 // alert("You do not have permission to access this option.");
-    //             });
-    //             elements[i].style.pointerEvents = "none";
-    //             elements[i].style.opacity = "0.6";
-    //             elements[i].style.cursor = "not-allowed";
-    //             elements[i].style.transition = "opacity 0.3s, cursor 0.3s";
 
-    //             // Add hover effect to show a block cursor
-    //             elements[i].addEventListener("mouseenter", function () {
-    //                 this.style.cursor = "not-allowed";
-    //             });
-
-    //             elements[i].addEventListener("mouseleave", function () {
-    //                 this.style.cursor = "initial";
-    //             });
-    //         }
-    //     }
-    // }
 
 
     // Call the function for each option

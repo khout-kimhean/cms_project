@@ -53,7 +53,7 @@ body {
   user-select: text;
   width: 100vw;
   height: 100vh;
-  font-family: "Poppins", sans-serif;
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
   font-size: 0.88rem;
   user-select: none;
   overflow-x: hidden;
@@ -83,7 +83,7 @@ h2 {
 
 h3 {
   font-weight: 500;
-  font-size: 0.87rem;
+  font-size: 0.98rem;
 }
 
 small {
@@ -91,7 +91,10 @@ small {
 }
 
 p {
-  color: var(--color-dark-variant);
+  font-size: 14px;
+  margin-top: 5px;
+  font-weight: 400;
+  color: var(--color-dark) !important;
 }
 
 b {
@@ -99,7 +102,10 @@ b {
 }
 
 .text-muted {
-  color: var(--color-info-dark);
+  font-size: 12px;
+  font-weight: 500;
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
+  color: var(--color-dark);
 }
 
 .primary {
@@ -142,11 +148,13 @@ aside .toggle .logo {
   gap: 0.5rem;
 }
 aside .toggle .logo img {
-  width: 2rem;
-  height: 2rem;
-  /* Make the image circular */
-  border-radius: 50%; /* Make the image circular */
+  margin-left: 0px;
+  margin-top: -35px;
+  margin-bottom: -35px;
+  width: 7rem;
+  height: 7rem;
   object-fit: cover;
+  /* font-family: "Eras ITC", "Eras Light ITC", sans-serif; */
 }
 
 aside .toggle .close {
@@ -229,6 +237,10 @@ aside .sidebar .message-count {
 }
 
 /* main  */
+.back_button h1 {
+  display: inline-block;
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
+}
 .container2 .head {
   margin-bottom: 10px;
   display: inline-flex;
@@ -240,7 +252,7 @@ aside .sidebar .message-count {
 .container2 .head h2 {
   margin-left: 30px;
   text-align: center;
-  font-family: cursive, sans-serif;
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
   font-size: 25px;
   color: #333;
 }
@@ -257,6 +269,7 @@ aside .sidebar .message-count {
   display: flex;
 }
 .container2 .item .file {
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
   width: 220px;
 }
 .container2 .file {
@@ -269,6 +282,8 @@ aside .sidebar .message-count {
 }
 
 .container2 .search {
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
+  font-size: 14px;
   text-align: center;
   margin-left: 10px;
   width: 360px;
@@ -278,6 +293,7 @@ aside .sidebar .message-count {
 }
 
 .container2 button {
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
   margin-left: 10px;
   background-color: rgb(196, 160, 6);
   color: var(--color-white);

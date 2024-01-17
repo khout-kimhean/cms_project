@@ -51,7 +51,7 @@ html {
 body {
   width: 100vw;
   height: 100vh;
-  font-family: "Poppins", sans-serif;
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif !important;
   font-size: 0.88rem;
   user-select: none;
   overflow-x: hidden;
@@ -81,7 +81,7 @@ h2 {
 
 h3 {
   font-weight: 500;
-  font-size: 0.87rem;
+  font-size: 0.98rem;
 }
 
 small {
@@ -89,7 +89,10 @@ small {
 }
 
 p {
-  color: var(--color-dark-variant);
+  font-size: 14px;
+  margin-top: 5px;
+  font-weight: 400;
+  color: var(--color-dark) !important;
 }
 
 b {
@@ -97,7 +100,9 @@ b {
 }
 
 .text-muted {
-  color: var(--color-info-dark);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-dark);
 }
 
 .primary {
@@ -140,8 +145,11 @@ aside .toggle .logo {
   gap: 0.5rem;
 }
 aside .toggle .logo img {
-  width: 2rem;
-  height: 2rem;
+  margin-left: 0px;
+  margin-top: -35px;
+  margin-bottom: -35px;
+  width: 7rem;
+  height: 7rem;
   object-fit: cover;
 }
 
@@ -227,22 +235,25 @@ aside .sidebar .message-count {
 } */
 
 .container2 .back_button a {
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif !important;
   border-radius: 20px;
   color: rgb(12, 77, 162);
+}
+.container2 .back_button h1 {
+  display: inline-block;
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif !important;
 }
 .container2 {
   box-shadow: var(--box-shadow);
   border-radius: var(--card-border-radius);
   padding: var(--card-padding);
   background-color: var(--color-white);
-  font-family: cursive, sans-serif;
   margin-top: 70px;
   height: 88%;
   width: 138%;
   color: var(--color-dark);
 }
 .container2 h2 {
-  font-family: cursive, sans-serif;
   margin-bottom: 20px;
   text-align: center;
 }
@@ -250,7 +261,6 @@ aside .sidebar .message-count {
 .container2 .select_role label {
   font-size: 14px;
   border: 1px solid #ccc;
-  font-family: cursive, sans-serif;
   background-color: var(--color-white);
   padding: 10px;
   color: #202528;
@@ -261,7 +271,6 @@ aside .sidebar .message-count {
   width: 38%;
   font-size: 14px;
   border: 1px solid #ccc;
-  font-family: cursive, sans-serif;
   background-color: var(--color-white);
   padding: 10px;
   color: #202528;
@@ -278,7 +287,6 @@ aside .sidebar .message-count {
     border: 1px solid #ccc;
     margin-bottom: 10px;
     margin-top: 10px;
-    font-family: cursive, sans-serif;
     outline: 0;
     background: var(--color-white);
     padding: 8px;
@@ -287,7 +295,6 @@ aside .sidebar .message-count {
 .container2 .select label {
     font-size: 14px;
     border: 1px solid #ccc;
-    font-family: cursive, sans-serif;
     background-color: var(--color-white);
     padding: 10px;
     color: #202528;
@@ -300,6 +307,7 @@ aside .sidebar .message-count {
 }
 .container2 form input[type="submit"] {
   background-color: var(--color-primary);
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif !important;
   border: none;
   /* border-radius: 20px; */
   color: var(--color-white);
@@ -330,7 +338,6 @@ aside .sidebar .message-count {
   margin-left: 25px;
   width: 300px;
   border: 1px solid #ccc;
-  font-family: cursive, sans-serif;
   outline: 0;
   background: var(--color-white);
   padding: 8px;
@@ -339,7 +346,6 @@ aside .sidebar .message-count {
 .container2 .select .user_mgt label {
   font-size: 14px;
   border: 1px solid #ccc;
-  font-family: cursive, sans-serif;
   background-color: var(--color-white);
   padding: 10px;
   color: #202528;

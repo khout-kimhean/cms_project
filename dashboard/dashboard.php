@@ -115,7 +115,7 @@ $result = $conn->query($sql);
 
                 <div class="logo">
                     <img src="../images/logo/logo.jpg">
-                    <h2>FTB <span class="danger">Bank</span></h2>
+                    <!-- <h2>FTB <span class="danger">Bank</span></h2> -->
                 </div>
                 <div class="close" id="close-btn">
                     <span class="material-icons-sharp">
@@ -145,7 +145,7 @@ $result = $conn->query($sql);
                 <a href="../file/file_mgt.php" <?php echo isLinkDisabled('file_mgt.php'); ?>>
                     <span class="fa fa-upload">
                     </span>
-                    <h3>Store File</h3>
+                    <h3>Documents</h3>
                 </a>
 
                 <!-- <a href="../data_store/list_upload.php">
@@ -158,7 +158,7 @@ $result = $conn->query($sql);
                     <span class="fa fa-address-book">
                         <!-- fab fa-app-store-ios -->
                     </span>
-                    <h3>Assessment</h3>
+                    <h3>IB User Assessment</h3>
                 </a>
 
                 <a href="../user_mgt/user_management.php" <?php echo isLinkDisabled('user_management.php'); ?>>
@@ -277,8 +277,8 @@ $result = $conn->query($sql);
                     <div class="user">
                         <a href="../file/file_mgt.php" <?php echo isLinkDisabled('file_mgt.php'); ?>>
                             <img src="../images/file/upload.png" alt="Show File">
-                            <h2>Store File</h2>
-                            <p>Upload and View file</p>
+                            <h2>Documents</h2>
+                            <p>Upload and View Docs</p>
                         </a>
                     </div>
                     <div class="user">
@@ -408,7 +408,7 @@ $result = $conn->query($sql);
                         <div class="info">
                             <h3>Support Time</h3>
                             <small class="text_muted">
-                                08:00 AM - 12:00 PM
+                                08:00 AM - 05:00 PM
                             </small>
                         </div>
                         <span class="material-icons-sharp">
@@ -427,7 +427,7 @@ $result = $conn->query($sql);
                         <div class="info">
                             <h3>Open Time</h3>
                             <small class="text_muted">
-                                01:00 PM - 5:00 PM
+                                08:00 AM - 5:00 PM
                             </small>
                         </div>
                         <span class="material-icons-sharp">

@@ -43,7 +43,7 @@ $result = $conn->query($sql);
             <div class="toggle">
                 <div class="logo">
                     <img src="../images/logo/logo.jpg">
-                    <h2>FTB <span class="danger">Bank</span></h2>
+                    <!-- <h2>FTB <span class="danger">Bank</span></h2> -->
                 </div>
                 <div class="close" id="close-btn">
                     <span class="material-icons-sharp">
@@ -86,7 +86,7 @@ $result = $conn->query($sql);
                     <span class="fa fa-address-book">
                         <!-- fab fa-app-store-ios -->
                     </span>
-                    <h3>Assessment</h3>
+                    <h3>IB User Assessment</h3>
                 </a>
 
                 <a href="../user_mgt/user_management.php" <?php echo isLinkDisabled('user_management.php'); ?>>

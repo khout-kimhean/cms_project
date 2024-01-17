@@ -149,8 +149,9 @@ body .background {
 }
 
 .question-container button:hover {
+  background-color: rgb(196, 160, 6);
   color: var(--text-color);
-  background-color: var(--color-light);
+  /* background-color: var(--color-light); */
   cursor: pointer;
 }
 
@@ -195,11 +196,13 @@ body .background {
   color: var(--text-color);
 }
 .default-text h1 {
+  font-weight: 500;
   color: var(--text-color);
-  font-family: cursive;
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
   font-size: 2rem;
 }
 .default-text p {
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
   color: var(--text-color);
   margin-top: 10px;
   font-size: 1.1rem;
@@ -226,7 +229,8 @@ body .background {
   border-radius: 10px;
 }
 .text {
-  font-size: 14px;
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
+  font-size: 15px;
   color: var(--text-color);
   /* color: var(--color-background); */
 }
@@ -385,7 +389,7 @@ span.material-symbols-rounded {
   height: 55px;
   width: 100%;
   border: none;
-  padding: 15px 15px 0px 15px;
+  padding: 15px 15px 15px 15px;
   /* color: var(--color-background); */
   color: var(--placeholder-color);
   /* background-color: var(--color-dark); */

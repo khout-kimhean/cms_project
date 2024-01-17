@@ -64,7 +64,7 @@ $result = mysqli_query($con, $sql);
 
                 <div class="logo">
                     <img src="../images/logo/logo.jpg">
-                    <h2>FTB <span class="danger">Bank</span></h2>
+                    <!-- <h2>FTB <span class="danger">Bank</span></h2> -->
                 </div>
                 <div class="close" id="close-btn">
                     <span class="material-icons-sharp">
@@ -84,14 +84,14 @@ $result = mysqli_query($con, $sql);
                 <a href="../file/file_mgt.php" <?php echo isLinkDisabled('file_mgt.php'); ?>>
                     <span class="fa fa-upload">
                     </span>
-                    <h3>Store File</h3>
+                    <h3>Documents</h3>
                 </a>
 
                 <a href="../assessment/assessment.php" <?php echo isLinkDisabled('assessment.php'); ?>>
                     <span class="fa fa-address-book">
                         <!-- fab fa-app-store-ios -->
                     </span>
-                    <h3>Assessment</h3>
+                    <h3>IB User Assessment</h3>
                 </a>
 
                 <a href="../user_mgt/user_management.php" <?php echo isLinkDisabled('user_management.php'); ?>>
@@ -112,7 +112,9 @@ $result = mysqli_query($con, $sql);
             <div class="container2">
                 <div class="back_button">
                     <a href="../dashboard/dashboard.php" class="back-button">
-                        <i class="fa fa-chevron-circle-left" style="font-size: 25px">Back</i>
+                        <i class="fa fa-chevron-circle-left" style="font-size: 25px">
+                            <h1>Back</h1>
+                        </i>
                     </a>
                 </div>
                 <div class="notification-container">
@@ -130,27 +132,27 @@ $result = mysqli_query($con, $sql);
                         while ($row = mysqli_fetch_assoc($result)) {
                             if (!empty($row['request_date']) && !empty($row['end_date'])) {
                                 ?>
-                    <div class="notify-alert-box">
-                        <img src="../images/logo/logo.jpg">
-                        <div class="notification-item">
-                            <p>
-                                <strong>
-                                    <?php echo htmlspecialchars($row['display_name']); ?>
-                                </strong><br><br>
-                                <span>
-                                    <?php echo htmlspecialchars($row['branch']); ?>
-                                </span>
-                            </p>
-                        </div>
-                        <div class="detail-item">
-                            <div class="move-back">
-                                <a href="../dashboard/notification.php?delete=<?php echo $row['id']; ?>"><i
-                                        class="fa fa-arrow-circle-right" aria-hidden="true"></i> Move Back</a>
-                            </div>
-                            <?php echo htmlspecialchars($row['end_date']); ?>
-                        </div>
-                    </div>
-                    <?php
+                                <div class="notify-alert-box">
+                                    <img src="../images/logo/logo.jpg">
+                                    <div class="notification-item">
+                                        <p>
+                                            <strong>
+                                                <?php echo htmlspecialchars($row['display_name']); ?>
+                                            </strong><br><br>
+                                            <span>
+                                                <?php echo htmlspecialchars($row['branch']); ?>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="detail-item">
+                                        <div class="move-back">
+                                            <a href="../dashboard/notification.php?delete=<?php echo $row['id']; ?>"><i
+                                                    class="fa fa-arrow-circle-right" aria-hidden="true"></i> Move Back</a>
+                                        </div>
+                                        <?php echo htmlspecialchars($row['end_date']); ?>
+                                    </div>
+                                </div>
+                                <?php
                             }
                         }
                     } else {
@@ -165,31 +167,32 @@ $result = mysqli_query($con, $sql);
 
                     $sql = "SELECT * FROM user_new ORDER BY id DESC";
                     $result = mysqli_query($con, $sql);
+
                     if ($result && mysqli_num_rows($result) > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
                             ?>
-                    <div class="notify-alert-box">
-                        <img src="../images/logo/logo.jpg">
-                        <div class="notification-item">
-                            <p>
-                                <strong>
-                                    <?php echo ($row['display_name']); ?>
-                                </strong><br><br>
-                                <span>
-                                    <?php echo htmlspecialchars($row['branch']); ?>
-                                </span>
-                            </p>
-                        </div>
+                            <div class="notify-alert-box">
+                                <img src="../images/logo/logo.jpg">
+                                <div class="notification-item">
+                                    <p>
+                                        <strong>
+                                            <?php echo ($row['display_name']); ?>
+                                        </strong><br><br>
+                                        <span>
+                                            <?php echo htmlspecialchars($row['branch']); ?>
+                                        </span>
+                                    </p>
+                                </div>
 
-                        <div class="date">
-                            <div class="delete">
+                                <div class="date">
+                                    <div class="delete">
+
+                                    </div>
+                                    <?php echo htmlspecialchars($row['request_date']); ?>
+                                </div>
 
                             </div>
-                            <?php echo htmlspecialchars($row['request_date']); ?>
-                        </div>
-
-                    </div>
-                    <?php }
+                        <?php }
                     }
 
                     ?>

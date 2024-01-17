@@ -108,33 +108,33 @@ mysqli_close($con);
     <link rel="stylesheet" type="text/css" href="../styles/assessment/assessment_user.css">
     <title>Admin Dashboard</title>
     <script>
-        function exportTableToExcel(tableId, filename = '') {
-            let downloadLink;
-            const dataType = 'application/vnd.ms-excel';
-            const table = document.getElementById(tableId);
-            const tableHTML = table.outerHTML.replace(/ /g, '%20');
+    function exportTableToExcel(tableId, filename = '') {
+        let downloadLink;
+        const dataType = 'application/vnd.ms-excel';
+        const table = document.getElementById(tableId);
+        const tableHTML = table.outerHTML.replace(/ /g, '%20');
 
-            // Create a download link element
-            downloadLink = document.createElement('a');
+        // Create a download link element
+        downloadLink = document.createElement('a');
 
-            document.body.appendChild(downloadLink);
+        document.body.appendChild(downloadLink);
 
-            if (navigator.msSaveOrOpenBlob) {
-                const blob = new Blob(['\ufeff', tableHTML], {
-                    type: dataType
-                });
-                navigator.msSaveOrOpenBlob(blob, filename);
-            } else {
-                // Create a link to the file
-                downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+        if (navigator.msSaveOrOpenBlob) {
+            const blob = new Blob(['\ufeff', tableHTML], {
+                type: dataType
+            });
+            navigator.msSaveOrOpenBlob(blob, filename);
+        } else {
+            // Create a link to the file
+            downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
 
-                // Setting the file name
-                downloadLink.download = filename;
+            // Setting the file name
+            downloadLink.download = filename;
 
-                //triggering the function
-                downloadLink.click();
-            }
+            //triggering the function
+            downloadLink.click();
         }
+    }
     </script>
 
 </head>
@@ -147,7 +147,7 @@ mysqli_close($con);
             <div class="toggle">
                 <div class="logo">
                     <img src="../images/logo/logo.jpg">
-                    <h2>FTB <span class="danger">Bank</span></h2>
+                    <!-- <h2>FTB <span class="danger">Bank</span></h2> -->
                 </div>
                 <div class="close" id="close-btn">
                     <span class="material-icons-sharp">
@@ -167,13 +167,13 @@ mysqli_close($con);
                 <a href="../file/file_mgt.php" <?php echo isLinkDisabled('file_mgt.php'); ?>>
                     <span class="fa fa-upload">
                     </span>
-                    <h3>Store File</h3>
+                    <h3>Documents</h3>
                 </a>
                 <a href="../assessment/assessment.php" <?php echo isLinkDisabled('assessment.php'); ?> class="active">
                     <span class="fa fa-address-book">
                         <!-- fab fa-app-store-ios -->
                     </span>
-                    <h3>Assessment</h3>
+                    <h3>IB User Assessment</h3>
                 </a>
 
                 <a href="../user_mgt/user_management.php" <?php echo isLinkDisabled('user_management.php'); ?>>
@@ -247,75 +247,75 @@ mysqli_close($con);
                                     $id = 0; // Initialize the counter
                                     while ($row = mysqli_fetch_assoc($result)) {
                                         ?>
-                                        <tr>
-                                            <td>
-                                                <?php echo ++$id; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['request_no']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['display_name']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['branch']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['department']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['position']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['function']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['role']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['m_branch']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['m_department']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['m_position']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['m_function']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['m_role']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['application']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['duration']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['requester']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['request_date']); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo htmlspecialchars($row['approver']); ?>
-                                            </td>
-                                            <td>
-                                                <?php
+                                <tr>
+                                    <td>
+                                        <?php echo ++$id; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo htmlspecialchars($row['request_no']); ?>
+                                    </td>
+                                    <td>
+                                        <?php echo htmlspecialchars($row['display_name']); ?>
+                                    </td>
+                                    <td>
+                                        <?php echo htmlspecialchars($row['branch']); ?>
+                                    </td>
+                                    <td>
+                                        <?php echo htmlspecialchars($row['department']); ?>
+                                    </td>
+                                    <td>
+                                        <?php echo htmlspecialchars($row['position']); ?>
+                                    </td>
+                                    <td>
+                                        <?php echo htmlspecialchars($row['function']); ?>
+                                    </td>
+                                    <td>
+                                        <?php echo htmlspecialchars($row['role']); ?>
+                                    </td>
+                                    <td>
+                                        <?php echo htmlspecialchars($row['m_branch']); ?>
+                                    </td>
+                                    <td>
+                                        <?php echo htmlspecialchars($row['m_department']); ?>
+                                    </td>
+                                    <td>
+                                        <?php echo htmlspecialchars($row['m_position']); ?>
+                                    </td>
+                                    <td>
+                                        <?php echo htmlspecialchars($row['m_function']); ?>
+                                    </td>
+                                    <td>
+                                        <?php echo htmlspecialchars($row['m_role']); ?>
+                                    </td>
+                                    <td>
+                                        <?php echo htmlspecialchars($row['application']); ?>
+                                    </td>
+                                    <td>
+                                        <?php echo htmlspecialchars($row['duration']); ?>
+                                    </td>
+                                    <td>
+                                        <?php echo htmlspecialchars($row['requester']); ?>
+                                    </td>
+                                    <td>
+                                        <?php echo htmlspecialchars($row['request_date']); ?>
+                                    </td>
+                                    <td>
+                                        <?php echo htmlspecialchars($row['approver']); ?>
+                                    </td>
+                                    <td>
+                                        <?php
                                                 $comment = htmlspecialchars($row['comment']);
                                                 echo strlen($comment) > 20 ? substr($comment, 0, 20) . '...' : $comment;
                                                 ?>
-                                            </td>
-                                            <td>
-                                                <a class="click1"
-                                                    href="edit_user_move.php?id=<?php echo $row['id']; ?>">Edit</a>
-                                                ||
-                                                <a href="assessment_user.php?id=<?php echo $row['id']; ?>">Delete</a>
-                                            </td>
-                                        </tr>
-                                        <?php
+                                    </td>
+                                    <td>
+                                        <a class="click1"
+                                            href="edit_user_move.php?id=<?php echo $row['id']; ?>">Edit</a>
+                                        ||
+                                        <a href="assessment_user.php?id=<?php echo $row['id']; ?>">Delete</a>
+                                    </td>
+                                </tr>
+                                <?php
                                     }
                                 } else {
                                     echo "<tr><td colspan='7'>No files found.</td></tr>";

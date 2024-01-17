@@ -143,7 +143,7 @@ $conn->close();
             <div class="toggle">
                 <div class="logo">
                     <img src="../images/logo/logo.jpg">
-                    <h2>FTB <span class="danger">Bank</span></h2>
+                    <!-- <h2>FTB <span class="danger">Bank</span></h2> -->
                 </div>
                 <div class="close" id="close-btn">
                     <span class="material-icons-sharp">
@@ -162,13 +162,13 @@ $conn->close();
                 <a href="../file/file_mgt.php" <?php echo isLinkDisabled('file_mgt.php'); ?>>
                     <span class="fa fa-upload">
                     </span>
-                    <h3>Store File</h3>
+                    <h3>Documents</h3>
                 </a>
                 <a href="../assessment/assessment.php" <?php echo isLinkDisabled('assessment.php'); ?> class="active">
                     <span class="fa fa-address-book">
                         <!-- fab fa-app-store-ios -->
                     </span>
-                    <h3>Assessment</h3>
+                    <h3>IB User Assessment</h3>
                 </a>
 
                 <a href="../user_mgt/user_management.php" <?php echo isLinkDisabled('user_management.php'); ?>>
@@ -189,7 +189,9 @@ $conn->close();
             <div class="container2">
                 <div class="back_button">
                     <a href="../assessment/list_new_user.php" class="back-button">
-                        <i class="fa fa-chevron-circle-left" style="font-size: 28px"> Back</i>
+                        <i class="fa fa-chevron-circle-left" style="font-size: 28px">
+                            <h1>Back</h1>
+                        </i>
                     </a>
                 </div>
 

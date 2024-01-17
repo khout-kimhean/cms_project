@@ -50,7 +50,7 @@ html {
 body {
   width: 100vw;
   height: 100vh;
-  font-family: "Poppins", sans-serif;
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
   font-size: 0.88rem;
   user-select: none;
   overflow-x: hidden;
@@ -80,7 +80,7 @@ h2 {
 
 h3 {
   font-weight: 500;
-  font-size: 0.87rem;
+  font-size: 0.98rem;
 }
 
 small {
@@ -88,15 +88,19 @@ small {
 }
 
 p {
-  color: var(--color-dark-variant);
+  font-size: 14px;
+  margin-top: 5px;
+  font-weight: 400;
+  color: var(--color-dark) !important;
 }
-
 b {
   color: var(--color-dark);
 }
 
 .text-muted {
-  color: var(--color-info-dark);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-dark) !important;
 }
 
 .primary {
@@ -139,10 +143,11 @@ aside .toggle .logo {
   gap: 0.5rem;
 }
 aside .toggle .logo img {
-  width: 2rem;
-  height: 2rem;
-  /* Make the image circular */
-  border-radius: 50%; /* Make the image circular */
+  margin-left: 0px;
+  margin-top: -35px;
+  margin-bottom: -35px;
+  width: 7rem;
+  height: 7rem;
   object-fit: cover;
 }
 
@@ -236,7 +241,6 @@ li {
   padding: 0;
 }
 .form-group label {
-  /* font-family: cursive, sans-serif; */
   font-size: 18px;
 }
 .container2 h1 {
@@ -245,6 +249,7 @@ li {
 }
 
 .container2 h2 {
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
   font-size: 20px;
   font-weight: bold;
 }
@@ -274,8 +279,7 @@ li {
 }
 
 .container2 label[for="searchTerm"] {
-  font-family: cursive, sans-serif;
-  font-weight: bold;
+  font-weight: 500;
   display: block;
   margin-bottom: 10px;
 }
@@ -305,16 +309,18 @@ li {
   overflow-y: auto;
 }
 .container2 .card-header a {
+  font-weight: 500;
   margin-right: 20px;
   color: rgb(12, 77, 162);
 }
 .container2 .card-header h2 {
-  font-family: cursive, sans-serif;
+  font-weight: 500;
   text-align: center;
   margin-right: 20px;
   color: var(--color-dark);
 }
 .container2 .btn.btn-info {
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
   background-color: rgb(196, 160, 6);
   color: var(--color-white);
   border: none;
@@ -329,7 +335,8 @@ table {
 }
 
 th {
-  background-color: var(--color-dark-variant);
+  font-size: 13px;
+  background-color: rgb(12, 77, 162);
   color: var(--color-white);
   font-weight: bold;
   padding: 10px;
@@ -341,7 +348,10 @@ tbody tr:nth-child(even) {
 }
 
 td {
+  color: var(--color-dark);
+  font-weight: 400;
   padding: 10px;
+  font-size: 13px;
 }
 
 a {
@@ -361,7 +371,6 @@ a {
 
 .container2 .card {
   margin-top: 70px;
-  /* font-family: cursive, sans-serif; */
   background-color: var(--color-white);
   border-radius: var(--card-border-radius);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -376,7 +385,6 @@ a {
   color: var(--color-white);
 }
 .container2 .card a button {
-  /* font-family: cursive, sans-serif; */
   width: 150px;
   cursor: pointer;
   color: var(--color-white);

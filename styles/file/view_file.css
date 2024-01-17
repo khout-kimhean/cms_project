@@ -51,7 +51,7 @@ body {
   display: inline-flex;
   width: 100vw;
   height: 100vh;
-  font-family: "Poppins", sans-serif;
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
   font-size: 0.88rem;
   user-select: none;
   overflow-x: hidden;
@@ -81,7 +81,7 @@ h2 {
 
 h3 {
   font-weight: 500;
-  font-size: 0.87rem;
+  font-size: 0.98rem;
 }
 
 small {
@@ -89,7 +89,10 @@ small {
 }
 
 p {
-  color: var(--color-dark-variant);
+  font-size: 14px;
+  margin-top: 5px;
+  font-weight: 400;
+  color: var(--color-dark) !important;
 }
 
 b {
@@ -97,7 +100,10 @@ b {
 }
 
 .text-muted {
-  color: var(--color-info-dark);
+  font-size: 12px;
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
+  color: var(--color-dark);
+  font-weight: 500;
 }
 
 .primary {
@@ -142,10 +148,11 @@ aside .toggle .logo {
   gap: 0.5rem;
 }
 aside .toggle .logo img {
-  width: 2rem;
-  height: 2rem;
-  /* Make the image circular */
-  border-radius: 50%; /* Make the image circular */
+  margin-left: 0px;
+  margin-top: -35px;
+  margin-bottom: -35px;
+  width: 7rem;
+  height: 7rem;
   object-fit: cover;
 }
 
@@ -233,9 +240,13 @@ aside .sidebar a:hover span {
 }
 
 /* main container2 */
+.back_button h1 {
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
+  font-weight: 500;
+  display: inline-block;
+}
 .container2 .note h3 {
   font-size: 14px;
-  /* font-family: cursive, sans-serif; */
   margin-top: 20px;
   padding: 4px;
   color: rgb(40, 13, 174);
@@ -251,14 +262,14 @@ li {
   padding: 0;
 }
 .form-group label {
-  font-family: cursive, sans-serif;
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
   font-size: 18px;
   /* border-radius: 20px; */
   overflow-y: auto;
 }
 main {
   width: 138%;
-  font-family: Arial, sans-serif;
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
   background-color: var(--color-background);
   color: var(--color-dark);
   margin-top: 40px;
@@ -368,6 +379,7 @@ tbody tr:nth-child(even) {
 }
 
 td {
+  font-size: 13px;
   padding: 10px;
 }
 

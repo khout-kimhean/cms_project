@@ -51,14 +51,22 @@ html {
 body {
   width: 100vw;
   height: 100vh;
-  font-family: "Poppins", sans-serif;
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
   font-size: 0.88rem;
   user-select: none;
   overflow-x: hidden;
   color: var(--color-dark);
   background-color: var(--color-background);
 }
-
+th {
+  /* line-height: 1.5px; */
+  font-size: 17px;
+  font-weight: 500 !important;
+  display: table-cell;
+  vertical-align: inherit;
+  font-weight: bold;
+  text-align: -internal-center;
+}
 a {
   color: var(--color-dark);
 }
@@ -75,13 +83,14 @@ h1 {
 }
 
 h2 {
-  font-weight: 600;
+  color: var(--color-dark);
+  font-weight: 500;
   font-size: 1.4rem;
 }
 
 h3 {
   font-weight: 500;
-  font-size: 0.87rem;
+  font-size: 0.98rem;
 }
 
 small {
@@ -89,7 +98,10 @@ small {
 }
 
 p {
-  color: var(--color-dark-variant);
+  font-size: 14px;
+  margin-top: 5px;
+  font-weight: 400;
+  color: var(--color-dark) !important;
 }
 
 b {
@@ -131,15 +143,18 @@ aside .toggle {
   margin-top: 1.4rem;
 }
 
-aside .toggle .logo {
+/* aside .toggle .logo {
   display: flex;
   gap: 0.5rem;
-}
+} */
 aside .toggle .logo img {
-  width: 2rem;
-  height: 2rem;
-  /* border-radius: 50%; */
+  margin-left: 0px;
+  margin-top: -35px;
+  margin-bottom: -35px;
+  width: 7rem;
+  height: 7rem;
   object-fit: cover;
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
 }
 
 aside .toggle .close {
@@ -188,7 +203,6 @@ aside .sidebar a:last-child {
 aside .sidebar a.active {
   width: 100%;
   color: rgb(12, 77, 162);
-  /* background-color: rgb(12, 77, 162); */
   background-color: var(--color-light);
   margin-left: 0;
 }
@@ -241,7 +255,8 @@ main {
   margin-top: 1.6rem;
 }
 main h1 {
-  font-family: cursive, sans-serif;
+  font-weight: 500;
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
 }
 main .analyse {
   display: grid;
@@ -270,8 +285,8 @@ main .analyse > div .status {
 }
 
 main .analyse h3 {
-  margin-left: 0.6rem;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
 }
 
 main .analyse .progresss {
@@ -294,13 +309,13 @@ main .analyse svg circle {
 }
 
 main .analyse .sales svg circle {
-  stroke: var(--color-success);
+  stroke: rgb(12, 77, 162);
   stroke-dashoffset: -30;
   stroke-dasharray: 200;
 }
 
 main .analyse .visits svg circle {
-  stroke: var(--color-danger);
+  stroke: rgb(196, 160, 6);
   stroke-dashoffset: -30;
   stroke-dasharray: 200;
 }
@@ -312,7 +327,7 @@ main .analyse .searches svg circle {
 }
 
 main .analyse .progresss .percentage {
-  font-family: cursive;
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
   color: var(--color-dark);
   font-size: 16px;
   position: absolute;
@@ -386,9 +401,10 @@ main .recent-orders table:hover {
 }
 
 main table tbody td {
+  font-size: 13px;
   height: 2.8rem;
   border-bottom: 1px solid var(--color-light);
-  color: var(--color-dark-variant);
+  color: var(--color-dark);
 }
 
 main table tbody tr:last-child td {
@@ -420,7 +436,7 @@ main .recent-orders a {
 }
 
 .notification .count {
-  font-family: cursive;
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
   margin-top: 23px;
   position: absolute;
   top: -5px;
@@ -515,7 +531,9 @@ main .recent-orders a {
 
 /* end  */
 .text-muted {
-  color: var(--color-info-dark);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-dark) !important;
 }
 .right-section {
   margin-top: 1.4rem;
@@ -577,6 +595,7 @@ main .recent-orders a {
   text-align: center;
   margin-top: 1rem;
   background-color: var(--color-white);
+  /* background-color: rgb(12, 77, 162); */
   padding: var(--card-padding);
   border-radius: var(--card-border-radius);
   box-shadow: var(--box-shadow);
@@ -594,6 +613,12 @@ main .recent-orders a {
   margin-bottom: 0.8rem;
   border-radius: 50%;
 }
+/* .right-section .user-profile img {
+  width: 15rem;
+  height: auto;
+  margin-top: -15px;
+  margin-bottom: -15px;
+} */
 
 .right-section .user-profile h2 {
   margin-bottom: 0.2rem;

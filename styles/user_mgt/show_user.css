@@ -50,7 +50,7 @@ html {
 body {
   width: 100vw;
   height: 100vh;
-  font-family: "Poppins", sans-serif;
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
   font-size: 0.88rem;
   user-select: none;
   overflow-x: hidden;
@@ -80,7 +80,7 @@ h2 {
 
 h3 {
   font-weight: 500;
-  font-size: 0.87rem;
+  font-size: 0.98rem;
 }
 
 small {
@@ -88,7 +88,10 @@ small {
 }
 
 p {
-  color: var(--color-dark-variant);
+  font-size: 14px;
+  margin-top: 5px;
+  font-weight: 400;
+  color: var(--color-dark) !important;
 }
 
 b {
@@ -96,7 +99,9 @@ b {
 }
 
 .text-muted {
-  color: var(--color-info-dark);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-dark);
 }
 
 .primary {
@@ -139,10 +144,11 @@ aside .toggle .logo {
   gap: 0.5rem;
 }
 aside .toggle .logo img {
-  width: 2rem;
-  height: 2rem;
-  /* Make the image circular */
-  border-radius: 50%; /* Make the image circular */
+  margin-left: 0px;
+  margin-top: -35px;
+  margin-bottom: -35px;
+  width: 7rem;
+  height: 7rem;
   object-fit: cover;
 }
 
@@ -269,17 +275,28 @@ main .new-users .user-list .user img {
   overflow-x: auto;
 }
 .button {
+  font-family: "Eras ITC", "Eras Light ITC", sans-serif;
   width: 100px;
   cursor: pointer;
   border-radius: var(--border-radius-2);
   padding: 5px;
   background-color: rgb(192, 160, 16);
 }
-
+th {
+  /* background-color: rgb(12, 77, 162); */
+  color: var(--color-dark);
+  padding: 8px;
+  font-size: 14px;
+  display: table-cell;
+  vertical-align: inherit;
+  /* font-weight: bold; */
+  text-align: -internal-center;
+}
 main table tbody td {
+  font-size: 14px;
   height: 2.8rem;
   border-bottom: 1px solid var(--color-light);
-  color: var(--color-dark-variant);
+  color: var(--color-dark);
 }
 
 main table tbody tr:last-child td {
