@@ -47,7 +47,7 @@ if ($totalDeleteResult) {
 $count = 0;
 
 $query_1 = "UPDATE user_move SET number =1 WHERE number =0";
-$result = mysqli_query($conn, $sql);
+// $result = mysqli_query($conn, $sql);
 
 $query_1 = "SELECT * FROM user_move WHERE number =0";
 $result = mysqli_query($conn, $query_1);
@@ -56,7 +56,7 @@ $error = array();
 
 
 $query_1 = "UPDATE user_new SET number =1 WHERE number =0";
-$result = mysqli_query($conn, $sql);
+// $result = mysqli_query($conn, $sql);
 
 $query_1 = "SELECT * FROM user_new WHERE number =0";
 $result = mysqli_query($conn, $query_1);

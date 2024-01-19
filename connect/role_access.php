@@ -21,8 +21,10 @@ function isLinkDisabled($link)
         'assign_function.php' => ['admin'],
         // <!-- store file -->
         // 'upload_file.php' => ['admin'],
+        // 'upload_file.php' => ['admin', 'card payment team', 'digital branch team', 'atm team', 'terminal team',],
+        // 'view_file.php' => ['admin', 'card payment team', 'digital branch team', 'atm team', 'terminal team',],
         'upload_file.php' => ['admin', 'card payment team', 'digital branch team', 'atm team', 'terminal team',],
-        'view_file.php' => ['admin', 'card payment team', 'digital branch team', 'atm team', 'terminal team',],
+        'view_file.php' => ['admin', 'card payment team', 'digital branch team', 'atm team', 'terminal team', 'user'],
         'view.php' => ['admin', 'card payment team', 'digital branch team', 'atm team', 'terminal team',],
         'view_data.php' => ['admin', 'card payment team', 'digital branch team', 'atm team', 'terminal team',],
         'edit_data.php' => ['admin', 'card payment team', 'digital branch team', 'atm team', 'terminal team',],
@@ -65,6 +67,7 @@ function isLinkDisabled($link)
         return 'style="pointer-events: none; opacity: 0.0;" onclick="event.preventDefault(); alert(\'You do not have permission to access this option.\');"';
     }
     return '';
+
 }
 
 ?>

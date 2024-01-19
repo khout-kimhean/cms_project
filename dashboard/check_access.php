@@ -14,6 +14,7 @@ if (!isset($_SESSION['user_role'])) {
 $userRole = $_SESSION['user_role'];
 $currentPage = basename($_SERVER['PHP_SELF']);
 
+
 $allowed_roles = [
     // <!-- dashboard -->
     'dashboard.php' => ['admin', 'card payment team', 'digital branch team', 'atm team', 'terminal team', 'user'],

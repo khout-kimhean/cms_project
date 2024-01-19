@@ -339,7 +339,7 @@ main {
 
 .container2 .form-group {
   margin-top: 5px;
-  margin-bottom: 5px;
+  /* margin-bottom: 5px; */
 }
 .form-group label {
   margin-bottom: 10px !important;

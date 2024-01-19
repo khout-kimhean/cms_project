@@ -5,17 +5,20 @@ include '../connect/role_access.php';
 
 $host = "localhost";
 $user = "root";
-$pass = "";
-$db = "demo";
+$password = "";
+$database = "demo";
 
-// Create a connection to the database
-$con = mysqli_connect($host, $user, $pass, $db);
+$con = mysqli_connect($host, $user, $password);
 
 if (!$con) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-// Function to get logged-in user's type
+// Select the database
+if (!mysqli_select_db($con, $database)) {
+    die("Database selection failed: " . mysqli_error($con));
+}
+
 function getLoggedInUserType($conn, $userId)
 {
     $userSql = "SELECT user_type FROM login_register WHERE id = ?";
@@ -76,11 +79,11 @@ if (isset($_POST['submit'])) {
 
             if (!in_array($fileExt, $allowedExtensions) && !in_array($_FILES['file1']['type'][$key], $allowedMimeTypes)) {
                 $errorMessage = "Invalid File Extension or MIME Type!";
-                header("Location: data_store.php?st=error&msg=" . urlencode($errorMessage));
+                header("Location: upload_file.php?st=error&msg=" . urlencode($errorMessage));
                 exit;
             }
 
-            $sql = 'SELECT MAX(id) as id FROM data_store';
+            $sql = 'SELECT MAX(id) as id FROM upload_file';
             $result = mysqli_query($con, $sql);
             $newFilename = '';
 
@@ -95,7 +98,7 @@ if (isset($_POST['submit'])) {
 
             if (!move_uploaded_file($fileTmpName, $filePath)) {
                 $errorMessage = "Error moving uploaded file.";
-                header("Location: data_store.php?st=error&msg=" . urlencode($errorMessage));
+                header("Location: upload_file.php?st=error&msg=" . urlencode($errorMessage));
                 exit;
             }
 
@@ -125,7 +128,7 @@ if (isset($_POST['submit'])) {
                 // Success
             } else {
                 $errorMessage = "Error: " . mysqli_error($con);
-                header("Location: data_store.php?st=error&msg=" . urlencode($errorMessage));
+                header("Location: upload_file.php?st=error&msg=" . urlencode($errorMessage));
                 exit;
             }
         }
@@ -138,7 +141,7 @@ if (isset($_POST['submit'])) {
         $description = strip_tags($_POST['description']);
         $title = $_POST['title'];
 
-        // Get the logged-in user's type
+
         $loggedInUserId = $_SESSION['user_id'];
         $loggedInUserType = getLoggedInUserType($con, $loggedInUserId);
 
@@ -151,7 +154,7 @@ if (isset($_POST['submit'])) {
             exit;
         } else {
             $errorMessage = "Error: " . mysqli_error($con);
-            header("Location: data_store.php?st=error&msg=" . urlencode($errorMessage));
+            header("Location: upload_file.php?st=error&msg=" . urlencode($errorMessage));
             exit;
         }
     }
