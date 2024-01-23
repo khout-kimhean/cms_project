@@ -44,23 +44,23 @@ if ($totalDeleteResult) {
 } else {
     echo "Error: " . $conn->error;
 }
-$count = 0;
+$count1 = 0;
+$count2 = 0;
 
-$query_1 = "UPDATE user_move SET number =1 WHERE number =0";
-// $result = mysqli_query($conn, $sql);
+// $query = "UPDATE user_move SET number =1 WHERE number = 0";
+// $result = mysqli_query($conn, $query);
 
 $query_1 = "SELECT * FROM user_move WHERE number =0";
-$result = mysqli_query($conn, $query_1);
-$count = mysqli_num_rows($result);
-$error = array();
+$result1 = mysqli_query($conn, $query_1);
+$count1 = mysqli_num_rows($result1);
 
 
-$query_1 = "UPDATE user_new SET number =1 WHERE number =0";
-// $result = mysqli_query($conn, $sql);
+// $query = "UPDATE tbl_create_user SET number =1 WHERE number = 0";
+// $result = mysqli_query($conn, $query);
 
-$query_1 = "SELECT * FROM user_new WHERE number =0";
-$result = mysqli_query($conn, $query_1);
-$count = mysqli_num_rows($result);
+$query_2 = "SELECT * FROM user_new WHERE number =0";
+$result2 = mysqli_query($conn, $query_2);
+$count2 = mysqli_num_rows($result2);
 
 
 $sql = "SELECT * FROM login_register";
@@ -88,7 +88,7 @@ $result = $conn->query($sql);
             type: "POST",
             processData: false,
             success: function(data) {
-                $("#notification-count").html("<?php echo $count; ?>");
+                $("#notification-count").html("<?php echo $count1 + $count2; ?>");
                 $("#notification-latest").show();
                 $("#notification-latest").html(data);
             },
@@ -191,10 +191,12 @@ $result = $conn->query($sql);
                 <h1>Analytics</h1>
                 <a href="../dashboard/notification.php" class="notification"
                     <?php echo isLinkDisabled('notification.php'); ?>>
-                    <i><img src="../images/logo/reminder2.png"></i>
-                    <span class="count"><?php echo $count; ?></span>
+                    <i id="notification-icon" name="button" onclick="myFunction()"><img
+                            src="../images/logo/reminder2.png"></i>
+                    <span id="notification-count" class="count"><?php echo $count1 + $count2; ?></span>
                 </a>
             </div>
+
 
 
             <!-- Analyses -->

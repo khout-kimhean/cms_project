@@ -564,10 +564,9 @@ const handleInfoCard2 = () => {
     2. 2 years of card validity
     3. USD currency only
     4. Able to register with FTB Mobile App
-    5. Secure payment with ACS 3Ds
-    6. Peace of mind with smart chip security
-    7. No plastic card fee
-    8. No annual fee
+    5. Peace of mind with smart chip security
+    6. No plastic card fee
+    7. No annual fee
 
     --> Limit
     Transaction Type			       \t\t\tLimit (USD)	Frequency

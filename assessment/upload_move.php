@@ -130,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
 
         $data = extractDataFromPdfText($text);
 
-        $sql = "INSERT INTO assessment_move (request_no, display_name, branch, department, position, application, function, role, m_branch, m_department, m_position, m_function, m_role, requester, duration, approver, request_date, end_date, comment) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO assessment_move (request_no, display_name, branch, department, position, application, function, role, m_branch, m_department, m_position, m_function, m_role, requester, duration, approver, request_date, end_date, comment, date_upload) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,NOW())";
         $stmt = $conn->prepare($sql);
         if (!$stmt) {
             echo "Error preparing SQL statement: " . $conn->error;

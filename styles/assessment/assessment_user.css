@@ -232,6 +232,63 @@ aside .sidebar .message-count {
 
 /* container2 */
 
+.form-container {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.form-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.form-control {
+  width: 90%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.form-group1 {
+  display: flex;
+  margin-top: 10px;
+}
+
+.btn-primary1 {
+  padding: 10px 20px;
+  /* background-color: #6c9bcf; */
+  background: rgb(196, 160, 6);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary1:hover {
+  background-color: #161c62;
+}
+
+/* end */
+
+.find-user form {
+  /* margin-bottom: 5px; */
+  display: inline-flex;
+}
+.form-control {
+  width: 90%;
+  border-radius: 8px;
+  margin-right: 0px;
+  padding: 8px;
+  border: 1px solid var(--color-dark);
+}
+.btn-info {
+  margin-top: 13px !important;
+}
 .buttonx #exportButton {
   /* margin-top: 3px; */
   font-family: "Eras ITC", "Eras Light ITC", sans-serif;
@@ -243,6 +300,7 @@ aside .sidebar .message-count {
 }
 
 .buttonx {
+  margin-top: 10px;
   margin-bottom: 10px;
   display: inline-flex;
   /* margin-top: 10px; */
@@ -272,7 +330,7 @@ main h2 {
   padding: var(--card-padding);
   border-radius: var(--card-border-radius);
   box-shadow: var(--box-shadow); */
-  height: 610px;
+  height: 485px;
   width: 1280px;
   color: var(--color-dark);
   overflow-y: auto;
@@ -308,7 +366,8 @@ li {
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 10px 20px;
-  background-color: var(--color-primary);
+  background: rgb(196, 160, 6);
+  /* background-color: var(--color-primary); */
   color: var(--color-white);
   border: none;
   border-radius: var(--border-radius-1);

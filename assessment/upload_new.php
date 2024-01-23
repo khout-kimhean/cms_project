@@ -67,7 +67,7 @@ if (isset($_POST['submit'])) {
         $text = $pdf->getText();
 
         $data = extractDataFromPdfText($text);
-        $sql = "INSERT INTO user_new ( request_no, display_name, branch, department, position, application, function, role, requester, approver, request_date , comment) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO user_new ( request_no, display_name, branch, department, position, application, function, role, requester, approver, request_date , comment , upload_date) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
         $stmt = $conn->prepare($sql);
 
         if ($stmt) {
